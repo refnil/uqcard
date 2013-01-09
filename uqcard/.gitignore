@@ -1,6 +1,3 @@
-/gen
-/proguard_cache_conf
-/proguard_cache
 
 # built application files
 *.apk
@@ -16,7 +13,11 @@
 bin/
 gen/
 
+/proguard_cache_conf
+/proguard_cache
+
 # Local configuration file (sdk path, etc)
 local.properties
 
+# Temporary file
 *.tmp
