@@ -12,20 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ImageAdapter extends BaseAdapter{
-	private Context context;
-	private ArrayList<Integer> images;
+	private Context mContext;
+	public Integer[] mThumbIds = {
+            R.drawable.android_logo, R.drawable.blackberry_logo,
+            R.drawable.ios_logo, R.drawable.windows_logo};
 	
 	public ImageAdapter(Context context)
 	{
-		context = this.context;
+		mContext = context;
 	}
 	
 	public int getCount() {
-		return images.size();
+		 return mThumbIds.length;
 	}
 
 	public Object getItem(int position) {
-		return images.get(position);
+		return mThumbIds[position];
 	}
 
 	public long getItemId(int position) {
@@ -34,14 +36,14 @@ public class ImageAdapter extends BaseAdapter{
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ImageView imageView = new ImageView(context);
-        imageView.setImageResource(images.get(position));
+		ImageView imageView = new ImageView(mContext);
+        imageView.setImageResource(mThumbIds[position]);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setLayoutParams(new GridView.LayoutParams(70, 70));
         return imageView;
 	}
 	
-	public void addImage(int id)
+	/*public void addImage(int id)
 	{
 		images.add(id);
 	}
@@ -50,6 +52,6 @@ public class ImageAdapter extends BaseAdapter{
 	{
 		int index = images.indexOf(id);
 		images.remove(index);
-	}
+	}*/
 
 }

@@ -1,28 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/grid_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:columnWidth="50dp"
+    android:gravity="center"
+    android:horizontalSpacing="3dp"
+    android:numColumns="auto_fit"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="10dp"
+    tools:context=".HandActivity" >
+    
+    
 
-
-        <SlidingDrawer xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:allowSingleTap="false"
-            android:bottomOffset="-60dip"
-            android:topOffset="200dip"
-            android:content="@+id/grid_view"
-            android:handle="@+id/buttonHandle"
-            android:orientation="vertical" >
-		
-            <Button
-                android:id="@+id/buttonHandle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#AF7817"
-                android:text="@string/hand_button" />
-            
-            <GridView
-                android:id="@+id/grid_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-            	android:background="#C68E17"
-                 />
-            
-        </SlidingDrawer>
+</GridView>

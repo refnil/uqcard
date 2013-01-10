@@ -28,15 +28,12 @@ public class HandActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hand);
         
-        GridView grid = (GridView) findViewById(R.id.grid_view);
+        GridView gridView = (GridView) findViewById(R.id.grid_view);
+        
+        // Instance of ImageAdapter Class
+        gridView.setAdapter(new ImageAdapter(this));
+        
         
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_hand, menu);
-        return true;
-    }
-
     
 }
