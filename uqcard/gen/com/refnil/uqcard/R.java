@@ -19,9 +19,10 @@ public final class R {
         public static final int windows_logo=0x7f020005;
     }
     public static final class id {
-        public static final int grid_view=0x7f070000;
-        public static final int menu_settings=0x7f070002;
-        public static final int seekBar1=0x7f070001;
+        public static final int Gallery01=0x7f070000;
+        public static final int ImageView01=0x7f070001;
+        public static final int menu_settings=0x7f070003;
+        public static final int seekBar1=0x7f070002;
     }
     public static final class layout {
         public static final int activity_hand=0x7f030000;
@@ -70,4 +71,25 @@ public final class R {
          */
         public static final int AppTheme=0x7f050001;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a Gallery1.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #Gallery1_android_galleryItemBackground com.refnil.uqcard:android_galleryItemBackground}</code></td><td></td></tr>
+           </table>
+           @see #Gallery1_android_galleryItemBackground
+         */
+        public static final int[] Gallery1 = {
+            0x0101004c
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#android_galleryItemBackground}
+          attribute's value can be found in the {@link #Gallery1} array.
+          @attr name android:android_galleryItemBackground
+        */
+        public static final int Gallery1_android_galleryItemBackground = 0;
+    };
 }

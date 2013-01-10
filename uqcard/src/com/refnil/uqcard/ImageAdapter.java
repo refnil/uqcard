@@ -3,55 +3,54 @@ package com.refnil.uqcard;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ImageAdapter extends BaseAdapter{
-	private Context mContext;
-	public Integer[] mThumbIds = {
+public class ImageAdapter extends BaseAdapter {
+
+	private Context ctx;
+	int imageBackground;
+	Integer[] pics = {
             R.drawable.android_logo, R.drawable.blackberry_logo,
-            R.drawable.ios_logo, R.drawable.windows_logo};
+            R.drawable.ios_logo, R.drawable.windows_logo};   
 	
-	public ImageAdapter(Context context)
-	{
-		mContext = context;
+	public ImageAdapter(Context c) {
+		ctx = c;
+		TypedArray ta = c.obtainStyledAttributes(R.styleable.Gallery1);
+		imageBackground = ta.getResourceId(R.styleable.Gallery1_android_galleryItemBackground, 1);
+		ta.recycle();
 	}
 	
 	public int getCount() {
-		 return mThumbIds.length;
+		
+		return pics.length;
 	}
 
-	public Object getItem(int position) {
-		return mThumbIds[position];
-	}
-
-	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ImageView imageView = new ImageView(mContext);
-        imageView.setImageResource(mThumbIds[position]);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setLayoutParams(new GridView.LayoutParams(70, 70));
-        return imageView;
-	}
 	
-	/*public void addImage(int id)
-	{
-		images.add(id);
+	public Object getItem(int arg0) {
+		return arg0;
 	}
+
 	
-	public void removeImage(int id)
-	{
-		int index = images.indexOf(id);
-		images.remove(index);
-	}*/
+	public long getItemId(int arg0) {
+		long id = (long) pics[arg0];
+		return id;
+	}
+
+	public View getView(int arg0, View arg1, ViewGroup arg2) {
+		ImageView iv = new ImageView(ctx);
+		iv.setImageResource(pics[arg0]);
+		iv.setScaleType(ImageView.ScaleType.FIT_XY);
+		iv.setLayoutParams(new Gallery.LayoutParams(150,120));
+		iv.setBackgroundResource(imageBackground);
+		return iv;
+	}
 
 }

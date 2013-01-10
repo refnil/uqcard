@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,23 +18,44 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Gallery;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HandActivity extends Activity{
-
+    ImageView imageView = null;
+    ImageAdapter adapter;
   
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    	adapter = new ImageAdapter(this);
+    	  
+    	
+    	super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hand);
         
-        GridView gridView = (GridView) findViewById(R.id.grid_view);
+        Gallery ga = (Gallery)findViewById(R.id.Gallery01);
+        ga.setAdapter(adapter);
         
-        // Instance of ImageAdapter Class
-        gridView.setAdapter(new ImageAdapter(this));
+        imageView = (ImageView)findViewById(R.id.ImageView01);
+        ga.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Toast.makeText(getBaseContext(), 
+						"You have selected picture " + (arg2+1) + " of Antartica", 
+						Toast.LENGTH_SHORT).show(); 
+				imageView.setImageResource((int) adapter.getItemId(arg2));
+				
+			}
+        	
+        });
         
         
-    }
-    
+    }    
 }
