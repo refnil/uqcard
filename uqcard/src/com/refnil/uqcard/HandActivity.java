@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,10 +48,10 @@ public class HandActivity extends Activity{
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Toast.makeText(getBaseContext(), 
-						"You have selected picture " + (arg2+1) + " of Antartica", 
-						Toast.LENGTH_SHORT).show(); 
-				imageView.setImageResource((int) adapter.getItemId(arg2));
+				Intent i = new Intent(getApplicationContext(), FullCardActivity.class);
+				int id = (int) adapter.getItemId(arg2);
+				i.putExtra("id", id);
+				startActivity(i);
 				
 			}
         	
