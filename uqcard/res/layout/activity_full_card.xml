@@ -6,7 +6,6 @@
     <ImageView
         android:id="@+id/ImageFullScreen"
         android:contentDescription="@string/fullScreenCard"
-        android:src="@drawable/ic_launcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ImageView>
 </RelativeLayout>

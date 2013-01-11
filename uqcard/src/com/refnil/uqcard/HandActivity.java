@@ -5,47 +5,49 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
+import android.gesture.Gesture;
+import android.gesture.GestureOverlayView;
+import android.gesture.GestureOverlayView.OnGesturePerformedListener;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnTouchListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Gallery;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.view.GestureDetector;
 
-public class HandActivity extends Activity{
-    ImageView imageView = null;
-    ImageAdapter adapter;
+public class HandActivity extends Activity implements OnTouchListener{
+	private ImageAdapter adapter;
+	private float pointX, pointY;
   
-    @Override
+   	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	adapter = new ImageAdapter(this);
-    	  
+   		super.onCreate(savedInstanceState);
+   		setContentView(R.layout.activity_hand);
+   		
+   		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+   	    View view = inflater.inflate(R.layout.activity_hand, null);
+   	    setContentView(view);
+   	    view.setOnTouchListener(this);
     	
-    	super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hand);
+    	
+       
         
-        Gallery ga = (Gallery)findViewById(R.id.Gallery01);
-        ga.setAdapter(adapter);
+        Gallery gallery = (Gallery)findViewById(R.id.Gallery01);
+        adapter = new ImageAdapter(this);
+        gallery.setAdapter(adapter);
         
-        imageView = (ImageView)findViewById(R.id.ImageView01);
-        ga.setOnItemClickListener(new OnItemClickListener() {
-
+        
+        
+        gallery.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent i = new Intent(getApplicationContext(), FullCardActivity.class);
@@ -54,9 +56,31 @@ public class HandActivity extends Activity{
 				startActivity(i);
 				
 			}
-        	
         });
         
-        
-    }    
+    }
+
+	public boolean onTouch(View arg0, MotionEvent event) {
+		float eventX = event.getX();
+	    float eventY = event.getY();
+
+	    switch (event.getAction()) {
+	    case MotionEvent.ACTION_DOWN:
+	      pointX=eventX;
+	      pointY=eventY;
+	      return true;
+	    case MotionEvent.ACTION_MOVE:
+	      //Nothing to do
+	      break;
+	    case MotionEvent.ACTION_UP:
+	    	if(eventY>pointY)
+	    	Toast.makeText(this, "Up to down", Toast.LENGTH_SHORT).show();
+	    	if(eventY<pointY)
+	        	Toast.makeText(this, "Down to up", Toast.LENGTH_SHORT).show();
+	      break;
+	    default:
+	      return false;
+	    }
+		return false;
+	}   
 }
