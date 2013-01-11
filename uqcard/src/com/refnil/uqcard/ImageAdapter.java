@@ -1,25 +1,18 @@
 package com.refnil.uqcard;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class ImageAdapter extends BaseAdapter {
 
 	private Context ctx;
 	int imageBackground;
-	Integer[] pics = {
-            R.drawable.android_logo, R.drawable.blackberry_logo,
-            R.drawable.ios_logo, R.drawable.windows_logo};   
+	Integer[] pics = {R.drawable.carreau,R.drawable.coeur,R.drawable.trefle,R.drawable.pique};
 	
 	public ImageAdapter(Context c) {
 		ctx = c;
