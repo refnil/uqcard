@@ -12,5 +12,6 @@
     <string name="hand_button">Hand</string>
     <string name="title_activity_full_card">FullCardActivity</string>
     <string name="fullScreenCard">fullscreen card</string>
+    <string name="currentCard">Current card</string>
 
 </resources>

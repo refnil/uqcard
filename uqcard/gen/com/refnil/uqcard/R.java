@@ -9,6 +9,76 @@ package com.refnil.uqcard;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int allowSingleTap=0x7f010005;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int animateOnClick=0x7f010006;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int bottomOffset=0x7f010003;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int content=0x7f010001;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int handle=0x7f010000;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int orientation=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int semiClosedContentSize=0x7f010007;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int topOffset=0x7f010004;
     }
     public static final class drawable {
         public static final int carreau=0x7f020000;
@@ -19,11 +89,13 @@ public final class R {
         public static final int trefle=0x7f020005;
     }
     public static final class id {
-        public static final int Gallery01=0x7f070001;
+        public static final int Gallery=0x7f070004;
         public static final int ImageFullScreen=0x7f070000;
-        public static final int ImageView01=0x7f070002;
-        public static final int menu_settings=0x7f070004;
-        public static final int seekBar1=0x7f070003;
+        public static final int ImageView01=0x7f070005;
+        public static final int contentGallery=0x7f070003;
+        public static final int handleButton=0x7f070002;
+        public static final int menu_settings=0x7f070006;
+        public static final int mySlidingDrawer=0x7f070001;
     }
     public static final class layout {
         public static final int activity_full_card=0x7f030000;
@@ -37,6 +109,7 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+        public static final int currentCard=0x7f04000b;
         public static final int fullScreenCard=0x7f04000a;
         public static final int hand_button=0x7f040008;
         public static final int hello_world=0x7f040001;
@@ -96,5 +169,151 @@ public final class R {
           @attr name android:android_galleryItemBackground
         */
         public static final int Gallery1_android_galleryItemBackground = 0;
+        /** Attributes that can be used with a SemiClosedSlidingDrawer.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_allowSingleTap com.refnil.uqcard:allowSingleTap}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_animateOnClick com.refnil.uqcard:animateOnClick}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_bottomOffset com.refnil.uqcard:bottomOffset}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_content com.refnil.uqcard:content}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_handle com.refnil.uqcard:handle}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_orientation com.refnil.uqcard:orientation}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_semiClosedContentSize com.refnil.uqcard:semiClosedContentSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #SemiClosedSlidingDrawer_topOffset com.refnil.uqcard:topOffset}</code></td><td></td></tr>
+           </table>
+           @see #SemiClosedSlidingDrawer_allowSingleTap
+           @see #SemiClosedSlidingDrawer_animateOnClick
+           @see #SemiClosedSlidingDrawer_bottomOffset
+           @see #SemiClosedSlidingDrawer_content
+           @see #SemiClosedSlidingDrawer_handle
+           @see #SemiClosedSlidingDrawer_orientation
+           @see #SemiClosedSlidingDrawer_semiClosedContentSize
+           @see #SemiClosedSlidingDrawer_topOffset
+         */
+        public static final int[] SemiClosedSlidingDrawer = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#allowSingleTap}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:allowSingleTap
+        */
+        public static final int SemiClosedSlidingDrawer_allowSingleTap = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#animateOnClick}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:animateOnClick
+        */
+        public static final int SemiClosedSlidingDrawer_animateOnClick = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#bottomOffset}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:bottomOffset
+        */
+        public static final int SemiClosedSlidingDrawer_bottomOffset = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#content}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:content
+        */
+        public static final int SemiClosedSlidingDrawer_content = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#handle}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:handle
+        */
+        public static final int SemiClosedSlidingDrawer_handle = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#orientation}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:orientation
+        */
+        public static final int SemiClosedSlidingDrawer_orientation = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#semiClosedContentSize}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:semiClosedContentSize
+        */
+        public static final int SemiClosedSlidingDrawer_semiClosedContentSize = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.refnil.uqcard.R.attr#topOffset}
+          attribute's value can be found in the {@link #SemiClosedSlidingDrawer} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name android:topOffset
+        */
+        public static final int SemiClosedSlidingDrawer_topOffset = 4;
     };
 }

@@ -3,4 +3,15 @@
     <declare-styleable name="Gallery1">
     <attr name="android:galleryItemBackground"/>
      </declare-styleable>
+     
+    <declare-styleable name="SemiClosedSlidingDrawer">
+    <attr name="handle" format="integer"/>
+    <attr name="content" format="integer"/>
+    <attr name="orientation" format="string" />
+    <attr name="bottomOffset" format="dimension"  />
+    <attr name="topOffset" format="dimension"  />
+    <attr name="allowSingleTap" format="boolean" />
+    <attr name="animateOnClick" format="boolean" />
+    <attr name="semiClosedContentSize" format="dimension" />
+</declare-styleable>
 </resources>
