@@ -6,7 +6,7 @@ object mainTest {
     val serveur = new Server
     serveur start
     
-    for(i <- 1 to 1)
+    for(i <- 1 to 2000)
     {
       new Player(serveur) start
     }
@@ -19,8 +19,8 @@ object mainTest {
     serveur ! Talk("Test6")
     serveur ! Talk("Test7")
     readLine()
-    
-    serveur ! Quit
+
+    serveur ! Close
   }
 
 }

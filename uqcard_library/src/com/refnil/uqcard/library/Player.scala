@@ -17,6 +17,7 @@ class Player(serveur: Server) extends Actor {
     	   serveur ! Disconnect
     	   exit()
     	} 
+        case Close => exit()
       }
     }
   }
