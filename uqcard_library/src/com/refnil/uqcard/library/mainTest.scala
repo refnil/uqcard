@@ -21,6 +21,8 @@ object mainTest {
     readLine()
 
     serveur ! Close
+    
+    println (Link.getLinkedLink)
   }
 
 }
