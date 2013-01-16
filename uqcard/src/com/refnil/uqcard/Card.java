@@ -19,7 +19,8 @@ public class Card extends ImageView
 		this.cost = cost;
 		this.name = name;
 		this.flavorText = "";
-		this.imageDescription = (ImageView) findViewById(R.id.imageView1);
+		//this.imageDescription = (ImageView) findViewById(R.id.imageView1);
+		
 		
 	}
 	
