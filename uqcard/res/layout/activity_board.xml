@@ -147,66 +147,7 @@
             android:textSize="15sp"
             android:height="30dp"></TextView>
         
-    </TableRow>
-    
-    <TableRow
-        android:id="@+id/playerRow" 
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:paddingTop="15dp">        
-            
-        <!-- Player -->    
-        <!-- Back -->  
-        <ImageView 
-            android:id="@+id/playerGeneral"
-            android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="4dp"
-            android:contentDescription="@string/playerGeneral"
-            android:src="@drawable/carreau"/>
-        
-        <ImageView 
-            android:id="@+id/playerBack1"
-           android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/playerBack"
-            android:src="@drawable/carreau"/>
-        
-        <ImageView 
-            android:id="@+id/playerBack2"
-            android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/playerBack"
-            android:src="@drawable/carreau"/>
-        
-        <ImageView 
-            android:id="@+id/playerBack3"
-            android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="5dp"
-            android:contentDescription="@string/playerBack"
-            android:src="@drawable/carreau"/>
-        
-        <ImageView 
-            android:id="@+id/playerPhenomenon"
-            android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:layout_marginRight="15dp"
-            android:contentDescription="@string/playerPhenomenon"
-            android:src="@drawable/carreau"/>
-        
-        <ImageView 
-            android:id="@+id/playerCemetery"
-           android:layout_width="45dp"
-            android:layout_height="55dp"
-            android:contentDescription="@string/playerCemetery"
-            android:src="@drawable/carreau"/>
-        
-    </TableRow>
-    
+    </TableRow>    
     <TableRow
         android:id="@+id/playerRow1" 
         android:layout_width="wrap_content"
@@ -264,6 +205,63 @@
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/playerDeck"
+            android:src="@drawable/carreau"/>
+        
+    </TableRow>
+    <TableRow
+        android:id="@+id/playerRow" 
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:paddingTop="15dp">        
+            
+        <!-- Player -->    
+        <!-- Back -->  
+        <ImageView 
+            android:id="@+id/playerGeneral"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="4dp"
+            android:contentDescription="@string/playerGeneral"
+            android:src="@drawable/carreau"/>
+        
+        <ImageView 
+            android:id="@+id/playerBack1"
+           android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerBack"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerBack2"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerBack"
+            android:src="@drawable/carreau"/>
+        
+        <ImageView 
+            android:id="@+id/playerBack3"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerBack"
+            android:src="@drawable/carreau"/>
+        
+        <ImageView 
+            android:id="@+id/playerPhenomenon"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@string/playerPhenomenon"
+            android:src="@drawable/carreau"/>
+        
+        <ImageView 
+            android:id="@+id/playerCemetery"
+           android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/playerCemetery"
             android:src="@drawable/carreau"/>
         
     </TableRow>

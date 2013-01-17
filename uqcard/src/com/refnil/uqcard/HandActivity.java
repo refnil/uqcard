@@ -1,31 +1,21 @@
 package com.refnil.uqcard;
 
 import android.app.Activity;
-import com.refnil.uqcard.*;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SlidingDrawer;
-import android.widget.SlidingDrawer.OnDrawerCloseListener;
-import android.widget.SlidingDrawer.OnDrawerOpenListener;
-import android.widget.Toast;
 
 public class HandActivity extends Activity implements OnTouchListener{
 	private ImageAdapter adapter;
-	private float pointX, pointY;
+	private float pointY;
   
    	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,12 +66,10 @@ public class HandActivity extends Activity implements OnTouchListener{
     }
 
 	public boolean onTouch(View arg0, MotionEvent event) {
-		float eventX = event.getX();
 	    float eventY = event.getY();
 
 	    switch (event.getAction()) {
 	    case MotionEvent.ACTION_DOWN:
-	      pointX=eventX;
 	      pointY=eventY;
 	      return true;
 	    case MotionEvent.ACTION_MOVE:
