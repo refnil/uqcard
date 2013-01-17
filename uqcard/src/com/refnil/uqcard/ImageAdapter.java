@@ -12,6 +12,7 @@ public class ImageAdapter extends BaseAdapter {
 
 	private Context ctx;
 	int imageBackground;
+	Card carte;
 	Integer[] pics = {R.drawable.carreau,R.drawable.coeur,R.drawable.trefle,R.drawable.pique};
 	
 	public ImageAdapter(Context c) {
@@ -45,5 +46,6 @@ public class ImageAdapter extends BaseAdapter {
 		iv.setBackgroundResource(imageBackground);
 		return iv;
 	}
+	
 
 }

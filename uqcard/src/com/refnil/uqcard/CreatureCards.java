@@ -1,6 +1,6 @@
 package com.refnil.uqcard;
 
-public class CreatureCards extends Card 
+/*public class CreatureCards extends Card 
 {
 	private int attack, defence, health;
 
@@ -14,4 +14,4 @@ public class CreatureCards extends Card
 
 	
 
-}
+}*/
