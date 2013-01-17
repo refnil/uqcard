@@ -13,5 +13,14 @@
     <string name="title_activity_full_card">FullCardActivity</string>
     <string name="fullScreenCard">fullscreen card</string>
     <string name="currentCard">Current card</string>
+    <string name="flavorText">La legende dit que ce robot aime manger des pommes -Steeve Job</string>
+    <string name="attack">atk: </string>
+    <string name="defence">def: </string>
+    <string name="health">vie: </string>
+    <string name="cardType">creature: </string>
+    <string name="description">description</string>
+    <string name = "creaType">Android</string>
+    <string name = "cardName">BugDroid</string>
+    <string name = "cost">4</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.refnil.uqcard;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -39,8 +40,16 @@ public class ImageAdapter extends BaseAdapter {
 	}
 
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
+		Card myCard = new Card(ctx, "chat", "chat","chat", 2);
+		View v = myCard.getCardView(ctx);
+		Bitmap viewCapture = null;
+		v.setDrawingCacheEnabled(true);
+		viewCapture = Bitmap.createBitmap(v.getDrawingCache());
+		v.setDrawingCacheEnabled(false);
+		
 		ImageView iv = new ImageView(ctx);
-		iv.setImageResource(pics[arg0]);
+		iv.setImageBitmap(viewCapture);
+		
 		iv.setScaleType(ImageView.ScaleType.FIT_XY);
 		iv.setLayoutParams(new Gallery.LayoutParams(150,120));
 		iv.setBackgroundResource(imageBackground);

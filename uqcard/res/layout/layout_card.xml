@@ -10,7 +10,7 @@
             android:layout_height="35dp"
             android:background="#FFFFFF" >
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/cost"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -18,64 +18,65 @@
                 android:layout_alignParentTop="true"
                 android:ems="10"
                 android:gravity="right"
-                android:text="4" />
+                android:text="@string/cost"
+                android:textSize="20sp" />
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/cost"
-                android:layout_weight="0.52"
                 android:ems="10"
-                android:text="BugDroid" >
+                android:text="@string/cardName"
+                android:textSize="20sp" >
 
-                <requestFocus />
-            </EditText>
+            </com.refnil.uqcard.AutoResizeTextView>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/botLayout"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="200dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:background="#FFFFFF" >
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/creaType"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:ems="10"
-                android:text="Android"
-                android:textSize="12sp" />
+                android:text="@string/creaType"
+                android:textSize="16sp" />
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/atk"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:ems="10"
-                android:text="Atk: "
+                android:text="@string/attack"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/flavor"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/atk"
                 android:layout_alignParentLeft="true"
                 android:ems="10"
-                android:text="La legende dit que ce robot aime manger des pommes -Steeve Job"
+                android:text="@string/flavorText"
                 android:textSize="13sp"
                 android:textStyle="italic" />
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/def"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
@@ -83,31 +84,33 @@
                 android:layout_alignParentRight="true"
                 android:ems="10"
                 android:gravity="right"
-                android:text="Def: "
+                android:text="@string/defence"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/vie"
+            <com.refnil.uqcard.AutoResizeTextView
+                android:id="@+id/hp"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
                 android:ems="10"
                 android:gravity="center"
-                android:text="HP: "
+                android:text="@string/health"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/cardType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/creaType"
                 android:ems="10"
-                android:text="creature"
-                android:textSize="12sp" />
+                android:text="@string/cardType"
+                android:textSize="16sp" />
 
-            <EditText
+            <com.refnil.uqcard.AutoResizeTextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,8 +120,8 @@
                 android:layout_below="@+id/creaType"
                 android:ems="10"
                 android:gravity="top"
-                android:text="creature description"
-                android:textSize="16sp" />
+                android:text="@string/description"
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
