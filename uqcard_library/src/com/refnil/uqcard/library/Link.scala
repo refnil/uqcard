@@ -1,5 +1,8 @@
 package com.refnil.uqcard.library
 
+import scala.actors.Actor
+import scala.collection.mutable.Map
+
 object Link {
   def getLinkedLink() = {
     val l1 = new Link
@@ -12,13 +15,14 @@ object Link {
 }
 
 class Link private() {
-  var otherLink:Link = null
-  
+  private var otherLink:Link = null
   private def setLinked(l:Link) = {
     otherLink = l
   }
   
+  val map = Map[Int,Actor]()
+  
   def receive(m:Message) = {}
-  def send(m:Message) = otherLink receive m
+  def send(f:Actor,m:Message) = otherLink receive m
 
 }

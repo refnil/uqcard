@@ -6,7 +6,7 @@ object mainTest {
     val serveur = new Server
     serveur start
     
-    for(i <- 1 to 2000)
+    for(i <- 1 to 20)
     {
       new Player(serveur) start
     }
@@ -19,10 +19,13 @@ object mainTest {
     serveur ! Talk("Test6")
     serveur ! Talk("Test7")
     readLine()
-
+    
     serveur ! Close
     
-    println (Link.getLinkedLink)
+    val (l1,l2) = Link.getLinkedLink
+    println (l1)
+    println (l2)
+    
   }
 
 }

@@ -8,6 +8,8 @@ class Proxy(actor:Actor,link:Link) extends Actor{
     
   }
   
+  def act = {}
+  
   
 
 }
