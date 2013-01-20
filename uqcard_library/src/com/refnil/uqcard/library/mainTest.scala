@@ -1,7 +1,7 @@
 package com.refnil.uqcard.library
 
 object mainTest {
-  def shishi() = "RATON"
+  def shishi() = "RATON2"
   def main(args: Array[String]): Unit = {
     val s = new Server
 

@@ -13,5 +13,6 @@
     <string name="title_activity_full_card">FullCardActivity</string>
     <string name="fullScreenCard">fullscreen card</string>
     <string name="currentCard">Current card</string>
+    <string name="title_activity_bluetooth">BluetoothActivity</string>
 
 </resources>

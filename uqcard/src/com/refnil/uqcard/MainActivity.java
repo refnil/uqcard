@@ -19,9 +19,9 @@ public class MainActivity extends Activity {
 		t.setText(mainTest.shishi());
 		
 		
-		Intent i = new Intent(getApplicationContext(), HandActivity.class);
+		Intent i = new Intent(getApplicationContext(), BluetoothActivity.class);
         // passing array index
-        //startActivity(i);
+        startActivity(i);
 	}
 
 	@Override

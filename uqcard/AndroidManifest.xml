@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HandActivity"
+            android:name="com.refnil.uqcard.HandActivity"
             android:label="@string/title_activity_hand" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +32,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FullCardActivity"
+            android:name="com.refnil.uqcard.FullCardActivity"
             android:label="@string/title_activity_full_card" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.refnil.uqcard.BluetoothActivity"
+            android:label="@string/title_activity_bluetooth" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
