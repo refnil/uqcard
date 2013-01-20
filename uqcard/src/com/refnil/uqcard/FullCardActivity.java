@@ -14,7 +14,6 @@ public class FullCardActivity extends Activity {
         setContentView(R.layout.activity_full_card);
         
         Intent i = this.getIntent();
-        
         int idImage = i.getExtras().getInt("id");
         
         ImageView image = (ImageView) findViewById(R.id.ImageFullScreen);

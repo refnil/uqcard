@@ -19,7 +19,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
             android:contentDescription="@string/opponentGeneral"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentBack1"
@@ -27,7 +28,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/opponentBack"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentBack2"
@@ -35,7 +37,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/opponentBack"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentBack3"
@@ -43,7 +46,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/opponentBack"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentPhenomenon"
@@ -51,14 +55,16 @@
             android:layout_height="55dp"
             android:layout_marginRight="15dp"
             android:contentDescription="@string/opponentPhenomenon"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentCemetery"
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/opponentCemetery"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
     </TableRow>
     
@@ -80,7 +86,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
             android:contentDescription="@string/opponentFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentFront2"
@@ -88,7 +95,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/opponentFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentFront3"
@@ -96,7 +104,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/opponentFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentFront4"
@@ -104,7 +113,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/opponentFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentFront5"
@@ -112,14 +122,16 @@
             android:layout_height="55dp"
             android:layout_marginRight="15dp"
             android:contentDescription="@string/opponentFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/opponentDeck"
            android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/opponentDeck"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
     </TableRow>
     
@@ -166,7 +178,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
             android:contentDescription="@string/playerFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/playerFront2"
@@ -174,7 +187,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/playerFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/playerFront3"
@@ -182,7 +196,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/playerFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/playerFront4"
@@ -190,7 +205,8 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/playerFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/playerFront5"
@@ -198,14 +214,16 @@
             android:layout_height="55dp"
             android:layout_marginRight="15dp"
             android:contentDescription="@string/playerFront"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/playerDeck"
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/playerDeck"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
     </TableRow>
     <TableRow
@@ -223,7 +241,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
             android:contentDescription="@string/playerGeneral"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
         <ImageView 
             android:id="@+id/playerBack1"
@@ -262,7 +281,8 @@
            android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/playerCemetery"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/carreau"
+            />
         
     </TableRow>
 </TableLayout>
