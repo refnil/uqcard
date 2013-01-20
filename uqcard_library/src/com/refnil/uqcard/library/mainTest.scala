@@ -3,29 +3,26 @@ package com.refnil.uqcard.library
 object mainTest {
 
   def main(args: Array[String]): Unit = {
-    val serveur = new Server
-    serveur start
-    
-    for(i <- 1 to 20)
-    {
-      new Player(serveur) start
-    }
-    
-    serveur ! Talk("Test")
-    serveur ! Talk("Test2")
-    serveur ! Talk("Test3")
-    serveur ! Talk("Test4")
-    serveur ! Talk("Test5")
-    serveur ! Talk("Test6")
-    serveur ! Talk("Test7")
-    readLine()
-    
-    serveur ! Close
-    
-    val (l1,l2) = Link.getLinkedLink
-    println (l1)
-    println (l2)
-    
+    val s = new Server
+
+    val p = new Player(s)
+
+    s start ()
+    p start ()
+    s ! Talk("Lol")
+
+    val (lc1, lc2) = LinkConn(s)
+
+    val sp = lc2.server
+    sp start
+
+    val p2 = new Player(lc2.server)
+    p2 start ()
+    s ! Talk("HEY")
+    readLine
+    s ! Talk("HEY2")
+
+    s ! Close
   }
 
 }

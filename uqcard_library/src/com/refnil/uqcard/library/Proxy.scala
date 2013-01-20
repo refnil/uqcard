@@ -2,13 +2,11 @@ package com.refnil.uqcard.library
 
 import scala.actors.Actor
 
-class Proxy(actor:Actor,link:Link) extends Actor{
+trait Proxy{
   
-  def fromLink(m:Message) = {
-    
-  }
-  
-  def act = {}
+  def init()
+  def receivedMessage(m : Message) = {}
+  def receivedElse(a : AnyRef)
   
   
 
