@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.widget.TextView;
+
+import com.refnil.uqcard.library.*;
 
 public class MainActivity extends Activity {
 
@@ -12,9 +15,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		TextView t = (TextView)findViewById(R.id.MainTextView);
+		t.setText(mainTest.shishi());
+		
+		
 		Intent i = new Intent(getApplicationContext(), HandActivity.class);
         // passing array index
-        startActivity(i);
+        //startActivity(i);
 	}
 
 	@Override
