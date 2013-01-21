@@ -22,5 +22,7 @@ class Player(serveur: User[Message]) extends User[Message] {
   }
 
   def receivedElse(a: AnyRef) = println("Received other shit player")
+  
+  
 
 }

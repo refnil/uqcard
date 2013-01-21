@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.UUID;
 
+import com.refnil.uqcard.library.Server;
 import com.refnil.uqcard.service.BluetoothService;
 import com.refnil.uqcard.service.IBluetoothService;
 
@@ -29,12 +30,6 @@ public class BluetoothActivity extends Activity {
 	
 	private IBluetoothService mBoundService;
 	private boolean mIsBound;
-	
-	private void startBluetooth()
-	{
-		Intent intent = new Intent(this, BluetoothService.class);
-		startService(intent);
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,9 @@ public class BluetoothActivity extends Activity {
 				if(mIsBound){
 					try {
 						mBoundService.listen();
+						BluetoothSocket bs = mBoundService.getSocket();  
+						BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, new Server());
+						
 					} catch (NotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -74,6 +72,8 @@ public class BluetoothActivity extends Activity {
 					
 					try {
 						mBoundService.connect(mBluetoothAdapter.getBondedDevices().iterator().next());
+						BluetoothSocket bs = mBoundService.getSocket();
+						BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, null);
 					} catch (NotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
