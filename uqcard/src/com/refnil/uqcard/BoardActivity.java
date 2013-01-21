@@ -213,6 +213,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
 				Gallery gallery = (Gallery)findViewById(R.id.Gallery);
 				gallery.setScaleY((float) 2);
 				gallery.setScaleX((float) 1.5);
+				gallery.setTranslationY(55);
 			}
         	
         });
@@ -224,6 +225,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
 				Gallery gallery = (Gallery)findViewById(R.id.Gallery);
 				gallery.setScaleY((float) 0.9);
 				gallery.setScaleX((float) 0.9);
+				gallery.setTranslationY(-7);
 			}
         	
         });
