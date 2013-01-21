@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    
+    
+    <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#2554C7">
+
+    <TableRow
+        android:id="@+id/opponentRow" 
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:paddingTop="15dp">        
+            
+        <!-- Opponent -->    
+        <!-- Back -->  
+        <ImageView 
+            android:id="@+id/opponentGeneral"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="4dp"
+            android:contentDescription="@string/opponentGeneral"
+            android:src="@drawable/coeur"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentBack1"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/opponentBack"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentBack2"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/opponentBack"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentBack3"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/opponentBack"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentPhenomenon"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@string/opponentPhenomenon"
+            android:src="@drawable/coeur"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentCemetery"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/opponentCemetery"
+            android:src="@drawable/coeur"
+            />
+        
+    </TableRow>
+    
+    <TableRow
+        android:id="@+id/opponentRow1" 
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="30dp">
+        
+        
+            
+        <!-- Opponent -->    
+        <!-- Front -->  
+        <ImageView 
+            android:id="@+id/opponentFront1"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="4dp"
+            android:contentDescription="@string/opponentFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentFront2"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/opponentFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentFront3"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/opponentFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentFront4"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/opponentFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentFront5"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@string/opponentFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/opponentDeck"
+           android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/opponentDeck"
+            android:src="@drawable/coeur"
+            />
+        
+    </TableRow>
+    
+    <TableRow
+        android:id="@+id/middleRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#5CB3FF">
+        
+        <TextView
+            android:id="@+id/opponentText"
+            android:textSize="15sp"
+            android:height="30dp"></TextView>
+        
+    </TableRow>
+    
+    <TableRow
+        android:id="@+id/middleRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#5CB3FF">
+        
+        <TextView
+            android:id="@+id/playerText"
+            android:textSize="15sp"
+            android:height="30dp"></TextView>
+        
+    </TableRow>    
+    <TableRow
+        android:id="@+id/playerRow1" 
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="30dp">
+        
+        
+            
+        <!-- Player -->    
+        <!-- Front -->  
+        <ImageView 
+            android:id="@+id/playerFront1"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="4dp"
+            android:contentDescription="@string/playerFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerFront2"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerFront3"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerFront"
+            android:background="#000000"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerFront4"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerFront5"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@string/playerFront"
+            android:src="@drawable/carreau"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerDeck"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/playerDeck"
+            android:src="@drawable/coeur"
+            />
+        
+    </TableRow>
+    <TableRow
+        android:id="@+id/playerRow" 
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:paddingTop="15dp">        
+            
+        <!-- Player -->    
+        <!-- Back -->  
+        <ImageView 
+            android:id="@+id/playerGeneral"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="4dp"
+            android:contentDescription="@string/playerGeneral"
+            android:src="@drawable/coeur"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerBack1"
+           android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerBack"
+            android:background="#000000"
+            />
+        
+        <ImageView 
+            android:id="@+id/playerBack2"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerBack"
+            android:src="@drawable/carreau"/>
+        
+        <ImageView 
+            android:id="@+id/playerBack3"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/playerBack"
+            android:src="@drawable/carreau"/>
+        
+        <ImageView 
+            android:id="@+id/playerPhenomenon"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@string/playerPhenomenon"
+            android:src="@drawable/coeur"/>
+        
+        <ImageView 
+            android:id="@+id/playerCemetery"
+           android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/playerCemetery"
+            android:src="@drawable/coeur"
+            />
+        
+    </TableRow>   
+    
+</TableLayout>
+    
+    <com.refnil.uqcard.SemiClosedSlidingDrawer 
+	    xmlns:android="http://schemas.android.com/apk/res/android" 
+	    xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
+	    android:id="@+id/mySlidingDrawer"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    custom:topOffset="350dp"
+	    custom:orientation="vertical"
+	    custom:handle="@+id/handleButton"
+	    custom:content="@+id/contentGallery"
+	    custom:allowSingleTap="true"
+	    custom:semiClosedContentSize="55dp"
+	    >
+        
+	    <Button
+	        android:id="@id/handleButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/hand_button" />
+	    
+	    <LinearLayout
+		    android:id="@id/contentGallery" 
+		    android:orientation="horizontal"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"
+			android:background="#25587E">
+	            
+	        
+		     <Gallery 
+				android:id="@+id/Gallery" 
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+	        	android:layout_gravity="top">
+		         
+		     </Gallery>	            
+	     </LinearLayout>
+		
+        
+    </com.refnil.uqcard.SemiClosedSlidingDrawer>
+    
+</FrameLayout>

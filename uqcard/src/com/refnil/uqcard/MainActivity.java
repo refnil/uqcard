@@ -12,7 +12,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		Intent i = new Intent(getApplicationContext(), HandActivity.class);
+		Intent i = new Intent(getApplicationContext(), BoardActivity.class);
         // passing array index
         startActivity(i);
 	}
