@@ -1,8 +1,11 @@
 package com.refnil.uqcard;
 
 import android.content.Context;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.RelativeLayout;
@@ -30,7 +33,7 @@ public class Card extends RelativeLayout
 		
 	}
 	
-	public View getCardView(Context c)
+	public View getCardView(Context c,int width,int height)
 	{
 		LayoutInflater inflater = (LayoutInflater)c.getSystemService
 			      (Context.LAYOUT_INFLATER_SERVICE);
@@ -40,6 +43,12 @@ public class Card extends RelativeLayout
 		((TextView) layoutCard.findViewById(R.id.name)).setText(name);
 		((TextView) layoutCard.findViewById(R.id.description)).setText(description);
 		((TextView) layoutCard.findViewById(R.id.flavor)).setText(flavor);
+		
+		WindowManager wm = (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		layoutCard.setLayoutParams(new LayoutParams(size.x,size.y));
 		return layoutCard;
 	}
 	

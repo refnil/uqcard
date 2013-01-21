@@ -11,7 +11,7 @@
 	    android:id="@+id/mySlidingDrawer"
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
-	    custom:topOffset="350dp"
+	    custom:topOffset="120dp"
 	    custom:orientation="vertical"
 	    custom:handle="@+id/handleButton"
 	    custom:content="@+id/contentGallery"

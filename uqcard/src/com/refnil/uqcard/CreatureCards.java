@@ -18,7 +18,7 @@ public class CreatureCards extends Card
 
 	public View getCardView(Context c)
 	{
-		View layoutCard = super.getCardView(c);
+		View layoutCard = super.getCardView(c,150,120);
 		
 		((TextView) layoutCard.findViewById(R.id.atk)).setText(attack);
 		((TextView) layoutCard.findViewById(R.id.def)).setText(defence);

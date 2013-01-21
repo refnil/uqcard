@@ -3,7 +3,9 @@ package com.refnil.uqcard;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
@@ -40,20 +42,29 @@ public class ImageAdapter extends BaseAdapter {
 	}
 
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		Card myCard = new Card(ctx, "chat", "chat","chat", 2);
-		View v = myCard.getCardView(ctx);
-		Bitmap viewCapture = null;
-		v.setDrawingCacheEnabled(true);
-		viewCapture = Bitmap.createBitmap(v.getDrawingCache());
-		v.setDrawingCacheEnabled(false);
+		Card myCard = new Card(ctx, "nom", "desc","flav", 2);
+
 		
+		View v = myCard.getCardView(ctx,150,120);
+		
+		Bitmap viewCapture = loadBitmapFromView(v);
 		ImageView iv = new ImageView(ctx);
-		iv.setImageBitmap(viewCapture);
 		
 		iv.setScaleType(ImageView.ScaleType.FIT_XY);
 		iv.setLayoutParams(new Gallery.LayoutParams(150,120));
 		iv.setBackgroundResource(imageBackground);
+		iv.setImageBitmap(viewCapture);
 		return iv;
+	}
+	
+	public static Bitmap loadBitmapFromView(View v) {
+		Bitmap b = Bitmap.createBitmap(v.getLayoutParams().width, v.getLayoutParams().height, Bitmap.Config.RGB_565);     
+	    Canvas c = new Canvas(b);
+	    v.measure(MeasureSpec.makeMeasureSpec(v.getLayoutParams().width, MeasureSpec.EXACTLY),
+	            MeasureSpec.makeMeasureSpec(v.getLayoutParams().height, MeasureSpec.EXACTLY));
+	    v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+	    v.draw(c);
+	    return b;
 	}
 	
 
