@@ -221,7 +221,7 @@ public class SemiClosedSlidingDrawer
 		mVertical = (orientation != null && orientation.equals("vertical"));
 		mBottomOffset = (int) a.getDimension(R.styleable.SemiClosedSlidingDrawer_bottomOffset, 0.0f);
 		mTopOffset = (int) a.getDimension(R.styleable.SemiClosedSlidingDrawer_topOffset, 0.0f);
-		mAllowSingleTap = a.getBoolean(R.styleable.SemiClosedSlidingDrawer_allowSingleTap, true);
+		mAllowSingleTap = a.getBoolean(R.styleable.SemiClosedSlidingDrawer_allowSingleTap, false);
 		mAnimateOnClick = a.getBoolean(R.styleable.SemiClosedSlidingDrawer_animateOnClick, true);
 		mSemiClosedContentSize = (int) a.getDimension(R.styleable.SemiClosedSlidingDrawer_semiClosedContentSize, 0.0f);
 

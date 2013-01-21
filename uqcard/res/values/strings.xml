@@ -2,13 +2,11 @@
 <resources>
 
     <string name="app_name">uqcard</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_section3">Section 3</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Section 1</string>
-    <string name="title_activity_hand">HandActivity</string>
     <string name="hand_button">Hand</string>
     <string name="title_activity_full_card">Your card</string>
     <string name="fullScreenCard">fullscreen card</string>

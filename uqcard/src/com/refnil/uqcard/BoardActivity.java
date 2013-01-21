@@ -28,7 +28,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
 
 		public void onClick(View v) {
 			ImageView iv = (ImageView) v;
-			if(phase == 0 && iv.getDrawable() != null)
+			if(phase == 0 && iv.getDrawable() != null && selectedCard != 0)
 			{
 					switch(iv.getId())
 					{
@@ -39,25 +39,31 @@ public class BoardActivity extends Activity implements OnTouchListener {
 					case R.id.opponentFront1 :
 					case R.id.opponentFront2 :
 					case R.id.opponentFront3 :
-					case R.id.opponentFront4 : attackCard(iv);
+					case R.id.opponentFront4 : 
+					case R.id.opponentFront5 : attackCard(iv);
 												break;
 					}
 			}
 			else
 			{
-				if(phase == 1 && iv.getDrawable() == null)
+				if((phase == 1 && iv.getDrawable() == null) || (phase == 0 && selectedCard == 0))
 				{
 					
 					switch(iv.getId())
 					{
-					case R.id.playerPhenomenon :
+					case R.id.playerPhenomenon : placeCard(iv);
+												break;
 					case R.id.playerBack1:
 					case R.id.playerBack2:
 					case R.id.playerBack3:
 					case R.id.playerFront1:
 					case R.id.playerFront2:
 					case R.id.playerFront3:
-					case R.id.playerFront4: placeCard(iv);
+					case R.id.playerFront4: 
+					case R.id.playerFront5 : if(phase == 0)
+												selectedCard = iv.getId();
+											else
+												placeCard(iv);
 											break;
 					}
 				}
@@ -91,7 +97,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
         TextView tv = (TextView) findViewById(R.id.opponentText);
         tv.setText("My opponent");
         tv = (TextView) findViewById(R.id.playerText);
-        tv.setText("Me, myself and I");
+        tv.setText("Me");
         
         //Opponent
         ImageView iv = (ImageView) findViewById(R.id.opponentBack1);
@@ -123,9 +129,16 @@ public class BoardActivity extends Activity implements OnTouchListener {
         iv.setTag(R.drawable.carreau);
         iv.setOnClickListener(c);
         iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentGeneral);
+        iv = (ImageView) findViewById(R.id.opponentFront5);
         iv.setTag(R.drawable.carreau);
         iv.setOnClickListener(c);
+        iv.setOnLongClickListener(lc);
+        iv = (ImageView) findViewById(R.id.opponentGeneral);
+        iv.setTag(R.drawable.coeur);
+        iv.setOnClickListener(c);
+        iv.setOnLongClickListener(lc);
+        iv = (ImageView) findViewById(R.id.opponentCemetery);
+        iv.setTag(R.drawable.coeur);
         iv.setOnLongClickListener(lc);
         
         //Player
@@ -157,15 +170,21 @@ public class BoardActivity extends Activity implements OnTouchListener {
         iv.setTag(R.drawable.carreau);
         iv.setOnClickListener(c);
         iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerGeneral);
+        iv = (ImageView) findViewById(R.id.playerFront5);
         iv.setTag(R.drawable.carreau);
+        iv.setOnClickListener(c);
+        iv.setOnLongClickListener(lc);
+        iv = (ImageView) findViewById(R.id.playerGeneral);
+        iv.setTag(R.drawable.coeur);
         iv.setOnClickListener(c);
         iv.setOnLongClickListener(lc);
         iv = (ImageView) findViewById(R.id.playerPhenomenon);
-        iv.setTag(R.drawable.carreau);
+        iv.setTag(R.drawable.coeur);
         iv.setOnClickListener(c);
         iv.setOnLongClickListener(lc);
-        
+        iv = (ImageView) findViewById(R.id.playerCemetery);
+        iv.setTag(R.drawable.coeur);
+        iv.setOnLongClickListener(lc);
         
         // Hand initialisation
         
@@ -267,6 +286,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
 		    	{
 		    		selectedCard = (int)gallery.getSelectedItemId();
 		        	slider.animateClose();
+		        	pointY =0;
 		    	}
 		      break;
 		    default:

@@ -9,7 +9,7 @@
     <TableLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFF00">
+    android:background="#2554C7">
 
     <TableRow
         android:id="@+id/opponentRow" 
@@ -26,7 +26,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
             android:contentDescription="@string/opponentGeneral"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
         <ImageView 
@@ -62,7 +62,7 @@
             android:layout_height="55dp"
             android:layout_marginRight="15dp"
             android:contentDescription="@string/opponentPhenomenon"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
         <ImageView 
@@ -70,7 +70,7 @@
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/opponentCemetery"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
     </TableRow>
@@ -137,7 +137,7 @@
            android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/opponentDeck"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
     </TableRow>
@@ -159,7 +159,7 @@
         android:id="@+id/middleRow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FF00FF">
+        android:background="#5CB3FF">
         
         <TextView
             android:id="@+id/playerText"
@@ -229,7 +229,7 @@
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/playerDeck"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
     </TableRow>
@@ -248,7 +248,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
             android:contentDescription="@string/playerGeneral"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
         <ImageView 
@@ -282,14 +282,14 @@
             android:layout_height="55dp"
             android:layout_marginRight="15dp"
             android:contentDescription="@string/playerPhenomenon"
-            android:src="@drawable/carreau"/>
+            android:src="@drawable/coeur"/>
         
         <ImageView 
             android:id="@+id/playerCemetery"
            android:layout_width="45dp"
             android:layout_height="55dp"
             android:contentDescription="@string/playerCemetery"
-            android:src="@drawable/carreau"
+            android:src="@drawable/coeur"
             />
         
     </TableRow>   
@@ -321,7 +321,7 @@
 		    android:orientation="horizontal"
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent"
-			android:background="#00FF00">
+			android:background="#25587E">
 	            
 	        
 		     <Gallery 
