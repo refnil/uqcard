@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">uqcard</string>
@@ -14,5 +13,6 @@
     <string name="fullScreenCard">fullscreen card</string>
     <string name="currentCard">Current card</string>
     <string name="title_activity_bluetooth">BluetoothActivity</string>
+    <string name="UUID">822309e6-f032-4ba4-857f-0f8030907101</string>
 
 </resources>
