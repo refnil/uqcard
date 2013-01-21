@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HandActivity"
-            android:label="@string/title_activity_hand" >
+            android:name=".FullCardActivity"
+            android:label="@string/title_activity_full_card" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +32,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FullCardActivity"
-            android:label="@string/title_activity_full_card" >
+            android:name=".BoardActivity"
+            android:label="@string/title_activity_board" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
