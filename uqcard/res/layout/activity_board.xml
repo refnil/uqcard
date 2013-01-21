@@ -1,5 +1,12 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    
+    
+    <TableLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#FFFF00">
@@ -196,7 +203,7 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/playerFront"
-            android:src="@drawable/carreau"
+            android:background="#000000"
             />
         
         <ImageView 
@@ -250,6 +257,7 @@
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:contentDescription="@string/playerBack"
+            android:background="#000000"
             />
         
         <ImageView 
@@ -284,5 +292,48 @@
             android:src="@drawable/carreau"
             />
         
-    </TableRow>
+    </TableRow>   
+    
 </TableLayout>
+    
+    <com.refnil.uqcard.SemiClosedSlidingDrawer 
+	    xmlns:android="http://schemas.android.com/apk/res/android" 
+	    xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
+	    android:id="@+id/mySlidingDrawer"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    custom:topOffset="350dp"
+	    custom:orientation="vertical"
+	    custom:handle="@+id/handleButton"
+	    custom:content="@+id/contentGallery"
+	    custom:allowSingleTap="true"
+	    custom:semiClosedContentSize="55dp"
+	    >
+        
+	    <Button
+	        android:id="@id/handleButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/hand_button" />
+	    
+	    <LinearLayout
+		    android:id="@id/contentGallery" 
+		    android:orientation="horizontal"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"
+			android:background="#00FF00">
+	            
+	        
+		     <Gallery 
+				android:id="@+id/Gallery" 
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+	        	android:layout_gravity="top">
+		         
+		     </Gallery>	            
+	     </LinearLayout>
+		
+        
+    </com.refnil.uqcard.SemiClosedSlidingDrawer>
+    
+</FrameLayout>

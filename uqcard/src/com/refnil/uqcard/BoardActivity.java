@@ -2,17 +2,27 @@ package com.refnil.uqcard;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.View.OnTouchListener;
+import android.widget.AdapterView;
+import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class BoardActivity extends Activity {
-	private int phase=0;
+public class BoardActivity extends Activity implements OnTouchListener {
+	private ImageAdapter adapter;
+	private float pointY;
+	private int phase=1;
+	private int selectedCard = 0;
 	private OnClickListener c = new OnClickListener()
 	{
 
@@ -29,7 +39,7 @@ public class BoardActivity extends Activity {
 					case R.id.opponentFront1 :
 					case R.id.opponentFront2 :
 					case R.id.opponentFront3 :
-					case R.id.opponentFront4 : attackCard();
+					case R.id.opponentFront4 : attackCard(iv);
 												break;
 					}
 			}
@@ -47,7 +57,7 @@ public class BoardActivity extends Activity {
 					case R.id.playerFront1:
 					case R.id.playerFront2:
 					case R.id.playerFront3:
-					case R.id.playerFront4: placeCard();
+					case R.id.playerFront4: placeCard(iv);
 											break;
 					}
 				}
@@ -60,7 +70,6 @@ public class BoardActivity extends Activity {
 	private OnLongClickListener lc = new OnLongClickListener(){
 
 		public boolean onLongClick(View v) {
-			Toast.makeText(getApplicationContext(), "longclick", Toast.LENGTH_SHORT).show();
 			ImageView iv = (ImageView) v;
 			int vID = iv.getId();
 			if(vID != R.id.playerDeck && vID != R.id.opponentDeck && iv.getDrawable() != null)
@@ -73,7 +82,11 @@ public class BoardActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board);
+        
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+   	    View view = inflater.inflate(R.layout.activity_board, null);
+   	    setContentView(view);
+   	    view.setOnTouchListener(this);       
         
         TextView tv = (TextView) findViewById(R.id.opponentText);
         tv.setText("My opponent");
@@ -153,6 +166,49 @@ public class BoardActivity extends Activity {
         iv.setOnClickListener(c);
         iv.setOnLongClickListener(lc);
         
+        
+        // Hand initialisation
+        
+       
+        
+        Gallery gallery = (Gallery)findViewById(R.id.Gallery);
+        adapter = new ImageAdapter(this);
+        gallery.setAdapter(adapter);   
+        
+        gallery.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent i = new Intent(getApplicationContext(), FullCardActivity.class);
+				int id = (int) adapter.getItemId(arg2);
+				i.putExtra("id", id);
+				startActivity(i);
+				
+			}
+        });
+        
+        SemiClosedSlidingDrawer slider = (SemiClosedSlidingDrawer) findViewById(R.id.mySlidingDrawer);
+        slider.setOnDrawerOpenListener(new com.refnil.uqcard.SemiClosedSlidingDrawer.OnDrawerOpenListener()
+        {
+
+			public void onDrawerOpened() {
+				Gallery gallery = (Gallery)findViewById(R.id.Gallery);
+				gallery.setScaleY((float) 2);
+				gallery.setScaleX((float) 1.5);
+			}
+        	
+        });
+        
+        slider.setOnDrawerCloseListener(new com.refnil.uqcard.SemiClosedSlidingDrawer.OnDrawerCloseListener()
+        {
+
+			public void onDrawerClosed() {
+				Gallery gallery = (Gallery)findViewById(R.id.Gallery);
+				gallery.setScaleY((float) 0.9);
+				gallery.setScaleX((float) 0.9);
+			}
+        	
+        });
+        
     }
     
     @Override
@@ -161,14 +217,30 @@ public class BoardActivity extends Activity {
         return true;
     }
 	
-	public void attackCard()
+	public void attackCard(ImageView iv)
 	{
-		Toast.makeText(getApplicationContext(), "Attack", Toast.LENGTH_SHORT).show();
+		if(selectedCard != 0)
+		{
+
+			Toast.makeText(getApplicationContext(), "Attack done", Toast.LENGTH_SHORT).show();
+			selectedCard = 0;
+			
+			//TEMP
+			phase = 1;
+		}
 	}
 	
-	public void placeCard()
+	public void placeCard(ImageView iv)
 	{
-		Toast.makeText(getApplicationContext(), "Place", Toast.LENGTH_SHORT).show();
+		if(selectedCard != 0)
+		{
+			iv.setImageResource(selectedCard);
+			iv.setTag(selectedCard);
+			selectedCard = 0;
+			
+			//TEMP
+			phase = 0;
+		}
 	}
 	
 	public void showCard(ImageView image)
@@ -177,5 +249,29 @@ public class BoardActivity extends Activity {
 		int id=(Integer) image.getTag();
 		i.putExtra("id",id);
 		startActivity(i);
+	}
+
+	public boolean onTouch(View arg0, MotionEvent event) {
+		 float eventY = event.getY();
+
+		    switch (event.getAction()) {
+		    case MotionEvent.ACTION_DOWN:
+		      pointY=eventY;
+		      return true;
+		    case MotionEvent.ACTION_MOVE:
+		      break;
+		    case MotionEvent.ACTION_UP:
+		    	SemiClosedSlidingDrawer slider = (SemiClosedSlidingDrawer) findViewById(R.id.mySlidingDrawer);
+		    	Gallery gallery = (Gallery)findViewById(R.id.Gallery);
+		    	if(eventY<pointY)
+		    	{
+		    		selectedCard = (int)gallery.getSelectedItemId();
+		        	slider.animateClose();
+		    	}
+		      break;
+		    default:
+		      return false;
+		    }
+			return false;
 	}
 }

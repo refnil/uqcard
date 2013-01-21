@@ -10,7 +10,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_board);
+		setContentView(R.layout.activity_main);
 		
 		Intent i = new Intent(getApplicationContext(), BoardActivity.class);
         // passing array index
