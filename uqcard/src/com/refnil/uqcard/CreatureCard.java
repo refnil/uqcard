@@ -1,0 +1,48 @@
+package com.refnil.uqcard;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.TextView;
+
+public class CreatureCard extends Card 
+{
+	private int attack, defense, health;
+
+	public CreatureCard(Context c,long id, String name, String description,String flavor,int cost , byte[] image ,int attack, int defense, int health)
+	{
+		super(c,id,name,description,flavor,cost,image);
+		this.setAttack(attack);
+		this.setDefense(defense);
+		this.setHealth(health);
+	}
+	
+	int getAttack()
+	{
+		return this.attack;
+	}
+	
+	void setAttack(int attack)
+	{
+		this.attack = attack;
+	}
+	
+	int getDefense()
+	{
+		return this.defense;
+	}
+	
+	void setDefense(int defense)
+	{
+		this.defense = defense;
+	}
+	
+	int getHealth()
+	{
+		return this.health;
+	}
+	
+	void setHealth(int health)
+	{
+		this.health = health;
+	}
+}
