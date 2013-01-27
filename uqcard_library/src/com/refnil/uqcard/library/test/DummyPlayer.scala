@@ -1,4 +1,4 @@
-package com.refnil.uqcard.library.Test
+package com.refnil.uqcard.library.test
 
 import com.refnil.uqcard.library.PlayerListener
 import com.refnil.uqcard.library.Player
