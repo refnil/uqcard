@@ -1,7 +1,7 @@
 package com.refnil.uqcard.library
 
 object LinkConn{
-  def apply(s:Server) ={
+  def apply(s:Server): (LinkConnections,LinkConnections)={
     val lc1 = new LinkConn(s)
     val lc2 = new LinkConn()
     lc1.lc = lc2

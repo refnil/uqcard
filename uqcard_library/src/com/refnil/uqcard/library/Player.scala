@@ -3,7 +3,7 @@ package com.refnil.uqcard.library
 import scala.actors.Actor
 import scala.collection.mutable.Set;
 
-class Player(serveur: User[Message]) extends User[Message] {
+class Player(val serveur: User[Message]) extends User[Message] {
   
   val listeners:Set[PlayerListener] = Set()
 
@@ -17,13 +17,16 @@ class Player(serveur: User[Message]) extends User[Message] {
 
   def receivedMessage(m: Message) = m match {
     case Talk(mess) =>
+      tellToListener(mess)
+      println("Player:",mess)
       cpt = cpt - 1
       if (cpt < 1) {
         serveur ! Disconnect
         exit()
       }
+    case Trans(a,m) => a ! m
     case Close => 
-      println("Player closing")
+      tellToListener("Player closing")
       exit()
   }
 

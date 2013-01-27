@@ -10,7 +10,9 @@ abstract class LinkConnections(s: Server=null) {
     if (s != null)
       s
     else
-      new ServeurProxy(this)
+       new ServeurProxy(this)
+  server start
+  
 
   def start()
   def send(m: Message)
