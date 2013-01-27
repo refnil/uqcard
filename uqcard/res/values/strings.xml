@@ -24,5 +24,9 @@
     <string name="playerCemetery">Player cemetery</string>
     <string name="playerFront">Player front</string>
     <string name="playerDeck">Player deck</string>
+    <string name="buttonSingle">Multiplayer 1 vs 1</string>
+    <string name="buttonMulti">Multiplayer 3  devices</string>
+    <string name="buttonOptions">Options</string>
+    <string name="buttonEditor">Deck editor</string>
 
 </resources>
