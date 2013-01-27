@@ -3,21 +3,18 @@ package com.refnil.uqcard.library
 import scala.actors.Actor
 import scala.collection.mutable.Set;
 
-class Player(val serveur: User[Message]) extends User[Message] {
-  
-  val listeners:Set[PlayerListener] = Set()
+class Player(val serveur: User[Message]) extends User[Message] with Listenable[String,Player]{
 
   var cpt = 6
   
-  def init() = serveur ! Connect
+  def tell(s:String) = this ! Trans(serveur,Talk(s))
   
-  def inscription(pl:PlayerListener) = listeners.add(pl)
-  private def tellToListener(s:String) = listeners.foreach(x => x.listened(this,s))
-  def fromListener(s:String) = this ! Trans(serveur,Talk(s))
-
+  protected def getSender = this
+  
+  def init() = serveur ! Connect
   def receivedMessage(m: Message) = m match {
     case Talk(mess) =>
-      tellToListener(mess)
+      messageListener(mess)
       println("Player:",mess)
       cpt = cpt - 1
       if (cpt < 1) {
@@ -26,11 +23,10 @@ class Player(val serveur: User[Message]) extends User[Message] {
       }
     case Trans(a,m) => a ! m
     case Close => 
-      tellToListener("Player closing")
+      closeListener()
       exit()
   }
-
-  def receivedElse(a: AnyRef) = println("Received other shit player")
+  def receivedElse(a: AnyRef) = messageListener("Player closing")
   
   
 
