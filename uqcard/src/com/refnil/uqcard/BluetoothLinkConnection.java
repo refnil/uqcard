@@ -20,18 +20,35 @@ public class BluetoothLinkConnection extends LinkConnections {
 	public BluetoothLinkConnection(BluetoothSocket bs, Server s)
 			throws IOException {
 		super(s);
+		Log.i("uqcard","Constructor blc begin");
 		// TODO Auto-generated constructor stub
 		this.bs = bs;
-		InputStream input = bs.getInputStream();
-		is = new ObjectInputStream(input);
-		os = new ObjectOutputStream(bs.getOutputStream());
+		Log.i("uqcard","blc bs");
+		InputStream ris  = bs.getInputStream();
+		Log.i("uqcard","ris done");
+		
+		if(s==null)
+		{
+			is = new ObjectInputStream(bs.getInputStream());
+			os = new ObjectOutputStream(bs.getOutputStream());
+		}
+		else
+		{
+			os = new ObjectOutputStream(bs.getOutputStream());
+			is = new ObjectInputStream(bs.getInputStream());
+		}
+		
+		Log.i("uqcard","Constructor blc end");
 	}
 
 	@Override
 	public void send(Message arg0) {
 		// TODO Auto-generated method stub
 		try {
+			Log.i("uqcard",arg0.toString());
 			os.writeObject(arg0);
+			Log.i("uqcard","done writing");
+			
 		} catch (IOException e) {
 		}
 	}
@@ -49,6 +66,7 @@ public class BluetoothLinkConnection extends LinkConnections {
 		                // Read from the InputStream
 		                m = (Message)is.readObject();
 		                // Send the obtained bytes to the UI activity
+		                Log.i("",m.toString());
 		                receive(m);
 		            } catch (IOException e) {
 		                break;

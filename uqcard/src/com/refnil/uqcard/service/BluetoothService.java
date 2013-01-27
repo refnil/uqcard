@@ -58,7 +58,8 @@ public class BluetoothService extends Service implements IBluetoothService {
 
 	public void listen() throws NotFoundException, IOException {
 		// TODO Auto-generated method stub
-		BluetoothSocket socket = ba.listenUsingRfcommWithServiceRecord("Server", UUID.fromString(getResources().getString(R.string.UUID))).accept();
+		bs = ba.listenUsingRfcommWithServiceRecord("Server", UUID.fromString(getResources().getString(R.string.UUID))).accept();
+		
 	}
 
 	public BluetoothSocket getSocket() {

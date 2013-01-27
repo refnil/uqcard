@@ -1,10 +1,8 @@
 package com.refnil.uqcard;
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.UUID;
-
 import com.refnil.uqcard.library.Server;
+import com.refnil.uqcard.library.Talk;
 import com.refnil.uqcard.service.BluetoothService;
 import com.refnil.uqcard.service.IBluetoothService;
 
@@ -12,18 +10,17 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Resources.NotFoundException;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class BluetoothActivity extends Activity {
@@ -49,8 +46,11 @@ public class BluetoothActivity extends Activity {
 					try {
 						mBoundService.listen();
 						BluetoothSocket bs = mBoundService.getSocket();  
+						Log.i("",bs==null?"null":"notnull");
 						BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, new Server());
-						
+						Log.i("","blc created");
+						blc.send(new Talk("lol"));
+						Log.i("","Message send");
 					} catch (NotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -74,6 +74,7 @@ public class BluetoothActivity extends Activity {
 						mBoundService.connect(mBluetoothAdapter.getBondedDevices().iterator().next());
 						BluetoothSocket bs = mBoundService.getSocket();
 						BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, null);
+						blc.start();
 					} catch (NotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
