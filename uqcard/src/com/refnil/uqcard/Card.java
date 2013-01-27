@@ -1,13 +1,6 @@
 package com.refnil.uqcard;
 
 import android.content.Context;
-import android.graphics.Point;
-import android.view.Display;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.RelativeLayout;
 
 public class Card extends RelativeLayout
@@ -20,11 +13,11 @@ public class Card extends RelativeLayout
 	private byte[] image;
 
 	// Pas nécessairement un constructeur ?
-	/*public Card(Context c,int cardId)
+	public Card(Context c,int cardId)
 	{
 		super(c);
 		// a faire apres la bd
-	}*/
+	}
 
 	public Card(Context c,long cardId,String name, String description,String flavor,int cost,byte[] image)
 	{

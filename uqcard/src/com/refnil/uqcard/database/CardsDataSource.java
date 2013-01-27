@@ -1,4 +1,7 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.database;
+
+import com.refnil.uqcard.Card;
+import com.refnil.uqcard.CreatureCard;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -57,6 +60,29 @@ public class CardsDataSource {
     database.delete(MySQLiteHelper.TABLE_CARDS, MySQLiteHelper.CARDS_ID + " = " + id, null);
     if(myCard instanceof CreatureCard)
     	database.delete(MySQLiteHelper.TABLE_CREATURECARDS, MySQLiteHelper.CREATURECARDS_IDCARD + " = " + id, null);
+  }
+  
+  public void changeCard(Card newCard)
+  {
+	  long id = newCard.get_Id();
+	  ContentValues values = new ContentValues();
+	  values.put(MySQLiteHelper.CARDS_NAME, newCard.getName());
+	  values.put(MySQLiteHelper.CARDS_DESCRIPTION, newCard.getDescription());
+	  values.put(MySQLiteHelper.CARDS_FLAVOR, newCard.getFlavor());
+	  values.put(MySQLiteHelper.CARDS_COST,newCard.getCost());
+	  values.put(MySQLiteHelper.CARDS_IMAGE,newCard.getImage());
+	 
+	  
+	  database.update(MySQLiteHelper.TABLE_CARDS, values, MySQLiteHelper.CARDS_ID + " = " + id, null);
+	  
+	  if(newCard instanceof CreatureCard)
+	  {
+		  values.clear();
+		  values.put(MySQLiteHelper.CREATURECARDS_ATTACK, ((CreatureCard) newCard).getAttack());
+		  values.put(MySQLiteHelper.CREATURECARDS_DEFENSE,((CreatureCard) newCard).getDefense());
+		  values.put(MySQLiteHelper.CREATURECARDS_HEALTH,((CreatureCard) newCard).getHealth());
+		  database.update(MySQLiteHelper.TABLE_CREATURECARDS, values, MySQLiteHelper.CREATURECARDS_IDCARD + " = " + id, null);
+	  }
   }
   
   public Card getCard(int id)

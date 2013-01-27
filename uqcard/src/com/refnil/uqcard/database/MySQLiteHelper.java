@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -49,7 +49,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		  CREATURECARDS_IDCARD + " integer not null, " +
 		  CREATURECARDS_ATTACK + " integer not null, " +
 		  CREATURECARDS_DEFENSE + " integer not null, " +
-		  CREATURECARDS_HEALTH + " integer not null " +
+		  CREATURECARDS_HEALTH + " integer not null, " +
+		  " FOREING KEY("+CREATURECARDS_IDCARD+") REFENRENCES "+ TABLE_CARDS +"("+ CARDS_ID+")"+
 		  ");";
 
 

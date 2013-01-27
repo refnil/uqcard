@@ -1,8 +1,6 @@
 package com.refnil.uqcard;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
 
 public class CreatureCard extends Card 
 {
@@ -16,7 +14,7 @@ public class CreatureCard extends Card
 		this.setHealth(health);
 	}
 	
-	int getAttack()
+	public int getAttack()
 	{
 		return this.attack;
 	}
@@ -26,7 +24,7 @@ public class CreatureCard extends Card
 		this.attack = attack;
 	}
 	
-	int getDefense()
+	public int getDefense()
 	{
 		return this.defense;
 	}
@@ -36,7 +34,7 @@ public class CreatureCard extends Card
 		this.defense = defense;
 	}
 	
-	int getHealth()
+	public int getHealth()
 	{
 		return this.health;
 	}

@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.board.BoardActivity;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
