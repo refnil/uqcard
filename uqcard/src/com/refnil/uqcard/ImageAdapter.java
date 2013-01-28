@@ -4,18 +4,22 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Point;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.RelativeLayout.LayoutParams;
 
 public class ImageAdapter extends BaseAdapter {
 
 	private Context ctx;
 	int imageBackground;
-	Card carte;
+	CardView carte;
 	Integer[] pics = {R.drawable.carreau,R.drawable.coeur,R.drawable.trefle,R.drawable.pique};
 	
 	public ImageAdapter(Context c) {
@@ -42,30 +46,25 @@ public class ImageAdapter extends BaseAdapter {
 	}
 
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		Card myCard = new Card(ctx, "nom", "desc","flav", 2);
+		CardView myCard = new CardView(ctx, "nom", "desc","flav", 2);
+		
+		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		
 
-		
-		View v = myCard.getCardView(ctx,150,120);
-		
-		Bitmap viewCapture = loadBitmapFromView(v);
-		ImageView iv = new ImageView(ctx);
-		
-		iv.setScaleType(ImageView.ScaleType.FIT_XY);
-		iv.setLayoutParams(new Gallery.LayoutParams(150,120));
-		iv.setBackgroundResource(imageBackground);
-		iv.setImageBitmap(viewCapture);
-		return iv;
+		return myCard.getCardImageView(ctx, size.x, size.y);
 	}
 	
-	public static Bitmap loadBitmapFromView(View v) {
-		Bitmap b = Bitmap.createBitmap(v.getLayoutParams().width, v.getLayoutParams().height, Bitmap.Config.RGB_565);     
-	    Canvas c = new Canvas(b);
-	    v.measure(MeasureSpec.makeMeasureSpec(v.getLayoutParams().width, MeasureSpec.EXACTLY),
-	            MeasureSpec.makeMeasureSpec(v.getLayoutParams().height, MeasureSpec.EXACTLY));
-	    v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-	    v.draw(c);
-	    return b;
+	public CardView getCardView(int arg0, View arg1, ViewGroup arg2)  {
+		CardView myCard = new CardView(ctx, "nom", "desc","flav", 2);
+		
+		return myCard;
+		
 	}
+	
+	
 	
 
 }

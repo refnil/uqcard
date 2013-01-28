@@ -4,11 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-public class CreatureCards extends Card 
+public class CreatureCardView extends CardView 
 {
 	private int attack, defence, health;
 
-	public CreatureCards(Context c,String name, String description,String flavor,int cost,int attack, int defence, int health)
+	public CreatureCardView(Context c,String name, String description,String flavor,int cost,int attack, int defence, int health)
 	{
 		super(c,name,description,flavor,cost);
 		this.attack = attack;

@@ -19,26 +19,38 @@
             
         <!-- Opponent -->    
         <!-- Back -->  
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
+            android:id="@+id/opponentGeneralpoopoo"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="4dp"
+            />
+        
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentGeneral"
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="4dp"
-            android:contentDescription="@string/opponentGeneral"
-            android:src="@drawable/coeur"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentBack1"
             android:layout_width="45dp"
             android:layout_height="55dp"
             android:layout_marginRight="5dp"
-            android:contentDescription="@string/opponentBack"
-            android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentBack2"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -47,7 +59,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentBack3"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -56,7 +70,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentPhenomenon"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -65,7 +81,9 @@
             android:src="@drawable/coeur"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentCemetery"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -86,7 +104,9 @@
             
         <!-- Opponent -->    
         <!-- Front -->  
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront1"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -96,7 +116,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+       <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront2"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -105,7 +127,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront3"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -114,7 +138,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront4"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -123,7 +149,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront5"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -132,7 +160,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentDeck"
            android:layout_width="45dp"
             android:layout_height="55dp"
@@ -178,7 +208,9 @@
             
         <!-- Player -->    
         <!-- Front -->  
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront1"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -188,7 +220,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront2"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -197,7 +231,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront3"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -206,7 +242,9 @@
             android:background="#000000"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront4"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -215,7 +253,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront5"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -224,7 +264,9 @@
             android:src="@drawable/carreau"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerDeck"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -241,7 +283,9 @@
             
         <!-- Player -->    
         <!-- Back -->  
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerGeneral"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -251,7 +295,9 @@
             android:src="@drawable/coeur"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerBack1"
            android:layout_width="45dp"
             android:layout_height="55dp"
@@ -260,7 +306,9 @@
             android:background="#000000"
             />
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerBack2"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -268,7 +316,9 @@
             android:contentDescription="@string/playerBack"
             android:src="@drawable/carreau"/>
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerBack3"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -276,7 +326,9 @@
             android:contentDescription="@string/playerBack"
             android:src="@drawable/carreau"/>
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
+	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerPhenomenon"
             android:layout_width="45dp"
             android:layout_height="55dp"
@@ -284,7 +336,8 @@
             android:contentDescription="@string/playerPhenomenon"
             android:src="@drawable/coeur"/>
         
-        <ImageView 
+        <com.refnil.uqcard.Card
+	    	xmlns:android="http://schemas.android.com/apk/res/android" 
             android:id="@+id/playerCemetery"
            android:layout_width="45dp"
             android:layout_height="55dp"

@@ -22,13 +22,14 @@ public class BoardActivity extends Activity implements OnTouchListener {
 	private ImageAdapter adapter;
 	private float pointY;
 	private int phase=1;
-	private int selectedCard = 0;
+	private CardView selectedCard;
 	private OnClickListener c = new OnClickListener()
 	{
 
 		public void onClick(View v) {
-			ImageView iv = (ImageView) v;
-			if(phase == 0 && iv.getDrawable() != null && selectedCard != 0)
+			//FIXER SIZE
+			ImageView iv = ((CardView) v).getCardImageView(getApplicationContext(), 200, 100);
+			if(phase == 0 && iv.getDrawable() != null && selectedCard != null)
 			{
 					switch(iv.getId())
 					{
@@ -46,7 +47,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
 			}
 			else
 			{
-				if((phase == 1 && iv.getDrawable() == null) || (phase == 0 && selectedCard == 0))
+				if((phase == 1 && iv.getDrawable() == null) || (phase == 0 && selectedCard == null))
 				{
 					
 					switch(iv.getId())
@@ -61,7 +62,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
 					case R.id.playerFront3:
 					case R.id.playerFront4: 
 					case R.id.playerFront5 : if(phase == 0)
-												selectedCard = iv.getId();
+												selectedCard = null;//iv.getId();
 											else
 												placeCard(iv);
 											break;
@@ -99,92 +100,100 @@ public class BoardActivity extends Activity implements OnTouchListener {
         tv = (TextView) findViewById(R.id.playerText);
         tv.setText("Me");
         
+        
+        
         //Opponent
-        ImageView iv = (ImageView) findViewById(R.id.opponentBack1);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentBack2);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentBack3);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentFront1);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentFront2);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentFront3);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentFront4);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentFront5);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentGeneral);
-        iv.setTag(R.drawable.coeur);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.opponentCemetery);
-        iv.setTag(R.drawable.coeur);
-        iv.setOnLongClickListener(lc);
+        CardView cd;
+        cd= (CardView) findViewById(R.id.opponentBack1);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd.setBackgroundColor(0);
+        
+        cd.setTag(R.drawable.carreau);
+
+        cd = (CardView) findViewById(R.id.opponentBack2);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        
+        cd = (CardView) findViewById(R.id.opponentBack3);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        
+        cd = (CardView) findViewById(R.id.opponentFront1);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.opponentFront2);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.opponentFront3);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.opponentFront4);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.opponentFront5);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.opponentGeneral);
+        cd.setTag(R.drawable.coeur);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.opponentCemetery);
+        cd.setTag(R.drawable.coeur);
+        cd.setOnLongClickListener(lc);
         
         //Player
-        iv = (ImageView) findViewById(R.id.playerBack1);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerBack2);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerBack3);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerFront1);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerFront2);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerFront3);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerFront4);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerFront5);
-        iv.setTag(R.drawable.carreau);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerGeneral);
-        iv.setTag(R.drawable.coeur);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerPhenomenon);
-        iv.setTag(R.drawable.coeur);
-        iv.setOnClickListener(c);
-        iv.setOnLongClickListener(lc);
-        iv = (ImageView) findViewById(R.id.playerCemetery);
-        iv.setTag(R.drawable.coeur);
-        iv.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerBack1);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerBack2);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerBack3);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerFront1);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerFront2);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerFront3);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerFront4);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerFront5);
+        cd.setTag(R.drawable.carreau);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerGeneral);
+        cd.setTag(R.drawable.coeur);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerPhenomenon);
+        cd.setTag(R.drawable.coeur);
+        cd.setOnClickListener(c);
+        cd.setOnLongClickListener(lc);
+        cd = (CardView) findViewById(R.id.playerCemetery);
+        cd.setTag(R.drawable.coeur);
+        cd.setOnLongClickListener(lc);
         
         // Hand initialisation
         
@@ -240,11 +249,11 @@ public class BoardActivity extends Activity implements OnTouchListener {
 	
 	public void attackCard(ImageView iv)
 	{
-		if(selectedCard != 0)
+		if(selectedCard != null)
 		{
 
 			Toast.makeText(getApplicationContext(), "Attack done", Toast.LENGTH_SHORT).show();
-			selectedCard = 0;
+			selectedCard = null;
 			
 			//TEMP
 			phase = 1;
@@ -253,11 +262,12 @@ public class BoardActivity extends Activity implements OnTouchListener {
 	
 	public void placeCard(ImageView iv)
 	{
-		if(selectedCard != 0)
+		if(selectedCard != null)
 		{
-			iv.setImageResource(selectedCard);
+			//SETTER DES VRAI SIZE LA LA
+			iv.setImageBitmap(selectedCard.loadBitmapFromView(selectedCard.getCardView(getApplicationContext(), 200, 100)));
 			iv.setTag(selectedCard);
-			selectedCard = 0;
+			selectedCard = null;
 			
 			//TEMP
 			phase = 0;
@@ -286,9 +296,12 @@ public class BoardActivity extends Activity implements OnTouchListener {
 		    	Gallery gallery = (Gallery)findViewById(R.id.Gallery);
 		    	if(eventY<pointY)
 		    	{
-		    		selectedCard = (int)gallery.getSelectedItemId();
+		    		if(slider.isOpened())
+		    		{
+		    		selectedCard = ((ImageAdapter) gallery.getAdapter()).getCardView(gallery.getSelectedItemPosition(), null, null);
 		        	slider.animateClose();
 		        	pointY =0;
+		    		}
 		    	}
 		      break;
 		    default:
