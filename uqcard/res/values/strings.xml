@@ -33,7 +33,6 @@
     <string name = "creaType">Android</string>
     <string name = "cardName">BugDroid</string>
     <string name = "cost">4</string>
-    <string name="playerDeck">Player deck</string>
     <string name="buttonSingle">Multiplayer 1 vs 1</string>
     <string name="buttonMulti">Multiplayer 3  devices</string>
     <string name="buttonOptions">Options</string>
