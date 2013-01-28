@@ -26,19 +26,6 @@ public class CardView extends RelativeLayout
 	public CardView(Context c,AttributeSet atrs)
 	{
 		super(c,atrs);
-		// a faire apres la bd
-		/*
-		TypedArray ta = c.obtainStyledAttributes(R.styleable.Gallery1);
-		imageBackground = ta.getResourceId(R.styleable.Gallery1_android_galleryItemBackground, 1);
-		
-		inflater = (LayoutInflater)c.getSystemService
-			      (Context.LAYOUT_INFLATER_SERVICE);
-		layoutCard = inflater.inflate(R.layout.layout_card, null);
-		
-		((TextView) layoutCard.findViewById(R.id.cost)).setText(Integer.toString(card.getCost()));
-		((TextView) layoutCard.findViewById(R.id.name)).setText(card.getName());
-		((TextView) layoutCard.findViewById(R.id.description)).setText(card.getDescription());
-		((TextView) layoutCard.findViewById(R.id.flavor)).setText(card.getFlavor());*/
 		
 	}
 	
