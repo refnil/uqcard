@@ -1,8 +1,9 @@
 package com.refnil.uqcard.library
 
 sealed abstract class Message extends Serializable
-case class IdMessage(id:Int,m:Message) extends Message
-case object Connect extends Message
+case class IdMessage(id:Int,m:Message) extends Message //For communication trough proxy
+
+case object Connect extends Message 
 case object Disconnect extends Message
 case object Close extends Message
 case object RequestServer extends Message

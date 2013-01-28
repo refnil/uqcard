@@ -3,9 +3,9 @@ package com.refnil.uqcard.library
 import scala.actors.Actor
 
 trait User[T >: Message] extends Actor{
-    def init()
-	def receivedMessage(m : T)
-	def receivedElse(a : AnyRef)
+    protected def init()
+	protected def receivedMessage(m : T)
+	protected def receivedElse(a : AnyRef)
 	
 	def act() = {
       init()

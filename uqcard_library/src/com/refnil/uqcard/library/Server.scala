@@ -3,16 +3,24 @@ package com.refnil.uqcard.library
 import scala.actors.Actor
 import scala.actors.OutputChannel
 import scala.collection.mutable.LinkedList
+import com.refnil.uqcard.library.logic.Board
 
 class Server extends User[Message] {
-  var players: List[User[Message]] = List()
   
+  private var connected: List[User[Message]] = List()
+  
+  private val board = new Board
+  private var started = false
+  
+  
+  
+  //From user[Message]
   def init() = {}
 
   def receivedMessage(m: Message) = m match {
     case Connect =>
-      players = sender match {
-        case p: User[Message] => p :: players
+      connected = sender match {
+        case p: User[Message] => p :: connected
         case _ => players
       }
       println(sender)
