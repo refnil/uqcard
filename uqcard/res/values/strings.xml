@@ -37,5 +37,6 @@
     <string name="buttonMulti">Multiplayer 3  devices</string>
     <string name="buttonOptions">Options</string>
     <string name="buttonEditor">Deck editor</string>
-
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_database">DatabaseActivity</string>
 </resources>

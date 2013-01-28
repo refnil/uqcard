@@ -1,4 +1,12 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.board;
+
+import com.refnil.uqcard.R;
+import com.refnil.uqcard.R.drawable;
+import com.refnil.uqcard.R.id;
+import com.refnil.uqcard.R.layout;
+import com.refnil.uqcard.R.menu;
+import com.refnil.uqcard.board.SemiClosedSlidingDrawer.OnDrawerCloseListener;
+import com.refnil.uqcard.board.SemiClosedSlidingDrawer.OnDrawerOpenListener;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -206,7 +214,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
         });
         
         SemiClosedSlidingDrawer slider = (SemiClosedSlidingDrawer) findViewById(R.id.mySlidingDrawer);
-        slider.setOnDrawerOpenListener(new com.refnil.uqcard.SemiClosedSlidingDrawer.OnDrawerOpenListener()
+        slider.setOnDrawerOpenListener(new com.refnil.uqcard.board.SemiClosedSlidingDrawer.OnDrawerOpenListener()
         {
 
 			public void onDrawerOpened() {
@@ -218,7 +226,7 @@ public class BoardActivity extends Activity implements OnTouchListener {
         	
         });
         
-        slider.setOnDrawerCloseListener(new com.refnil.uqcard.SemiClosedSlidingDrawer.OnDrawerCloseListener()
+        slider.setOnDrawerCloseListener(new com.refnil.uqcard.board.SemiClosedSlidingDrawer.OnDrawerCloseListener()
         {
 
 			public void onDrawerClosed() {
