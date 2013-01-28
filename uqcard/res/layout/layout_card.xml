@@ -1,0 +1,128 @@
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/android3d" >
+
+        <RelativeLayout
+            android:id="@+id/topLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFFFFF" >
+
+            <TextView
+                android:id="@+id/cost"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:ems="10"
+                android:gravity="right"
+                android:text="@string/cost"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/cost"
+                android:ems="10"
+                android:text="@string/cardName"
+                android:textSize="40sp" >
+
+            </TextView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/botLayout"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#FFFFFF" >
+
+            <TextView
+                android:id="@+id/creaType"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:ems="10"
+                android:text="@string/creaType"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/atk"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:ems="10"
+                android:text="@string/attack"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/flavor"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/atk"
+                android:layout_alignParentLeft="true"
+                android:ems="10"
+                android:text="@string/flavorText"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/def"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:ems="10"
+                android:gravity="right"
+                android:text="@string/defence"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hp"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:ems="10"
+                android:gravity="center"
+                android:text="@string/health"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cardType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/creaType"
+                android:ems="10"
+                android:text="@string/cardType"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/flavor"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/creaType"
+                android:ems="10"
+                android:gravity="top"
+                android:text="@string/description"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>

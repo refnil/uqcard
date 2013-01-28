@@ -24,7 +24,19 @@
     <string name="playerCemetery">Player cemetery</string>
     <string name="playerFront">Player front</string>
     <string name="playerDeck">Player deck</string>
+    <string name="flavorText">La legende dit que ce robot aime manger des pommes -Steeve Job</string>
+    <string name="attack">atk: </string>
+    <string name="defence">def: </string>
+    <string name="health">vie: </string>
+    <string name="cardType">creature: </string>
+    <string name="description">description</string>
+    <string name = "creaType">Android</string>
+    <string name = "cardName">BugDroid</string>
+    <string name = "cost">4</string>
+    <string name="buttonSingle">Multiplayer 1 vs 1</string>
+    <string name="buttonMulti">Multiplayer 3  devices</string>
+    <string name="buttonOptions">Options</string>
+    <string name="buttonEditor">Deck editor</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_database">DatabaseActivity</string>
-
 </resources>
