@@ -11,6 +11,7 @@
     <string name="title_activity_full_card">Your card</string>
     <string name="fullScreenCard">fullscreen card</string>
     <string name="currentCard">Current card</string>
+<<<<<<< HEAD
     <string name="title_activity_board">BoardActivity</string>
     <string name="opponentGeneral">Opponent general</string>
     <string name="opponentBack">Opponent back</string>
@@ -24,5 +25,16 @@
     <string name="playerCemetery">Player cemetery</string>
     <string name="playerFront">Player front</string>
     <string name="playerDeck">Player deck</string>
+=======
+    <string name="flavorText">La legende dit que ce robot aime manger des pommes -Steeve Job</string>
+    <string name="attack">atk: </string>
+    <string name="defence">def: </string>
+    <string name="health">vie: </string>
+    <string name="cardType">creature: </string>
+    <string name="description">description</string>
+    <string name = "creaType">Android</string>
+    <string name = "cardName">BugDroid</string>
+    <string name = "cost">4</string>
+>>>>>>> refs/heads/Cards
 
 </resources>
