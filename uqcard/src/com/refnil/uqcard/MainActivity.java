@@ -1,6 +1,6 @@
 package com.refnil.uqcard;
 
-import com.refnil.uqcard.board.BoardActivity;
+import com.refnil.uqcard.board.BoardViewActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 		{
 
 			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), BoardActivity.class);
+				Intent i = new Intent(getApplicationContext(), BoardViewActivity.class);
 		        startActivity(i);
 				
 			}

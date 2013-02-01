@@ -10,26 +10,20 @@ public class Card extends RelativeLayout
 	private String name;
 	private String description;
 	private String flavor;
-
+	private long id;
 	private byte[] image;
 
-	// Pas nécessairement un constructeur ?
-	public Card(Context c,int cardId)
+	Card(String name, String description, String flavor, int cost)
 	{
-		super(c);
-		// a faire apres la bd
+		this.name = name;
+		this.description = description;
+		this.flavor = flavor;
+		this.cost = cost;
 	}
 
-
-	public Card(Context c,long cardId,String name, String description,String flavor,int cost,byte[] image)
+	Card(final Card card)
 	{
-		super(c);
-		this.setId(id);
-		this.setName(name);
-		this.setDescription(description);
-		this.setFlavor(flavor);
-		this.setCost(cost);
-		this.setImage(image);
+		this(card.getName(),card.getDescription(),card.getFlavor(),card.getCost());
 	}
 
 	public long get_Id() {
