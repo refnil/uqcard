@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".board.FullCardActivity"
+            android:name=".FullCardActivity"
             android:label="@string/title_activity_full_card" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".board.BoardViewActivity"
+            android:name=".board.BoardViewActivity"         
             android:label="@string/title_activity_board" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

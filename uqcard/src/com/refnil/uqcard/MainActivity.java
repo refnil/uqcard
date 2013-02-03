@@ -1,7 +1,5 @@
 package com.refnil.uqcard;
 
-import com.refnil.uqcard.board.BoardViewActivity;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,56 +15,59 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		Button b = (Button) findViewById(R.id.buttonSingle);
-		b.setOnClickListener(new OnClickListener()
-		{
+		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Intent i = new Intent(getApplicationContext(), BoardViewActivity.class);
-		        startActivity(i);
-				
+				Intent i = new Intent(getApplicationContext(),
+						BoardViewActivity.class);
+				startActivity(i);
+
 			}
-			
+
 		});
-		
+
 		b = (Button) findViewById(R.id.buttonMulti);
-		b.setOnClickListener(new OnClickListener()
-		{
+		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Multi", Toast.LENGTH_SHORT).show();
-				//Intent i = new Intent(getApplicationContext(), BoardActivity.class);
-		        //startActivity(i);
-				
+				Toast.makeText(getApplicationContext(), "Multi",
+						Toast.LENGTH_SHORT).show();
+				// Intent i = new Intent(getApplicationContext(),
+				// BoardActivity.class);
+				// startActivity(i);
+
 			}
-			
+
 		});
-		
+
 		b = (Button) findViewById(R.id.buttonEditor);
-		b.setOnClickListener(new OnClickListener()
-		{
+		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Editor", Toast.LENGTH_SHORT).show();
-				//Intent i = new Intent(getApplicationContext(), BoardActivity.class);
-		        //startActivity(i);
-				
+				Toast.makeText(getApplicationContext(), "Editor",
+						Toast.LENGTH_SHORT).show();
+				// Intent i = new Intent(getApplicationContext(),
+				// BoardActivity.class);
+				// startActivity(i);
+
 			}
-			
+
 		});
-		
+
 		b = (Button) findViewById(R.id.buttonOptions);
-		b.setOnClickListener(new OnClickListener()
-		{
+		b.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Options", Toast.LENGTH_SHORT).show();
-				//Intent i = new Intent(getApplicationContext(), BoardActivity.class);
-		        //startActivity(i);
-				
+				Toast.makeText(getApplicationContext(), "Options",
+						Toast.LENGTH_SHORT).show();
+				// Intent i = new Intent(getApplicationContext(),
+				// BoardActivity.class);
+				// startActivity(i);
+
 			}
-			
+
 		});
 	}
 
