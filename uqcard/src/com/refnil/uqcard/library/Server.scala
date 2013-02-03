@@ -21,19 +21,19 @@ class Server extends User[Message] {
     case Connect =>
       connected = sender match {
         case p: User[Message] => p :: connected
-        case _ => players
+        case _ => connected
       }
       println(sender)
     case Disconnect =>
-      players = sender match {
-        case p: Player => players.filter(x => p != x)
-        case _ => players
+      connected = sender match {
+        case p: Player => connected.filter(x => p != x)
+        case _ => connected
       }
       println("Disconnect")
     case Talk(mess) =>
-      players.foreach(x => x ! Talk(mess))
+      connected.foreach(x => x ! Talk(mess))
     case Close =>
-      players foreach (x => x ! Close)
+      connected foreach (x => x ! Close)
       exit()
   }
 
