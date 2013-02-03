@@ -9,6 +9,7 @@ public class Card implements Parcelable {
 	private String name;
 	private String description;
 	private String flavor;
+
 	private long id;
 	private byte[] image;
 	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
@@ -114,5 +115,4 @@ public class Card implements Parcelable {
 		dest.writeInt(this.getCost());
 		dest.writeByteArray(this.getImage());
 	}
-
 }
