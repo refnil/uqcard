@@ -1,18 +1,45 @@
 <resources>
 
     <string name="app_name">uqcard</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_section3">Section 3</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Section 1</string>
-    <string name="title_activity_hand">HandActivity</string>
     <string name="hand_button">Hand</string>
-    <string name="title_activity_full_card">FullCardActivity</string>
+    <string name="title_activity_full_card">Your card</string>
     <string name="fullScreenCard">fullscreen card</string>
-    <string name="currentCard">Current card</string>
+	
     <string name="title_activity_bluetooth">BluetoothActivity</string>
     <string name="UUID">822309e6-f032-4ba4-857f-0f8030907101</string>
 
+    <string name="currentCard">Current card</string>
+    <string name="title_activity_board">BoardActivity</string>
+    <string name="opponentGeneral">Opponent general</string>
+    <string name="opponentBack">Opponent back</string>
+    <string name="opponentPhenomenon">Opponent phenomenon</string>
+    <string name="opponentCemetery">Opponent cemetery</string>
+    <string name="opponentFront">Opponent front</string>
+    <string name="opponentDeck">Opponent deck</string>
+    <string name="playerGeneral">Player general</string>
+    <string name="playerBack">Player back</string>
+    <string name="playerPhenomenon">Player phenomenon</string>
+    <string name="playerCemetery">Player cemetery</string>
+    <string name="playerFront">Player front</string>
+    <string name="playerDeck">Player deck</string>
+    <string name="flavorText">La legende dit que ce robot aime manger des pommes -Steeve Job</string>
+    <string name="attack">atk: </string>
+    <string name="defence">def: </string>
+    <string name="health">vie: </string>
+    <string name="cardType">creature: </string>
+    <string name="description">description</string>
+    <string name = "creaType">Android</string>
+    <string name = "cardName">BugDroid</string>
+    <string name = "cost">4</string>
+    <string name="buttonSingle">Multiplayer 1 vs 1</string>
+    <string name="buttonMulti">Multiplayer 3  devices</string>
+    <string name="buttonOptions">Options</string>
+    <string name="buttonEditor">Deck editor</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_database">DatabaseActivity</string>
 </resources>

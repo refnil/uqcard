@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#2554C7" >
+
+        <TableRow
+            android:id="@+id/opponentRow"
+            android:layout_width="wrap_content"
+            android:layout_height="75dip"
+            android:paddingTop="15dip" >
+
+            <!-- Opponent -->
+            <!-- Back -->
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentGeneral"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentBack1"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentBack2"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentBack3"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentPhenomenon"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="15dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentCemetery"
+                android:layout_width="45dip"
+                android:layout_height="55dip" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/opponentRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="75dip"
+            android:paddingBottom="30dip"
+            android:paddingTop="15dip" >
+
+            <!-- Opponent -->
+            <!-- Front -->
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentFront1"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentFront2"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentFront3"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentFront4"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentFront5"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="15dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/opponentDeck"
+                android:layout_width="45dip"
+                android:layout_height="55dip" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/middleRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5CB3FF" >
+
+            <TextView
+                android:id="@+id/opponentText"
+                android:height="30dip"
+                android:textSize="15sp" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/middleRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#5CB3FF" >
+
+            <TextView
+                android:id="@+id/playerText"
+                android:height="30dip"
+                android:textSize="15sp" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/playerRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="75dip"
+            android:paddingBottom="30dip"
+            android:paddingTop="15dip" >
+
+            <!-- Player -->
+            <!-- Front -->
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerFront1"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerFront2"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerFront3"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerFront4"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerFront5"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="15dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerDeck"
+                android:layout_width="45dip"
+                android:layout_height="55dip" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/playerRow"
+            android:layout_width="wrap_content"
+            android:layout_height="75dip"
+            android:paddingTop="15dip" >
+
+            <!-- Player -->
+            <!-- Back -->
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerGeneral"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginLeft="4dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerBack1"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerBack2"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerBack3"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="5dip"
+                android:contentDescription="@string/playerBack"
+                android:src="@drawable/carreau" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerPhenomenon"
+                android:layout_width="45dip"
+                android:layout_height="55dip"
+                android:layout_marginRight="15dip" />
+
+            <com.refnil.uqcard.CardView
+                android:id="@+id/playerCemetery"
+                android:layout_width="45dip"
+                android:layout_height="55dip" />
+        </TableRow>
+    </TableLayout>
+
+    <com.refnil.uqcard.SemiClosedSlidingDrawer
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
+        android:id="@+id/mySlidingDrawer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        custom:allowSingleTap="true"
+        custom:content="@+id/contentGallery"
+        custom:handle="@+id/handleButton"
+        custom:orientation="vertical"
+        custom:semiClosedContentSize="55dip"
+        custom:topOffset="350dip" >
+
+        <Button
+            android:id="@id/handleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hand_button" />
+
+        <LinearLayout
+            android:id="@id/contentGallery"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#25587E"
+            android:orientation="horizontal" >
+
+            <Gallery
+                android:id="@+id/Gallery"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top" >
+            </Gallery>
+        </LinearLayout>
+    </com.refnil.uqcard.SemiClosedSlidingDrawer>
+
+</RelativeLayout>
