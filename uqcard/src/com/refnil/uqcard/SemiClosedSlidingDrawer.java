@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package com.refnil.uqcard.board;
+package com.refnil.uqcard;
 
 import java.lang.reflect.Method;
 
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.R.styleable;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -89,9 +88,7 @@ import android.view.accessibility.AccessibilityEvent;
  * @attr ref android.R.styleable#SlidingDrawer_allowSingleTap
  * @attr ref android.R.styleable#SlidingDrawer_animateOnClick
  */
-public class SemiClosedSlidingDrawer
-	extends ViewGroup
-{
+public class SemiClosedSlidingDrawer extends ViewGroup {
 	public static final int ORIENTATION_HORIZONTAL = 0;
 	public static final int ORIENTATION_VERTICAL = 1;
 
@@ -154,8 +151,7 @@ public class SemiClosedSlidingDrawer
 	/**
 	 * Callback invoked when the drawer is opened.
 	 */
-	public static interface OnDrawerOpenListener
-	{
+	public static interface OnDrawerOpenListener {
 		/**
 		 * Invoked when the drawer becomes fully open.
 		 */
@@ -165,8 +161,7 @@ public class SemiClosedSlidingDrawer
 	/**
 	 * Callback invoked when the drawer is closed.
 	 */
-	public static interface OnDrawerCloseListener
-	{
+	public static interface OnDrawerCloseListener {
 		/**
 		 * Invoked when the drawer becomes fully closed.
 		 */
@@ -176,8 +171,7 @@ public class SemiClosedSlidingDrawer
 	/**
 	 * Callback invoked when the drawer is scrolled.
 	 */
-	public static interface OnDrawerScrollListener
-	{
+	public static interface OnDrawerScrollListener {
 		/**
 		 * Invoked when the user starts dragging/flinging the drawer's handle.
 		 */
@@ -198,8 +192,7 @@ public class SemiClosedSlidingDrawer
 	 * @param attrs
 	 *            The attributes defined in XML.
 	 */
-	public SemiClosedSlidingDrawer(Context context, AttributeSet attrs)
-	{
+	public SemiClosedSlidingDrawer(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);
 	}
 
@@ -214,35 +207,47 @@ public class SemiClosedSlidingDrawer
 	 * @param defStyle
 	 *            The style to apply to this widget.
 	 */
-	public SemiClosedSlidingDrawer(Context context, AttributeSet attrs, int defStyle)
-	{
+	public SemiClosedSlidingDrawer(Context context, AttributeSet attrs,
+			int defStyle) {
 		super(context, attrs, defStyle);
-		TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SemiClosedSlidingDrawer, defStyle, 0);
+		TypedArray a = context.obtainStyledAttributes(attrs,
+				R.styleable.SemiClosedSlidingDrawer, defStyle, 0);
 
-		String orientation = a.getString(R.styleable.SemiClosedSlidingDrawer_orientation);
+		String orientation = a
+				.getString(R.styleable.SemiClosedSlidingDrawer_orientation);
 		mVertical = (orientation != null && orientation.equals("vertical"));
-		mBottomOffset = (int) a.getDimension(R.styleable.SemiClosedSlidingDrawer_bottomOffset, 0.0f);
-		mTopOffset = (int) a.getDimension(R.styleable.SemiClosedSlidingDrawer_topOffset, 0.0f);
-		mAllowSingleTap = a.getBoolean(R.styleable.SemiClosedSlidingDrawer_allowSingleTap, false);
-		mAnimateOnClick = a.getBoolean(R.styleable.SemiClosedSlidingDrawer_animateOnClick, true);
-		mSemiClosedContentSize = (int) a.getDimension(R.styleable.SemiClosedSlidingDrawer_semiClosedContentSize, 0.0f);
+		mBottomOffset = (int) a.getDimension(
+				R.styleable.SemiClosedSlidingDrawer_bottomOffset, 0.0f);
+		mTopOffset = (int) a.getDimension(
+				R.styleable.SemiClosedSlidingDrawer_topOffset, 0.0f);
+		mAllowSingleTap = a.getBoolean(
+				R.styleable.SemiClosedSlidingDrawer_allowSingleTap, false);
+		mAnimateOnClick = a.getBoolean(
+				R.styleable.SemiClosedSlidingDrawer_animateOnClick, true);
+		mSemiClosedContentSize = (int) a
+				.getDimension(
+						R.styleable.SemiClosedSlidingDrawer_semiClosedContentSize,
+						0.0f);
 
-		int handleId = a.getResourceId(R.styleable.SemiClosedSlidingDrawer_handle, 0);
-		if (handleId == 0)
-		{
-			throw new IllegalArgumentException("The handle attribute is required and must refer " + "to a valid child.");
-		}
-
-		int contentId = a.getResourceId(R.styleable.SemiClosedSlidingDrawer_content, 0);
-		if (contentId == 0)
-		{
-			throw new IllegalArgumentException("The content attribute is required and must refer "
+		int handleId = a.getResourceId(
+				R.styleable.SemiClosedSlidingDrawer_handle, 0);
+		if (handleId == 0) {
+			throw new IllegalArgumentException(
+					"The handle attribute is required and must refer "
 							+ "to a valid child.");
 		}
 
-		if (handleId == contentId)
-		{
-			throw new IllegalArgumentException("The content and handle attributes must refer "
+		int contentId = a.getResourceId(
+				R.styleable.SemiClosedSlidingDrawer_content, 0);
+		if (contentId == 0) {
+			throw new IllegalArgumentException(
+					"The content attribute is required and must refer "
+							+ "to a valid child.");
+		}
+
+		if (handleId == contentId) {
+			throw new IllegalArgumentException(
+					"The content and handle attributes must refer "
 							+ "to different children.");
 		}
 
@@ -263,99 +268,89 @@ public class SemiClosedSlidingDrawer
 	}
 
 	@Override
-	protected void onFinishInflate()
-	{
+	protected void onFinishInflate() {
 		mHandle = findViewById(mHandleId);
-		if (mHandle == null)
-		{
-			throw new IllegalArgumentException("The handle attribute is must refer to an" + " existing child.");
+		if (mHandle == null) {
+			throw new IllegalArgumentException(
+					"The handle attribute is must refer to an"
+							+ " existing child.");
 		}
 		mHandle.setOnClickListener(new DrawerToggler());
 
 		mContent = findViewById(mContentId);
-		if (mContent == null)
-		{
-			throw new IllegalArgumentException("The content attribute is must refer to an" + " existing child.");
+		if (mContent == null) {
+			throw new IllegalArgumentException(
+					"The content attribute is must refer to an"
+							+ " existing child.");
 		}
 		mContent.setVisibility(View.VISIBLE);
 	}
 
 	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
-	{
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
 		int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
 
 		int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
 		int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
-		if (widthSpecMode == MeasureSpec.UNSPECIFIED || heightSpecMode == MeasureSpec.UNSPECIFIED)
-		{
-			throw new RuntimeException("SlidingDrawer cannot have UNSPECIFIED dimensions");
+		if (widthSpecMode == MeasureSpec.UNSPECIFIED
+				|| heightSpecMode == MeasureSpec.UNSPECIFIED) {
+			throw new RuntimeException(
+					"SlidingDrawer cannot have UNSPECIFIED dimensions");
 		}
 
 		final View handle = mHandle;
 		measureChild(handle, widthMeasureSpec, heightMeasureSpec);
 
-		if (mVertical)
-		{
-			int height = heightSpecSize - handle.getMeasuredHeight() - mTopOffset;
-			mContent.measure(MeasureSpec.makeMeasureSpec(widthSpecSize, MeasureSpec.EXACTLY),
-							MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
-		}
-		else
-		{
+		if (mVertical) {
+			int height = heightSpecSize - handle.getMeasuredHeight()
+					- mTopOffset;
+			mContent.measure(MeasureSpec.makeMeasureSpec(widthSpecSize,
+					MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(height,
+					MeasureSpec.EXACTLY));
+		} else {
 			int width = widthSpecSize - handle.getMeasuredWidth() - mTopOffset;
-			mContent.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-							MeasureSpec.makeMeasureSpec(heightSpecSize, MeasureSpec.EXACTLY));
+			mContent.measure(MeasureSpec.makeMeasureSpec(width,
+					MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
+					heightSpecSize, MeasureSpec.EXACTLY));
 		}
 
 		setMeasuredDimension(widthSpecSize, heightSpecSize);
 	}
 
 	@Override
-	protected void dispatchDraw(Canvas canvas)
-	{
+	protected void dispatchDraw(Canvas canvas) {
 		final long drawingTime = getDrawingTime();
 		final View handle = mHandle;
 		final boolean isVertical = mVertical;
 
 		drawChild(canvas, handle, drawingTime);
 
-		if (mTracking || mAnimating || !mExpanded)
-		{
+		if (mTracking || mAnimating || !mExpanded) {
 			final Bitmap cache = mContent.getDrawingCache();
-			if (cache != null)
-			{
-				if (isVertical)
-				{
+			if (cache != null) {
+				if (isVertical) {
 					canvas.drawBitmap(cache, 0, handle.getBottom(), null);
-				}
-				else
-				{
+				} else {
 					canvas.drawBitmap(cache, handle.getRight(), 0, null);
 				}
-			}
-			else
-			{
+			} else {
 				canvas.save();
-				canvas.translate(isVertical ? 0 : handle.getLeft() - mTopOffset, isVertical ? handle.getTop()
-								- mTopOffset : 0);
+				canvas.translate(
+						isVertical ? 0 : handle.getLeft() - mTopOffset,
+						isVertical ? handle.getTop() - mTopOffset : 0);
 				drawChild(canvas, mContent, drawingTime);
 				canvas.restore();
 			}
-		}
-		else if (mExpanded)
-		{
+		} else if (mExpanded) {
 			drawChild(canvas, mContent, drawingTime);
 		}
 	}
 
 	@Override
-	protected void onLayout(boolean changed, int l, int t, int r, int b)
-	{
-		if (mTracking)
-		{
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+		if (mTracking) {
 			return;
 		}
 
@@ -372,37 +367,36 @@ public class SemiClosedSlidingDrawer
 
 		final View content = mContent;
 
-		if (mVertical)
-		{
+		if (mVertical) {
 			// [SEMI-CLOSED] Change so that drawer is laid out semi-closed in
 			// collapsed mode.
 			childLeft = (width - childWidth) / 2;
-			childTop = mExpanded ? mTopOffset : height - childHeight + mBottomOffset - mSemiClosedContentSize;
+			childTop = mExpanded ? mTopOffset : height - childHeight
+					+ mBottomOffset - mSemiClosedContentSize;
 
-			content.layout(0, mTopOffset + childHeight, content.getMeasuredWidth(),
-							mTopOffset + childHeight + content.getMeasuredHeight());
-		}
-		else
-		{
+			content.layout(0, mTopOffset + childHeight,
+					content.getMeasuredWidth(), mTopOffset + childHeight
+							+ content.getMeasuredHeight());
+		} else {
 			// [SEMI-CLOSED] Change so that drawer is laid out semi-closed in
 			// collapsed mode.
-			childLeft = mExpanded ? mTopOffset : width - childWidth + mBottomOffset - mSemiClosedContentSize;
+			childLeft = mExpanded ? mTopOffset : width - childWidth
+					+ mBottomOffset - mSemiClosedContentSize;
 			childTop = (height - childHeight) / 2;
 
-			content.layout(mTopOffset + childWidth, 0, mTopOffset + childWidth + content.getMeasuredWidth(),
-							content.getMeasuredHeight());
+			content.layout(mTopOffset + childWidth, 0, mTopOffset + childWidth
+					+ content.getMeasuredWidth(), content.getMeasuredHeight());
 		}
 
-		handle.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
+		handle.layout(childLeft, childTop, childLeft + childWidth, childTop
+				+ childHeight);
 		mHandleHeight = handle.getHeight();
 		mHandleWidth = handle.getWidth();
 	}
 
 	@Override
-	public boolean onInterceptTouchEvent(MotionEvent event)
-	{
-		if (mLocked)
-		{
+	public boolean onInterceptTouchEvent(MotionEvent event) {
+		if (mLocked) {
 			return false;
 		}
 
@@ -413,16 +407,14 @@ public class SemiClosedSlidingDrawer
 
 		final Rect frame = mFrame;
 		final View handle = mHandle;
-		
+
 		handle.getHitRect(frame);
 
-		if (!mTracking && !frame.contains((int) x, (int) y))
-		{
+		if (!mTracking && !frame.contains((int) x, (int) y)) {
 			return false;
 		}
 
-		if (action == MotionEvent.ACTION_DOWN)
-		{
+		if (action == MotionEvent.ACTION_DOWN) {
 			mTracking = true;
 
 			handle.setPressed(true);
@@ -430,19 +422,15 @@ public class SemiClosedSlidingDrawer
 			prepareContent();
 
 			// Must be called after prepareContent()
-			if (mOnDrawerScrollListener != null)
-			{
+			if (mOnDrawerScrollListener != null) {
 				mOnDrawerScrollListener.onScrollStarted();
 			}
 
-			if (mVertical)
-			{
+			if (mVertical) {
 				final int top = mHandle.getTop();
 				mTouchDelta = (int) y - top;
 				prepareTracking(top);
-			}
-			else
-			{
+			} else {
 				final int left = mHandle.getLeft();
 				mTouchDelta = (int) x - left;
 				prepareTracking(left);
@@ -454,20 +442,18 @@ public class SemiClosedSlidingDrawer
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event)
-	{
-		if (mLocked)
-		{
+	public boolean onTouchEvent(MotionEvent event) {
+		if (mLocked) {
 			return true;
 		}
 
-		if (mTracking)
-		{
+		if (mTracking) {
 			mVelocityTracker.addMovement(event);
 			final int action = event.getAction();
 			switch (action) {
 			case MotionEvent.ACTION_MOVE:
-				moveHandle((int) (mVertical ? event.getY() : event.getX()) - mTouchDelta);
+				moveHandle((int) (mVertical ? event.getY() : event.getX())
+						- mTouchDelta);
 				break;
 			case MotionEvent.ACTION_UP:
 			case MotionEvent.ACTION_CANCEL: {
@@ -479,78 +465,62 @@ public class SemiClosedSlidingDrawer
 				boolean negative;
 
 				final boolean vertical = mVertical;
-				if (vertical)
-				{
+				if (vertical) {
 					negative = yVelocity < 0;
-					if (xVelocity < 0)
-					{
+					if (xVelocity < 0) {
 						xVelocity = -xVelocity;
 					}
-					if (xVelocity > mMaximumMinorVelocity)
-					{
+					if (xVelocity > mMaximumMinorVelocity) {
 						xVelocity = mMaximumMinorVelocity;
 					}
-				}
-				else
-				{
+				} else {
 					negative = xVelocity < 0;
-					if (yVelocity < 0)
-					{
+					if (yVelocity < 0) {
 						yVelocity = -yVelocity;
 					}
-					if (yVelocity > mMaximumMinorVelocity)
-					{
+					if (yVelocity > mMaximumMinorVelocity) {
 						yVelocity = mMaximumMinorVelocity;
 					}
 				}
 
 				float velocity = (float) Math.hypot(xVelocity, yVelocity);
-				if (negative)
-				{
+				if (negative) {
 					velocity = -velocity;
 				}
 
 				final int top = mHandle.getTop();
 				final int left = mHandle.getLeft();
 
-				if (Math.abs(velocity) < mMaximumTapVelocity)
-				{
+				if (Math.abs(velocity) < mMaximumTapVelocity) {
 					// [SEMI-CLOSED] Remove width of visible content part here.
-					if (vertical ? (mExpanded && top < mTapThreshold + mTopOffset)
-									|| (!mExpanded && top > mBottomOffset + getBottom() - getTop() - mHandleHeight
-													- -mSemiClosedContentSize - mTapThreshold)
-									: (mExpanded && left < mTapThreshold + mTopOffset)
-													|| (!mExpanded && left > mBottomOffset + getRight() - getLeft()
-																	- mHandleWidth - mSemiClosedContentSize
-																	- mTapThreshold))
-					{
+					if (vertical ? (mExpanded && top < mTapThreshold
+							+ mTopOffset)
+							|| (!mExpanded && top > mBottomOffset + getBottom()
+									- getTop() - mHandleHeight
+									- -mSemiClosedContentSize - mTapThreshold)
+							: (mExpanded && left < mTapThreshold + mTopOffset)
+									|| (!mExpanded && left > mBottomOffset
+											+ getRight() - getLeft()
+											- mHandleWidth
+											- mSemiClosedContentSize
+											- mTapThreshold)) {
 
-						if (mAllowSingleTap)
-						{
+						if (mAllowSingleTap) {
 							playSoundEffect(SoundEffectConstants.CLICK);
 
-							if (mExpanded)
-							{
+							if (mExpanded) {
 								animateClose(vertical ? top : left);
-							}
-							else
-							{
+							} else {
 								animateOpen(vertical ? top : left);
 							}
-						}
-						else
-						{
+						} else {
 							performFling(vertical ? top : left, velocity, false);
 						}
 
-					}
-					else
-					{
+					} else {
 						performFling(vertical ? top : left, velocity, false);
 					}
-				}
-				else
-				{
+				} else {
 					performFling(vertical ? top : left, velocity, false);
 				}
 			}
@@ -561,67 +531,52 @@ public class SemiClosedSlidingDrawer
 		return mTracking || mAnimating || super.onTouchEvent(event);
 	}
 
-	private void animateClose(int position)
-	{
+	private void animateClose(int position) {
 		prepareTracking(position);
 		performFling(position, mMaximumAcceleration, true);
 	}
 
-	private void animateOpen(int position)
-	{
+	private void animateOpen(int position) {
 		prepareTracking(position);
 		performFling(position, -mMaximumAcceleration, true);
 	}
 
-	private void performFling(int position, float velocity, boolean always)
-	{
+	private void performFling(int position, float velocity, boolean always) {
 		mAnimationPosition = position;
 		mAnimatedVelocity = velocity;
 
-		if (mExpanded)
-		{
+		if (mExpanded) {
 			if (always
-							|| (velocity > mMaximumMajorVelocity || (position > mTopOffset
-											+ (mVertical ? mHandleHeight : mHandleWidth) && velocity > -mMaximumMajorVelocity)))
-			{
+					|| (velocity > mMaximumMajorVelocity || (position > mTopOffset
+							+ (mVertical ? mHandleHeight : mHandleWidth) && velocity > -mMaximumMajorVelocity))) {
 				// We are expanded, but they didn't move sufficiently to cause
 				// us to retract. Animate back to the expanded position.
 				mAnimatedAcceleration = mMaximumAcceleration;
-				if (velocity < 0)
-				{
+				if (velocity < 0) {
 					mAnimatedVelocity = 0;
 				}
-			}
-			else
-			{
+			} else {
 				// We are expanded and are now going to animate away.
 				mAnimatedAcceleration = -mMaximumAcceleration;
-				if (velocity > 0)
-				{
+				if (velocity > 0) {
 					mAnimatedVelocity = 0;
 				}
 			}
-		}
-		else
-		{
+		} else {
 			if (!always
-							&& (velocity > mMaximumMajorVelocity || (position > (mVertical ? getHeight() : getWidth()) / 2 && velocity > -mMaximumMajorVelocity)))
-			{
+					&& (velocity > mMaximumMajorVelocity || (position > (mVertical ? getHeight()
+							: getWidth()) / 2 && velocity > -mMaximumMajorVelocity))) {
 				// We are collapsed, and they moved enough to allow us to
 				// expand.
 				mAnimatedAcceleration = mMaximumAcceleration;
-				if (velocity < 0)
-				{
+				if (velocity < 0) {
 					mAnimatedVelocity = 0;
 				}
-			}
-			else
-			{
+			} else {
 				// We are collapsed, but they didn't move sufficiently to cause
 				// us to retract. Animate back to the collapsed position.
 				mAnimatedAcceleration = -mMaximumAcceleration;
-				if (velocity > 0)
-				{
+				if (velocity > 0) {
 					mAnimatedVelocity = 0;
 				}
 			}
@@ -632,22 +587,22 @@ public class SemiClosedSlidingDrawer
 		mCurrentAnimationTime = now + ANIMATION_FRAME_DURATION;
 		mAnimating = true;
 		mHandler.removeMessages(MSG_ANIMATE);
-		mHandler.sendMessageAtTime(mHandler.obtainMessage(MSG_ANIMATE), mCurrentAnimationTime);
+		mHandler.sendMessageAtTime(mHandler.obtainMessage(MSG_ANIMATE),
+				mCurrentAnimationTime);
 		stopTracking();
 	}
 
-	private void prepareTracking(int position)
-	{
+	private void prepareTracking(int position) {
 		mTracking = true;
 		mVelocityTracker = VelocityTracker.obtain();
 		boolean opening = !mExpanded;
-		if (opening)
-		{
+		if (opening) {
 			mAnimatedAcceleration = mMaximumAcceleration;
 			mAnimatedVelocity = mMaximumMajorVelocity;
 			// [SEMI-CLOSED] Remove width of visible content part here.
-			mAnimationPosition = mBottomOffset + (mVertical ? getHeight() - mHandleHeight : getWidth() - mHandleWidth)
-							- mSemiClosedContentSize;
+			mAnimationPosition = mBottomOffset
+					+ (mVertical ? getHeight() - mHandleHeight : getWidth()
+							- mHandleWidth) - mSemiClosedContentSize;
 			moveHandle((int) mAnimationPosition);
 			mAnimating = true;
 			mHandler.removeMessages(MSG_ANIMATE);
@@ -655,11 +610,8 @@ public class SemiClosedSlidingDrawer
 			mAnimationLastTime = now;
 			mCurrentAnimationTime = now + ANIMATION_FRAME_DURATION;
 			mAnimating = true;
-		}
-		else
-		{
-			if (mAnimating)
-			{
+		} else {
+			if (mAnimating) {
 				mAnimating = false;
 				mHandler.removeMessages(MSG_ANIMATE);
 			}
@@ -667,37 +619,32 @@ public class SemiClosedSlidingDrawer
 		}
 	}
 
-	private void moveHandle(int position)
-	{
+	private void moveHandle(int position) {
 		final View handle = mHandle;
 
-		if (mVertical)
-		{
-			if (position == EXPANDED_FULL_OPEN)
-			{
+		if (mVertical) {
+			if (position == EXPANDED_FULL_OPEN) {
 				handle.offsetTopAndBottom(mTopOffset - handle.getTop());
 				invalidate();
 			}
 			// [SEMI-CLOSED] Remove width of visible content part here.
-			else if (position == COLLAPSED_SEMI_CLOSED)
-			{
-				handle.offsetTopAndBottom(mBottomOffset + getBottom() - getTop() - mHandleHeight
-								- mSemiClosedContentSize - handle.getTop());
+			else if (position == COLLAPSED_SEMI_CLOSED) {
+				handle.offsetTopAndBottom(mBottomOffset + getBottom()
+						- getTop() - mHandleHeight - mSemiClosedContentSize
+						- handle.getTop());
 				invalidate();
-			}
-			else
-			{
+			} else {
 				final int top = handle.getTop();
 				int deltaY = position - top;
-				if (position < mTopOffset)
-				{
+				if (position < mTopOffset) {
 					deltaY = mTopOffset - top;
 				}
 				// [SEMI-CLOSED] Remove width of visible content part here ...
-				else if (deltaY > mBottomOffset + getBottom() - getTop() - mHandleHeight - mSemiClosedContentSize - top)
-				{
+				else if (deltaY > mBottomOffset + getBottom() - getTop()
+						- mHandleHeight - mSemiClosedContentSize - top) {
 					// [SEMI_CLOSED] ... and here.
-					deltaY = mBottomOffset + getBottom() - getTop() - mHandleHeight - mSemiClosedContentSize - top;
+					deltaY = mBottomOffset + getBottom() - getTop()
+							- mHandleHeight - mSemiClosedContentSize - top;
 				}
 				handle.offsetTopAndBottom(deltaY);
 
@@ -707,39 +654,36 @@ public class SemiClosedSlidingDrawer
 				handle.getHitRect(frame);
 				region.set(frame);
 
-				region.union(frame.left, frame.top - deltaY, frame.right, frame.bottom - deltaY);
-				region.union(0, frame.bottom - deltaY, getWidth(), frame.bottom - deltaY + mContent.getHeight());
+				region.union(frame.left, frame.top - deltaY, frame.right,
+						frame.bottom - deltaY);
+				region.union(0, frame.bottom - deltaY, getWidth(), frame.bottom
+						- deltaY + mContent.getHeight());
 
 				invalidate(region);
 			}
-		}
-		else
-		{
-			if (position == EXPANDED_FULL_OPEN)
-			{
+		} else {
+			if (position == EXPANDED_FULL_OPEN) {
 				handle.offsetLeftAndRight(mTopOffset - handle.getLeft());
 				invalidate();
 			}
 			// [SEMI-CLOSED] Remove width of visible content part here.
-			else if (position == COLLAPSED_SEMI_CLOSED)
-			{
-				handle.offsetLeftAndRight(mBottomOffset + getRight() - getLeft() - mHandleWidth
-								- mSemiClosedContentSize - handle.getLeft());
+			else if (position == COLLAPSED_SEMI_CLOSED) {
+				handle.offsetLeftAndRight(mBottomOffset + getRight()
+						- getLeft() - mHandleWidth - mSemiClosedContentSize
+						- handle.getLeft());
 				invalidate();
-			}
-			else
-			{
+			} else {
 				final int left = handle.getLeft();
 				int deltaX = position - left;
-				if (position < mTopOffset)
-				{
+				if (position < mTopOffset) {
 					deltaX = mTopOffset - left;
 				}
 				// [SEMI-CLOSED] Remove width of visible content part here ...
-				else if (deltaX > mBottomOffset + getRight() - getLeft() - mHandleWidth - mSemiClosedContentSize - left)
-				{
+				else if (deltaX > mBottomOffset + getRight() - getLeft()
+						- mHandleWidth - mSemiClosedContentSize - left) {
 					// [SEMI-CLOSED] ... and here.
-					deltaX = mBottomOffset + getRight() - getLeft() - mHandleWidth - mSemiClosedContentSize - left;
+					deltaX = mBottomOffset + getRight() - getLeft()
+							- mHandleWidth - mSemiClosedContentSize - left;
 				}
 				handle.offsetLeftAndRight(deltaX);
 
@@ -749,118 +693,105 @@ public class SemiClosedSlidingDrawer
 				handle.getHitRect(frame);
 				region.set(frame);
 
-				region.union(frame.left - deltaX, frame.top, frame.right - deltaX, frame.bottom);
-				region.union(frame.right - deltaX, 0, frame.right - deltaX + mContent.getWidth(), getHeight());
+				region.union(frame.left - deltaX, frame.top, frame.right
+						- deltaX, frame.bottom);
+				region.union(frame.right - deltaX, 0, frame.right - deltaX
+						+ mContent.getWidth(), getHeight());
 
 				invalidate(region);
 			}
 		}
 	}
 
-	private void prepareContent()
-	{
-		if (mAnimating)
-		{
+	private void prepareContent() {
+		if (mAnimating) {
 			return;
 		}
 
 		// Something changed in the content, we need to honor the layout request
 		// before creating the cached bitmap
 		final View content = mContent;
-		if (content.isLayoutRequested())
-		{
-			if (mVertical)
-			{
+		if (content.isLayoutRequested()) {
+			if (mVertical) {
 				final int childHeight = mHandleHeight;
 				int height = getBottom() - getTop() - childHeight - mTopOffset;
-				content.measure(MeasureSpec.makeMeasureSpec(getRight() - getLeft(), MeasureSpec.EXACTLY),
-								MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY));
-				content.layout(0, mTopOffset + childHeight, content.getMeasuredWidth(), mTopOffset + childHeight
+				content.measure(MeasureSpec.makeMeasureSpec(getRight()
+						- getLeft(), MeasureSpec.EXACTLY), MeasureSpec
+						.makeMeasureSpec(height, MeasureSpec.EXACTLY));
+				content.layout(0, mTopOffset + childHeight,
+						content.getMeasuredWidth(), mTopOffset + childHeight
 								+ content.getMeasuredHeight());
-			}
-			else
-			{
+			} else {
 				final int childWidth = mHandle.getWidth();
 				int width = getRight() - getLeft() - childWidth - mTopOffset;
-				content.measure(MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY),
-								MeasureSpec.makeMeasureSpec(getBottom() - getTop(), MeasureSpec.EXACTLY));
-				content.layout(childWidth + mTopOffset, 0, mTopOffset + childWidth + content.getMeasuredWidth(),
-								content.getMeasuredHeight());
+				content.measure(MeasureSpec.makeMeasureSpec(width,
+						MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(
+						getBottom() - getTop(), MeasureSpec.EXACTLY));
+				content.layout(childWidth + mTopOffset, 0, mTopOffset
+						+ childWidth + content.getMeasuredWidth(),
+						content.getMeasuredHeight());
 			}
 		}
 		// Try only once... we should really loop but it's not a big deal
 		// if the draw was cancelled, it will only be temporary anyway
 		content.getViewTreeObserver().dispatchOnPreDraw();
-		if (!isViewHardwareAccelerated(content))
-		{
+		if (!isViewHardwareAccelerated(content)) {
 			content.buildDrawingCache();
 		}
 
 		content.setVisibility(View.GONE);
 	}
-	
-	private boolean isViewHardwareAccelerated(View view)
-	{
+
+	private boolean isViewHardwareAccelerated(View view) {
 		// View.isHardwareAccelerated() is available from API level 11 (and up).
-		try
-		{
-			Method isHardwareAcceleratedMethod = view.getClass().getDeclaredMethod("isHardwareAccelerated");
-			if (isHardwareAcceleratedMethod != null)
-			{
-				Boolean result = (Boolean) isHardwareAcceleratedMethod.invoke(view);
+		try {
+			Method isHardwareAcceleratedMethod = view.getClass()
+					.getDeclaredMethod("isHardwareAccelerated");
+			if (isHardwareAcceleratedMethod != null) {
+				Boolean result = (Boolean) isHardwareAcceleratedMethod
+						.invoke(view);
 				return result != null && result;
 			}
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			// Can't do anything here.
 		}
 		return false;
 	}
 
-	private void stopTracking()
-	{
+	private void stopTracking() {
 		mHandle.setPressed(false);
 		mTracking = false;
 
-		if (mOnDrawerScrollListener != null)
-		{
+		if (mOnDrawerScrollListener != null) {
 			mOnDrawerScrollListener.onScrollEnded();
 		}
 
-		if (mVelocityTracker != null)
-		{
+		if (mVelocityTracker != null) {
 			mVelocityTracker.recycle();
 			mVelocityTracker = null;
 		}
 	}
 
-	private void doAnimation()
-	{
-		if (mAnimating)
-		{
+	private void doAnimation() {
+		if (mAnimating) {
 			incrementAnimation();
-			if (mAnimationPosition >= mBottomOffset + (mVertical ? getHeight() : getWidth()) - 1)
-			{
+			if (mAnimationPosition >= mBottomOffset
+					+ (mVertical ? getHeight() : getWidth()) - 1) {
 				mAnimating = false;
 				closeDrawer();
-			}
-			else if (mAnimationPosition < mTopOffset)
-			{
+			} else if (mAnimationPosition < mTopOffset) {
 				mAnimating = false;
 				openDrawer();
-			}
-			else
-			{
+			} else {
 				moveHandle((int) mAnimationPosition);
 				mCurrentAnimationTime += ANIMATION_FRAME_DURATION;
-				mHandler.sendMessageAtTime(mHandler.obtainMessage(MSG_ANIMATE), mCurrentAnimationTime);
+				mHandler.sendMessageAtTime(mHandler.obtainMessage(MSG_ANIMATE),
+						mCurrentAnimationTime);
 			}
 		}
 	}
 
-	private void incrementAnimation()
-	{
+	private void incrementAnimation() {
 		long now = SystemClock.uptimeMillis();
 		float t = (now - mAnimationLastTime) / 1000.0f; // ms -> s
 		final float position = mAnimationPosition;
@@ -880,14 +811,10 @@ public class SemiClosedSlidingDrawer
 	 * @see #animateOpen()
 	 * @see #animateToggle()
 	 */
-	public void toggle()
-	{
-		if (!mExpanded)
-		{
+	public void toggle() {
+		if (!mExpanded) {
 			openDrawer();
-		}
-		else
-		{
+		} else {
 			closeDrawer();
 		}
 		invalidate();
@@ -903,14 +830,10 @@ public class SemiClosedSlidingDrawer
 	 * @see #animateOpen()
 	 * @see #toggle()
 	 */
-	public void animateToggle()
-	{
-		if (!mExpanded)
-		{
+	public void animateToggle() {
+		if (!mExpanded) {
 			animateOpen();
-		}
-		else
-		{
+		} else {
 			animateClose();
 		}
 	}
@@ -922,8 +845,7 @@ public class SemiClosedSlidingDrawer
 	 * @see #close()
 	 * @see #animateOpen()
 	 */
-	public void open()
-	{
+	public void open() {
 		openDrawer();
 		invalidate();
 		requestLayout();
@@ -938,8 +860,7 @@ public class SemiClosedSlidingDrawer
 	 * @see #open()
 	 * @see #animateClose()
 	 */
-	public void close()
-	{
+	public void close() {
 		closeDrawer();
 		invalidate();
 		requestLayout();
@@ -954,18 +875,15 @@ public class SemiClosedSlidingDrawer
 	 * @see #animateToggle()
 	 * @see #toggle()
 	 */
-	public void animateClose()
-	{
+	public void animateClose() {
 		prepareContent();
 		final OnDrawerScrollListener scrollListener = mOnDrawerScrollListener;
-		if (scrollListener != null)
-		{
+		if (scrollListener != null) {
 			scrollListener.onScrollStarted();
 		}
 		animateClose(mVertical ? mHandle.getTop() : mHandle.getLeft());
 
-		if (scrollListener != null)
-		{
+		if (scrollListener != null) {
 			scrollListener.onScrollEnded();
 		}
 	}
@@ -979,56 +897,47 @@ public class SemiClosedSlidingDrawer
 	 * @see #animateToggle()
 	 * @see #toggle()
 	 */
-	public void animateOpen()
-	{
+	public void animateOpen() {
 		prepareContent();
 		final OnDrawerScrollListener scrollListener = mOnDrawerScrollListener;
-		if (scrollListener != null)
-		{
+		if (scrollListener != null) {
 			scrollListener.onScrollStarted();
 		}
 		animateOpen(mVertical ? mHandle.getTop() : mHandle.getLeft());
 
 		sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
 
-		if (scrollListener != null)
-		{
+		if (scrollListener != null) {
 			scrollListener.onScrollEnded();
 		}
 	}
 
-	private void closeDrawer()
-	{
+	private void closeDrawer() {
 		moveHandle(COLLAPSED_SEMI_CLOSED);
 		mContent.setVisibility(View.GONE);
 		mContent.destroyDrawingCache();
 
-		if (!mExpanded)
-		{
+		if (!mExpanded) {
 			return;
 		}
 
 		mExpanded = false;
-		if (mOnDrawerCloseListener != null)
-		{
+		if (mOnDrawerCloseListener != null) {
 			mOnDrawerCloseListener.onDrawerClosed();
 		}
 	}
 
-	private void openDrawer()
-	{
+	private void openDrawer() {
 		moveHandle(EXPANDED_FULL_OPEN);
 		mContent.setVisibility(View.VISIBLE);
 
-		if (mExpanded)
-		{
+		if (mExpanded) {
 			return;
 		}
 
 		mExpanded = true;
 
-		if (mOnDrawerOpenListener != null)
-		{
+		if (mOnDrawerOpenListener != null) {
 			mOnDrawerOpenListener.onDrawerOpened();
 		}
 	}
@@ -1040,8 +949,8 @@ public class SemiClosedSlidingDrawer
 	 * @param onDrawerOpenListener
 	 *            The listener to be notified when the drawer is opened.
 	 */
-	public void setOnDrawerOpenListener(OnDrawerOpenListener onDrawerOpenListener)
-	{
+	public void setOnDrawerOpenListener(
+			OnDrawerOpenListener onDrawerOpenListener) {
 		mOnDrawerOpenListener = onDrawerOpenListener;
 	}
 
@@ -1052,8 +961,8 @@ public class SemiClosedSlidingDrawer
 	 * @param onDrawerCloseListener
 	 *            The listener to be notified when the drawer is closed.
 	 */
-	public void setOnDrawerCloseListener(OnDrawerCloseListener onDrawerCloseListener)
-	{
+	public void setOnDrawerCloseListener(
+			OnDrawerCloseListener onDrawerCloseListener) {
 		mOnDrawerCloseListener = onDrawerCloseListener;
 	}
 
@@ -1065,8 +974,8 @@ public class SemiClosedSlidingDrawer
 	 * @param onDrawerScrollListener
 	 *            The listener to be notified when scrolling starts or stops.
 	 */
-	public void setOnDrawerScrollListener(OnDrawerScrollListener onDrawerScrollListener)
-	{
+	public void setOnDrawerScrollListener(
+			OnDrawerScrollListener onDrawerScrollListener) {
 		mOnDrawerScrollListener = onDrawerScrollListener;
 	}
 
@@ -1076,8 +985,7 @@ public class SemiClosedSlidingDrawer
 	 * @return The View reprenseting the handle of the drawer, identified by the
 	 *         "handle" id in XML.
 	 */
-	public View getHandle()
-	{
+	public View getHandle() {
 		return mHandle;
 	}
 
@@ -1087,8 +995,7 @@ public class SemiClosedSlidingDrawer
 	 * @return The View reprenseting the content of the drawer, identified by
 	 *         the "content" id in XML.
 	 */
-	public View getContent()
-	{
+	public View getContent() {
 		return mContent;
 	}
 
@@ -1097,8 +1004,7 @@ public class SemiClosedSlidingDrawer
 	 * 
 	 * @see #lock()
 	 */
-	public void unlock()
-	{
+	public void unlock() {
 		mLocked = false;
 	}
 
@@ -1107,8 +1013,7 @@ public class SemiClosedSlidingDrawer
 	 * 
 	 * @see #unlock()
 	 */
-	public void lock()
-	{
+	public void lock() {
 		mLocked = true;
 	}
 
@@ -1117,8 +1022,7 @@ public class SemiClosedSlidingDrawer
 	 * 
 	 * @return True if the drawer is opened, false otherwise.
 	 */
-	public boolean isOpened()
-	{
+	public boolean isOpened() {
 		return mExpanded;
 	}
 
@@ -1127,40 +1031,29 @@ public class SemiClosedSlidingDrawer
 	 * 
 	 * @return True if the drawer is scroller or flinging, false otherwise.
 	 */
-	public boolean isMoving()
-	{
+	public boolean isMoving() {
 		return mTracking || mAnimating;
 	}
 
-	private class DrawerToggler
-		implements OnClickListener
-	{
-		public void onClick(View v)
-		{
-			if (mLocked)
-			{
+	private class DrawerToggler implements OnClickListener {
+		public void onClick(View v) {
+			if (mLocked) {
 				return;
 			}
 			// mAllowSingleTap isn't relevant here; you're *always*
 			// allowed to open/close the drawer by clicking with the
 			// trackball.
 
-			if (mAnimateOnClick)
-			{
+			if (mAnimateOnClick) {
 				animateToggle();
-			}
-			else
-			{
+			} else {
 				toggle();
 			}
 		}
 	}
 
-	private class SlidingHandler
-		extends Handler
-	{
-		public void handleMessage(Message m)
-		{
+	private class SlidingHandler extends Handler {
+		public void handleMessage(Message m) {
 			switch (m.what) {
 			case MSG_ANIMATE:
 				doAnimation();

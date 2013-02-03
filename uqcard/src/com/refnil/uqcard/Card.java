@@ -1,10 +1,9 @@
 package com.refnil.uqcard;
 
-import android.content.Context;
-import android.widget.RelativeLayout;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Card extends RelativeLayout
-{
+public class Card implements Parcelable {
 
 	private int cost;
 	private String name;
@@ -12,18 +11,47 @@ public class Card extends RelativeLayout
 	private String flavor;
 	private long id;
 	private byte[] image;
+	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
+		public Card createFromParcel(Parcel source) {
+			return new Card(source);
+		}
 
-	Card(String name, String description, String flavor, int cost)
-	{
-		this.name = name;
-		this.description = description;
-		this.flavor = flavor;
-		this.cost = cost;
+		public Card[] newArray(int size) {
+			return new Card[size];
+		}
+	};
+
+	Card(long id, String name, String description, String flavor, int cost,
+			byte[] image) {
+		this.setId(id);
+		this.setName(name);
+		this.setDescription(description);
+		this.setFlavor(flavor);
+		this.setCost(cost);
+		this.setImage(image);
 	}
 
-	Card(final Card card)
-	{
-		this(card.getName(),card.getDescription(),card.getFlavor(),card.getCost());
+	Card(String name, String description, String flavor, int cost) {
+		this.setName(name);
+		this.setDescription(description);
+		this.setFlavor(flavor);
+		this.setCost(cost);
+	}
+
+	Card(final Card card) {
+		this(card.getName(), card.getDescription(), card.getFlavor(), card
+				.getCost());
+	}
+
+	public Card(Parcel source) {
+		byte[] temp = null;
+		this.setId(source.readLong());
+		this.setName(source.readString());
+		this.setDescription(source.readString());
+		this.setFlavor(source.readString());
+		this.setCost(source.readInt());
+		source.readByteArray(temp);
+		this.setImage(temp);
 	}
 
 	public long get_Id() {
@@ -72,6 +100,19 @@ public class Card extends RelativeLayout
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeLong(this.get_Id());
+		dest.writeString(this.getName());
+		dest.writeString(this.getDescription());
+		dest.writeString(this.getFlavor());
+		dest.writeInt(this.getCost());
+		dest.writeByteArray(this.getImage());
 	}
 
 }
