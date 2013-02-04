@@ -26,7 +26,7 @@ public class Board extends ListenableClass<Event>{
 	private Stack<Card> playerGraveyardCards;
 	private Card selectedCardOnBoard;
 
-	public AbstractBoard() {
+	public Board() {
 
 	}
 
