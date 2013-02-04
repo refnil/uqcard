@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ImageView
+    <com.refnil.uqcard.CardView
         android:id="@+id/ImageFullScreen"
-        android:contentDescription="@string/fullScreenCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ImageView>
+        android:layout_height="match_parent">
+    </com.refnil.uqcard.CardView>
+
 </RelativeLayout>
