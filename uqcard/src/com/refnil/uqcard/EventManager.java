@@ -15,11 +15,11 @@ public class EventManager {
 	}
 
 	public void sendPhaseToPlayer(GameConditionEvent gce) {
-		p.sendEvent((Event)gce);
+		p.sendEvent(this.gce);
 	}
 
 	public void sendPhaseToPlayer(TurnPhaseEvent tpe) {
-		p.sendEvent(tpe);
+		p.sendEvent(this.tpe);
 	}
 	
 	public GameConditionEvent getGameConditionEvent()

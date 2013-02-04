@@ -3,13 +3,13 @@ package com.refnil.uqcard;
 import java.util.List;
 import java.util.Stack;
 
-import com.refnil.uqcard.library.Listenable;
+import com.refnil.uqcard.library.ListenableClass;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-public abstract class AbstractBoard implements Listenable<Event>{
+public class Board extends ListenableClass<Event>{
 	
 	private final static String TAG = "Board";
 	

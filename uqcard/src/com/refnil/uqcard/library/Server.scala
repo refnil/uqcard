@@ -4,6 +4,7 @@ import scala.actors.Actor
 import scala.actors.OutputChannel
 import scala.collection.mutable.Set
 import com.refnil.uqcard.Event
+import com.refnil.uqcard.Board
 
 class Server extends User[Message] with Listener[Event]{
   
@@ -35,6 +36,7 @@ class Server extends User[Message] with Listener[Event]{
         case _ => 
       }
       println("Disconnect")
+    case RequestServer(e) => board.receiveEvent(e);
     case Talk(mess) =>
       players.foreach(x => x._2 ! Talk(mess))
     case Close() =>

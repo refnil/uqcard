@@ -12,6 +12,8 @@ import com.refnil.uqcard.library.Message;
 import com.refnil.uqcard.library.Server;
 
 public class BluetoothLinkConnection extends LinkConnections {
+	
+	private static final String TAG = "BluetootLinkConnection";
 
 	final BluetoothSocket bs;
 	final ObjectInputStream is;
@@ -20,12 +22,12 @@ public class BluetoothLinkConnection extends LinkConnections {
 	public BluetoothLinkConnection(BluetoothSocket bs, Server s)
 			throws IOException {
 		super(s);
-		Log.i("uqcard","Constructor blc begin");
+		Log.i(TAG,"Constructor blc begin");
 		// TODO Auto-generated constructor stub
 		this.bs = bs;
-		Log.i("uqcard","blc bs");
+		Log.i(TAG,"blc bs");
 		InputStream ris  = bs.getInputStream();
-		Log.i("uqcard","ris done");
+		Log.i(TAG,"ris done");
 		
 		if(s==null)
 		{
@@ -38,16 +40,16 @@ public class BluetoothLinkConnection extends LinkConnections {
 			is = new ObjectInputStream(bs.getInputStream());
 		}
 		
-		Log.i("uqcard","Constructor blc end");
+		Log.i(TAG,"Constructor blc end");
 	}
 
 	@Override
 	public void send(Message arg0) {
 		// TODO Auto-generated method stub
 		try {
-			Log.i("uqcard",arg0.toString());
+			Log.v(TAG,arg0.toString());
 			os.writeObject(arg0);
-			Log.i("uqcard","done writing");
+			Log.v(TAG,"done sending");
 			
 		} catch (IOException e) {
 		}
@@ -56,7 +58,7 @@ public class BluetoothLinkConnection extends LinkConnections {
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
-		(new Runnable(){
+		Thread t = new Thread(new Runnable(){
 			Message m;
 
 			public void run() {
@@ -66,7 +68,7 @@ public class BluetoothLinkConnection extends LinkConnections {
 		                // Read from the InputStream
 		                m = (Message)is.readObject();
 		                // Send the obtained bytes to the UI activity
-		                Log.i("",m.toString());
+		                Log.v(TAG,m.toString());
 		                receive(m);
 		            } catch (IOException e) {
 		                break;
@@ -77,7 +79,9 @@ public class BluetoothLinkConnection extends LinkConnections {
 		        }
 			}
 			
-		}).run();
+		});
+		
+		t.start();
 	}
 	
 	public void cancel() {

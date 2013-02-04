@@ -29,6 +29,7 @@ public class HostChoice extends Activity {
 
 	private String TAG = "HostChoice";
 	IService mService;
+	ServiceConnection mConnection;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class HostChoice extends Activity {
 		final Button h = (Button) findViewById(R.id.host_button);
 		final Button c = (Button) findViewById(R.id.client_button);
 
-		ServiceConnection mConnection = new ServiceConnection() {
+		mConnection = new ServiceConnection() {
 
 			// Called when the connection with the service is established
 			public void onServiceConnected(ComponentName className,
@@ -97,6 +98,12 @@ public class HostChoice extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_host_choice, menu);
 		return true;
+	}
+	
+	@Override
+	protected void onDestroy(){
+		super.onDestroy();
+		unbindService(mConnection);
 	}
 
 	@Override

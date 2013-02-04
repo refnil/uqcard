@@ -3,10 +3,18 @@ package com.refnil.uqcard;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.library.Board;
 import com.refnil.uqcard.library.Listener;
+import com.refnil.uqcard.service.IService;
+import com.refnil.uqcard.service.UqcardService;
+import com.refnil.uqcard.service.UqcardService.LocalBinder;
 
 import android.os.Bundle;
+import android.os.IBinder;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,20 +23,39 @@ import android.widget.Gallery;
 import android.widget.TextView;
 
 public class BoardViewActivity extends Activity implements Listener<Event> {
-	private ImageAdapter adapter;
+	private final static String TAG = "BoardViewActivity";
+	//private ImageAdapter adapter;
 	private EventManager em;
 	private Board board;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		em = new EventManager();
+		
+		ServiceConnection mConnection = new ServiceConnection() {
+
+			public void onServiceConnected(ComponentName name, IBinder service) {
+				// TODO Auto-generated method stub
+				Log.i(TAG,"BoardViewActivity est connecter au service.");
+				IService mService = (IService) ((LocalBinder) service).getService();
+				em = new EventManager(mService.getPlayer());
+				board = mService.getBoard();
+			}
+
+			public void onServiceDisconnected(ComponentName name) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		
+		Intent intent = new Intent(this, UqcardService.class);
+		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 		
 		
 		/************************** TEMP ZONE **********************************/
 		setContentView(R.layout.test);
 		Button b = (Button) findViewById(R.id.button1);
-		b.setEnabled(false);
 		b.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
@@ -69,6 +96,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 		});
 		
 		b = (Button) findViewById(R.id.button2);
+		b.setEnabled(false);
 		b.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {

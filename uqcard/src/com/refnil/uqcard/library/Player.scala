@@ -3,11 +3,11 @@ package com.refnil.uqcard.library
 import scala.actors.Actor
 import scala.collection.mutable.Set;
 import com.refnil.uqcard.Event
+import com.refnil.uqcard.Board
 
 class Player(val serveur: User[Message]) extends User[Message] with Listenable[String] {
 
-  var board: Board= null;
-  var number: Int = -1;
+  var board: Board= new Board();
 
   def tell(s: String) = this ! Trans(serveur, Talk(s))
 
@@ -21,7 +21,7 @@ class Player(val serveur: User[Message]) extends User[Message] with Listenable[S
   protected def receivedMessage(m: Message) = m match {
     case Trans(a, m) => a ! m
     case EventMessage(e) => board.receiveEvent(e)
-    case YouAre(i) => number = i
+    case YouAre(i) => board.setPlayerID(i)
     case ConnectedPlayer(name:String) => messageListener(name + " has connected.")
     case Talk(mess) => messageListener(mess)
 

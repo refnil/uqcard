@@ -6,10 +6,13 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.refnil.uqcard.BluetoothLinkConnection;
+import com.refnil.uqcard.BoardViewActivity;
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.Board;
 import com.refnil.uqcard.library.LinkConnections;
 import com.refnil.uqcard.library.Server;
 import com.refnil.uqcard.library.Close;
+import com.refnil.uqcard.library.Player;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -28,6 +31,7 @@ public class UqcardService extends Service implements IService {
 	private final IBinder mBinder = new LocalBinder();
 	private UUID uuid;
 	private Server server = null;
+	private Player player = null;
 	private Set<LinkConnections> lcs = new HashSet<LinkConnections>();
 
 	@Override
@@ -90,7 +94,7 @@ public class UqcardService extends Service implements IService {
 	public void listenBluetooth() {
 		// TODO Auto-generated method stub
 		listenBluetooth(1);
-
+		
 	}
 
 	public void connect(final BluetoothDevice bd) {
@@ -103,7 +107,12 @@ public class UqcardService extends Service implements IService {
 					BluetoothSocket bs = bd
 							.createRfcommSocketToServiceRecord(uuid);
 					bs.connect();
-					lcs.add(new BluetoothLinkConnection(bs, server));
+					BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, server);
+					blc.start();
+					lcs.add(blc);
+					Intent i = new Intent(UqcardService.this, BoardViewActivity.class);
+					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(i);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -144,8 +153,15 @@ public class UqcardService extends Service implements IService {
 					while (i-- > 0) {
 						try {
 							BluetoothSocket bs = bss.accept();
-							lcs.add(new BluetoothLinkConnection(bs, server));
+							BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, server);
+							blc.start();
+							lcs.add(blc);
 							Log.i(TAG, "Connection received");
+							if(nb == 1){
+								Intent i = new Intent(UqcardService.this, BoardViewActivity.class);
+								i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+								startActivity(i);
+							}
 						} catch (NotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -167,6 +183,22 @@ public class UqcardService extends Service implements IService {
 		});
 
 		t.start();
+	}
+
+	public Player getPlayer() {
+		// TODO Auto-generated method stub
+		if (server != null && player == null) {
+			player = new Player(server);
+			player.start();
+			player.connect("ROger");
+		}
+		return player;
+	}
+
+	public Board getBoard() {
+		// TODO Auto-generated method stub
+		
+		return player!=null?player.board():null;
 	}
 
 }
