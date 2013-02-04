@@ -8,8 +8,10 @@ import android.widget.Toast;
 
 public class Board {
 	private Context c;
+	private BoardViewActivity boardView;
 	private int phase;
 	private int tour;
+	private int playerID ;
 	private List<Card> opponentHandCards;
 	private List<Card> playerHandCards;
 	private List<Card> opponentBoardCards;
@@ -20,8 +22,9 @@ public class Board {
 	private Stack<Card> playerGraveyardCards;
 	private Card selectedCardOnBoard;
 
-	public Board(Context c) {
+	public Board(Context c,BoardViewActivity boardView) {
 		this.c = c;
+		this.boardView = boardView;
 	}
 
 	public int getPhase() {
@@ -152,6 +155,14 @@ public class Board {
 		this.playerGraveyardCards.push(c);
 	}
 
+	public int getPlayerID() {
+		return playerID;
+	}
+
+	public void setPlayerID(int playerID) {
+		this.playerID = playerID;
+	}
+
 	public Card getSelectedCardOnBoard() {
 		return selectedCardOnBoard;
 	}
@@ -163,18 +174,23 @@ public class Board {
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
 			Toast.makeText(this.c, "Game begins", Toast.LENGTH_SHORT).show();
+			boardView.onMessage(event);
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
-			Toast.makeText(this.c, "Turn begins", Toast.LENGTH_SHORT).show();
+			this.setTour(this.getTour()+1);
+			Toast.makeText(this.c, "Turn " + this.getTour() +" begins", Toast.LENGTH_SHORT).show();
+			boardView.onMessage(event);
 		}
 
 		if (event.type == Event_Type.END_TURN) {
-			Toast.makeText(this.c, "Turn ends", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this.c, "Turn " + this.getTour() +" ends", Toast.LENGTH_SHORT).show();
+			boardView.onMessage(event);
 		}
 
 		if (event.type == Event_Type.END_GAME) {
 			Toast.makeText(this.c, "Game ends", Toast.LENGTH_SHORT).show();
+			boardView.onMessage(event);
 		}
 	}
 
