@@ -25,6 +25,11 @@ public class GameConditionEvent extends Event {
  			
  		}
  	}
+ 	
+ 	public void setPhase(Event_Type t)
+ 	{
+ 		type = t;
+ 	}
 	
 	 	
 }
