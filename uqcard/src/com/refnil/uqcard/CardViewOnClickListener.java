@@ -7,7 +7,7 @@ public class CardViewOnClickListener implements OnClickListener {
 
 	public void onClick(View v) {
 		// FIXER SIZE
-		CardView iv = (CardView) v;
+		//CardView iv = (CardView) v;
 		// SEND EVENT
 
 	}

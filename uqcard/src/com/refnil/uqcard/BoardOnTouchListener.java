@@ -27,9 +27,9 @@ public class BoardOnTouchListener implements OnTouchListener {
 		case MotionEvent.ACTION_UP:
 			if (eventY < pointY) {
 				if (slider.isOpened()) {
-					CardView ca = ((ImageAdapter) gallery.getAdapter())
-							.getCardView(gallery.getSelectedItemPosition(),
-									null, null);
+					//CardView ca = ((ImageAdapter) gallery.getAdapter())
+							//.getCardView(gallery.getSelectedItemPosition(),
+								//	null, null);
 					// POUSSER À LEVENT MANAGER
 					slider.animateClose();
 					pointY = 0;

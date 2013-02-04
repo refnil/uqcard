@@ -22,8 +22,8 @@ public class Card implements Parcelable {
 		}
 	};
 
-	Card(long id, String name, String description, String flavor, int cost,
-			byte[] image) {
+	Card(long id, String name, String description, String flavor, int cost,byte[] image) {
+
 		this.setId(id);
 		this.setName(name);
 		this.setDescription(description);
@@ -103,6 +103,7 @@ public class Card implements Parcelable {
 		this.image = image;
 	}
 
+
 	public int describeContents() {
 		return 0;
 	}
@@ -115,4 +116,5 @@ public class Card implements Parcelable {
 		dest.writeInt(this.getCost());
 		dest.writeByteArray(this.getImage());
 	}
+
 }

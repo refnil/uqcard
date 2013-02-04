@@ -6,8 +6,8 @@ public class EventManager {
 	private TurnPhaseEvent tpe;
 
 	public EventManager() {
-		this.gce = (GameConditionEvent) new Event(Event_Type.BEGIN_GAME);
-		this.tpe = (TurnPhaseEvent) new Event(Event_Type.BEGIN_TURN);
+		this.gce = new GameConditionEvent(Event_Type.BEGIN_GAME);
+		this.tpe = new TurnPhaseEvent(Event_Type.BEGIN_TURN);
 	}
 
 	public void sendPhaseToPlayer(GameConditionEvent gce) {
@@ -16,5 +16,15 @@ public class EventManager {
 
 	public void sendPhaseToPlayer(TurnPhaseEvent tpe) {
 		Player.SendEvent(this.tpe);
+	}
+	
+	public GameConditionEvent getGameConditionEvent()
+	{
+		return this.gce;
+	}
+	
+	public TurnPhaseEvent getTurnPhaseEvent()
+	{
+		return this.tpe;
 	}
 }
