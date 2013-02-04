@@ -2,38 +2,53 @@ package com.refnil.uqcard.library
 
 import scala.actors.Actor
 import scala.actors.OutputChannel
-import scala.collection.mutable.LinkedList
-import com.refnil.uqcard.library.logic.Board
+import scala.collection.mutable.Set
+import com.refnil.uqcard.Event
 
-class Server extends User[Message] {
+class Server extends User[Message] with Listener[Event]{
   
-  private var connected: List[User[Message]] = List()
+  private var players:Set[(Int,User[Message],String)] = Set()
+  private var numberOfPlayer:Int = 0
   
-  private val board = new Board
+  private val board = new Board()
   private var started = false
   
   //From user[Message]
   def init() = {}
 
   def receivedMessage(m: Message) = m match {
-    case Connect() =>
-      connected = sender match {
-        case p: User[Message] => p :: connected
-        case _ => connected
+    case Trans(p,m) => p ! m
+    case ConnectPlayer(name) =>
+      sender match {
+        case p: User[Message] => if(numberOfPlayer<2) {
+          numberOfPlayer += 1
+          players += Tuple3(numberOfPlayer,p,name)
+          p ! YouAre(numberOfPlayer)
+          players foreach(x => x._2 ! ConnectedPlayer(name))
+        }   
+        case _ => 
       }
       println(sender)
-    case Disconnect() =>
-      connected = sender match {
-        case p: Player => connected.filter(x => p != x)
-        case _ => connected
+    case DisconnectPlayer() =>
+      sender match {
+        case p: User[Message] => players filter(x => x._2 != p )
+        case _ => 
       }
       println("Disconnect")
     case Talk(mess) =>
-      connected.foreach(x => x ! Talk(mess))
+      players.foreach(x => x._2 ! Talk(mess))
     case Close() =>
-      connected foreach (x => x ! Close)
+      players foreach (x => x._2 ! Close)
       exit()
   }
 
   def receivedElse(a: AnyRef) = println("Received other shit")
+  
+  def onMessage(e:Event) = {
+    players foreach(x => this ! Trans(x._2,EventMessage(e)))
+  }
+  
+  def onClose() = {
+    
+  }
 }

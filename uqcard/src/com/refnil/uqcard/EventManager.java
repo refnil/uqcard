@@ -1,21 +1,25 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.library.Player;
+
 public class EventManager {
 
 	private GameConditionEvent gce;
 	private TurnPhaseEvent tpe;
+	private Player p;
 
-	public EventManager() {
+	public EventManager(Player p) {
 		this.gce = new GameConditionEvent(Event_Type.BEGIN_GAME);
 		this.tpe = new TurnPhaseEvent(Event_Type.BEGIN_TURN);
+		this.p = p;
 	}
 
 	public void sendPhaseToPlayer(GameConditionEvent gce) {
-		Player.SendEvent(this.gce);
+		p.sendEvent((Event)gce);
 	}
 
 	public void sendPhaseToPlayer(TurnPhaseEvent tpe) {
-		Player.SendEvent(this.tpe);
+		p.sendEvent(tpe);
 	}
 	
 	public GameConditionEvent getGameConditionEvent()

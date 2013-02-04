@@ -3,12 +3,16 @@ package com.refnil.uqcard;
 import java.util.List;
 import java.util.Stack;
 
+import com.refnil.uqcard.library.Listenable;
+
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
-public class Board {
-	private Context c;
-	private BoardViewActivity boardView;
+public abstract class AbstractBoard implements Listenable<Event>{
+	
+	private final static String TAG = "Board";
+	
 	private int phase;
 	private int tour;
 	private int playerID ;
@@ -22,9 +26,8 @@ public class Board {
 	private Stack<Card> playerGraveyardCards;
 	private Card selectedCardOnBoard;
 
-	public Board(Context c,BoardViewActivity boardView) {
-		this.c = c;
-		this.boardView = boardView;
+	public AbstractBoard() {
+
 	}
 
 	public int getPhase() {
@@ -173,25 +176,24 @@ public class Board {
 
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
-			Toast.makeText(this.c, "Game begins", Toast.LENGTH_SHORT).show();
-			boardView.onMessage(event);
+			Log.i(TAG, "Game begins");
+			messageListener(event);
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
 			this.setTour(this.getTour()+1);
-			Toast.makeText(this.c, "Turn " + this.getTour() +" begins", Toast.LENGTH_SHORT).show();
-			boardView.onMessage(event);
+			Log.i(TAG, "Turn " + this.getTour() +" begins");
+			messageListener(event);
 		}
 
 		if (event.type == Event_Type.END_TURN) {
-			Toast.makeText(this.c, "Turn " + this.getTour() +" ends", Toast.LENGTH_SHORT).show();
-			boardView.onMessage(event);
+			Log.i(TAG, "Turn " + this.getTour() +" ends");
+			messageListener(event);
 		}
 
 		if (event.type == Event_Type.END_GAME) {
-			Toast.makeText(this.c, "Game ends", Toast.LENGTH_SHORT).show();
-			boardView.onMessage(event);
-
+			Log.i(TAG, "Game ends");
+			messageListener(event);
 		}
 	}
 

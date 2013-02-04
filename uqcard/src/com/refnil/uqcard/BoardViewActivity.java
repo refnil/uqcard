@@ -1,6 +1,9 @@
 package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.library.Board;
+import com.refnil.uqcard.library.Listener;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +14,7 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.TextView;
 
-public class BoardViewActivity extends Activity {
+public class BoardViewActivity extends Activity implements Listener<Event> {
 	private ImageAdapter adapter;
 	private EventManager em;
 	private Board board;
@@ -20,7 +23,7 @@ public class BoardViewActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		em = new EventManager();
-		board = new Board(getApplicationContext(),this);
+		
 		
 		/************************** TEMP ZONE **********************************/
 		setContentView(R.layout.test);
