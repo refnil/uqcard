@@ -25,6 +25,33 @@ public class Board {
 	public Board(Context c,BoardViewActivity boardView) {
 		this.c = c;
 		this.boardView = boardView;
+
+		/*****************************TEMP ZONE 04-02-2013 *********************/
+		CreatureCard c1 = new CreatureCard(c,1,"Nexus 4","Smartphone","LG bro.",2,null,4,4,20);
+		CardView cv1 = new CardView(c,c1);
+		CreatureCard c2 = new CreatureCard(c,2,"Nexus 7","7\" tablet","Asus style.",1,null,2,5,15);
+		CardView cv2 = new CardView(c,c2);
+		CreatureCard c3 = new CreatureCard(c,3,"Nexus 10","10\" tablet","Samsung stuff.",4,null,7,3,25);
+		CardView cv3 = new CardView(c,c3);
+		
+		this.addCardToBoard(cv1,R.id.playerFront2,true);
+		this.addCardToBoard(cv2,R.id.playerFront3,true);
+		this.addCardToBoard(cv3,R.id.playerFront4,true);
+		/***************************** END *************************************/
+	}
+	
+	public void addCardToBoard(CardView card,int viewID,boolean currentPlayer)
+	{
+		if(currentPlayer)
+		{
+			playerBoardCards.add(card.getCard());
+			boardView.onMessage(new PlaceCardEvent(Event_Type.PLACE_PLAYER_CARD,card,viewID));
+		}
+		else
+		{
+			opponentBoardCards.add(card.getCard());
+			boardView.onMessage(new PlaceCardEvent(Event_Type.PLACE_OPPONENT_CARD,card,viewID));
+		}
 	}
 
 	public int getPhase() {

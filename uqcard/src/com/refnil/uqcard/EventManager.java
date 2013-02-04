@@ -9,6 +9,13 @@ public class EventManager {
 		this.gce = new GameConditionEvent(Event_Type.BEGIN_GAME);
 		this.tpe = new TurnPhaseEvent(Event_Type.BEGIN_TURN);
 	}
+	
+
+	
+	public void sendEventToPlayer(Event e)
+	{
+		Player.SendEvent(e);
+	}
 
 	public void sendPhaseToPlayer(GameConditionEvent gce) {
 		Player.SendEvent(this.gce);
