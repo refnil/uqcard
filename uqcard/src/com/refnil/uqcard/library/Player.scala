@@ -3,7 +3,7 @@ package com.refnil.uqcard.library
 import scala.actors.Actor
 import scala.collection.mutable.Set;
 
-class Player(val serveur: User[Message]) extends User[Message] with Listenable[String,Player]{
+class Player(val serveur: User[Message]) extends User[Message] with Listenable[String]{
 
   var cpt = 6
   
@@ -22,7 +22,7 @@ class Player(val serveur: User[Message]) extends User[Message] with Listenable[S
         exit()
       }
     case Trans(a,m) => a ! m
-    case Close => 
+    case Close() => 
       closeListener()
       exit()
   }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">uqcard</string>
@@ -9,10 +10,8 @@
     <string name="hand_button">Hand</string>
     <string name="title_activity_full_card">Your card</string>
     <string name="fullScreenCard">fullscreen card</string>
-	
     <string name="title_activity_bluetooth">BluetoothActivity</string>
     <string name="UUID">822309e6-f032-4ba4-857f-0f8030907101</string>
-
     <string name="currentCard">Current card</string>
     <string name="title_activity_board">BoardActivity</string>
     <string name="opponentGeneral">Opponent general</string>
@@ -33,13 +32,18 @@
     <string name="health">vie: </string>
     <string name="cardType">creature: </string>
     <string name="description">description</string>
-    <string name = "creaType">Android</string>
-    <string name = "cardName">BugDroid</string>
-    <string name = "cost">4</string>
+    <string name="creaType">Android</string>
+    <string name="cardName">BugDroid</string>
+    <string name="cost">4</string>
     <string name="buttonSingle">Multiplayer 1 vs 1</string>
     <string name="buttonMulti">Multiplayer 3  devices</string>
     <string name="buttonOptions">Options</string>
     <string name="buttonEditor">Deck editor</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_database">DatabaseActivity</string>
+    <string name="title_activity_host_choice">HostChoice</string>
+    <string name="title_activity_bluetooth_connect">BluetoothConnect</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
+
 </resources>

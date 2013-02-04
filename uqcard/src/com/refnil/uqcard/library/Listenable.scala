@@ -2,12 +2,11 @@ package com.refnil.uqcard.library
 
 import scala.collection.mutable.Set
 
-trait Listenable[T,P] {
-  private val listeners:Set[Listener[T,P]] = Set()
+trait Listenable[T] {
+  private val listeners:Set[Listener[T]] = Set()
   
-  def subcribe(l: Listener[T,P]) = listeners add l
-  def unsuscribe(l: Listener[T,P]) = listeners remove l
-  protected def getSender():P
-  protected def messageListener(m:T) = listeners.foreach(x => x.onMessage(getSender,m))
-  protected def closeListener() = listeners.foreach(x => x.onClose(getSender))
+  def subscribe(l: Listener[T]) = listeners add l
+  def unsubscribe(l: Listener[T]) = listeners remove l
+  protected def messageListener(m:T) = listeners.foreach(x => x.onMessage(m))
+  protected def closeListener() = listeners.foreach(x => x.onClose())
 }

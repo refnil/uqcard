@@ -1,8 +1,8 @@
 package com.refnil.uqcard.library
 
-trait Listener[T,P] {
+trait Listener[T] {
   
-  def onMessage(p:P,m:T)
-  def onClose(p:P)
+  def onMessage(m:T)
+  def onClose()
 
 }

@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-
 public class MainActivity extends Activity {
 
 	@Override
@@ -67,6 +66,19 @@ public class MainActivity extends Activity {
 				// Intent i = new Intent(getApplicationContext(),
 				// BoardActivity.class);
 				// startActivity(i);
+
+			}
+
+		});
+
+		b = (Button) findViewById(R.id.buttonConnectivity);
+		b.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				Toast.makeText(getApplicationContext(), "Test Connectivity",
+						Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getApplicationContext(), HostChoice.class);
+				startActivity(i);
 
 			}
 

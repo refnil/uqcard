@@ -6,6 +6,8 @@ trait User[T >: Message] extends Actor{
     protected def init()
 	protected def receivedMessage(m : T)
 	protected def receivedElse(a : AnyRef)
+    
+    def tell(m:Message) = this ! m
 	
 	def act() = {
       init()

@@ -4,12 +4,12 @@ import com.refnil.uqcard.library.Listener
 import com.refnil.uqcard.library.PlayerListener
 import com.refnil.uqcard.library.Player
 
-class DummyPlayer extends Listener[String,Player] {
+class DummyPlayer extends Listener[String] {
 
-  def onMessage(p:Player,m:String) = {
+  def onMessage(m:String) = {
     print("Dummy received:")
     println(m)
   }
-  def onClose(p:Player) = {}
+  def onClose() = {}
 
 }

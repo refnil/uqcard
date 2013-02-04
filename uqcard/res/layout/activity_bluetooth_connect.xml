@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="true"
+    android:orientation="vertical"
+    tools:context=".BluetoothConnect" >
+
+    <TextView
+        android:id="@+id/BluetoothPairedListHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Paired devices:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ListView
+        android:id="@+id/BluetoothPairedList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:context=".BluetoothConnect" >
+    </ListView>
+    
+    <TextView
+        android:id="@+id/BluetoothDiscoveredListHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Discovered devices:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <ListView
+        android:id="@+id/BluetoothDiscoveredList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:context=".BluetoothConnect" >
+    </ListView>
+    
+    <Button 
+        android:id="@+id/BluetoothDiscoveriesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start discovery"/>
+
+    
+
+</LinearLayout>

@@ -7,17 +7,17 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="16" />
-    
+
     <uses-permission android:name="android.permission.BLUETOOTH" />
+     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-        <service android:name=".service.BluetoothService" />
-        
+        <service android:name="com.refnil.uqcard.service.BluetoothService" />
+
         <activity
             android:name="com.refnil.uqcard.MainActivity"
             android:label="@string/title_activity_main" >
@@ -28,10 +28,8 @@
             </intent-filter>
         </activity>
         <activity
-
-            android:name=".FullCardActivity"
+            android:name="com.refnil.uqcard.FullCardActivity"
             android:label="@string/title_activity_full_card" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,8 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-
-            android:name=".board.BoardViewActivity"         
+            android:name="com.refnil.uqcard.board.BoardViewActivity"
             android:label="@string/title_activity_board" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,8 +54,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        
+        <activity
+            android:name="com.refnil.uqcard.HostChoice"
+            android:label="@string/title_activity_host_choice" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.refnil.uqcard.MainActivity" />
+        </activity>
+
+        <service android:name="com.refnil.uqcard.service.UqcardService" >
+        </service>
+
+        <activity
+            android:name="com.refnil.uqcard.BluetoothConnect"
+            android:label="@string/title_activity_bluetooth_connect" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.refnil.uqcard.HostChoice" />
+        </activity>
     </application>
 
 </manifest>

@@ -19,10 +19,10 @@ object mainTest {
     p2.start()
     
     val dp = new DummyPlayer()
-    p2.subcribe(dp)
+    p2.subscribe(dp)
     
-    val rp = new RealPlayer()
-    p1.subcribe(rp)
+    val rp = new RealPlayer(p1)
+    p1.subscribe(rp)
     
     p1 ! Talk("Start")
   }
