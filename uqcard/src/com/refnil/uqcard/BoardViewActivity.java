@@ -251,5 +251,6 @@ public class BoardViewActivity extends Activity {
 	public void onClose()
 	{
 		
+
 	}
 }

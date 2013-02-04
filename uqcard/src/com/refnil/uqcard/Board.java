@@ -191,6 +191,7 @@ public class Board {
 		if (event.type == Event_Type.END_GAME) {
 			Toast.makeText(this.c, "Game ends", Toast.LENGTH_SHORT).show();
 			boardView.onMessage(event);
+
 		}
 	}
 
