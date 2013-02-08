@@ -45,5 +45,8 @@
     <string name="title_activity_bluetooth_connect">BluetoothConnect</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
+    <string name="title_activity_main_activity44">MainActivity44</string>
+    <string name="title_activity_main_activitytratratra">MainActivitytratratra</string>
 
 </resources>
