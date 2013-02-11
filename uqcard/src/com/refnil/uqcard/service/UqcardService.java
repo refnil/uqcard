@@ -14,6 +14,7 @@ import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Server;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.library.message.Close;
+import com.refnil.uqcard.library.message.DisconnectPlayer;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -119,10 +120,17 @@ public class UqcardService extends Service implements IService {
 							bs, server);
 					server = blc.getServer();
 					blc.start();
+					blc.send(new Close());
 					lcs.add(blc);
 					Intent i = new Intent(UqcardService.this,
 							BoardViewActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					try {
+						getPlayer().connect("CHOUCHOUI");
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					startActivity(i);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -167,6 +175,7 @@ public class UqcardService extends Service implements IService {
 							BluetoothLinkConnection blc = new BluetoothLinkConnection(
 									bs, server);
 							blc.start();
+							blc.send(new DisconnectPlayer());
 							lcs.add(blc);
 							Log.i(TAG, "Connection received");
 							if (nb == 1) {

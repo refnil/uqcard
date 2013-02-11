@@ -56,7 +56,7 @@ abstract public class AbstractActor {
 		public void handleMessage(Message msg) {
 			Serializable o = msg.getData().getSerializable(BUNDLE_KEY);
 			if (o != null) {
-				Log.i(TAG,o.toString());
+				//Log.i(TAG,o.toString());
 				handleUqcardMessage(msg.replyTo, (UqcardMessage) o);
 			} else {
 				Log.i(TAG, "received something else");

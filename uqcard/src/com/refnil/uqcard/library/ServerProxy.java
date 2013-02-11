@@ -9,13 +9,13 @@ import android.os.RemoteException;
 
 import com.refnil.uqcard.library.message.UqcardMessage;
 
-public class ServeurProxy extends AbstractServer implements Proxy {
+public class ServerProxy extends AbstractServer implements Proxy {
 	
 	private LinkConnection lc;
 	private Map<Messenger,Link> messengerMap = new HashMap<Messenger,Link>();
 	
 
-	public ServeurProxy(Looper looper,LinkConnection lc) {
+	public ServerProxy(Looper looper,LinkConnection lc) {
 		super(looper);
 		// TODO Auto-generated constructor stub
 		this.lc = lc;
@@ -39,6 +39,7 @@ public class ServeurProxy extends AbstractServer implements Proxy {
 			l = lc.newLink(this,sender);
 			messengerMap.put(sender, l);
 		}
+		l.send(um);
 	}
 
 }

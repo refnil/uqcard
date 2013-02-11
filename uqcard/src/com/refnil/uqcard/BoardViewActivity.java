@@ -38,8 +38,8 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				// TODO Auto-generated method stub
 				Log.i(TAG,"BoardViewActivity est connecter au service.");
 				IService mService = (IService) ((LocalBinder) service).getService();
-				em = new EventManager(mService.getPlayer());
 				Player p = mService.getPlayer();
+				em = new EventManager(p);
 				board = p.getBoard();
 			}
 

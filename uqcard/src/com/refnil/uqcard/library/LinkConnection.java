@@ -5,9 +5,11 @@ import com.refnil.uqcard.library.message.UqcardMessage;
 
 import android.os.HandlerThread;
 import android.os.Messenger;
+import android.util.Log;
 import android.util.SparseArray;
 
 public abstract class LinkConnection {
+	private static final String TAG = "LinkConnection";
 	private AbstractServer as;
 	private SparseArray<Link> map = new SparseArray<Link>();
 	private int highestId = 0;
@@ -19,7 +21,7 @@ public abstract class LinkConnection {
 		} else {
 			HandlerThread t = new HandlerThread("ProxyServer");
 			t.start();
-            this.as = new ProxyServer(t.getLooper(), this);
+            this.as = new ServerProxy(t.getLooper(), this);
 			
 		}
 	}
@@ -27,6 +29,7 @@ public abstract class LinkConnection {
 	public void receive(UqcardMessage um) {
 		IdMessage m = um instanceof IdMessage?(IdMessage)um:null;
 		if (m!=null) {
+			Log.i(TAG, m.message.toString());
 			Link l = map.get(m.id);
 			if (l == null) {
 				HandlerThread t = new HandlerThread("ProxyPlayer");
@@ -41,6 +44,7 @@ public abstract class LinkConnection {
 
 	public Link newLink(Proxy from, Messenger to) {
 		int id = highestId++;
+		Log.i(TAG,"New link" + String.valueOf(id));
 		Link l = new Link(id, this, from,to);
 		map.append(id, l);
 		return l;
