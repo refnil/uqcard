@@ -110,13 +110,14 @@ public class CardsDataSource {
 				null, null);
 		if (cursor.getCount() == 1) {
 			cursor.moveToFirst();
-			CreatureCard aCard = new CreatureCard(c, myCard.get_Id(),
+			//FIXME
+			/*CreatureCard aCard = new CreatureCard(c, myCard.get_Id(),
 					myCard.getName(), myCard.getDescription(),
 					myCard.getFlavor(), myCard.getCost(), myCard.getImage(),
 					cursor.getInt(MySQLiteHelper.CREATURECARDS_NUM_ATTACK),
 					cursor.getInt(MySQLiteHelper.CREATURECARDS_NUM_DEFENSE),
 					cursor.getInt(MySQLiteHelper.CREATURECARDS_NUM_HEALTH));
-			myCard = aCard;
+			myCard = aCard;*/
 		}
 		return myCard;
 	}

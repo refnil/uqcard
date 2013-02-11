@@ -20,5 +20,20 @@ public class CreatureCard extends Card {
 		this.hp = hp;
 	}
 
+	public String getAttack() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getDefense() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getHealth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
