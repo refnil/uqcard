@@ -38,7 +38,6 @@ public class Player extends AbstractPlayer {
 		return board;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	protected void handleUqcardMessage(Messenger sender, UqcardMessage um) {
 		// TODO Auto-generated method stub
@@ -49,13 +48,13 @@ public class Player extends AbstractPlayer {
 		
 		Log.i(TAG,um.toString());
 		
-		if (um.as(em)) { // EventMessage
+		if ((em = um.get())!=null) { // EventMessage
 			board.receiveEvent(em.event);
-		} else if (um.as(ya)) { // YouAre
+		} else if ((ya = um.get())!=null) { // YouAre
 			board.setPlayerID(ya.id);
-		} else if (um.as(cp)) { // ConnectedPlayer
+		} else if ((cp = um.get())!=null) { // ConnectedPlayer
 
-		} else if (um.as(c)) { // Close
+		} else if ((c = um.get())!=null) { // Close
 			close();
 		}
 

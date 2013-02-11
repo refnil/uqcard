@@ -26,7 +26,7 @@ public abstract class LinkConnection {
 	@SuppressWarnings("null")
 	public void receive(UqcardMessage um) {
 		IdMessage m = null;
-		if (um.as(m)) {
+		if ((m = um.get())!=null) {
 			Link l = map.get(m.id);
 			if (l == null) {
 				HandlerThread t = new HandlerThread("ProxyPlayer");

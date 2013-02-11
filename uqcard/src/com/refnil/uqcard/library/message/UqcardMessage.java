@@ -20,9 +20,9 @@ public abstract class UqcardMessage implements Serializable {
 		return ret;
 	}
 
-	public <T extends UqcardMessage> boolean as(T out) {
+	/*public <T extends UqcardMessage> boolean as(T out) {
 		out = this.get();
 		return out != null;
-	}
+	}*/
 
 }

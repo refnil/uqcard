@@ -41,7 +41,7 @@ public class Server extends AbstractServer implements Listener<Event>{
 		RequestServer rs = null;
 		Close c = null;
 		
-		if(um.as(cp)){
+		if((cp = um.get())!=null){
 			if(numberOfPlayer < 2){
 				numberOfPlayer++;
 				players.add(new TempPlayer(numberOfPlayer, sender, cp.name));
@@ -58,7 +58,7 @@ public class Server extends AbstractServer implements Listener<Event>{
 					e.printStackTrace();
 				}
 			}
-		}else if(um.as(dp)){
+		}else if((dp = um.get())!=null){
 			ListIterator<TempPlayer> it = players.listIterator();
 			
 			while(it.hasNext()){
@@ -74,9 +74,9 @@ public class Server extends AbstractServer implements Listener<Event>{
 					break;
 				}
 			}
-		}else if(um.as(rs)){
+		}else if((rs = um.get())!=null){
 			board.receiveEvent(rs.event);
-		}else if(um.as(c)){
+		}else if((c = um.get())!=null){
 			try {
 				tellToAll(new Close());
 			} catch (RemoteException e) {
