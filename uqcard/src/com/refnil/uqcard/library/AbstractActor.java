@@ -38,6 +38,10 @@ abstract public class AbstractActor {
 	public Messenger getMessenger() {
 		return new Messenger(aah);
 	}
+	
+	public void close(){
+		aah.getLooper().quit();
+	}
 
 	private final class AbstractActorHandler extends Handler {
 

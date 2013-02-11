@@ -2,9 +2,9 @@ package com.refnil.uqcard.service;
 
 import android.bluetooth.BluetoothDevice;
 
-import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.Board;
-import com.refnil.uqcard.library.Server;
+import com.refnil.uqcard.library.AbstractServer;
+import com.refnil.uqcard.library.Player;
 
 public interface IService {
 	
@@ -15,7 +15,7 @@ public interface IService {
 	
 	public void createServer();
 	public void destroyServer();
-	public Server getServer();
+	public AbstractServer getServer();
 	
 	public Player getPlayer();
 	public Board getBoard();

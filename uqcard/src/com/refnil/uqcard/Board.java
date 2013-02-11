@@ -3,13 +3,13 @@ package com.refnil.uqcard;
 import java.util.List;
 import java.util.Stack;
 
-import com.refnil.uqcard.library.ListenableClass;
+import com.refnil.uqcard.library.AbstractListenable;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Board extends ListenableClass<Event>{
+public class Board extends AbstractListenable<Event>{
 	
 	private final static String TAG = "Board";
 	
@@ -25,10 +25,6 @@ public class Board extends ListenableClass<Event>{
 	private Stack<Card> opponentGraveyardCards;
 	private Stack<Card> playerGraveyardCards;
 	private Card selectedCardOnBoard;
-
-	public AbstractBoard() {
-
-	}
 
 	public int getPhase() {
 		return phase;
@@ -177,23 +173,23 @@ public class Board extends ListenableClass<Event>{
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
 			Log.i(TAG, "Game begins");
-			messageListener(event);
+			tell(event);
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
 			this.setTour(this.getTour()+1);
 			Log.i(TAG, "Turn " + this.getTour() +" begins");
-			messageListener(event);
+			tell(event);
 		}
 
 		if (event.type == Event_Type.END_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() +" ends");
-			messageListener(event);
+			tell(event);
 		}
 
 		if (event.type == Event_Type.END_GAME) {
 			Log.i(TAG, "Game ends");
-			messageListener(event);
+			tell(event);
 		}
 	}
 

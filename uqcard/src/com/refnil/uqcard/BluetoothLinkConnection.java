@@ -7,11 +7,11 @@ import java.io.ObjectOutputStream;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
-import com.refnil.uqcard.library.LinkConnections;
-import com.refnil.uqcard.library.Message;
-import com.refnil.uqcard.library.Server;
+import com.refnil.uqcard.library.AbstractServer;
+import com.refnil.uqcard.library.LinkConnection;
+import com.refnil.uqcard.library.message.UqcardMessage;
 
-public class BluetoothLinkConnection extends LinkConnections {
+public class BluetoothLinkConnection extends LinkConnection {
 	
 	private static final String TAG = "BluetootLinkConnection";
 
@@ -19,7 +19,7 @@ public class BluetoothLinkConnection extends LinkConnections {
 	final ObjectInputStream is;
 	final ObjectOutputStream os;
 
-	public BluetoothLinkConnection(BluetoothSocket bs, Server s)
+	public BluetoothLinkConnection(BluetoothSocket bs, AbstractServer s)
 			throws IOException {
 		super(s);
 		Log.i(TAG,"Constructor blc begin");
@@ -44,7 +44,7 @@ public class BluetoothLinkConnection extends LinkConnections {
 	}
 
 	@Override
-	public void send(Message arg0) {
+	public void send(UqcardMessage arg0) {
 		// TODO Auto-generated method stub
 		try {
 			Log.v(TAG,arg0.toString());
@@ -59,14 +59,14 @@ public class BluetoothLinkConnection extends LinkConnections {
 	public void start() {
 		// TODO Auto-generated method stub
 		Thread t = new Thread(new Runnable(){
-			Message m;
+			UqcardMessage m;
 
 			public void run() {
 				// TODO Auto-generated method stub
 				while (true) {
 		            try {
 		                // Read from the InputStream
-		                m = (Message)is.readObject();
+		                m = (UqcardMessage)is.readObject();
 		                // Send the obtained bytes to the UI activity
 		                Log.v(TAG,m.toString());
 		                receive(m);

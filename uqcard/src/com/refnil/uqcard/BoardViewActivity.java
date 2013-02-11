@@ -1,7 +1,6 @@
 package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.library.Board;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;

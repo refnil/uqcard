@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import android.os.RemoteException;
+
 import com.refnil.uqcard.library.Player;
 
 public class EventManager {
@@ -14,14 +16,15 @@ public class EventManager {
 		this.p = p;
 	}
 
-	public void sendPhaseToPlayer(GameConditionEvent gce) {
-		p.sendEvent(this.gce);
+	public void sendToPlayer(Event event) {
+		try {
+			p.sendEvent(event);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void sendPhaseToPlayer(TurnPhaseEvent tpe) {
-		p.sendEvent(this.tpe);
-	}
-	
 	public GameConditionEvent getGameConditionEvent()
 	{
 		return this.gce;

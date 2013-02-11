@@ -9,6 +9,8 @@ import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.BoardViewActivity;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.Board;
+import com.refnil.uqcard.library.AbstractServer;
+import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.LinkConnections;
 import com.refnil.uqcard.library.Server;
 import com.refnil.uqcard.library.Close;
@@ -21,6 +23,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Binder;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,9 +33,9 @@ public class UqcardService extends Service implements IService {
 	private final String TAG = "Uqcard service";
 	private final IBinder mBinder = new LocalBinder();
 	private UUID uuid;
-	private Server server = null;
+	private AbstractServer server = null;
 	private Player player = null;
-	private Set<LinkConnections> lcs = new HashSet<LinkConnections>();
+	private Set<LinkConnection> lcs = new HashSet<LinkConnection>();
 
 	@Override
 	public void onCreate() {
@@ -188,17 +191,12 @@ public class UqcardService extends Service implements IService {
 	public Player getPlayer() {
 		// TODO Auto-generated method stub
 		if (server != null && player == null) {
-			player = new Player(server);
-			player.start();
+			HandlerThread t = new HandlerThread("Player");
+			player = new Player(t.getLooper(),server);
+			t.start();
 			player.connect("ROger");
 		}
 		return player;
-	}
-
-	public Board getBoard() {
-		// TODO Auto-generated method stub
-		
-		return player!=null?player.board():null;
 	}
 
 }
