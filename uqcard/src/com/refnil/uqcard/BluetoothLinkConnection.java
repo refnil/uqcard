@@ -45,10 +45,8 @@ public class BluetoothLinkConnection extends LinkConnection {
 	public void send(UqcardMessage arg0) {
 		// TODO Auto-generated method stub
 		try {
-			Log.v(TAG,arg0.toString());
+			Log.i(TAG,"Sent: " + arg0);
 			os.writeObject(arg0);
-			Log.v(TAG,"done sending");
-			
 		} catch (IOException e) {
 		}
 	}

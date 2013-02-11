@@ -35,7 +35,6 @@ public abstract class LinkConnection {
 				HandlerThread t = new HandlerThread("ProxyPlayer");
                 t.start();
 				PlayerProxy pp = new PlayerProxy(t.getLooper(), as, this);
-				
 				l = pp.getLink();
 			}
 			l.receive(m.message);
