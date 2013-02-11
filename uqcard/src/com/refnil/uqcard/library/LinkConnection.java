@@ -4,6 +4,7 @@ import com.refnil.uqcard.library.message.IdMessage;
 import com.refnil.uqcard.library.message.UqcardMessage;
 
 import android.os.HandlerThread;
+import android.os.Messenger;
 import android.util.SparseArray;
 
 public abstract class LinkConnection {
@@ -37,9 +38,9 @@ public abstract class LinkConnection {
 		}
 	}
 
-	public Link newLink(Proxy from, AbstractActor to) {
+	public Link newLink(Proxy from, Messenger to) {
 		int id = highestId++;
-		Link l = new Link(id, this, from, to);
+		Link l = new Link(id, this, from,to);
 		map.append(id, l);
 		return l;
 

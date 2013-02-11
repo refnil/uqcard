@@ -11,10 +11,10 @@ import com.refnil.uqcard.R;
 import com.refnil.uqcard.Board;
 import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
-import com.refnil.uqcard.library.LinkConnections;
 import com.refnil.uqcard.library.Server;
-import com.refnil.uqcard.library.Close;
 import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.message.Close;
+
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -25,6 +25,7 @@ import android.content.res.Resources.NotFoundException;
 import android.os.Binder;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -85,11 +86,13 @@ public class UqcardService extends Service implements IService {
 	public void createServer() {
 		// TODO Auto-generated method stub
 		if (server == null) {
-			server = new Server();
+			HandlerThread t = new HandlerThread("Server");
+			server = new Server(t.getLooper());
+			t.start();
 		}
 	}
 
-	public Server getServer() {
+	public AbstractServer getServer() {
 		// TODO Auto-generated method stub
 		return server;
 	}
@@ -131,7 +134,7 @@ public class UqcardService extends Service implements IService {
 	public void destroyServer() {
 		// TODO Auto-generated method stub
 		if (server != null) {
-			server.tell(new Close());
+			server.close();
 			server = null;
 		}
 	}
@@ -194,7 +197,12 @@ public class UqcardService extends Service implements IService {
 			HandlerThread t = new HandlerThread("Player");
 			player = new Player(t.getLooper(),server);
 			t.start();
-			player.connect("ROger");
+			try {
+				player.connect("ROger");
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return player;
 	}

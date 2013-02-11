@@ -13,8 +13,7 @@ public class PlayerProxy extends AbstractPlayer implements Proxy{
 	public PlayerProxy(Looper looper, AbstractServer as, LinkConnection lc) {
 		super(looper,as);
 		// TODO Auto-generated constructor stub
-		this.l = lc.newLink(this, as);
-		
+		this.l = lc.newLink(this,as.getMessenger());	
 	}
 
 	@Override
@@ -28,10 +27,10 @@ public class PlayerProxy extends AbstractPlayer implements Proxy{
 		return l;
 	}
 
-	public void receive(UqcardMessage um) {
+	public void receive(Messenger to, UqcardMessage um) {
 		// TODO Auto-generated method stub
 		try {
-			sendTo(getServer(),um);
+			sendTo(to,um);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

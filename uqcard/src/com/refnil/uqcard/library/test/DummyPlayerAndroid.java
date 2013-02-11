@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.refnil.uqcard.library.Listenable;
 import com.refnil.uqcard.library.Listener;
-import com.refnil.uqcard.library.Player;
 
 public class DummyPlayerAndroid implements Listener<String> {
 

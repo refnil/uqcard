@@ -18,7 +18,6 @@ public interface IService {
 	public AbstractServer getServer();
 	
 	public Player getPlayer();
-	public Board getBoard();
 	
 	public void listenBluetooth();
 	public void listenBluetooth(int nb);

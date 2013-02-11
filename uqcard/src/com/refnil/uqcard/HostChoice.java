@@ -5,10 +5,10 @@ import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
 import com.refnil.uqcard.library.Listenable;
 import com.refnil.uqcard.library.Player;
-import com.refnil.uqcard.library.test.DummyPlayer;
 import com.refnil.uqcard.library.test.DummyPlayerAndroid;
 
 import android.os.Bundle;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -68,8 +68,9 @@ public class HostChoice extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mService.createServer();
-				Player p = new Player(mService.getServer());
-				DummyPlayerAndroid dpa = new DummyPlayerAndroid(p);
+				HandlerThread t = new HandlerThread("Player");
+				Player p = new Player(t.getLooper(),mService.getServer());
+				t.start();
 				Log.v(TAG,"Try to listen");
 				mService.listenBluetooth();
 				

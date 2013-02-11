@@ -5,9 +5,7 @@ import java.util.Stack;
 
 import com.refnil.uqcard.library.AbstractListenable;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Board extends AbstractListenable<Event>{
 	

@@ -38,7 +38,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				Log.i(TAG,"BoardViewActivity est connecter au service.");
 				IService mService = (IService) ((LocalBinder) service).getService();
 				em = new EventManager(mService.getPlayer());
-				board = mService.getBoard();
+				board = mService.getPlayer().getBoard();
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -61,7 +61,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				GameConditionEvent gc = em.getGameConditionEvent();
 				if(gc.type != Event_Type.BEGIN_GAME)
 					gc.nextPhase();
-				em.sendPhaseToPlayer(gc);
+				em.sendToPlayer(gc);
 			}
 			
 		});
@@ -74,7 +74,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				TurnPhaseEvent tp = em.getTurnPhaseEvent();
 				if(tp.type != Event_Type.BEGIN_TURN)
 					tp.nextPhase();
-				em.sendPhaseToPlayer(tp);
+				em.sendToPlayer(tp);
 				
 			}
 			
@@ -88,7 +88,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				TurnPhaseEvent tp = em.getTurnPhaseEvent();
 				if(tp.type != Event_Type.END_TURN)
 					tp.nextPhase();
-				em.sendPhaseToPlayer(tp);
+				em.sendToPlayer(tp);
 				
 			}
 			
@@ -121,7 +121,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				GameConditionEvent gc = em.getGameConditionEvent();
 				if(gc.type != Event_Type.BEGIN_GAME)
 					gc.nextPhase();
-				em.sendPhaseToPlayer(gc);
+				em.sendToPlayer(gc);
 			}
 			
 		});
@@ -134,7 +134,7 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				GameConditionEvent gc = em.getGameConditionEvent();
 				if(gc.type != Event_Type.END_GAME)
 					gc.nextPhase();
-				em.sendPhaseToPlayer(gc);
+				em.sendToPlayer(gc);
 				
 			}
 			

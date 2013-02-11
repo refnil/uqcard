@@ -242,7 +242,6 @@ public class BluetoothConnect extends Activity {
 	private class BluetoothEntryAdapter extends ArrayAdapter<BluetoothEntry> {
 
 		LayoutInflater li = getLayoutInflater();
-		private Filter mFilter;
 
 		public BluetoothEntryAdapter(Context c) {
 			super(c, R.layout.bluetooth_entry);

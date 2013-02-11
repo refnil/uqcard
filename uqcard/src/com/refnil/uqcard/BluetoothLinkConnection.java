@@ -26,8 +26,6 @@ public class BluetoothLinkConnection extends LinkConnection {
 		// TODO Auto-generated constructor stub
 		this.bs = bs;
 		Log.i(TAG,"blc bs");
-		InputStream ris  = bs.getInputStream();
-		Log.i(TAG,"ris done");
 		
 		if(s==null)
 		{

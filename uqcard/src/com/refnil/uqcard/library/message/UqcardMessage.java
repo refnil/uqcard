@@ -9,6 +9,7 @@ public abstract class UqcardMessage implements Serializable {
 	 */
 	private static final long serialVersionUID = 4496947639996702674L;
 
+	@SuppressWarnings("unchecked")
 	public <T extends UqcardMessage> T get() {
 		T ret = null;
 		try {
