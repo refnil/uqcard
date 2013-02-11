@@ -7,5 +7,4 @@ public class Event{
 	Event(Event_Type t) {
 		type = t;
 	}
-
 }

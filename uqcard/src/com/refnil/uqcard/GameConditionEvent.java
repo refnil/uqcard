@@ -19,8 +19,12 @@ public class GameConditionEvent extends Event {
 			break;
 		default:
 			break;
-
-		}
-	}
-
+ 			
+ 		}
+ 	}
+ 	
+ 	public void setPhase(Event_Type t)
+ 	{
+ 		type = t;
+ 	} 	
 }

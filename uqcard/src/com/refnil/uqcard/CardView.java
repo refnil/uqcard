@@ -1,6 +1,8 @@
 package com.refnil.uqcard;
 
 import android.content.Context;
+
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -135,3 +137,5 @@ public class CardView extends RelativeLayout {
 	}
 
 }
+
+

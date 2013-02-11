@@ -11,7 +11,6 @@ public class TurnPhaseEvent extends Event {
 
 	public void nextPhase() {
 		switch (type) {
-
 		case BEGIN_TURN:
 			type = Event_Type.END_TURN;
 			break;
@@ -20,8 +19,6 @@ public class TurnPhaseEvent extends Event {
 			break;
 		default:
 			break;
-
 		}
 	}
-
 }
