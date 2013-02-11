@@ -16,7 +16,7 @@ import com.refnil.uqcard.library.message.UqcardMessage;
 import com.refnil.uqcard.library.message.YouAre;
 
 public class Player extends AbstractPlayer {
-	
+
 	private final static String TAG = "Player";
 
 	private Board board;
@@ -24,6 +24,7 @@ public class Player extends AbstractPlayer {
 	public Player(Looper looper, AbstractServer as) {
 		super(looper, as);
 		// TODO Auto-generated constructor stub
+		board = new Board();
 	}
 
 	public void connect(String name) throws RemoteException {
@@ -41,20 +42,22 @@ public class Player extends AbstractPlayer {
 	@Override
 	protected void handleUqcardMessage(Messenger sender, UqcardMessage um) {
 		// TODO Auto-generated method stub
-		EventMessage em = null;
-		YouAre ya = null;
-		ConnectedPlayer cp = null;
-		Close c = null;
-		
-		Log.i(TAG,um.toString());
-		
-		if ((em = um.get())!=null) { // EventMessage
-			board.receiveEvent(em.event);
-		} else if ((ya = um.get())!=null) { // YouAre
-			board.setPlayerID(ya.id);
-		} else if ((cp = um.get())!=null) { // ConnectedPlayer
+		EventMessage em = um instanceof EventMessage ? (EventMessage) um : null;
+		YouAre ya = um instanceof YouAre ? (YouAre) um : null;
+		ConnectedPlayer cp = um instanceof ConnectedPlayer ? (ConnectedPlayer) um
+				: null;
+		Close c = um instanceof Close ? (Close) um : null;
 
-		} else if ((c = um.get())!=null) { // Close
+		Log.i(TAG, um.toString());
+
+		if (em != null) { // EventMessage
+			board.receiveEvent(em.event);
+		} else if (ya != null) { // YouAre
+			Log.i(TAG, String.valueOf(ya.id));
+			board.setPlayerID(ya.id);
+		} else if (cp != null) { // ConnectedPlayer
+
+		} else if (c != null) { // Close
 			close();
 		}
 

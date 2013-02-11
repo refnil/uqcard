@@ -2,6 +2,7 @@ package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.library.Listener;
+import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
@@ -38,7 +39,8 @@ public class BoardViewActivity extends Activity implements Listener<Event> {
 				Log.i(TAG,"BoardViewActivity est connecter au service.");
 				IService mService = (IService) ((LocalBinder) service).getService();
 				em = new EventManager(mService.getPlayer());
-				board = mService.getPlayer().getBoard();
+				Player p = mService.getPlayer();
+				board = p.getBoard();
 			}
 
 			public void onServiceDisconnected(ComponentName name) {

@@ -18,20 +18,21 @@ public abstract class LinkConnection {
 
 		} else {
 			HandlerThread t = new HandlerThread("ProxyServer");
-			as = new ProxyServer(t.getLooper(), this);
 			t.start();
+            this.as = new ProxyServer(t.getLooper(), this);
+			
 		}
 	}
 
-	@SuppressWarnings("null")
 	public void receive(UqcardMessage um) {
-		IdMessage m = null;
-		if ((m = um.get())!=null) {
+		IdMessage m = um instanceof IdMessage?(IdMessage)um:null;
+		if (m!=null) {
 			Link l = map.get(m.id);
 			if (l == null) {
 				HandlerThread t = new HandlerThread("ProxyPlayer");
+                t.start();
 				PlayerProxy pp = new PlayerProxy(t.getLooper(), as, this);
-				t.start();
+				
 				l = pp.getLink();
 			}
 			l.receive(m.message);
@@ -44,6 +45,10 @@ public abstract class LinkConnection {
 		map.append(id, l);
 		return l;
 
+	}
+	
+	public AbstractServer getServer(){
+		return as;
 	}
 
 	abstract public void send(UqcardMessage idMessage);

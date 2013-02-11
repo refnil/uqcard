@@ -16,11 +16,13 @@ abstract public class AbstractActor {
 
 	final private static String TAG = "AbstractActor";
 	final private static String BUNDLE_KEY = "UQCARDMESSAGE";
+	private Messenger messenger;
 
 	private AbstractActorHandler aah;
 
 	public AbstractActor(Looper looper) {
 		aah = new AbstractActorHandler(looper);
+		messenger = new Messenger(aah);
 	}
 
 	protected abstract void handleUqcardMessage(Messenger sender,
@@ -29,14 +31,15 @@ abstract public class AbstractActor {
 	protected void sendTo(Messenger mess, UqcardMessage um)
 			throws RemoteException {
 		Message m = Message.obtain();
-		Bundle b = Bundle.EMPTY;
+		m.replyTo = messenger;
+		Bundle b = new Bundle();
 		b.putSerializable(BUNDLE_KEY, um);
 		m.setData(b);
 		mess.send(m);
 	}
 
 	public Messenger getMessenger() {
-		return new Messenger(aah);
+		return messenger;
 	}
 	
 	public void close(){
@@ -53,6 +56,7 @@ abstract public class AbstractActor {
 		public void handleMessage(Message msg) {
 			Serializable o = msg.getData().getSerializable(BUNDLE_KEY);
 			if (o != null) {
+				Log.i(TAG,o.toString());
 				handleUqcardMessage(msg.replyTo, (UqcardMessage) o);
 			} else {
 				Log.i(TAG, "received something else");

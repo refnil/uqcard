@@ -62,7 +62,7 @@ public class UqcardService extends Service implements IService {
 			break;
 		}
 
-		return START_STICKY;
+		return START_REDELIVER_INTENT;
 	}
 
 	@Override
@@ -86,9 +86,11 @@ public class UqcardService extends Service implements IService {
 	public void createServer() {
 		// TODO Auto-generated method stub
 		if (server == null) {
+       
 			HandlerThread t = new HandlerThread("Server");
-			server = new Server(t.getLooper());
 			t.start();
+			server = new Server(t.getLooper());
+
 		}
 	}
 
@@ -100,7 +102,7 @@ public class UqcardService extends Service implements IService {
 	public void listenBluetooth() {
 		// TODO Auto-generated method stub
 		listenBluetooth(1);
-		
+
 	}
 
 	public void connect(final BluetoothDevice bd) {
@@ -113,10 +115,13 @@ public class UqcardService extends Service implements IService {
 					BluetoothSocket bs = bd
 							.createRfcommSocketToServiceRecord(uuid);
 					bs.connect();
-					BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, server);
+					BluetoothLinkConnection blc = new BluetoothLinkConnection(
+							bs, server);
+					server = blc.getServer();
 					blc.start();
 					lcs.add(blc);
-					Intent i = new Intent(UqcardService.this, BoardViewActivity.class);
+					Intent i = new Intent(UqcardService.this,
+							BoardViewActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i);
 				} catch (IOException e) {
@@ -126,7 +131,7 @@ public class UqcardService extends Service implements IService {
 			}
 
 		});
-		
+
 		t.start();
 
 	}
@@ -159,12 +164,14 @@ public class UqcardService extends Service implements IService {
 					while (i-- > 0) {
 						try {
 							BluetoothSocket bs = bss.accept();
-							BluetoothLinkConnection blc = new BluetoothLinkConnection(bs, server);
+							BluetoothLinkConnection blc = new BluetoothLinkConnection(
+									bs, server);
 							blc.start();
 							lcs.add(blc);
 							Log.i(TAG, "Connection received");
-							if(nb == 1){
-								Intent i = new Intent(UqcardService.this, BoardViewActivity.class);
+							if (nb == 1) {
+								Intent i = new Intent(UqcardService.this,
+										BoardViewActivity.class);
 								i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(i);
 							}
@@ -195,8 +202,9 @@ public class UqcardService extends Service implements IService {
 		// TODO Auto-generated method stub
 		if (server != null && player == null) {
 			HandlerThread t = new HandlerThread("Player");
-			player = new Player(t.getLooper(),server);
-			t.start();
+            t.start();
+			player = new Player(t.getLooper(), server);
+			
 			try {
 				player.connect("ROger");
 			} catch (RemoteException e) {

@@ -20,10 +20,10 @@ import com.refnil.uqcard.library.message.RequestServer;
 import com.refnil.uqcard.library.message.UqcardMessage;
 import com.refnil.uqcard.library.message.YouAre;
 
-public class Server extends AbstractServer implements Listener<Event>{
-	
+public class Server extends AbstractServer implements Listener<Event> {
+
 	private Board board = new Board();
-	
+
 	private List<TempPlayer> players = new ArrayList<TempPlayer>();
 	private int numberOfPlayer = 0;
 
@@ -36,17 +36,17 @@ public class Server extends AbstractServer implements Listener<Event>{
 	@Override
 	protected void handleUqcardMessage(Messenger sender, UqcardMessage um) {
 		// TODO Auto-generated method stub
-		ConnectPlayer cp = null;
-		DisconnectPlayer dp = null;
-		RequestServer rs = null;
-		Close c = null;
-		
-		if((cp = um.get())!=null){
-			if(numberOfPlayer < 2){
+		ConnectPlayer cp = um instanceof ConnectPlayer?(ConnectPlayer)um:null;
+		DisconnectPlayer dp = um instanceof DisconnectPlayer?(DisconnectPlayer)um:null;
+		RequestServer rs = um instanceof RequestServer?(RequestServer)um:null;
+		Close c = um instanceof Close?(Close)um:null;
+
+		if (cp != null) {
+			if (numberOfPlayer < 2) {
 				numberOfPlayer++;
 				players.add(new TempPlayer(numberOfPlayer, sender, cp.name));
 				try {
-					sendTo(sender,new YouAre(numberOfPlayer));
+					sendTo(sender, new YouAre(numberOfPlayer));
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -58,12 +58,12 @@ public class Server extends AbstractServer implements Listener<Event>{
 					e.printStackTrace();
 				}
 			}
-		}else if((dp = um.get())!=null){
+		} else if (dp != null) {
 			ListIterator<TempPlayer> it = players.listIterator();
-			
-			while(it.hasNext()){
+
+			while (it.hasNext()) {
 				TempPlayer tp = it.next();
-				if(sender == tp.m){
+				if (sender == tp.m) {
 					it.remove();
 					try {
 						tellToAll(new DisconnectedPlayer(tp.name));
@@ -74,9 +74,9 @@ public class Server extends AbstractServer implements Listener<Event>{
 					break;
 				}
 			}
-		}else if((rs = um.get())!=null){
+		} else if (rs != null) {
 			board.receiveEvent(rs.event);
-		}else if((c = um.get())!=null){
+		} else if (c != null) {
 			try {
 				tellToAll(new Close());
 			} catch (RemoteException e) {
@@ -86,12 +86,12 @@ public class Server extends AbstractServer implements Listener<Event>{
 		}
 
 	}
-	
-	private void tellToAll(UqcardMessage um) throws RemoteException{
+
+	private void tellToAll(UqcardMessage um) throws RemoteException {
 		ListIterator<TempPlayer> it = players.listIterator();
-		
-		while(it.hasNext()){
-			sendTo(it.next().m,um);
+
+		while (it.hasNext()) {
+			sendTo(it.next().m, um);
 		}
 	}
 
@@ -107,15 +107,15 @@ public class Server extends AbstractServer implements Listener<Event>{
 
 	public void onClose() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	private class TempPlayer{
+
+	private class TempPlayer {
 		final public int id;
 		final public Messenger m;
 		final public String name;
 
-		public TempPlayer(int id, Messenger m, String name){
+		public TempPlayer(int id, Messenger m, String name) {
 			this.id = id;
 			this.m = m;
 			this.name = name;

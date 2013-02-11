@@ -68,9 +68,6 @@ public class HostChoice extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mService.createServer();
-				HandlerThread t = new HandlerThread("Player");
-				Player p = new Player(t.getLooper(),mService.getServer());
-				t.start();
 				Log.v(TAG,"Try to listen");
 				mService.listenBluetooth();
 				
