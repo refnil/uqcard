@@ -2,9 +2,10 @@ package com.refnil.uqcard;
 
 public class SelectedCardEvent extends Event{
 
-	SelectedCardEvent(Event_Type t) {
+	CardView card;
+	SelectedCardEvent(Event_Type t,CardView card) {
 		super(t);
-		// TODO Auto-generated constructor stub
+		this.card = card;
 	}
 
 }

@@ -2,9 +2,12 @@ package com.refnil.uqcard;
 
 public class CreatureAttackEvent extends Event{
 
-	CreatureAttackEvent(Event_Type t) {
+	CardView from;
+	CardView to;
+	CreatureAttackEvent(Event_Type t, CardView from, CardView to) {
 		super(t);
-		// TODO Auto-generated constructor stub
+		this.from = from;
+		this.to = to;
 	}
 
 }

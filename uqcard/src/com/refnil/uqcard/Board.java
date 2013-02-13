@@ -8,10 +8,6 @@ import android.widget.Toast;
 
 public class Board {
 	private Context c;
-	private BoardViewActivity boardView;
-	private int phase;
-	private int tour;
-	private int playerID ;
 	private List<Card> opponentHandCards;
 	private List<Card> playerHandCards;
 	private List<Card> opponentBoardCards;
@@ -20,7 +16,6 @@ public class Board {
 	private Stack<Card> playerStackCards;
 	private Stack<Card> opponentGraveyardCards;
 	private Stack<Card> playerGraveyardCards;
-	private Card selectedCardOnBoard;
 
 	public Board(Context c,BoardViewActivity boardView) {
 		this.c = c;
@@ -52,22 +47,6 @@ public class Board {
 			opponentBoardCards.add(card.getCard());
 			boardView.onMessage(new PlaceCardEvent(Event_Type.PLACE_OPPONENT_CARD,card,viewID));
 		}
-	}
-
-	public int getPhase() {
-		return phase;
-	}
-
-	public void setPhase(int phase) {
-		this.phase = phase;
-	}
-
-	public int getTour() {
-		return tour;
-	}
-
-	public void setTour(int tour) {
-		this.tour = tour;
 	}
 
 	public List<Card> getOpponentHandCards() {
@@ -219,6 +198,28 @@ public class Board {
 			Toast.makeText(this.c, "Game ends", Toast.LENGTH_SHORT).show();
 			boardView.onMessage(event);
 
+		}
+		
+		if(event.type == Event_Type.PLACE_PLAYER_CARD)
+		{
+			PlaceCardEvent e = (PlaceCardEvent) event;
+			playerBoardCards.add(e.g)
+		}
+		
+		if(event.type == Event_Type.PLACE_OPPONENT_CARD)
+		{
+		
+		}
+		
+		if(event.type == Event_Type.SELECT_OPPONENT_CARD)
+		{
+		
+		}
+		
+		if(event.type == Event_Type.SELECT_PLAYER_CARD)
+		{
+			SelectedCardEvent e = (SelectedCardEvent) event;
+			this.setSelectedCardOnBoard(e.card);
 		}
 	}
 
