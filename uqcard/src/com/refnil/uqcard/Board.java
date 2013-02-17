@@ -7,13 +7,13 @@ import com.refnil.uqcard.library.AbstractListenable;
 
 import android.util.Log;
 
-public class Board extends AbstractListenable<Event>{
-	
+public class Board extends AbstractListenable<Event> {
+
 	private final static String TAG = "Board";
-	
+
 	private int phase;
 	private int tour;
-	private int playerID ;
+	private int playerID;
 	private List<Card> opponentHandCards;
 	private List<Card> playerHandCards;
 	private List<Card> opponentBoardCards;
@@ -175,19 +175,32 @@ public class Board extends AbstractListenable<Event>{
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
-			this.setTour(this.getTour()+1);
-			Log.i(TAG, "Turn " + this.getTour() +" begins");
+			this.setTour(this.getTour() + 1);
+			Log.i(TAG, "Turn " + this.getTour() + " begins");
 			tell(event);
 		}
 
 		if (event.type == Event_Type.END_TURN) {
-			Log.i(TAG, "Turn " + this.getTour() +" ends");
+			Log.i(TAG, "Turn " + this.getTour() + " ends");
 			tell(event);
 		}
 
 		if (event.type == Event_Type.END_GAME) {
 			Log.i(TAG, "Game ends");
 			tell(event);
+		}
+
+		if (event instanceof AttackEvent) {
+			AttackEvent ae = (AttackEvent) event;
+			Card opp = ae.opponent.getCard();
+			Card pl = ae.player.getCard();
+			int index = opponentBoardCards.indexOf(opp);
+			int index1 = playerBoardCards.indexOf(pl);
+			((CreatureCard) opponentBoardCards.get(index))
+					.setHp(((CreatureCard) opponentBoardCards.get(index))
+							.getHp()
+							- ((CreatureCard) playerBoardCards.get(index1))
+									.getAtk());
 		}
 	}
 

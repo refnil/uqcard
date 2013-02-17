@@ -37,7 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BoardViewActivity"
+            android:name=".BoardActivity"
             android:label="@string/title_activity_board" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

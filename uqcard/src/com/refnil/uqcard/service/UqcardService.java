@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import com.refnil.uqcard.BluetoothLinkConnection;
-import com.refnil.uqcard.BoardViewActivity;
+import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.Board;
 import com.refnil.uqcard.library.AbstractServer;
@@ -122,7 +122,7 @@ public class UqcardService extends Service implements IService {
 					blc.start();
 					lcs.add(blc);
 					Intent i = new Intent(UqcardService.this,
-							BoardViewActivity.class);
+							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 					startActivity(i);
 				} catch (IOException e) {
@@ -172,7 +172,7 @@ public class UqcardService extends Service implements IService {
 							Log.i(TAG, "Connection received");
 							if (nb == 1) {
 								Intent i = new Intent(UqcardService.this,
-										BoardViewActivity.class);
+										BoardActivity.class);
 								i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 								startActivity(i);
 							}
