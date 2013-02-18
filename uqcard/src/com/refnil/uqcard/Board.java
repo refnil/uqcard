@@ -22,7 +22,6 @@ public class Board extends AbstractListenable<Event> {
 	private Stack<Card> playerStackCards;
 	private Stack<Card> opponentGraveyardCards;
 	private Stack<Card> playerGraveyardCards;
-	private Card selectedCardOnBoard;
 
 	public int getPhase() {
 		return phase;
@@ -160,13 +159,6 @@ public class Board extends AbstractListenable<Event> {
 		this.playerID = playerID;
 	}
 
-	public Card getSelectedCardOnBoard() {
-		return selectedCardOnBoard;
-	}
-
-	public void setSelectedCardOnBoard(Card selectedCardOnBoard) {
-		this.selectedCardOnBoard = selectedCardOnBoard;
-	}
 
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
@@ -201,7 +193,8 @@ public class Board extends AbstractListenable<Event> {
 							.getHp()
 							- ((CreatureCard) playerBoardCards.get(index1))
 									.getAtk());
+			ae.opponent.setCard((Card)opponentBoardCards.get(index));
+			tell(ae);
 		}
 	}
-
 }

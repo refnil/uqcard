@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import java.util.List;
+
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
@@ -14,18 +16,21 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.util.Log;
-import android.view.LayoutInflater;
+//import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Gallery;
-import android.widget.TextView;
+//import android.widget.Gallery;
+//import android.widget.TextView;
 import android.widget.Toast;
 
 public class BoardActivity extends Activity implements Listener<Event> {
 	private final static String TAG = "BoardActivity";
 	private EventManager em;
+	private List<CardView> onBoard;
+	private Board board;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -218,6 +223,13 @@ public class BoardActivity extends Activity implements Listener<Event> {
 
 	}
 
+
+	public void receiveBoardFromPlayer(Board board)
+	{
+		this.board = board;
+		this.board.subscribe(this);
+	}
+	
 	public void onMessage(final Event e)
 	{
 		this.runOnUiThread(new Runnable() {
@@ -282,8 +294,19 @@ public class BoardActivity extends Activity implements Listener<Event> {
 					{
 						SelectedCardEvent s = (SelectedCardEvent)e;
 						CardView cv = s.card;
-						//MEttre la carte en surbrillance
+						int i =onBoard.indexOf(cv);
+						onBoard.get(i).setDrawingCacheBackgroundColor(Color.MAGENTA);
 						Toast.makeText(getApplicationContext(), "Carte sélectionnée", Toast.LENGTH_SHORT).show();
+					}
+					else
+					{
+						if(e instanceof AttackEvent)
+						{
+							Toast.makeText(getApplicationContext(), "Attack done", Toast.LENGTH_SHORT).show();
+							AttackEvent ae = (AttackEvent)e;
+							int i =onBoard.indexOf(ae.opponent);
+							onBoard.set(i,ae.opponent);
+						}
 					}
 				}
 		}

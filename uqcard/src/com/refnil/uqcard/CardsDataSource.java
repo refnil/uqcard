@@ -22,7 +22,7 @@ public class CardsDataSource {
 			MySQLiteHelper.CREATURECARDS_HEALTH };
 
 	public CardsDataSource(Context context) {
-		c = context;
+		setC(context);
 		dbHelper = new MySQLiteHelper(context);
 	}
 
@@ -130,5 +130,13 @@ public class CardsDataSource {
 				cursor.getInt(MySQLiteHelper.CARDS_NUM_COST),
 				cursor.getBlob(MySQLiteHelper.CARDS_NUM_IMAGE));
 		return aCard;
+	}
+
+	public Context getC() {
+		return c;
+	}
+
+	public void setC(Context c) {
+		this.c = c;
 	}
 }

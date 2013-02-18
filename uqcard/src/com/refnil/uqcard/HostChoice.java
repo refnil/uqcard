@@ -3,12 +3,12 @@ package com.refnil.uqcard;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
-import com.refnil.uqcard.library.Listenable;
-import com.refnil.uqcard.library.Player;
-import com.refnil.uqcard.library.test.DummyPlayerAndroid;
+//import com.refnil.uqcard.library.Listenable;
+//import com.refnil.uqcard.library.Player;
+//import com.refnil.uqcard.library.test.DummyPlayerAndroid;
 
 import android.os.Bundle;
-import android.os.HandlerThread;
+//import android.os.HandlerThread;
 import android.os.IBinder;
 import android.app.Activity;
 import android.content.ComponentName;

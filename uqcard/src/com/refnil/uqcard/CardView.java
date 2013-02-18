@@ -2,7 +2,7 @@ package com.refnil.uqcard;
 
 import android.content.Context;
 
-import android.content.res.TypedArray;
+//import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -92,6 +92,10 @@ public class CardView extends RelativeLayout {
 
 	public Card getCard() {
 		return this.card;
+	}
+	
+	public void setCard(Card card){
+		this.card = card;
 	}
 
 	public View getCardView(Context c, int width, int height) {

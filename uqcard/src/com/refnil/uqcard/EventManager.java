@@ -40,6 +40,7 @@ public class EventManager {
 			{
 				AttackEvent ae = new AttackEvent(((SelectedCardEvent)e).card,getSelectedCard());
 				sendToPlayer(ae);
+				selectedCard = null;
 			}
 		}
 	}

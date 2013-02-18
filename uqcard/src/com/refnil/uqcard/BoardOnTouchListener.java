@@ -12,7 +12,7 @@ public class BoardOnTouchListener implements OnTouchListener {
 
 	public BoardOnTouchListener(SemiClosedSlidingDrawer s, Gallery g) {
 		slider = s;
-		gallery = g;
+		setGallery(g);
 	}
 
 	public boolean onTouch(View v, MotionEvent event) {
@@ -40,6 +40,14 @@ public class BoardOnTouchListener implements OnTouchListener {
 			return false;
 		}
 		return false;
+	}
+
+	public Gallery getGallery() {
+		return gallery;
+	}
+
+	public void setGallery(Gallery gallery) {
+		this.gallery = gallery;
 	}
 
 }
