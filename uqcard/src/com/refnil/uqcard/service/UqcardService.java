@@ -5,17 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.refnil.uqcard.BluetoothLinkConnection;
-import com.refnil.uqcard.BoardActivity;
-import com.refnil.uqcard.R;
-import com.refnil.uqcard.Board;
-import com.refnil.uqcard.library.AbstractServer;
-import com.refnil.uqcard.library.LinkConnection;
-import com.refnil.uqcard.library.Server;
-import com.refnil.uqcard.library.Player;
-import com.refnil.uqcard.library.message.Close;
-import com.refnil.uqcard.library.message.DisconnectPlayer;
-
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -29,6 +18,14 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.refnil.uqcard.BluetoothLinkConnection;
+import com.refnil.uqcard.BoardActivity;
+import com.refnil.uqcard.R;
+import com.refnil.uqcard.library.AbstractServer;
+import com.refnil.uqcard.library.LinkConnection;
+import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.Server;
 
 public class UqcardService extends Service implements IService {
 
