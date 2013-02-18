@@ -44,6 +44,7 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				IService mService = (IService) ((LocalBinder) service).getService();
 				Player p = mService.getPlayer();
 				em = new EventManager(p);
+				setBoard(p.getBoard());
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -222,12 +223,11 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				(Gallery) findViewById(R.id.Gallery)));*/
 
 	}
-
-
-	public void receiveBoardFromPlayer(Board board)
-	{
-		this.board = board;
-		this.board.subscribe(this);
+	
+	protected void setBoard(Board board2) {
+		// TODO Auto-generated method stub
+		board = board2;
+		board.subscribe(this);
 	}
 	
 	public void onMessage(final Event e)
