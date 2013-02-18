@@ -1,8 +1,6 @@
 package com.refnil.uqcard;
 
-import java.io.Serializable;
-
-public class SelectedCardEvent extends Event implements Serializable{
+public class SelectedCardEvent extends Event{
 	
 	private static final long serialVersionUID = -1388745581161354890L;
 	CardView card;

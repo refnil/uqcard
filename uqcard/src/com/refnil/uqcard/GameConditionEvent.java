@@ -2,6 +2,10 @@ package com.refnil.uqcard;
 
 public class GameConditionEvent extends Event {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8329319225907136685L;
 	public Event_Type type;
 
 	GameConditionEvent(Event_Type t) {

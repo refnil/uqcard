@@ -1,6 +1,12 @@
 package com.refnil.uqcard;
 
-public abstract class Event{
+import java.io.Serializable;
+
+public abstract class Event implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8632370455495023669L;
 	public final Event_Type type;
 	public int id;
 
