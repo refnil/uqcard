@@ -57,7 +57,7 @@ public class BoardActivity extends Activity implements Listener<Event> {
 		Intent intent = new Intent(this, UqcardService.class);
 		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 		
-		em.setBoard(this);
+		//em.setBoard(this);
 		/************************** TEMP ZONE **********************************/
 		setContentView(R.layout.test);
 		Button b = (Button) findViewById(R.id.button1);
