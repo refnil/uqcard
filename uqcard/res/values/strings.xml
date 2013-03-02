@@ -39,14 +39,12 @@
     <string name="buttonMulti">Multiplayer 3  devices</string>
     <string name="buttonOptions">Options</string>
     <string name="buttonEditor">Deck editor</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_database">DatabaseActivity</string>
     <string name="title_activity_host_choice">HostChoice</string>
     <string name="title_activity_bluetooth_connect">BluetoothConnect</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
-
     <string name="general_name">general name</string>
     <string name="general_ability_1_name">1</string>
     <string name="general_ability_2_name">2</string>
@@ -54,6 +52,11 @@
     <string name="general_ability_1_description">player gains 1 renewable ressource</string>
     <string name="general_ability_2_description">target creature gets -1 attack</string>
     <string name="general_ability_3_description">deal x damage to target creature or player, exile x cards</string>
-    
+    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_tabs">TabsActivity</string>
+    <string name="deckList">Decks</string>
+    <string name="game">Game</string>
+    <string name="cardList">Cards</string>
+    <string name="history">History</string>
 
 </resources>
