@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class TabsActivity extends FragmentActivity implements
@@ -154,10 +155,7 @@ public class TabsActivity extends FragmentActivity implements
 		}
 	}
 
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
+	
 	public static class DeckSectionFragment extends Fragment {
 		
 
@@ -167,8 +165,7 @@ public class TabsActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// Create a new TextView and set its text to the fragment's section
-			// number argument value.
+			
 			TextView textView = new TextView(getActivity());
 			textView.setBackgroundColor(Color.RED);
 			textView.setGravity(Gravity.CENTER);
@@ -176,6 +173,7 @@ public class TabsActivity extends FragmentActivity implements
 			return textView;
 		}
 	}
+	
 	
 	public static class GameSectionFragment extends Fragment {
 		
@@ -185,8 +183,7 @@ public class TabsActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// Create a new TextView and set its text to the fragment's section
-			// number argument value.
+			
 			TextView textView = new TextView(getActivity());
 			textView.setBackgroundColor(Color.BLUE);
 			textView.setGravity(Gravity.CENTER);
@@ -203,8 +200,7 @@ public class TabsActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// Create a new TextView and set its text to the fragment's section
-			// number argument value.
+			
 			TextView textView = new TextView(getActivity());
 			textView.setBackgroundColor(Color.MAGENTA);
 			textView.setGravity(Gravity.CENTER);
@@ -221,13 +217,11 @@ public class TabsActivity extends FragmentActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			// Create a new TextView and set its text to the fragment's section
-			// number argument value.
-			TextView textView = new TextView(getActivity());
-			textView.setBackgroundColor(Color.GREEN);
-			textView.setGravity(Gravity.CENTER);
-			textView.setText("Histo");
-			return textView;
+			
+			
+			View view = inflater.inflate(R.layout.history,
+			        container, false);
+			return view;
 		}
 	}
 
