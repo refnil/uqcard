@@ -1,26 +1,17 @@
 package com.refnil.uqcard;
 
-import java.util.ArrayList;
+
+import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class TabsActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -119,20 +110,15 @@ public class TabsActivity extends FragmentActivity implements
 			Fragment fragment = null;
 			switch(position)
 			{
-				case 0 : fragment = new DeckSectionFragment();
+				case 0 : fragment = new DeckListFragment();
 						break;
-				case 1 : fragment = new GameSectionFragment();
+				case 1 : fragment = new GameFragment();
 						break;
-				case 2 : fragment = new CardListSectionFragment();
+				case 2 : fragment = new CardListFragment();
 						break;
-				case 3 : fragment = new HistoSectionFragment();
+				case 3 : fragment = new HistoryFragment();
 						break;
 			}
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
-			//Bundle args = new Bundle();
-			//args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			//fragment.setArguments(args);
 			return fragment;
 		}
 
@@ -157,99 +143,4 @@ public class TabsActivity extends FragmentActivity implements
 			return null;
 		}
 	}
-
-	
-	public static class DeckSectionFragment extends Fragment {
-		
-
-		public DeckSectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			
-			TextView textView = new TextView(getActivity());
-			textView.setBackgroundColor(Color.RED);
-			textView.setGravity(Gravity.CENTER);
-			textView.setText("Deck list");
-			return textView;
-		}
-	}
-	
-	
-	public static class GameSectionFragment extends Fragment {
-		
-		public GameSectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			
-			TextView textView = new TextView(getActivity());
-			textView.setBackgroundColor(Color.BLUE);
-			textView.setGravity(Gravity.CENTER);
-			textView.setText("Game");
-			return textView;
-		}
-	}
-	
-	public static class CardListSectionFragment extends Fragment {
-		
-		public CardListSectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			
-			View view = inflater.inflate(R.layout.card_list,
-			        container, false);
-			
-			ArrayList<String> listItems=new ArrayList<String>();
-		    ArrayAdapter<String> adapter=new ArrayAdapter<String>(this.getActivity(),
-		            android.R.layout.simple_list_item_1,
-		            listItems);
-		    
-		    //Temp
-			listItems.add("Small raton 1/1");
-			//End temp
-			
-			ListView lv = (ListView) view.findViewById(R.id.listViewCardsList);
-			lv.setAdapter(adapter);
-			
-			return view;
-		}
-	}
-	
-	public static class HistoSectionFragment extends Fragment {
-		
-		public HistoSectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			
-			
-			View view = inflater.inflate(R.layout.history,
-			        container, false);
-			
-			ArrayList<String> listItems=new ArrayList<String>();
-		    ArrayAdapter<String> adapter=new ArrayAdapter<String>(this.getActivity(),
-		            android.R.layout.simple_list_item_1,
-		            listItems);
-		    
-		    //Temp
-			listItems.add("Player 1 attacked");
-			//End temp
-			
-			ListView lv = (ListView) view.findViewById(R.id.listViewHistory);
-			lv.setAdapter(adapter);
-			
-			return view;
-		}
-	}
-
 }

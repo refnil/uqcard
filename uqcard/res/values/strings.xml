@@ -58,5 +58,7 @@
     <string name="game">Game</string>
     <string name="cardList">Cards</string>
     <string name="history">History</string>
-
+	<string name="newgame">New game</string>
+	<string name="connect">Connect</string>
+	<string name="host">Host</string>
 </resources>
