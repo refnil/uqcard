@@ -204,11 +204,22 @@ public class TabsActivity extends FragmentActivity implements
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			
-			TextView textView = new TextView(getActivity());
-			textView.setBackgroundColor(Color.MAGENTA);
-			textView.setGravity(Gravity.CENTER);
-			textView.setText("CardList");
-			return textView;
+			View view = inflater.inflate(R.layout.card_list,
+			        container, false);
+			
+			ArrayList<String> listItems=new ArrayList<String>();
+		    ArrayAdapter<String> adapter=new ArrayAdapter<String>(this.getActivity(),
+		            android.R.layout.simple_list_item_1,
+		            listItems);
+		    
+		    //Temp
+			listItems.add("Small raton 1/1");
+			//End temp
+			
+			ListView lv = (ListView) view.findViewById(R.id.listViewCardsList);
+			lv.setAdapter(adapter);
+			
+			return view;
 		}
 	}
 	
