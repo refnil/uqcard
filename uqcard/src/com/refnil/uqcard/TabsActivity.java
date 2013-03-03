@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
@@ -16,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -221,6 +224,19 @@ public class TabsActivity extends FragmentActivity implements
 			
 			View view = inflater.inflate(R.layout.history,
 			        container, false);
+			
+			ArrayList<String> listItems=new ArrayList<String>();
+		    ArrayAdapter<String> adapter=new ArrayAdapter<String>(this.getActivity(),
+		            android.R.layout.simple_list_item_1,
+		            listItems);
+		    
+		    //Temp
+			listItems.add("Player 1 attacked");
+			//End temp
+			
+			ListView lv = (ListView) view.findViewById(R.id.listViewHistory);
+			lv.setAdapter(adapter);
+			
 			return view;
 		}
 	}
