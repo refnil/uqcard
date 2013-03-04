@@ -26,6 +26,8 @@ import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.library.Server;
+import com.refnil.uqcard.library.ai.AbstractAI;
+import com.refnil.uqcard.library.ai.DummyAi;
 
 public class UqcardService extends Service implements IService {
 
@@ -50,13 +52,20 @@ public class UqcardService extends Service implements IService {
 		int type = intent.getIntExtra(IService.TYPE, IService.NOTHING);
 
 		switch (type) {
-		case 1:
+		case CONNECT_BLUETOOTH:
 			BluetoothAdapter ba = BluetoothAdapter.getDefaultAdapter();
 			ba.cancelDiscovery();
 			String add = intent.getStringExtra("address");
 			if (!add.isEmpty()) {
 				connect(ba.getRemoteDevice(add));
 			}
+			break;
+		case START_AI_LAME:
+			createServer();
+			HandlerThread t = new HandlerThread("player_ai");
+			t.start();
+			Player p = new Player(t.getLooper(), server);
+			new DummyAi(p);
 			break;
 		}
 
