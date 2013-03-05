@@ -1,4 +1,4 @@
-package com.refnil.uqcard.library.communication;
+package com.refnil.uqcard.library;
 
 import java.io.Serializable;
 

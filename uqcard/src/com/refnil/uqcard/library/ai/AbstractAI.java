@@ -5,7 +5,7 @@ import android.os.RemoteException;
 import com.refnil.uqcard.Board;
 import com.refnil.uqcard.Event;
 import com.refnil.uqcard.library.Listener;
-import com.refnil.uqcard.library.communication.Player;
+import com.refnil.uqcard.library.Player;
 
 public abstract class AbstractAI implements Listener<Event>{
 	

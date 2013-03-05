@@ -22,12 +22,12 @@ import android.widget.Toast;
 import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.library.AbstractServer;
+import com.refnil.uqcard.library.LinkConnection;
+import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.Server;
 import com.refnil.uqcard.library.ai.AbstractAI;
 import com.refnil.uqcard.library.ai.DummyAi;
-import com.refnil.uqcard.library.communication.AbstractServer;
-import com.refnil.uqcard.library.communication.LinkConnection;
-import com.refnil.uqcard.library.communication.Player;
-import com.refnil.uqcard.library.communication.Server;
 
 public class UqcardService extends Service implements IService {
 

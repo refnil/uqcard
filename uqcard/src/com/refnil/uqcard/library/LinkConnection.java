@@ -1,4 +1,4 @@
-package com.refnil.uqcard.library.communication;
+package com.refnil.uqcard.library;
 
 import com.refnil.uqcard.library.message.IdMessage;
 import com.refnil.uqcard.library.message.UqcardMessage;

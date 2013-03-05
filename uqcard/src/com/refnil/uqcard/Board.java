@@ -3,7 +3,7 @@ package com.refnil.uqcard;
 import java.util.List;
 import java.util.Stack;
 
-import com.refnil.uqcard.library.communication.AbstractListenable;
+import com.refnil.uqcard.library.AbstractListenable;
 
 import android.util.Log;
 
