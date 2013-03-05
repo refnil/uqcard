@@ -17,13 +17,14 @@ public abstract class AbstractAI implements Listener<Event>{
 		this.p = p;
 		b = p.getBoard();
 		b.subscribe(this);
+		
 	}
 	
-	protected Board getBoard(){
+	final protected Board getBoard(){
 		return b;
 	}
 	
-	protected void sendEvent(Event e) throws RemoteException
+	final protected void sendEvent(Event e) throws RemoteException
 	{
 		p.sendEvent(e);
 	}

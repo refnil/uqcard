@@ -15,15 +15,21 @@ public class DummyAi extends AbstractAI {
 	public DummyAi(Player p) {
 		super(p);
 		Log.i(TAG,"Start dummy ai");
+		try {
+			p.connect("DUMMY_AI");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void onMessage(Event e) {
 		// TODO Auto-generated method stub
 		BeginTurn bt = e instanceof BeginTurn?(BeginTurn)e:null;
-		
+		Log.i(TAG,"I want to end my turn.");
 		if(bt!=null){
 			try {
-				Log.i(TAG,"I want to end my turn.");
+				
 				sendEvent(new EndTurn());
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block

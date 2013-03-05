@@ -32,7 +32,7 @@ public class Player extends AbstractPlayer {
 	}
 
 	public void sendEvent(Event e) throws RemoteException {
-		sendTo(getServer(), new RequestServer(e));
+		sendTo(getServer(), new RequestServer(board.getPlayerID(),e));
 	}
 
 	public Board getBoard() {
