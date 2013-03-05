@@ -103,6 +103,12 @@ public class MainActivity extends Activity {
 
 		});
 	}
+	
+	public void startActivityLayout(View v)
+	{
+		Intent i = new Intent(getApplicationContext(),TabsActivity.class);
+		startActivity(i);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
