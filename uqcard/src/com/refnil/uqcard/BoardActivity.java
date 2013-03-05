@@ -94,7 +94,7 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				TurnPhaseEvent tp = em.getTurnPhaseEvent();
 				if(tp.type != Event_Type.END_TURN)
 					tp.nextPhase();
-				em.sendToPlayer(tp);
+				em.sendToPlayer(new TurnPhaseEvent(Event_Type.END_TURN));
 				
 			}
 			
@@ -249,9 +249,8 @@ public class BoardActivity extends Activity implements Listener<Event> {
 			{
 				Button b = (Button) findViewById(R.id.Button03);
 				b.setEnabled(true);
-				b = (Button) findViewById(R.id.Button01);
 				b = (Button) findViewById(R.id.Button02);
-				b.setEnabled(false);
+				b.setEnabled(true);
 				b = (Button) findViewById(R.id.button1);
 				b.setEnabled(false);
 			}
@@ -315,6 +314,5 @@ public class BoardActivity extends Activity implements Listener<Event> {
 	public void onClose()
 	{
 		
-
 	}
 }

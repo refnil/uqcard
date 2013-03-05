@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.refnil.uqcard.Board;
 import com.refnil.uqcard.Event;
+import com.refnil.uqcard.ServerBoard;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
@@ -25,7 +26,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 	
 	private final static String TAG = "Server";
 
-	private Board board = new Board();
+	private ServerBoard board = new ServerBoard();
 
 	private List<TempPlayer> players = new ArrayList<TempPlayer>();
 	private int numberOfPlayer = 0;
@@ -81,6 +82,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 				}
 			}
 		} else if (rs != null) {
+			Log.i(TAG,rs.event.type.toString());
 			board.receiveEvent(rs.event);
 		} else if (c != null) {
 			try {

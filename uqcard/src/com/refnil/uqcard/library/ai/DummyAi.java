@@ -9,12 +9,14 @@ import com.refnil.uqcard.Event;
 import com.refnil.uqcard.library.Player;
 
 public class DummyAi extends AbstractAI {
-	
-	private final static String TAG= "DummyAi";
+
+	private final static String TAG = "DummyAi";
+
+	private int turn = 0;
 
 	public DummyAi(Player p) {
 		super(p);
-		Log.i(TAG,"Start dummy ai");
+		Log.i(TAG, "Start dummy ai");
 		try {
 			p.connect("DUMMY_AI");
 		} catch (RemoteException e) {
@@ -25,15 +27,18 @@ public class DummyAi extends AbstractAI {
 
 	public void onMessage(Event e) {
 		// TODO Auto-generated method stub
-		BeginTurn bt = e instanceof BeginTurn?(BeginTurn)e:null;
-		Log.i(TAG,"I want to end my turn.");
-		if(bt!=null){
-			try {
-				
-				sendEvent(new EndTurn());
-			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+		BeginTurn bt = e instanceof BeginTurn ? (BeginTurn) e : null;
+
+		if (bt != null) {
+			turn++;
+			if (turn % 2 == 0) {
+				try {
+					Log.i(TAG, "I want to end my turn.");
+					sendEvent(new EndTurn());
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 
@@ -42,6 +47,6 @@ public class DummyAi extends AbstractAI {
 	public void onClose() {
 		// TODO Auto-generated method stub
 
-	}	
+	}
 
 }
