@@ -1,5 +1,8 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.service.IService;
+import com.refnil.uqcard.service.UqcardService;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -80,6 +83,22 @@ public class MainActivity extends Activity {
 				Intent i = new Intent(getApplicationContext(), HostChoice.class);
 				startActivity(i);
 
+			}
+
+		});
+
+		b = (Button) findViewById(R.id.button_ai);
+		b.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				Intent i = new Intent(getApplicationContext(),
+						UqcardService.class);
+				i.putExtra(IService.TYPE, IService.START_AI_LAME);
+				startService(i);
+				
+				i = new Intent(getApplicationContext(),
+						BoardActivity.class);
+				startActivity(i);
 			}
 
 		});

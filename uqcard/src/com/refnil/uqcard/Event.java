@@ -10,7 +10,7 @@ public abstract class Event implements Serializable{
 	public final Event_Type type;
 	public int id;
 
-	Event(Event_Type t) {
+	public Event(Event_Type t) {
 		type = t;
 	}
 }

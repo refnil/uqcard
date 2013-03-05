@@ -38,10 +38,17 @@
         android:text="Test connectivity" />
 
     <Button
+
         android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Test Layout" 
         android:onClick="startActivityLayout"/>
+	<Button
+        android:id="@+id/button_ai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VS ai" />
+
 
 </LinearLayout>
