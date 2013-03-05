@@ -2,7 +2,7 @@ package com.refnil.uqcard;
 
 import android.os.RemoteException;
 
-import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.communication.Player;
 
 public class EventManager {
 

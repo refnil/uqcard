@@ -6,8 +6,8 @@ import java.io.ObjectOutputStream;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
-import com.refnil.uqcard.library.AbstractServer;
-import com.refnil.uqcard.library.LinkConnection;
+import com.refnil.uqcard.library.communication.AbstractServer;
+import com.refnil.uqcard.library.communication.LinkConnection;
 import com.refnil.uqcard.library.message.UqcardMessage;
 
 public class BluetoothLinkConnection extends LinkConnection {

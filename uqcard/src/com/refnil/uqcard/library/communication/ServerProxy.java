@@ -1,4 +1,4 @@
-package com.refnil.uqcard.library;
+package com.refnil.uqcard.library.communication;
 
 import java.util.HashMap;
 import java.util.Map;

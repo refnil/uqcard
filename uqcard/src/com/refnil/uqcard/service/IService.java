@@ -2,8 +2,8 @@ package com.refnil.uqcard.service;
 
 import android.bluetooth.BluetoothDevice;
 
-import com.refnil.uqcard.library.AbstractServer;
-import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.communication.AbstractServer;
+import com.refnil.uqcard.library.communication.Player;
 
 public interface IService {
 	

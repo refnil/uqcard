@@ -1,4 +1,4 @@
-package com.refnil.uqcard.library;
+package com.refnil.uqcard.library.communication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.refnil.uqcard.Board;
 import com.refnil.uqcard.Event;
+import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;

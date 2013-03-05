@@ -1,4 +1,4 @@
-package com.refnil.uqcard.library;
+package com.refnil.uqcard.library.communication;
 
 import android.os.Messenger;
 import android.util.Log;

@@ -1,8 +1,11 @@
-package com.refnil.uqcard.library;
+package com.refnil.uqcard.library.communication;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import com.refnil.uqcard.library.Listenable;
+import com.refnil.uqcard.library.Listener;
 
 public abstract class AbstractListenable<T> implements Listenable<T> {
 	private List<Listener<T>> list = new ArrayList<Listener<T>>();

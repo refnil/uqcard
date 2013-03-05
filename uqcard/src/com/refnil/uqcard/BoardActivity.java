@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.library.Listener;
-import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.communication.Player;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;

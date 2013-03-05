@@ -6,7 +6,7 @@ import android.util.Log;
 import com.refnil.uqcard.BeginTurn;
 import com.refnil.uqcard.EndTurn;
 import com.refnil.uqcard.Event;
-import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.communication.Player;
 
 public class DummyAi extends AbstractAI {
 	
