@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -32,7 +32,7 @@ public class Card implements Parcelable {
 		this.setImage(image);
 	}
 
-	Card(String name, String description, String flavor, int cost) {
+	public Card(String name, String description, String flavor, int cost) {
 		this.setName(name);
 		this.setDescription(description);
 		this.setFlavor(flavor);

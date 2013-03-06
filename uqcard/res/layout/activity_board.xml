@@ -17,7 +17,7 @@
             
         <!-- Opponent -->    
         <!-- Back -->  
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentGeneralpoopoo"
@@ -27,7 +27,7 @@
             android:layout_marginLeft="4dp"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentGeneral"
@@ -37,7 +37,7 @@
             android:layout_marginLeft="4dp"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentBack1"
@@ -46,7 +46,7 @@
             android:layout_marginRight="5dp"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentBack2"
@@ -57,7 +57,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentBack3"
@@ -68,7 +68,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentPhenomenon"
@@ -79,7 +79,7 @@
             android:src="@drawable/coeur"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentCemetery"
@@ -102,7 +102,7 @@
             
         <!-- Opponent -->    
         <!-- Front -->  
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront1"
@@ -114,7 +114,7 @@
             android:src="@drawable/carreau"
             />
         
-       <com.refnil.uqcard.Card
+       <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront2"
@@ -125,7 +125,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront3"
@@ -136,7 +136,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront4"
@@ -147,7 +147,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentFront5"
@@ -158,7 +158,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/opponentDeck"
@@ -206,7 +206,7 @@
             
         <!-- Player -->    
         <!-- Front -->  
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront1"
@@ -218,7 +218,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront2"
@@ -229,7 +229,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront3"
@@ -240,7 +240,7 @@
             android:background="#000000"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront4"
@@ -251,7 +251,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerFront5"
@@ -262,7 +262,7 @@
             android:src="@drawable/carreau"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerDeck"
@@ -281,7 +281,7 @@
             
         <!-- Player -->    
         <!-- Back -->  
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerGeneral"
@@ -293,7 +293,7 @@
             android:src="@drawable/coeur"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerBack1"
@@ -304,7 +304,7 @@
             android:background="#000000"
             />
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerBack2"
@@ -314,7 +314,7 @@
             android:contentDescription="@string/playerBack"
             android:src="@drawable/carreau"/>
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerBack3"
@@ -324,7 +324,7 @@
             android:contentDescription="@string/playerBack"
             android:src="@drawable/carreau"/>
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
 	    	xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
             android:id="@+id/playerPhenomenon"
@@ -334,7 +334,7 @@
             android:contentDescription="@string/playerPhenomenon"
             android:src="@drawable/coeur"/>
         
-        <com.refnil.uqcard.Card
+        <com.refnil.uqcard.data.Card
 	    	xmlns:android="http://schemas.android.com/apk/res/android" 
             android:id="@+id/playerCemetery"
            android:layout_width="45dp"

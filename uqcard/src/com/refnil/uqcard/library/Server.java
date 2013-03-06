@@ -9,8 +9,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.refnil.uqcard.Board;
 import com.refnil.uqcard.ServerBoard;
+import com.refnil.uqcard.data.Board;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;

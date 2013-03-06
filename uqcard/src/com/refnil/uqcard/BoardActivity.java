@@ -3,6 +3,7 @@ package com.refnil.uqcard;
 import java.util.List;
 
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.data.Board;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.EventManager;

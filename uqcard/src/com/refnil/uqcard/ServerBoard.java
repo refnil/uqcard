@@ -1,5 +1,6 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.data.Board;
 import com.refnil.uqcard.event.BeginTurnEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;

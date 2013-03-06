@@ -1,4 +1,5 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.data;
+
 
 public class CreatureCard extends Card {
 	
