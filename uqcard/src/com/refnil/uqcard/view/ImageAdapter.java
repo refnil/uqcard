@@ -1,6 +1,8 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.view;
 
-import com.refnil.uqcard.view.CardView;
+import com.refnil.uqcard.R;
+import com.refnil.uqcard.R.drawable;
+import com.refnil.uqcard.R.styleable;
 
 import android.content.Context;
 import android.content.res.TypedArray;

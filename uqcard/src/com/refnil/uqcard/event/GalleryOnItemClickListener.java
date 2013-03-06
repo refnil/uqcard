@@ -1,6 +1,8 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
 
+import com.refnil.uqcard.FullCardActivity;
 import com.refnil.uqcard.data.Card;
+import com.refnil.uqcard.view.ImageAdapter;
 
 import android.app.Activity;
 import android.content.Context;

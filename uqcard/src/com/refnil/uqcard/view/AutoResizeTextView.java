@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.view;
 
 import android.content.Context;
 import android.text.Layout.Alignment;

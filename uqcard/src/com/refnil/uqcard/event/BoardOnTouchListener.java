@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
 
 import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 

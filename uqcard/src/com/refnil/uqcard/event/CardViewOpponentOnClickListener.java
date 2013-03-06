@@ -1,8 +1,5 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
 
-import com.refnil.uqcard.event.EventManager;
-import com.refnil.uqcard.event.Event_Type;
-import com.refnil.uqcard.event.SelectedCardEvent;
 import com.refnil.uqcard.view.CardView;
 
 import android.view.View;
