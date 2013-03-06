@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.view.CardView;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 //import android.graphics.Bitmap;

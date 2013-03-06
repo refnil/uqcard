@@ -3,8 +3,8 @@ package com.refnil.uqcard.event;
 import android.os.RemoteException;
 
 import com.refnil.uqcard.BoardActivity;
-import com.refnil.uqcard.CardView;
 import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.view.CardView;
 
 public class EventManager {
 

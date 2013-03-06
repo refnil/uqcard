@@ -347,7 +347,7 @@
     
 </TableLayout>
     
-    <com.refnil.uqcard.SemiClosedSlidingDrawer 
+    <com.refnil.uqcard.view.SemiClosedSlidingDrawer 
 	    xmlns:android="http://schemas.android.com/apk/res/android" 
 	    xmlns:custom="http://schemas.android.com/apk/res/com.refnil.uqcard"
 	    android:id="@+id/mySlidingDrawer"
@@ -384,6 +384,6 @@
 		     </Gallery>	            
 	     </LinearLayout>
 		
-    </com.refnil.uqcard.SemiClosedSlidingDrawer>
+    </com.refnil.uqcard.view.SemiClosedSlidingDrawer>
 
 </RelativeLayout>

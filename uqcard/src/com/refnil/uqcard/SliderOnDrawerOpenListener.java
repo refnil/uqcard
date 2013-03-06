@@ -2,7 +2,7 @@ package com.refnil.uqcard;
 
 import android.widget.Gallery;
 
-import com.refnil.uqcard.SemiClosedSlidingDrawer.OnDrawerOpenListener;
+import com.refnil.uqcard.view.SemiClosedSlidingDrawer.OnDrawerOpenListener;
 
 public class SliderOnDrawerOpenListener implements OnDrawerOpenListener {
 

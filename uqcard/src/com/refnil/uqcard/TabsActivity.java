@@ -1,6 +1,12 @@
 package com.refnil.uqcard;
 
 
+import com.refnil.uqcard.view.CardListFragment;
+import com.refnil.uqcard.view.DeckListFragment;
+import com.refnil.uqcard.view.GameFragment;
+import com.refnil.uqcard.view.HistoryFragment;
+import com.refnil.uqcard.view.StatsFragment;
+
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.Bundle;

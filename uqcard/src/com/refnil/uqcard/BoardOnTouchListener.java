@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;

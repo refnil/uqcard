@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.view;
 
 import android.graphics.Color;
 import android.os.Bundle;

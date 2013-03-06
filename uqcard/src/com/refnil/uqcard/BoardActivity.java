@@ -16,6 +16,7 @@ import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
+import com.refnil.uqcard.view.CardView;
 
 import android.os.Bundle;
 import android.os.IBinder;

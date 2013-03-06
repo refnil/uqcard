@@ -2,7 +2,7 @@ package com.refnil.uqcard;
 
 import android.widget.Gallery;
 
-import com.refnil.uqcard.SemiClosedSlidingDrawer.OnDrawerCloseListener;
+import com.refnil.uqcard.view.SemiClosedSlidingDrawer.OnDrawerCloseListener;
 
 public class SliderOnDrawerCloseListener implements OnDrawerCloseListener {
 

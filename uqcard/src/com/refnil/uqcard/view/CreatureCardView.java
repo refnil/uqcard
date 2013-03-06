@@ -1,4 +1,7 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.view;
+
+import com.refnil.uqcard.R;
+import com.refnil.uqcard.R.id;
 
 import android.content.Context;
 import android.view.View;

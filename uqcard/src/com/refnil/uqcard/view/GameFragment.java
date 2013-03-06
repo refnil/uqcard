@@ -1,4 +1,8 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.view;
+
+import com.refnil.uqcard.R;
+import com.refnil.uqcard.R.id;
+import com.refnil.uqcard.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

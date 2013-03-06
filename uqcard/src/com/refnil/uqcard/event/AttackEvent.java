@@ -1,6 +1,6 @@
 package com.refnil.uqcard.event;
 
-import com.refnil.uqcard.CardView;
+import com.refnil.uqcard.view.CardView;
 
 public class AttackEvent extends Event{
 
