@@ -1,4 +1,5 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
+
 
 public class TurnPhaseEvent extends Event {
 
@@ -8,7 +9,7 @@ public class TurnPhaseEvent extends Event {
 	private static final long serialVersionUID = -686978529918001244L;
 	public Event_Type type;
 
-	TurnPhaseEvent(Event_Type t) {
+	public TurnPhaseEvent(Event_Type t) {
 		super(t);
 		type = Event_Type.BEGIN_TURN;
 	}

@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
 
 public enum Event_Type
 {

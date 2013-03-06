@@ -3,6 +3,9 @@ package com.refnil.uqcard;
 import java.util.List;
 import java.util.Stack;
 
+import com.refnil.uqcard.event.AttackEvent;
+import com.refnil.uqcard.event.Event;
+import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.library.AbstractListenable;
 
 import android.util.Log;
@@ -184,8 +187,8 @@ public class Board extends AbstractListenable<Event> {
 
 		if (event instanceof AttackEvent) {
 			AttackEvent ae = (AttackEvent) event;
-			Card opp = ae.opponent.getCard();
-			Card pl = ae.player.getCard();
+			Card opp = ae.getOpponent().getCard();
+			Card pl = ae.getPlayer().getCard();
 			int index = opponentBoardCards.indexOf(opp);
 			int index1 = playerBoardCards.indexOf(pl);
 			((CreatureCard) opponentBoardCards.get(index))
@@ -193,7 +196,7 @@ public class Board extends AbstractListenable<Event> {
 							.getHp()
 							- ((CreatureCard) playerBoardCards.get(index1))
 									.getAtk());
-			ae.opponent.setCard((Card)opponentBoardCards.get(index));
+			ae.getOpponent().setCard((Card)opponentBoardCards.get(index));
 			tell(ae);
 		}
 	}

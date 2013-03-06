@@ -1,5 +1,9 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.event.EventManager;
+import com.refnil.uqcard.event.Event_Type;
+import com.refnil.uqcard.event.SelectedCardEvent;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 

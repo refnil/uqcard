@@ -3,6 +3,13 @@ package com.refnil.uqcard;
 import java.util.List;
 
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.event.AttackEvent;
+import com.refnil.uqcard.event.Event;
+import com.refnil.uqcard.event.EventManager;
+import com.refnil.uqcard.event.Event_Type;
+import com.refnil.uqcard.event.GameConditionEvent;
+import com.refnil.uqcard.event.SelectedCardEvent;
+import com.refnil.uqcard.event.TurnPhaseEvent;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.service.IService;
@@ -242,7 +249,7 @@ public class BoardActivity extends Activity implements Listener<Event> {
 		});
 	}
 	
-	void handleEvent(Event e){
+	public void handleEvent(Event e){
 		if(e instanceof GameConditionEvent)
 		{
 			if(e.type == Event_Type.BEGIN_GAME)
@@ -292,7 +299,7 @@ public class BoardActivity extends Activity implements Listener<Event> {
 					if(e instanceof SelectedCardEvent)
 					{
 						SelectedCardEvent s = (SelectedCardEvent)e;
-						CardView cv = s.card;
+						CardView cv = s.getCard();
 						int i =onBoard.indexOf(cv);
 						onBoard.get(i).setDrawingCacheBackgroundColor(Color.MAGENTA);
 						Toast.makeText(getApplicationContext(), "Carte sélectionnée", Toast.LENGTH_SHORT).show();
@@ -303,8 +310,8 @@ public class BoardActivity extends Activity implements Listener<Event> {
 						{
 							Toast.makeText(getApplicationContext(), "Attack done", Toast.LENGTH_SHORT).show();
 							AttackEvent ae = (AttackEvent)e;
-							int i =onBoard.indexOf(ae.opponent);
-							onBoard.set(i,ae.opponent);
+							int i =onBoard.indexOf(ae.getOpponent());
+							onBoard.set(i,ae.getOpponent());
 						}
 					}
 				}

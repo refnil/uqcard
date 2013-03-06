@@ -1,7 +1,9 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
 
 import android.os.RemoteException;
 
+import com.refnil.uqcard.BoardActivity;
+import com.refnil.uqcard.CardView;
 import com.refnil.uqcard.library.Player;
 
 public class EventManager {
@@ -33,12 +35,12 @@ public class EventManager {
 		{
 			if(e.type == Event_Type.SELECTED_PLAYER_CARD)
 			{
-				setSelectedCard(((SelectedCardEvent)e).card);
+				setSelectedCard(((SelectedCardEvent)e).getCard());
 				board.handleEvent(e);
 			}
 			else
 			{
-				AttackEvent ae = new AttackEvent(((SelectedCardEvent)e).card,getSelectedCard());
+				AttackEvent ae = new AttackEvent(((SelectedCardEvent)e).getCard(),getSelectedCard());
 				sendToPlayer(ae);
 				selectedCard = null;
 			}

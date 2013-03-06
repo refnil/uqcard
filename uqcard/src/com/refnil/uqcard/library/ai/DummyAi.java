@@ -3,9 +3,9 @@ package com.refnil.uqcard.library.ai;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.refnil.uqcard.BeginTurn;
-import com.refnil.uqcard.EndTurn;
-import com.refnil.uqcard.Event;
+import com.refnil.uqcard.event.BeginTurnEvent;
+import com.refnil.uqcard.event.EndTurnEvent;
+import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.Player;
 
 public class DummyAi extends AbstractAI {
@@ -27,14 +27,14 @@ public class DummyAi extends AbstractAI {
 
 	public void onMessage(Event e) {
 		// TODO Auto-generated method stub
-		BeginTurn bt = e instanceof BeginTurn ? (BeginTurn) e : null;
+		BeginTurnEvent bt = e instanceof BeginTurnEvent ? (BeginTurnEvent) e : null;
 
 		if (bt != null) {
 			turn++;
 			if (turn % 2 == 0) {
 				try {
 					Log.i(TAG, "I want to end my turn.");
-					sendEvent(new EndTurn());
+					sendEvent(new EndTurnEvent());
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

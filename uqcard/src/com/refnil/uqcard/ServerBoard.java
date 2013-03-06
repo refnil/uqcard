@@ -1,5 +1,9 @@
 package com.refnil.uqcard;
 
+import com.refnil.uqcard.event.BeginTurnEvent;
+import com.refnil.uqcard.event.Event;
+import com.refnil.uqcard.event.Event_Type;
+
 import android.util.Log;
 
 public class ServerBoard extends Board {
@@ -24,7 +28,7 @@ public class ServerBoard extends Board {
 
 		if (event.type == Event_Type.END_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() + " ends");
-			tell(new BeginTurn());
+			tell(new BeginTurnEvent());
 		}
 
 		if (event.type == Event_Type.END_GAME) {

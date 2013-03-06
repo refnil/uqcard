@@ -1,4 +1,5 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
+
 
 public class GameConditionEvent extends Event {
 

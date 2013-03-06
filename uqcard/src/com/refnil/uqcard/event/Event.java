@@ -1,6 +1,7 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.event;
 
 import java.io.Serializable;
+
 
 public abstract class Event implements Serializable{
 	/**
