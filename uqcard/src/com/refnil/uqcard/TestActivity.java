@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class TestActivity extends BoardEventInterface{
+public class TestActivity extends AbstractBoardEventManager{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

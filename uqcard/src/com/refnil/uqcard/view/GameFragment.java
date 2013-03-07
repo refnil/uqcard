@@ -2,11 +2,8 @@ package com.refnil.uqcard.view;
 
 import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.R.id;
-import com.refnil.uqcard.R.layout;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

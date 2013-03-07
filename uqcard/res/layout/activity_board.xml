@@ -179,6 +179,7 @@
         <TextView
             android:id="@+id/opponentText"
             android:textSize="15sp"
+            android:textIsSelectable="false"
             android:height="30dp"></TextView>
         
     </TableRow>
@@ -192,6 +193,7 @@
         <TextView
             android:id="@+id/playerText"
             android:textSize="15sp"
+            android:textIsSelectable="false"
             android:height="30dp"></TextView>
         
     </TableRow>    

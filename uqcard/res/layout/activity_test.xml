@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:text="Start Game" />
+        android:text="@string/startgame" />
 
     <Button
         android:id="@+id/Button02"
@@ -19,6 +19,6 @@
         android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="End turn" />
+        android:text="@string/endturn" />
 
 </RelativeLayout>

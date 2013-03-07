@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Gallery;
 import android.widget.TextView;
 
-public class BoardActivity extends BoardEventInterface {
+public class BoardActivity extends AbstractBoardEventManager {
 	private ImageAdapter adapter;
 	
 	@Override

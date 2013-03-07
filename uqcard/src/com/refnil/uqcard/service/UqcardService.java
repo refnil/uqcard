@@ -26,7 +26,6 @@ import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.library.Server;
-import com.refnil.uqcard.library.ai.AbstractAI;
 import com.refnil.uqcard.library.ai.DummyAi;
 
 public class UqcardService extends Service implements IService {

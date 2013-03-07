@@ -19,8 +19,6 @@ package com.refnil.uqcard.view;
 import java.lang.reflect.Method;
 
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.R.styleable;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;

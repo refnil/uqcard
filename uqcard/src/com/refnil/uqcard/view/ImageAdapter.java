@@ -1,23 +1,14 @@
 package com.refnil.uqcard.view;
 
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.R.drawable;
-import com.refnil.uqcard.R.styleable;
-
 import android.content.Context;
 import android.content.res.TypedArray;
-//import android.graphics.Bitmap;
-//import android.graphics.Canvas;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
-//import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-//import android.widget.Gallery;
-//import android.widget.ImageView;
-//import android.widget.RelativeLayout.LayoutParams;
 
 public class ImageAdapter extends BaseAdapter {
 

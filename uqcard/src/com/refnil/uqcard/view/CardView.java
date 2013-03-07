@@ -1,8 +1,6 @@
 package com.refnil.uqcard.view;
 
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.R.id;
-import com.refnil.uqcard.R.layout;
 import com.refnil.uqcard.data.Card;
 
 import android.content.Context;

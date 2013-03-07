@@ -21,7 +21,7 @@ import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
 import com.refnil.uqcard.view.CardView;
 
-public abstract class BoardEventInterface extends Activity implements Listener<Event>{
+public abstract class AbstractBoardEventManager extends Activity implements Listener<Event>{
 	protected final static String TAG = "BoardActivity";
 	protected EventManager em;
 	protected List<CardView> onBoard;
