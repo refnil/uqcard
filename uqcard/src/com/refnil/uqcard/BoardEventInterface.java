@@ -7,21 +7,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.refnil.uqcard.data.Board;
-import com.refnil.uqcard.event.AttackEvent;
-import com.refnil.uqcard.event.Event;
-import com.refnil.uqcard.event.EventManager;
-import com.refnil.uqcard.event.Event_Type;
-import com.refnil.uqcard.event.GameConditionEvent;
-import com.refnil.uqcard.event.SelectedCardEvent;
+import com.refnil.uqcard.event.*;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.service.IService;
@@ -85,6 +77,8 @@ public abstract class BoardEventInterface extends Activity implements Listener<E
 	
 	public abstract void BattleAction();
 	
+	public abstract void PutCardAction();
+	
 	final public void SelectedCardAction(int cardViewID)
 	{
 		em.setSelectedCard(cardViewID);
@@ -126,6 +120,9 @@ public abstract class BoardEventInterface extends Activity implements Listener<E
 		
 		else if(e.type == Event_Type.DECLARE_ATTACK)
 			BattleAction();
+		
+		else if(e.type == Event_Type.PUT_CARD)
+			PutCardAction();
 			
 	}
 }

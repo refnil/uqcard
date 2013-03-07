@@ -1,35 +1,22 @@
 package com.refnil.uqcard;
 
-import java.util.List;
 
-import com.refnil.uqcard.data.Board;
-import com.refnil.uqcard.event.AttackEvent;
-import com.refnil.uqcard.event.EndTurnEvent;
-import com.refnil.uqcard.event.Event;
-import com.refnil.uqcard.event.EventManager;
-import com.refnil.uqcard.event.Event_Type;
-import com.refnil.uqcard.event.GameConditionEvent;
-import com.refnil.uqcard.event.SelectedCardEvent;
+import com.refnil.uqcard.event.*;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
-import com.refnil.uqcard.view.CardView;
 
 import android.os.Bundle;
 import android.os.IBinder;
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class TestActivity extends BoardEventInterface{
 	
@@ -64,10 +51,7 @@ public class TestActivity extends BoardEventInterface{
 		b.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.BEGIN_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
+				em.sendToPlayer(new BeginGameEvent());
 			}
 			
 		});
@@ -116,6 +100,12 @@ public class TestActivity extends BoardEventInterface{
 
 	@Override
 	public void BattleAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void PutCardAction() {
 		// TODO Auto-generated method stub
 		
 	}	

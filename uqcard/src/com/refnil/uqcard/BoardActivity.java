@@ -148,4 +148,10 @@ public class BoardActivity extends BoardEventInterface {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void PutCardAction() {
+		// TODO Auto-generated method stub
+		
+	}
 }

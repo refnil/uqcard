@@ -1,21 +1,16 @@
 package com.refnil.uqcard.event;
 
 import android.os.RemoteException;
-import android.util.Log;
-
 import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.library.Player;
-import com.refnil.uqcard.view.CardView;
 
 public class EventManager {
 
-	private GameConditionEvent gce;
 	private Player p;
 	private BoardActivity board;
 	private int selectedCard;
 
 	public EventManager(Player p) {
-		this.gce = new GameConditionEvent(Event_Type.BEGIN_GAME);
 		this.p = p;
 	}
 	
@@ -44,11 +39,6 @@ public class EventManager {
 				selectedCard = -1;
 			}*/
 		}
-	}
-
-	public GameConditionEvent getGameConditionEvent()
-	{
-		return this.gce;
 	}
 
 	public BoardActivity getBoard() {
