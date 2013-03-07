@@ -10,20 +10,17 @@ import com.refnil.uqcard.view.CardView;
 public class EventManager {
 
 	private GameConditionEvent gce;
-	private TurnPhaseEvent tpe;
 	private Player p;
 	private BoardActivity board;
 	private CardView selectedCard;
 
 	public EventManager(Player p) {
 		this.gce = new GameConditionEvent(Event_Type.BEGIN_GAME);
-		this.tpe = new TurnPhaseEvent(Event_Type.BEGIN_TURN);
 		this.p = p;
 	}
 	
 	public void sendToPlayer(Event event) {
 		try {
-			Log.i("EM", "TATA " + event.type.toString());
 			p.sendEvent(event);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -52,11 +49,6 @@ public class EventManager {
 	public GameConditionEvent getGameConditionEvent()
 	{
 		return this.gce;
-	}
-	
-	public TurnPhaseEvent getTurnPhaseEvent()
-	{
-		return this.tpe;
 	}
 
 	public BoardActivity getBoard() {
