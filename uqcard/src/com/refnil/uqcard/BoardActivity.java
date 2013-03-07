@@ -138,19 +138,19 @@ public class BoardActivity extends BoardEventInterface {
 	}
 
 	@Override
-	public void DrawCardAction() {
+	public void DrawCardAction(int id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void BattleAction() {
+	public void BattleAction(int id, int id1) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void PutCardAction() {
+	public void PutCardAction(int id,int pos) {
 		// TODO Auto-generated method stub
 		
 	}

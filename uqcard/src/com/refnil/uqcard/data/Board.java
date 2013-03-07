@@ -188,7 +188,7 @@ public class Board extends AbstractListenable<Event> {
 
 		if (event instanceof AttackEvent) {
 			AttackEvent ae = (AttackEvent) event;
-			Card opp = ae.getOpponent().getCard();
+			/*Card opp = ae.getOpponent().getCard();
 			Card pl = ae.getPlayer().getCard();
 			int index = opponentBoardCards.indexOf(opp);
 			int index1 = playerBoardCards.indexOf(pl);
@@ -197,7 +197,7 @@ public class Board extends AbstractListenable<Event> {
 							.getHp()
 							- ((CreatureCard) playerBoardCards.get(index1))
 									.getAtk());
-			ae.getOpponent().setCard((Card)opponentBoardCards.get(index));
+			ae.getOpponent().setCard((Card)opponentBoardCards.get(index));*/
 			tell(ae);
 		}
 	}

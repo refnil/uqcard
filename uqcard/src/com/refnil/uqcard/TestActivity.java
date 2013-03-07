@@ -70,8 +70,8 @@ public class TestActivity extends BoardEventInterface{
 
 	@Override
 	public void BeginTurnAction() {
-		// TODO Auto-generated method stub
-		
+		Button b = (Button) findViewById(R.id.Button02);
+		b.setEnabled(true);
 	}
 
 	@Override
@@ -82,8 +82,10 @@ public class TestActivity extends BoardEventInterface{
 
 	@Override
 	public void BeginGameAction() {
-		// TODO Auto-generated method stub
-		
+		Button b = (Button) findViewById(R.id.Button02);
+		b.setEnabled(true);
+		b = (Button) findViewById(R.id.button1);
+		b.setEnabled(false);
 	}
 
 	@Override
@@ -93,19 +95,19 @@ public class TestActivity extends BoardEventInterface{
 	}
 
 	@Override
-	public void DrawCardAction() {
+	public void DrawCardAction(int id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void BattleAction() {
+	public void BattleAction(int id, int id1) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void PutCardAction() {
+	public void PutCardAction(int id, int pos) {
 		// TODO Auto-generated method stub
 		
 	}	

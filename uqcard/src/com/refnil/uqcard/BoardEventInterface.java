@@ -73,11 +73,11 @@ public abstract class BoardEventInterface extends Activity implements Listener<E
 	
 	public abstract void EndGameAction();
 	
-	public abstract void DrawCardAction();
+	public abstract void DrawCardAction(int id);
 	
-	public abstract void BattleAction();
+	public abstract void BattleAction(int id,int id1);
 	
-	public abstract void PutCardAction();
+	public abstract void PutCardAction(int id,int pos);
 	
 	final public void SelectedCardAction(int cardViewID)
 	{
@@ -116,13 +116,13 @@ public abstract class BoardEventInterface extends Activity implements Listener<E
 			EndTurnAction();
 		
 		else if(e.type == Event_Type.DRAW_CARD)
-			DrawCardAction();
+			DrawCardAction(((DrawCardEvent)e).id);
 		
 		else if(e.type == Event_Type.DECLARE_ATTACK)
-			BattleAction();
+			BattleAction(((AttackEvent)e).getPlayer(),((AttackEvent)e).getOpponent());
 		
 		else if(e.type == Event_Type.PUT_CARD)
-			PutCardAction();
+			PutCardAction(((PutCardEvent)e).getCard(),((PutCardEvent)e).getPosition());
 			
 	}
 }

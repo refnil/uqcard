@@ -1,29 +1,27 @@
 package com.refnil.uqcard.event;
 
-import com.refnil.uqcard.view.CardView;
-
 public class AttackEvent extends Event{
 
 	private static final long serialVersionUID = 4417563050991299544L;
 	
-	private CardView opponent;
-	private CardView player;
-	AttackEvent(CardView opp, CardView pl)
+	private int opponent;
+	private int player;
+	AttackEvent(int opp, int pl)
 	{
 		super(Event_Type.DECLARE_ATTACK);
 		this.setOpponent(opp);
 		this.setPlayer(pl);
 	}
-	public CardView getOpponent() {
+	public int getOpponent() {
 		return opponent;
 	}
-	public void setOpponent(CardView opponent) {
+	public void setOpponent(int opponent) {
 		this.opponent = opponent;
 	}
-	public CardView getPlayer() {
+	public int getPlayer() {
 		return player;
 	}
-	public void setPlayer(CardView player) {
+	public void setPlayer(int player) {
 		this.player = player;
 	}
 }
