@@ -4,15 +4,8 @@ import java.util.List;
 
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.data.Board;
-import com.refnil.uqcard.event.AttackEvent;
-import com.refnil.uqcard.event.Event;
-import com.refnil.uqcard.event.EventManager;
-import com.refnil.uqcard.event.Event_Type;
-import com.refnil.uqcard.event.GameConditionEvent;
-import com.refnil.uqcard.event.SelectedCardEvent;
-import com.refnil.uqcard.event.TurnPhaseEvent;
-import com.refnil.uqcard.library.Listener;
-import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.event.*;
+import com.refnil.uqcard.library.*;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
@@ -54,6 +47,7 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				Player p = mService.getPlayer();
 				em = new EventManager(p);
 				setBoard(p.getBoard());
+				board.temp = true;
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -81,29 +75,12 @@ public class BoardActivity extends Activity implements Listener<Event> {
 			
 		});
 		
-		b = (Button) findViewById(R.id.Button01);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				TurnPhaseEvent tp = em.getTurnPhaseEvent();
-				if(tp.type != Event_Type.BEGIN_TURN)
-					tp.nextPhase();
-				em.sendToPlayer(tp);
-				
-			}
-			
-		});
-		
 		b = (Button) findViewById(R.id.Button02);
 		b.setEnabled(false);
 		b.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
-				TurnPhaseEvent tp = em.getTurnPhaseEvent();
-				if(tp.type != Event_Type.END_TURN)
-					tp.nextPhase();
-				em.sendToPlayer(new TurnPhaseEvent(Event_Type.END_TURN));
+				em.sendToPlayer(new EndTurnEvent());
 				
 			}
 			
@@ -135,20 +112,6 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				if(gc.type != Event_Type.BEGIN_GAME)
 					gc.nextPhase();
 				em.sendToPlayer(gc);
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.Button03);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.END_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
-				
 			}
 			
 		});
@@ -256,45 +219,18 @@ public class BoardActivity extends Activity implements Listener<Event> {
 		{
 			if(e.type == Event_Type.BEGIN_GAME)
 			{
-				Button b = (Button) findViewById(R.id.Button03);
-				b.setEnabled(true);
-				b = (Button) findViewById(R.id.Button02);
+				Button b = (Button) findViewById(R.id.Button02);
 				b.setEnabled(true);
 				b = (Button) findViewById(R.id.button1);
-				b.setEnabled(false);
-			}
-			else
-			{
-				Button b = (Button) findViewById(R.id.button1);
-				b.setEnabled(true);
-				b = (Button) findViewById(R.id.Button01);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.Button02);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.Button03);
 				b.setEnabled(false);
 			}
 		}
 		else
 		{
-				if(e instanceof TurnPhaseEvent)
+				if(e.type == Event_Type.BEGIN_TURN)
 				{
-					if(e.type == Event_Type.BEGIN_TURN)
-					{
-						Button  b = (Button) findViewById(R.id.Button01);
-						b.setEnabled(false);
-						b = (Button) findViewById(R.id.Button02);
-						b.setEnabled(true);
-					}
-					else
-					{
-						if(e.type == Event_Type.END_TURN)
-						{
-							Button b = (Button) findViewById(R.id.Button01);
-							b = (Button) findViewById(R.id.Button02);
-							b.setEnabled(false);
-						}
-					}
+					Button b = (Button) findViewById(R.id.Button02);
+					b.setEnabled(true);
 				}
 				else
 				{

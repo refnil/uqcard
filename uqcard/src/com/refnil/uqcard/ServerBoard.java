@@ -18,6 +18,7 @@ public class ServerBoard extends Board {
 	
 	@Override
 	public void receiveEvent(Event event) {
+		Log.i(TAG,"TPTP "+ event.type.toString());
 		if (event.type == Event_Type.BEGIN_GAME) {
 			Log.i(TAG, "Game begins");
 			tell(event);

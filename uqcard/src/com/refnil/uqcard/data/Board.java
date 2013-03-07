@@ -12,6 +12,7 @@ import android.util.Log;
 
 public class Board extends AbstractListenable<Event> {
 
+	public boolean temp;
 	private final static String TAG = "Board";
 
 	private int phase;

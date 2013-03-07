@@ -1,6 +1,7 @@
 package com.refnil.uqcard.event;
 
 import android.os.RemoteException;
+import android.util.Log;
 
 import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.library.Player;
@@ -22,6 +23,7 @@ public class EventManager {
 	
 	public void sendToPlayer(Event event) {
 		try {
+			Log.i("EM", "TATA " + event.type.toString());
 			p.sendEvent(event);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
