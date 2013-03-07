@@ -76,6 +76,10 @@
             android:name="com.refnil.uqcard.TabsActivity"
             android:label="@string/title_activity_tabs" >
         </activity>
+        <activity
+            android:name="com.refnil.uqcard.TestActivity"
+            android:label="@string/title_activity_test" >
+        </activity>
     </application>
 
 </manifest>

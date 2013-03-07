@@ -12,7 +12,7 @@ public class EventManager {
 	private GameConditionEvent gce;
 	private Player p;
 	private BoardActivity board;
-	private CardView selectedCard;
+	private int selectedCard;
 
 	public EventManager(Player p) {
 		this.gce = new GameConditionEvent(Event_Type.BEGIN_GAME);
@@ -32,7 +32,7 @@ public class EventManager {
 	{
 		if(e instanceof SelectedCardEvent)
 		{
-			if(e.type == Event_Type.SELECTED_PLAYER_CARD)
+			/*if(e.type == Event_Type.SELECTED_PLAYER_CARD)
 			{
 				setSelectedCard(((SelectedCardEvent)e).getCard());
 				board.handleEvent(e);
@@ -41,8 +41,8 @@ public class EventManager {
 			{
 				AttackEvent ae = new AttackEvent(((SelectedCardEvent)e).getCard(),getSelectedCard());
 				sendToPlayer(ae);
-				selectedCard = null;
-			}
+				selectedCard = -1;
+			}*/
 		}
 	}
 
@@ -59,11 +59,11 @@ public class EventManager {
 		this.board = board;
 	}
 
-	public CardView getSelectedCard() {
+	public int getSelectedCard() {
 		return selectedCard;
 	}
 
-	public void setSelectedCard(CardView selectedCard) {
+	public void setSelectedCard(int selectedCard) {
 		this.selectedCard = selectedCard;
 	}
 }

@@ -28,95 +28,12 @@ import android.widget.Button;
 //import android.widget.TextView;
 import android.widget.Toast;
 
-public class BoardActivity extends Activity implements Listener<Event> {
-	private final static String TAG = "BoardActivity";
-	private EventManager em;
-	private List<CardView> onBoard;
-	private Board board;
+public class BoardActivity extends BoardEventInterface {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ServiceConnection mConnection = new ServiceConnection() {
-
-			public void onServiceConnected(ComponentName name, IBinder service) {
-				// TODO Auto-generated method stub
-				Log.i(TAG,"BoardViewActivity est connecter au service.");
-				IService mService = (IService) ((LocalBinder) service).getService();
-				Player p = mService.getPlayer();
-				em = new EventManager(p);
-				setBoard(p.getBoard());
-				board.temp = true;
-			}
-
-			public void onServiceDisconnected(ComponentName name) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
-		Intent intent = new Intent(this, UqcardService.class);
-		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-		
-		//em.setBoard(this);
-		/************************** TEMP ZONE **********************************/
-		setContentView(R.layout.test);
-		Button b = (Button) findViewById(R.id.button1);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.BEGIN_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.Button02);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				em.sendToPlayer(new EndTurnEvent());
-				
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.button2);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				Button b = (Button) findViewById(R.id.button2);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.button3);
-				b.setEnabled(false);
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.button3);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				Button b = (Button) findViewById(R.id.button2);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.button3);
-				b.setEnabled(false);
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.BEGIN_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
-			}
-			
-		});
-		
-		/***************************** END *************************************/
 		/*LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.activity_board, null);
 		setContentView(view);
@@ -195,69 +112,40 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				(Gallery) findViewById(R.id.Gallery)));*/
 
 	}
-	
-	protected void setBoard(Board board2) {
-		// TODO Auto-generated method stub
-		board = board2;
-		board.subscribe(this);
-	}
-	
-	public void onMessage(final Event e)
-	{
-		this.runOnUiThread(new Runnable() {
 
-			public void run() {
-				// TODO Auto-generated method stub
-				handleEvent(e);
-			}
-			
-		});
+	@Override
+	public void BeginTurnAction() {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	public void handleEvent(Event e){
-		if(e instanceof GameConditionEvent)
-		{
-			if(e.type == Event_Type.BEGIN_GAME)
-			{
-				Button b = (Button) findViewById(R.id.Button02);
-				b.setEnabled(true);
-				b = (Button) findViewById(R.id.button1);
-				b.setEnabled(false);
-			}
-		}
-		else
-		{
-				if(e.type == Event_Type.BEGIN_TURN)
-				{
-					Button b = (Button) findViewById(R.id.Button02);
-					b.setEnabled(true);
-				}
-				else
-				{
-					if(e instanceof SelectedCardEvent)
-					{
-						SelectedCardEvent s = (SelectedCardEvent)e;
-						CardView cv = s.getCard();
-						int i =onBoard.indexOf(cv);
-						onBoard.get(i).setDrawingCacheBackgroundColor(Color.MAGENTA);
-						Toast.makeText(getApplicationContext(), "Carte sélectionnée", Toast.LENGTH_SHORT).show();
-					}
-					else
-					{
-						if(e instanceof AttackEvent)
-						{
-							Toast.makeText(getApplicationContext(), "Attack done", Toast.LENGTH_SHORT).show();
-							AttackEvent ae = (AttackEvent)e;
-							int i =onBoard.indexOf(ae.getOpponent());
-							onBoard.set(i,ae.getOpponent());
-						}
-					}
-				}
-		}
+
+	@Override
+	public void EndTurnAction() {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	public void onClose()
-	{
+
+	@Override
+	public void BeginGameAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void EndGameAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DrawCardAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void BattleAction() {
+		// TODO Auto-generated method stub
 		
 	}
 }
