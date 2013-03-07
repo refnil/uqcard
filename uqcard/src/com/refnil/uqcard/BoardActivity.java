@@ -1,40 +1,24 @@
 package com.refnil.uqcard;
 
-import java.util.List;
-
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.data.Board;
 import com.refnil.uqcard.event.*;
-import com.refnil.uqcard.library.*;
-import com.refnil.uqcard.service.IService;
-import com.refnil.uqcard.service.UqcardService;
-import com.refnil.uqcard.service.UqcardService.LocalBinder;
-import com.refnil.uqcard.view.CardView;
-
+import com.refnil.uqcard.view.ImageAdapter;
+import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.util.Log;
-//import android.view.LayoutInflater;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-//import android.widget.Gallery;
-//import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Gallery;
+import android.widget.TextView;
 
 public class BoardActivity extends BoardEventInterface {
-
+	private ImageAdapter adapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		/*LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.activity_board, null);
 		setContentView(view);
 		view.setOnTouchListener(new BoardOnTouchListener(
@@ -46,56 +30,7 @@ public class BoardActivity extends BoardEventInterface {
 		tv = (TextView) findViewById(R.id.playerText);
 		tv.setText("Me");
 
-		// TODO SET ONLONGCLICK QUAND ON AJOUTE CARTE
-		// Opponent
-		Context c = getApplicationContext();
-		CardView iv = (CardView) findViewById(R.id.opponentBack1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentBack2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentBack3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront4);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront5);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentGeneral);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-		iv = (CardView) findViewById(R.id.opponentPhenomenon);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-		iv = (CardView) findViewById(R.id.opponentCemetery);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-
-		// Player
-		iv = (CardView) findViewById(R.id.playerBack1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerBack2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerBack3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront4);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront5);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerGeneral);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-		iv = (CardView) findViewById(R.id.playerPhenomenon);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerCemetery);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
+		
 
 		// Hand initialisation
 
@@ -109,7 +44,7 @@ public class BoardActivity extends BoardEventInterface {
 		slider.setOnDrawerOpenListener(new SliderOnDrawerOpenListener(
 				(Gallery) findViewById(R.id.Gallery)));
 		slider.setOnDrawerCloseListener(new SliderOnDrawerCloseListener(
-				(Gallery) findViewById(R.id.Gallery)));*/
+				(Gallery) findViewById(R.id.Gallery)));
 
 	}
 

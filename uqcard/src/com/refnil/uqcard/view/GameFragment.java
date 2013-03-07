@@ -1,9 +1,13 @@
 package com.refnil.uqcard.view;
 
+import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.R.id;
 import com.refnil.uqcard.R.layout;
+import com.refnil.uqcard.service.IService;
+import com.refnil.uqcard.service.UqcardService;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,8 +31,14 @@ public class GameFragment extends Fragment {
 		view.findViewById(R.id.textViewNewGame).setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
-				Toast.makeText(getActivity().getApplicationContext(), "New game", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getActivity().getApplicationContext(),
+						UqcardService.class);
+				i.putExtra(IService.TYPE, IService.START_AI_LAME);
+				getActivity().startService(i);
 				
+				i = new Intent(getActivity().getApplicationContext(),
+						BoardActivity.class);
+				startActivity(i);
 			}
 			
 		});

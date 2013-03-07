@@ -31,9 +31,9 @@ public class StatsFragment extends Fragment {
 	            android.R.layout.simple_list_item_1,
 	            items);
 		//Temp
-		items.add("Win");
+		items.add("Wins");
 		items.add("1");
-		items.add("Lose");
+		items.add("Losses");
 		items.add("2");
 		//End temp   
 		GridView gv = (GridView) view.findViewById(R.id.gridViewStats);
