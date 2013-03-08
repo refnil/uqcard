@@ -11,6 +11,7 @@ public class Card implements Parcelable {
 	private String flavor;
 
 	private long id;
+	private long uid;
 	private byte[] image;
 	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
 		public Card createFromParcel(Parcel source) {
@@ -116,5 +117,13 @@ public class Card implements Parcelable {
 		dest.writeString(this.getFlavor());
 		dest.writeInt(this.getCost());
 		dest.writeByteArray(this.getImage());
+	}
+
+	public long getUid() {
+		return uid;
+	}
+
+	public void setUid(long uid) {
+		this.uid = uid;
 	}
 }

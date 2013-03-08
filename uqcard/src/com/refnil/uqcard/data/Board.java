@@ -4,8 +4,14 @@ import java.util.List;
 import java.util.Stack;
 
 import com.refnil.uqcard.event.AttackEvent;
+import com.refnil.uqcard.event.BeginGameEvent;
+import com.refnil.uqcard.event.BeginTurnEvent;
+import com.refnil.uqcard.event.DrawCardEvent;
+import com.refnil.uqcard.event.EndGameEvent;
+import com.refnil.uqcard.event.EndTurnEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
+import com.refnil.uqcard.event.PutCardEvent;
 import com.refnil.uqcard.library.AbstractListenable;
 
 import android.util.Log;
@@ -166,39 +172,91 @@ public class Board extends AbstractListenable<Event> {
 
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
-			Log.i(TAG, "Game begins");
-			tell(event);
+			BeginGameAction((BeginGameEvent)event);
 		}
 
-		if (event.type == Event_Type.BEGIN_TURN) {
-			this.setTour(this.getTour() + 1);
-			Log.i(TAG, "Turn " + this.getTour() + " begins");
-			tell(event);
+		else if (event.type == Event_Type.BEGIN_TURN) {
+			BeginTurnAction((BeginTurnEvent)event);
 		}
 
-		if (event.type == Event_Type.END_TURN) {
-			Log.i(TAG, "Turn " + this.getTour() + " ends");
-			tell(event);
+		else if (event.type == Event_Type.END_TURN) {
+			EndTurnAction((EndTurnEvent)event);
 		}
 
-		if (event.type == Event_Type.END_GAME) {
-			Log.i(TAG, "Game ends");
-			tell(event);
+		else if (event.type == Event_Type.END_GAME) {
+			EndGameAction((EndGameEvent)event);
+		}
+		
+		else if(event.type == Event_Type.DRAW_CARD){
+			DrawCardAction((DrawCardEvent)event);
+		}
+		
+		else if(event.type == Event_Type.PUT_CARD)
+		{
+			PutCardAction((PutCardEvent)event);
 		}
 
-		if (event instanceof AttackEvent) {
-			AttackEvent ae = (AttackEvent) event;
-			/*Card opp = ae.getOpponent().getCard();
-			Card pl = ae.getPlayer().getCard();
-			int index = opponentBoardCards.indexOf(opp);
-			int index1 = playerBoardCards.indexOf(pl);
-			((CreatureCard) opponentBoardCards.get(index))
-					.setHp(((CreatureCard) opponentBoardCards.get(index))
-							.getHp()
-							- ((CreatureCard) playerBoardCards.get(index1))
-									.getAtk());
-			ae.getOpponent().setCard((Card)opponentBoardCards.get(index));*/
-			tell(ae);
+		else if (event instanceof AttackEvent) {
+			BattleAction((AttackEvent)event);
 		}
+	}
+	
+	void BeginGameAction(BeginGameEvent event)
+	{
+		Log.i(TAG, "Game begins");
+		tell(event);
+	}
+	
+	void BeginTurnAction(BeginTurnEvent event)
+	{
+		this.setTour(this.getTour() + 1);
+		Log.i(TAG, "Turn " + this.getTour() + " begins");
+		tell(event);
+	}
+	
+	void DrawCardAction(DrawCardEvent event)
+	{
+		Log.i(TAG, "Draw card");
+		DrawCardEvent dce = (DrawCardEvent)event;
+		Card c = CardStoreBidon.getCard(dce.getCard());
+		playerTakeCardInStack();
+		addPlayerHandCard(c);
+		tell(event);
+	}
+	
+	void PutCardAction(PutCardEvent event)
+	{
+		Log.i(TAG,"Put card");
+		Card c = CardStoreBidon.getCard(event.getCard());
+		deletePlayerHandCard(c);
+		addPlayerBoardCard(c);
+		tell(event);
+	}
+	
+	void BattleAction(AttackEvent event)
+	{
+		Card c = CardStoreBidon.getCard(event.getOpponent());
+		List<Card> list =  getOpponentBoardCards();
+		for(int i=0;i<list.size();i++)
+		{
+			if(list.get(i).getUid() == c.getUid())
+			{
+				list.set(i,c);
+				break;
+			}
+		}
+		tell(event);
+	}
+	
+	void EndTurnAction(EndTurnEvent event)
+	{
+		Log.i(TAG, "Turn " + this.getTour() + " ends");
+		tell(event);
+	}
+	
+	void EndGameAction(EndGameEvent event)
+	{
+		Log.i(TAG, "Game ends");
+		tell(event);
 	}
 }
