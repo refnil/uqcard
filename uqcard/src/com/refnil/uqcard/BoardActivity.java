@@ -2,6 +2,7 @@ package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.event.*;
+import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.ImageAdapter;
 import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 import android.os.Bundle;
@@ -11,7 +12,7 @@ import android.view.View;
 import android.widget.Gallery;
 import android.widget.TextView;
 
-public class BoardActivity extends AbstractBoardEventManager {
+public class BoardActivity extends AbstractBoard {
 	private ImageAdapter adapter;
 	
 	@Override
@@ -32,10 +33,11 @@ public class BoardActivity extends AbstractBoardEventManager {
 
 		
 
-		// Hand initialisation
-
+		// Hand (For tests.)
+		/*
 		Gallery gallery = (Gallery) findViewById(R.id.Gallery);
-		adapter = new ImageAdapter(this);
+		CardView tab[]  = {new CardView(getApplicationContext(), "nom", "desc", "flav", 2)};
+		adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
 		gallery.setOnItemClickListener(new GalleryOnItemClickListener(
 				getApplicationContext(), gallery));
@@ -44,49 +46,49 @@ public class BoardActivity extends AbstractBoardEventManager {
 		slider.setOnDrawerOpenListener(new SliderOnDrawerOpenListener(
 				(Gallery) findViewById(R.id.Gallery)));
 		slider.setOnDrawerCloseListener(new SliderOnDrawerCloseListener(
-				(Gallery) findViewById(R.id.Gallery)));
+				(Gallery) findViewById(R.id.Gallery)));*/
 
 	}
 
 	@Override
-	public void BeginTurnAction() {
+	public void BeginTurnAction(BeginTurnEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void EndTurnAction() {
+	public void EndTurnAction(EndTurnEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void BeginGameAction() {
+	public void BeginGameAction(BeginGameEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void EndGameAction() {
+	public void EndGameAction(EndGameEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void DrawCardAction(int id) {
-		// TODO Auto-generated method stub
+	public void DrawCardAction(DrawCardEvent event) {
+		//Add new card to player's hand
+	}
+
+	@Override
+	public void BattleAction(AttackEvent event) {
+		//Update informations of target
 		
 	}
 
 	@Override
-	public void BattleAction(int id, int id1) {
-		// TODO Auto-generated method stub
+	public void PutCardAction(PutCardEvent event) {
+		//Place card on gridview
 		
 	}
 
-	@Override
-	public void PutCardAction(int id,int pos) {
-		// TODO Auto-generated method stub
-		
-	}
 }

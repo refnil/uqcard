@@ -22,24 +22,6 @@ public class EventManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public void sendEventToEventManager(Event e)
-	{
-		if(e instanceof SelectedCardEvent)
-		{
-			/*if(e.type == Event_Type.SELECTED_PLAYER_CARD)
-			{
-				setSelectedCard(((SelectedCardEvent)e).getCard());
-				board.handleEvent(e);
-			}
-			else
-			{
-				AttackEvent ae = new AttackEvent(((SelectedCardEvent)e).getCard(),getSelectedCard());
-				sendToPlayer(ae);
-				selectedCard = -1;
-			}*/
-		}
-	}
 
 	public BoardActivity getBoard() {
 		return board;
@@ -53,7 +35,14 @@ public class EventManager {
 		return selectedCard;
 	}
 
-	public void setSelectedCard(int selectedCard) {
-		this.selectedCard = selectedCard;
+	public void setSelectedCard(int selectedCard,boolean opponent) {
+		
+		if(this.getSelectedCard() != -1 && opponent)
+		{
+			this.sendToPlayer(new AttackEvent(this.getSelectedCard(),selectedCard));	
+			this.selectedCard = -1;
+		}
+		else
+			this.selectedCard = selectedCard;
 	}
 }

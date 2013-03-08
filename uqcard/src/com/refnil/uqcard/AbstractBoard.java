@@ -21,7 +21,7 @@ import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
 import com.refnil.uqcard.view.CardView;
 
-public abstract class AbstractBoardEventManager extends Activity implements Listener<Event>{
+public abstract class AbstractBoard extends Activity implements Listener<Event>{
 	protected final static String TAG = "BoardActivity";
 	protected EventManager em;
 	protected List<CardView> onBoard;
@@ -65,23 +65,23 @@ public abstract class AbstractBoardEventManager extends Activity implements List
 		
 	}
 	
-	public abstract void BeginTurnAction();
+	public abstract void BeginTurnAction(BeginTurnEvent event);
 	
-	public abstract void EndTurnAction();
+	public abstract void EndTurnAction(EndTurnEvent event);
 	
-	public abstract void BeginGameAction();
+	public abstract void BeginGameAction(BeginGameEvent event);
 	
-	public abstract void EndGameAction();
+	public abstract void EndGameAction(EndGameEvent event);
 	
-	public abstract void DrawCardAction(int id);
+	public abstract void DrawCardAction(DrawCardEvent event);
 	
-	public abstract void BattleAction(int id,int id1);
+	public abstract void BattleAction(AttackEvent event);
 	
-	public abstract void PutCardAction(int id,int pos);
+	public abstract void PutCardAction(PutCardEvent event);
 	
-	final public void SelectedCardAction(int cardViewID)
+	final public void SelectedCardAction(SelectedCardEvent event)
 	{
-		em.setSelectedCard(cardViewID);
+		em.setSelectedCard(event.getCard().getCard().getUid(),event.isOpponent());
 	}
 	
 	final protected void setBoard(Board board2) {
@@ -104,25 +104,25 @@ public abstract class AbstractBoardEventManager extends Activity implements List
 	
 	final public void handleEvent(Event e){
 		if(e.type == Event_Type.BEGIN_GAME)
-			BeginGameAction();	
+			BeginGameAction((BeginGameEvent)e);	
 		
 		else if(e.type == Event_Type.END_GAME)
-			EndGameAction();
+			EndGameAction((EndGameEvent)e);
 		
 		else if(e.type == Event_Type.BEGIN_TURN)
-			BeginTurnAction();
+			BeginTurnAction((BeginTurnEvent)e);
 		
 		else if(e.type == Event_Type.END_TURN)
-			EndTurnAction();
+			EndTurnAction((EndTurnEvent)e);
 		
 		else if(e.type == Event_Type.DRAW_CARD)
-			DrawCardAction(((DrawCardEvent)e).id);
+			DrawCardAction((DrawCardEvent)e);
 		
 		else if(e.type == Event_Type.DECLARE_ATTACK)
-			BattleAction(((AttackEvent)e).getPlayer(),((AttackEvent)e).getOpponent());
+			BattleAction((AttackEvent)e);
 		
 		else if(e.type == Event_Type.PUT_CARD)
-			PutCardAction(((PutCardEvent)e).getCard(),((PutCardEvent)e).getPosition());
+			PutCardAction((PutCardEvent)e);
 			
 	}
 }

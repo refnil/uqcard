@@ -14,16 +14,13 @@ public class ImageAdapter extends BaseAdapter {
 
 	private Context ctx;
 	int imageBackground;
-	CardView carte;
+	CardView pics[];
 
-	Integer[] pics = {R.drawable.carreau,R.drawable.coeur,R.drawable.trefle,R.drawable.pique};
-	
-
-	public ImageAdapter(Context c) {
+	public ImageAdapter(Context c,CardView tab[]) {
 		ctx = c;
 		TypedArray ta = c.obtainStyledAttributes(R.styleable.Gallery1);
-		imageBackground = ta.getResourceId(
-				R.styleable.Gallery1_android_galleryItemBackground, 1);
+		imageBackground = ta.getResourceId(R.styleable.Gallery1_android_galleryItemBackground, 1);
+		pics = tab;
 		ta.recycle();
 	}
 
@@ -32,33 +29,27 @@ public class ImageAdapter extends BaseAdapter {
 		return pics.length;
 	}
 
-	public Object getItem(int arg0) {
-		return arg0;
-	}
-
-	public long getItemId(int arg0) {
-		long id = (long) pics[arg0];
-		return id;
+	public Object getItem(int pos) {
+		return pics[pos];
 	}
 
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
-
-		CardView myCard = new CardView(ctx, "nom", "desc","flav", 2);
-		
-		WindowManager wm = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
-		Display display = wm.getDefaultDisplay();
-		Point size = new Point();
-		display.getSize(size);
-		
-
-		return myCard.getCardImageView(ctx, size.x, size.y);
+			WindowManager wm = (WindowManager) ctx
+					.getSystemService(Context.WINDOW_SERVICE);
+			Display display = wm.getDefaultDisplay();
+			Point size = new Point();
+			display.getSize(size);
+			return pics[arg0].getCardImageView(ctx, size.x, size.y);
 	}
-	
-	public CardView getCardView(int arg0, View arg1, ViewGroup arg2)  {
-		CardView myCard = new CardView(ctx, "nom", "desc","flav", 2);
-		
-		return myCard;
-		
+
+	public CardView getCardView(int arg0, View arg1, ViewGroup arg2) {
+		return (CardView)arg1;
+
+	}
+
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

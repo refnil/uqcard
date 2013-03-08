@@ -6,6 +6,7 @@ public class SelectedCardEvent extends Event{
 	
 	private static final long serialVersionUID = -1388745581161354890L;
 	private CardView card;
+	private boolean opponent;
 	
 	public SelectedCardEvent(Event_Type t, CardView c)
 	{
@@ -19,5 +20,13 @@ public class SelectedCardEvent extends Event{
 
 	public void setCard(CardView card) {
 		this.card = card;
+	}
+
+	public boolean isOpponent() {
+		return opponent;
+	}
+
+	public void setOpponent(boolean opponent) {
+		this.opponent = opponent;
 	}
 }

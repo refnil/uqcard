@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class TestActivity extends AbstractBoardEventManager{
+public class TestActivity extends AbstractBoard{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,46 +69,47 @@ public class TestActivity extends AbstractBoardEventManager{
 	}
 
 	@Override
-	public void BeginTurnAction() {
+	public void BeginTurnAction(BeginTurnEvent event) {
 		Button b = (Button) findViewById(R.id.Button02);
 		b.setEnabled(true);
 	}
 
 	@Override
-	public void EndTurnAction() {
+	public void EndTurnAction(EndTurnEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void BeginGameAction() {
+	public void BeginGameAction(BeginGameEvent event) {
 		Button b = (Button) findViewById(R.id.Button02);
 		b.setEnabled(true);
 		b = (Button) findViewById(R.id.button1);
 		b.setEnabled(false);
+		
 	}
 
 	@Override
-	public void EndGameAction() {
+	public void EndGameAction(EndGameEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void DrawCardAction(int id) {
+	public void DrawCardAction(DrawCardEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void BattleAction(int id, int id1) {
+	public void BattleAction(AttackEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void PutCardAction(int id, int pos) {
+	public void PutCardAction(PutCardEvent event) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
 }

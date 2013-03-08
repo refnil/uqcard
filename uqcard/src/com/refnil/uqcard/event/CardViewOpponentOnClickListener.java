@@ -13,7 +13,7 @@ public class CardViewOpponentOnClickListener implements OnClickListener {
 		this.em = em;
 	}
 	public void onClick(View v) {
-		em.sendEventToEventManager(new SelectedCardEvent(Event_Type.SELECTED_OPPONENT_CARD,(CardView)v));
+		em.setSelectedCard(((CardView)v).getCard().getUid(), true);
 	}
 
 }
