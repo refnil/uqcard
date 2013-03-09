@@ -1,6 +1,8 @@
 package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.data.Card;
+import com.refnil.uqcard.data.CardStoreBidon;
 import com.refnil.uqcard.event.*;
 import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.ImageAdapter;
@@ -10,6 +12,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Gallery;
+import android.widget.GridView;
 import android.widget.TextView;
 
 public class BoardActivity extends AbstractBoard {
@@ -76,19 +79,41 @@ public class BoardActivity extends AbstractBoard {
 
 	@Override
 	public void DrawCardAction(DrawCardEvent event) {
-		//Add new card to player's hand
+		Gallery gallery = (Gallery) findViewById(R.id.Gallery);
+		final int size = gallery.getAdapter().getCount()+1;
+		CardView tab[] = new CardView[size];
+		tab = ((ImageAdapter)gallery.getAdapter()).getPics();
+		
+		Card c = CardStoreBidon.getCard(event.getCard());
+		tab[size-2] = new CardView(getApplicationContext(),c);
+		ImageAdapter adapter = new ImageAdapter(this,tab);
+		gallery.setAdapter(adapter);
 	}
 
 	@Override
 	public void BattleAction(AttackEvent event) {
-		//Update informations of target
+		GridView gv ;
+		if(event.isYourAttack())
+			gv = (GridView) findViewById(R.id.gridViewBoardOpponent);
+		else
+			gv = (GridView) findViewById(R.id.gridViewBoardPlayer);
+		Card c = CardStoreBidon.getCard(event.getOpponent());
+		CardView cv = new CardView(getApplicationContext(),c);
+		int index = gv.indexOfChild(cv);
+		((ImageAdapter)gv.getAdapter()).replaceItem(cv, index);
 		
 	}
 
 	@Override
 	public void PutCardAction(PutCardEvent event) {
-		//Place card on gridview
-		
+		Card c = CardStoreBidon.getCard(event.getCard());
+		CardView cv = new CardView(getApplicationContext(),c);
+		GridView gv;
+		if(event.isOpponent())
+			gv = (GridView) findViewById(R.id.gridViewBoardOpponent);
+		else
+			gv = (GridView) findViewById(R.id.gridViewBoardPlayer);
+		gv.addView(cv, event.getPosition());
 	}
 
 }

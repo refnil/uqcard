@@ -14,7 +14,7 @@ public class ImageAdapter extends BaseAdapter {
 
 	private Context ctx;
 	int imageBackground;
-	CardView pics[];
+	private CardView pics[];
 
 	public ImageAdapter(Context c,CardView tab[]) {
 		ctx = c;
@@ -22,6 +22,11 @@ public class ImageAdapter extends BaseAdapter {
 		imageBackground = ta.getResourceId(R.styleable.Gallery1_android_galleryItemBackground, 1);
 		pics = tab;
 		ta.recycle();
+	}
+	
+	public CardView[] getPics()
+	{
+		return pics;
 	}
 
 	public int getCount() {
@@ -50,6 +55,12 @@ public class ImageAdapter extends BaseAdapter {
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public void replaceItem(CardView newItem,int pos)
+	{
+		if(pos < pics.length)
+			pics[pos] = newItem;
 	}
 
 }

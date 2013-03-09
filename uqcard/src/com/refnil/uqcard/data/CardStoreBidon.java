@@ -4,6 +4,6 @@ public class CardStoreBidon {
 
 	static public Card getCard(int id)
 	{
-		return new Card(null, null, null, 1);
+		return new Card("test", "test1", "test2", 1);
 	}
 }
