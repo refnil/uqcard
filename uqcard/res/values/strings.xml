@@ -65,5 +65,17 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="startgame">Start Game</string>
     <string name="endturn">End turn</string>
+    <string name="pos1">1</string>
+    <string name="pos2">2</string>
+    <string name="pos3">3</string>
+    <string name="pos4">4</string>
+    <string name="pos5">5</string>
+    <string name="pos7">7</string>
+    <string name="pos8">8</string>
+    <string name="pos9">9</string>
+    <string name="pos10">10</string>
+    <string name="pos11">11</string>
+    <string name="graveyard">graveyard</string>
+    <string name="deck">deck</string>
 
 </resources>

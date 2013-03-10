@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -140,9 +142,20 @@ public class BoardActivity extends AbstractBoard {
 		gv.addView(cv, event.getPosition());
 	}
 	
-	public void EndTurnButton(View v)
+	public void StartGameButton(View v)
 	{
-		em.sendToPlayer(new EndTurnEvent());
+		Button b = (Button) findViewById(R.id.endturnbutton);
+		b.setText(R.string.endturn);
+		b.setOnClickListener(new OnClickListener()
+		{
+
+			public void onClick(View v) {
+				em.sendToPlayer(new EndTurnEvent());
+				
+			}
+			
+		});
+		em.sendToPlayer(new BeginGameEvent());
 	}
 
 }

@@ -1,8 +1,6 @@
 package com.refnil.uqcard.event;
 
 import com.refnil.uqcard.view.CardView;
-
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
