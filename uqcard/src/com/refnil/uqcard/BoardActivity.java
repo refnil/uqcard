@@ -12,11 +12,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Gallery;
-import android.widget.GridView;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 public class BoardActivity extends AbstractBoard {
-	private ImageAdapter adapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -92,15 +91,16 @@ public class BoardActivity extends AbstractBoard {
 
 	@Override
 	public void BattleAction(AttackEvent event) {
-		GridView gv ;
+		GridLayout gv ;
 		if(event.isYourAttack())
-			gv = (GridView) findViewById(R.id.gridViewBoardOpponent);
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
 		else
-			gv = (GridView) findViewById(R.id.gridViewBoardPlayer);
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
 		Card c = CardStoreBidon.getCard(event.getOpponent());
 		CardView cv = new CardView(getApplicationContext(),c);
 		int index = gv.indexOfChild(cv);
-		((ImageAdapter)gv.getAdapter()).replaceItem(cv, index);
+		gv.removeViewAt(index);
+		gv.addView(cv, index);
 		
 	}
 
@@ -108,11 +108,11 @@ public class BoardActivity extends AbstractBoard {
 	public void PutCardAction(PutCardEvent event) {
 		Card c = CardStoreBidon.getCard(event.getCard());
 		CardView cv = new CardView(getApplicationContext(),c);
-		GridView gv;
+		GridLayout gv;
 		if(event.isOpponent())
-			gv = (GridView) findViewById(R.id.gridViewBoardOpponent);
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
 		else
-			gv = (GridView) findViewById(R.id.gridViewBoardPlayer);
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
 		gv.addView(cv, event.getPosition());
 	}
 

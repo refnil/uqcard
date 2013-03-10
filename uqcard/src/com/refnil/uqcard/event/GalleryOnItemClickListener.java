@@ -2,6 +2,7 @@ package com.refnil.uqcard.event;
 
 import com.refnil.uqcard.FullCardActivity;
 import com.refnil.uqcard.data.Card;
+import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.ImageAdapter;
 
 import android.app.Activity;
@@ -24,8 +25,8 @@ public class GalleryOnItemClickListener implements OnItemClickListener {
 
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		Intent i = new Intent(context, FullCardActivity.class);
-		Card card = ((ImageAdapter) gallery.getAdapter()).getCardView(
-				gallery.getSelectedItemPosition(), null, null).getCard();
+		CardView cv = (CardView) ((ImageAdapter)gallery.getAdapter()).getItem(gallery.getSelectedItemPosition());
+		Card card = cv.getCard();
 		i.putExtra("Card", card);
 		((Activity) context).startActivity(i);
 	}
