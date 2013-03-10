@@ -33,6 +33,11 @@ public class Board extends AbstractListenable<Event> {
 	private Stack<Card> opponentGraveyardCards;
 	private Stack<Card> playerGraveyardCards;
 
+	public Board()
+	{
+		this.setTour(1);
+	}
+	
 	public int getPhase() {
 		return phase;
 	}
