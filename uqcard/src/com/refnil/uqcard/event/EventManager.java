@@ -9,6 +9,7 @@ public class EventManager {
 	private Player p;
 	private BoardActivity board;
 	private int selectedCard;
+	private int selectedCardHand;
 
 	public EventManager(Player p) {
 		this.p = p;
@@ -44,5 +45,13 @@ public class EventManager {
 		}
 		else
 			this.selectedCard = selectedCard;
+	}
+
+	public int getSelectedCardHand() {
+		return selectedCardHand;
+	}
+
+	public void setSelectedCardHand(int selectedCardHand) {
+		this.selectedCardHand = selectedCardHand;
 	}
 }

@@ -9,6 +9,7 @@ import com.refnil.uqcard.view.ImageAdapter;
 import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 import android.os.Bundle;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Gallery;
@@ -26,14 +27,24 @@ public class BoardActivity extends AbstractBoard {
 		setContentView(view);
 		view.setOnTouchListener(new BoardOnTouchListener(
 				(SemiClosedSlidingDrawer) findViewById(R.id.mySlidingDrawer),
-				(Gallery) findViewById(R.id.Gallery)));
+				(Gallery) findViewById(R.id.Gallery),em));
 
 		TextView tv = (TextView) findViewById(R.id.opponentText);
 		tv.setText("My opponent");
 		tv = (TextView) findViewById(R.id.playerText);
 		tv.setText("Me");
 
+		GridLayout glo = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
+		for(int i=0;i<glo.getChildCount();i++)
+		{
+			glo.getChildAt(i).setOnClickListener(new CardViewOpponentOnClickListener(em));
+		}
 		
+		GridLayout glp = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
+		for(int i=0;i<glp.getChildCount();i++)
+		{
+			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
+		}
 
 		// Hand (For tests.)
 		/*
