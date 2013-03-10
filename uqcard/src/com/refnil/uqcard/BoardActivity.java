@@ -2,7 +2,8 @@ package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.data.Card;
-import com.refnil.uqcard.data.CardStoreBidon;
+import com.refnil.uqcard.data.CardStore;
+import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.event.*;
 import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.ImageAdapter;
@@ -17,6 +18,8 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 
 public class BoardActivity extends AbstractBoard {
+	
+	private CardStore CardStoreBidon = new DummyCardStore();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

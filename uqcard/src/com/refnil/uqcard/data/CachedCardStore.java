@@ -1,4 +1,4 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.data;
 
 import android.util.SparseArray;
 

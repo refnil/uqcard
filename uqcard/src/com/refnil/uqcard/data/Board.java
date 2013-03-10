@@ -20,6 +20,8 @@ public class Board extends AbstractListenable<Event> {
 
 	public boolean temp;
 	private final static String TAG = "Board";
+	
+	private CardStore CardStoreBidon = new DummyCardStore();
 
 	private int phase;
 	private int tour;
