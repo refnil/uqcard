@@ -58,8 +58,12 @@
     <string name="game">Game</string>
     <string name="cardList">Cards</string>
     <string name="history">History</string>
-	<string name="newgame">New game</string>
-	<string name="connect">Connect</string>
-	<string name="host">Host</string>
-	<string name="stats">Stats</string>
+    <string name="newgame">New game</string>
+    <string name="connect">Connect</string>
+    <string name="host">Host</string>
+    <string name="stats">Stats</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="startgame">Start Game</string>
+    <string name="endturn">End turn</string>
+
 </resources>

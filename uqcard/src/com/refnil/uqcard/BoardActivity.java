@@ -1,217 +1,56 @@
 package com.refnil.uqcard;
 
-import java.util.List;
-
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.library.Listener;
-import com.refnil.uqcard.library.Player;
-import com.refnil.uqcard.service.IService;
-import com.refnil.uqcard.service.UqcardService;
-import com.refnil.uqcard.service.UqcardService.LocalBinder;
-
+import com.refnil.uqcard.data.Card;
+import com.refnil.uqcard.data.CardStoreBidon;
+import com.refnil.uqcard.event.*;
+import com.refnil.uqcard.view.CardView;
+import com.refnil.uqcard.view.ImageAdapter;
+import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.graphics.Color;
 import android.util.Log;
-//import android.view.LayoutInflater;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-//import android.widget.Gallery;
-//import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Gallery;
+import android.widget.GridLayout;
+import android.widget.TextView;
 
-public class BoardActivity extends Activity implements Listener<Event> {
-	private final static String TAG = "BoardActivity";
-	private EventManager em;
-	private List<CardView> onBoard;
-	private Board board;
-
+public class BoardActivity extends AbstractBoard {
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ServiceConnection mConnection = new ServiceConnection() {
-
-			public void onServiceConnected(ComponentName name, IBinder service) {
-				// TODO Auto-generated method stub
-				Log.i(TAG,"BoardViewActivity est connecter au service.");
-				IService mService = (IService) ((LocalBinder) service).getService();
-				Player p = mService.getPlayer();
-				em = new EventManager(p);
-				setBoard(p.getBoard());
-			}
-
-			public void onServiceDisconnected(ComponentName name) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
-		Intent intent = new Intent(this, UqcardService.class);
-		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-		
-		//em.setBoard(this);
-		/************************** TEMP ZONE **********************************/
-		setContentView(R.layout.test);
-		Button b = (Button) findViewById(R.id.button1);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.BEGIN_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.Button01);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				TurnPhaseEvent tp = em.getTurnPhaseEvent();
-				if(tp.type != Event_Type.BEGIN_TURN)
-					tp.nextPhase();
-				em.sendToPlayer(tp);
-				
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.Button02);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				TurnPhaseEvent tp = em.getTurnPhaseEvent();
-				if(tp.type != Event_Type.END_TURN)
-					tp.nextPhase();
-				em.sendToPlayer(new TurnPhaseEvent(Event_Type.END_TURN));
-				
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.button2);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				Button b = (Button) findViewById(R.id.button2);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.button3);
-				b.setEnabled(false);
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.button3);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				Button b = (Button) findViewById(R.id.button2);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.button3);
-				b.setEnabled(false);
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.BEGIN_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
-			}
-			
-		});
-		
-		b = (Button) findViewById(R.id.Button03);
-		b.setEnabled(false);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				GameConditionEvent gc = em.getGameConditionEvent();
-				if(gc.type != Event_Type.END_GAME)
-					gc.nextPhase();
-				em.sendToPlayer(gc);
-				
-			}
-			
-		});
-		
-		/***************************** END *************************************/
-		/*LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.activity_board, null);
 		setContentView(view);
 		view.setOnTouchListener(new BoardOnTouchListener(
 				(SemiClosedSlidingDrawer) findViewById(R.id.mySlidingDrawer),
-				(Gallery) findViewById(R.id.Gallery)));
+				(Gallery) findViewById(R.id.Gallery),em));
 
 		TextView tv = (TextView) findViewById(R.id.opponentText);
 		tv.setText("My opponent");
 		tv = (TextView) findViewById(R.id.playerText);
 		tv.setText("Me");
 
-		// TODO SET ONLONGCLICK QUAND ON AJOUTE CARTE
-		// Opponent
-		Context c = getApplicationContext();
-		CardView iv = (CardView) findViewById(R.id.opponentBack1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentBack2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentBack3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront4);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentFront5);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.opponentGeneral);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-		iv = (CardView) findViewById(R.id.opponentPhenomenon);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-		iv = (CardView) findViewById(R.id.opponentCemetery);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
+		GridLayout glo = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
+		for(int i=0;i<glo.getChildCount();i++)
+		{
+			glo.getChildAt(i).setOnClickListener(new CardViewOpponentOnClickListener(em));
+		}
+		
+		GridLayout glp = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
+		for(int i=0;i<glp.getChildCount();i++)
+		{
+			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
+		}
 
-		// Player
-		iv = (CardView) findViewById(R.id.playerBack1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerBack2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerBack3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront1);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront2);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront3);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront4);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerFront5);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerGeneral);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-		iv = (CardView) findViewById(R.id.playerPhenomenon);
-		iv.setOnClickListener(new CardViewOnClickListener());
-		iv = (CardView) findViewById(R.id.playerCemetery);
-		iv.setOnLongClickListener(new CardViewOnLongClickListener(c));
-
-		// Hand initialisation
-
+		// Hand (For tests.)
+		/*
 		Gallery gallery = (Gallery) findViewById(R.id.Gallery);
-		adapter = new ImageAdapter(this);
+		CardView tab[]  = {new CardView(getApplicationContext(), "nom", "desc", "flav", 2)};
+		adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
 		gallery.setOnItemClickListener(new GalleryOnItemClickListener(
 				getApplicationContext(), gallery));
@@ -223,96 +62,69 @@ public class BoardActivity extends Activity implements Listener<Event> {
 				(Gallery) findViewById(R.id.Gallery)));*/
 
 	}
-	
-	protected void setBoard(Board board2) {
-		// TODO Auto-generated method stub
-		board = board2;
-		board.subscribe(this);
-	}
-	
-	public void onMessage(final Event e)
-	{
-		this.runOnUiThread(new Runnable() {
 
-			public void run() {
-				// TODO Auto-generated method stub
-				handleEvent(e);
-			}
-			
-		});
-	}
-	
-	void handleEvent(Event e){
-		if(e instanceof GameConditionEvent)
-		{
-			if(e.type == Event_Type.BEGIN_GAME)
-			{
-				Button b = (Button) findViewById(R.id.Button03);
-				b.setEnabled(true);
-				b = (Button) findViewById(R.id.Button02);
-				b.setEnabled(true);
-				b = (Button) findViewById(R.id.button1);
-				b.setEnabled(false);
-			}
-			else
-			{
-				Button b = (Button) findViewById(R.id.button1);
-				b.setEnabled(true);
-				b = (Button) findViewById(R.id.Button01);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.Button02);
-				b.setEnabled(false);
-				b = (Button) findViewById(R.id.Button03);
-				b.setEnabled(false);
-			}
-		}
-		else
-		{
-				if(e instanceof TurnPhaseEvent)
-				{
-					if(e.type == Event_Type.BEGIN_TURN)
-					{
-						Button  b = (Button) findViewById(R.id.Button01);
-						b.setEnabled(false);
-						b = (Button) findViewById(R.id.Button02);
-						b.setEnabled(true);
-					}
-					else
-					{
-						if(e.type == Event_Type.END_TURN)
-						{
-							Button b = (Button) findViewById(R.id.Button01);
-							b = (Button) findViewById(R.id.Button02);
-							b.setEnabled(false);
-						}
-					}
-				}
-				else
-				{
-					if(e instanceof SelectedCardEvent)
-					{
-						SelectedCardEvent s = (SelectedCardEvent)e;
-						CardView cv = s.card;
-						int i =onBoard.indexOf(cv);
-						onBoard.get(i).setDrawingCacheBackgroundColor(Color.MAGENTA);
-						Toast.makeText(getApplicationContext(), "Carte sélectionnée", Toast.LENGTH_SHORT).show();
-					}
-					else
-					{
-						if(e instanceof AttackEvent)
-						{
-							Toast.makeText(getApplicationContext(), "Attack done", Toast.LENGTH_SHORT).show();
-							AttackEvent ae = (AttackEvent)e;
-							int i =onBoard.indexOf(ae.opponent);
-							onBoard.set(i,ae.opponent);
-						}
-					}
-				}
-		}
-	}
-	
-	public void onClose()
-	{
+	@Override
+	public void BeginTurnAction(BeginTurnEvent event) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void EndTurnAction(EndTurnEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void BeginGameAction(BeginGameEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void EndGameAction(EndGameEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DrawCardAction(DrawCardEvent event) {
+		Gallery gallery = (Gallery) findViewById(R.id.Gallery);
+		final int size = gallery.getAdapter().getCount()+1;
+		CardView tab[] = new CardView[size];
+		tab = ((ImageAdapter)gallery.getAdapter()).getPics();
+		
+		Card c = CardStoreBidon.getCard(event.getCard());
+		tab[size-2] = new CardView(getApplicationContext(),c);
+		ImageAdapter adapter = new ImageAdapter(this,tab);
+		gallery.setAdapter(adapter);
+	}
+
+	@Override
+	public void BattleAction(AttackEvent event) {
+		GridLayout gv ;
+		if(event.isYourAttack())
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
+		else
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
+		Card c = CardStoreBidon.getCard(event.getOpponent());
+		CardView cv = new CardView(getApplicationContext(),c);
+		int index = gv.indexOfChild(cv);
+		gv.removeViewAt(index);
+		gv.addView(cv, index);
+		
+	}
+
+	@Override
+	public void PutCardAction(PutCardEvent event) {
+		Card c = CardStoreBidon.getCard(event.getCard());
+		CardView cv = new CardView(getApplicationContext(),c);
+		GridLayout gv;
+		if(event.isOpponent())
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
+		else
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
+		gv.addView(cv, event.getPosition());
+	}
+
 }

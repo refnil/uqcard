@@ -2,8 +2,8 @@ package com.refnil.uqcard.library.ai;
 
 import android.os.RemoteException;
 
-import com.refnil.uqcard.Board;
-import com.refnil.uqcard.Event;
+import com.refnil.uqcard.data.Board;
+import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
 
