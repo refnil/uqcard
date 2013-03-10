@@ -7,6 +7,8 @@ import com.refnil.uqcard.BeginTurn;
 import com.refnil.uqcard.EndTurn;
 import com.refnil.uqcard.Event;
 import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.message.CardDeckMessage;
+import com.refnil.uqcard.library.message.EmptyDeck;
 
 public class DummyAi extends AbstractAI {
 
@@ -18,7 +20,7 @@ public class DummyAi extends AbstractAI {
 		super(p);
 		Log.i(TAG, "Start dummy ai");
 		try {
-			p.connect("DUMMY_AI");
+			p.connect("DUMMY_AI", new CardDeckMessage(0, 1, new EmptyDeck()));
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
