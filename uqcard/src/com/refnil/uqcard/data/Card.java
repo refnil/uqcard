@@ -23,7 +23,7 @@ public class Card implements Parcelable {
 		}
 	};
 
-	Card(long id, String name, String description, String flavor, int cost,byte[] image) {
+	public Card(long id, String name, String description, String flavor, int cost,byte[] image) {
 
 		this.setId(id);
 		this.setName(name);
@@ -40,7 +40,7 @@ public class Card implements Parcelable {
 		this.setCost(cost);
 	}
 
-	Card(final Card card) {
+	public Card(final Card card) {
 		this(card.getName(), card.getDescription(), card.getFlavor(), card
 				.getCost());
 	}
