@@ -5,8 +5,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.refnil.uqcard.Board;
-import com.refnil.uqcard.Event;
+import com.refnil.uqcard.data.Board;
+import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
@@ -32,7 +32,7 @@ public class Player extends AbstractPlayer {
 	}
 
 	public void sendEvent(Event e) throws RemoteException {
-		sendTo(getServer(), new RequestServer(e));
+		sendTo(getServer(), new RequestServer(board.getPlayerID(),e));
 	}
 
 	public Board getBoard() {

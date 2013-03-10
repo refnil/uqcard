@@ -5,17 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.refnil.uqcard.BluetoothLinkConnection;
-import com.refnil.uqcard.BoardActivity;
-import com.refnil.uqcard.R;
-import com.refnil.uqcard.Board;
-import com.refnil.uqcard.library.AbstractServer;
-import com.refnil.uqcard.library.LinkConnection;
-import com.refnil.uqcard.library.Server;
-import com.refnil.uqcard.library.Player;
-import com.refnil.uqcard.library.message.Close;
-import com.refnil.uqcard.library.message.DisconnectPlayer;
-
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -29,6 +18,15 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.refnil.uqcard.BluetoothLinkConnection;
+import com.refnil.uqcard.BoardActivity;
+import com.refnil.uqcard.R;
+import com.refnil.uqcard.library.AbstractServer;
+import com.refnil.uqcard.library.LinkConnection;
+import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.library.Server;
+import com.refnil.uqcard.library.ai.DummyAi;
 
 public class UqcardService extends Service implements IService {
 
@@ -53,13 +51,20 @@ public class UqcardService extends Service implements IService {
 		int type = intent.getIntExtra(IService.TYPE, IService.NOTHING);
 
 		switch (type) {
-		case 1:
+		case CONNECT_BLUETOOTH:
 			BluetoothAdapter ba = BluetoothAdapter.getDefaultAdapter();
 			ba.cancelDiscovery();
 			String add = intent.getStringExtra("address");
 			if (!add.isEmpty()) {
 				connect(ba.getRemoteDevice(add));
 			}
+			break;
+		case START_AI_LAME:
+			createServer();
+			HandlerThread t = new HandlerThread("player_ai");
+			t.start();
+			Player p = new Player(t.getLooper(), server);
+			new DummyAi(p);
 			break;
 		}
 

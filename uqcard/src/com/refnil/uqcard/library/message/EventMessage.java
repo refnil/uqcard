@@ -1,6 +1,6 @@
 package com.refnil.uqcard.library.message;
 
-import com.refnil.uqcard.Event;
+import com.refnil.uqcard.event.Event;
 
 public class EventMessage extends UqcardMessage {
 	/**

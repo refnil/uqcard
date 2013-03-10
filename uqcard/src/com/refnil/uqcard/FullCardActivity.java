@@ -1,6 +1,8 @@
 package com.refnil.uqcard;
 
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.data.Card;
+import com.refnil.uqcard.view.CardView;
 
 import android.os.Bundle;
 import android.app.Activity;

@@ -44,7 +44,7 @@ public class BluetoothLinkConnection extends LinkConnection {
 	public void send(UqcardMessage arg0) {
 		// TODO Auto-generated method stub
 		try {
-			Log.i(TAG,"Sent: " + arg0);
+			
 			os.writeObject(arg0);
 		} catch (IOException e) {
 		}
@@ -63,10 +63,10 @@ public class BluetoothLinkConnection extends LinkConnection {
 		                // Read from the InputStream
 		                m = (UqcardMessage)is.readObject();
 		                // Send the obtained bytes to the UI activity
-		                Log.v(TAG,m.toString());
 		                receive(m);
 		            } catch (IOException e) {
-		                break;
+		            	e.printStackTrace();
+		            	break;
 		            } catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

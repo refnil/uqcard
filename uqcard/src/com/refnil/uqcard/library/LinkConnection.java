@@ -29,7 +29,7 @@ public abstract class LinkConnection {
 	public void receive(UqcardMessage um) {
 		IdMessage m = um instanceof IdMessage?(IdMessage)um:null;
 		if (m!=null) {
-			Log.i(TAG, m.message.toString());
+			Log.i(TAG, "Received:" + m.message.toString());
 			Link l = map.get(m.id);
 			if (l == null) {
 				HandlerThread t = new HandlerThread("ProxyPlayer");

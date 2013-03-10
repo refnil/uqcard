@@ -7,9 +7,10 @@ import java.util.ListIterator;
 import android.os.Looper;
 import android.os.Messenger;
 import android.os.RemoteException;
+import android.util.Log;
 
-import com.refnil.uqcard.Board;
-import com.refnil.uqcard.Event;
+import com.refnil.uqcard.data.ServerBoard;
+import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
@@ -21,8 +22,10 @@ import com.refnil.uqcard.library.message.UqcardMessage;
 import com.refnil.uqcard.library.message.YouAre;
 
 public class Server extends AbstractServer implements Listener<Event> {
+	
+	private final static String TAG = "Server";
 
-	private Board board = new Board();
+	private ServerBoard board = new ServerBoard();
 
 	private List<TempPlayer> players = new ArrayList<TempPlayer>();
 	private int numberOfPlayer = 0;
@@ -36,6 +39,9 @@ public class Server extends AbstractServer implements Listener<Event> {
 	@Override
 	protected void handleUqcardMessage(Messenger sender, UqcardMessage um) {
 		// TODO Auto-generated method stub
+		
+		Log.i(TAG, "Server received:" + um);
+		
 		ConnectPlayer cp = um instanceof ConnectPlayer?(ConnectPlayer)um:null;
 		DisconnectPlayer dp = um instanceof DisconnectPlayer?(DisconnectPlayer)um:null;
 		RequestServer rs = um instanceof RequestServer?(RequestServer)um:null;
@@ -75,6 +81,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 				}
 			}
 		} else if (rs != null) {
+			Log.i(TAG,rs.event.type.toString());
 			board.receiveEvent(rs.event);
 		} else if (c != null) {
 			try {
@@ -88,6 +95,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 	}
 
 	private void tellToAll(UqcardMessage um) throws RemoteException {
+		Log.i(TAG, "Server sent:" + um);
 		ListIterator<TempPlayer> it = players.listIterator();
 
 		while (it.hasNext()) {
@@ -111,7 +119,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 	}
 
 	private class TempPlayer {
-		final public int id;
+		private final int id;
 		final public Messenger m;
 		final public String name;
 
