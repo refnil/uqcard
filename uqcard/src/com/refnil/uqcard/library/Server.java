@@ -9,9 +9,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-import com.refnil.uqcard.Board;
-import com.refnil.uqcard.Event;
-import com.refnil.uqcard.ServerBoard;
+import com.refnil.uqcard.data.ServerBoard;
+import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
@@ -120,7 +119,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 	}
 
 	private class TempPlayer {
-		final public int id;
+		private final int id;
 		final public Messenger m;
 		final public String name;
 
