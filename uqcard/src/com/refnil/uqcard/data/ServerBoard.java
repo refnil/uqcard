@@ -12,7 +12,7 @@ public class ServerBoard extends Board {
 	
 	public ServerBoard()
 	{
-		
+		this.setTour(1);
 	}
 	
 	@Override
@@ -29,6 +29,7 @@ public class ServerBoard extends Board {
 
 		if (event.type == Event_Type.END_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() + " ends");
+			this.setTour(getTour()+1);
 			tell(new BeginTurnEvent());
 		}
 
