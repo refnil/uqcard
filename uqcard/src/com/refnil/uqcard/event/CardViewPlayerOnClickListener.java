@@ -16,8 +16,8 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-		Log.i("playerlistener", "yarrr");
-		//em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+		if(v instanceof CardView)
+			em.setSelectedCard(((CardView)v).getCard().getUid(), false);
 	}
 
 }
