@@ -47,7 +47,7 @@ public class TestActivity extends AbstractBoard{
 		bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 		
 		setContentView(R.layout.activity_test);
-		Button b = (Button) findViewById(R.id.button1);
+		Button b = (Button) findViewById(R.id.endturnbutton);
 		b.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
@@ -84,7 +84,7 @@ public class TestActivity extends AbstractBoard{
 	public void BeginGameAction(BeginGameEvent event) {
 		Button b = (Button) findViewById(R.id.Button02);
 		b.setEnabled(true);
-		b = (Button) findViewById(R.id.button1);
+		b = (Button) findViewById(R.id.endturnbutton);
 		b.setEnabled(false);
 		
 	}

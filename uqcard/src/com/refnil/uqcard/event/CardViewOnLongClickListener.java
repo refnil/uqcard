@@ -18,13 +18,19 @@ public class CardViewOnLongClickListener implements OnLongClickListener {
 	}
 
 	public boolean onLongClick(View v) {
-		CardView iv = (CardView) v;
-		if (iv.getCard() != null) {
-			Intent i = new Intent(context, FullCardActivity.class);
-			i.putExtra("Card", iv.getCard());
-			((Activity) context).startActivity(i);
+		if(v instanceof CardView)
+		{
+			CardView iv = (CardView) v;
+			if (iv.getCard() != null) {
+				Intent i = new Intent(context, FullCardActivity.class);
+				i.putExtra("Card", iv.getCard());
+				((Activity) context).startActivity(i);
+			}
+
+			return true;
 		}
-		return true;
+		else
+			return false;
 	}
 
 }

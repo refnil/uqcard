@@ -9,7 +9,6 @@ import com.refnil.uqcard.view.ImageAdapter;
 import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 import android.os.Bundle;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Gallery;
@@ -38,12 +37,14 @@ public class BoardActivity extends AbstractBoard {
 		for(int i=0;i<glo.getChildCount();i++)
 		{
 			glo.getChildAt(i).setOnClickListener(new CardViewOpponentOnClickListener(em));
+			glo.getChildAt(i).setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
 		}
 		
 		GridLayout glp = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
 		for(int i=0;i<glp.getChildCount();i++)
 		{
 			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
+			glo.getChildAt(i).setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
 		}
 
 		// Hand (For tests.)
@@ -102,15 +103,27 @@ public class BoardActivity extends AbstractBoard {
 
 	@Override
 	public void BattleAction(AttackEvent event) {
-		GridLayout gv ;
-		if(event.isYourAttack())
-			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
-		else
-			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
+
 		Card c = CardStoreBidon.getCard(event.getOpponent());
 		CardView cv = new CardView(getApplicationContext(),c);
-		int index = gv.indexOfChild(cv);
+		int index;
+		GridLayout gv ;
+		if(event.isYourAttack())
+		{
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
+			index = gv.indexOfChild(cv);
+			cv.setOnClickListener(new CardViewOpponentOnClickListener(em));
+		}
+		else
+		{
+			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
+			index = gv.indexOfChild(cv);
+			cv.setOnClickListener(new CardViewPlayerOnClickListener(em));
+		}
+		cv.setClickable(true);
+		cv.setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
 		gv.removeViewAt(index);
+		
 		gv.addView(cv, index);
 		
 	}
@@ -125,6 +138,11 @@ public class BoardActivity extends AbstractBoard {
 		else
 			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
 		gv.addView(cv, event.getPosition());
+	}
+	
+	public void EndTurnButton(View v)
+	{
+		em.sendToPlayer(new EndTurnEvent());
 	}
 
 }
