@@ -9,13 +9,8 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
-<<<<<<< HEAD
-import com.refnil.uqcard.Event;
-import com.refnil.uqcard.ServerBoard;
-=======
 import com.refnil.uqcard.data.ServerBoard;
 import com.refnil.uqcard.event.Event;
->>>>>>> branch 'master' of https://github.com/refnil/uqcard.git
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
