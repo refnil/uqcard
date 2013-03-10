@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Cards>
+    <Card id="0">
+        <Name>Roger</Name>
+        <Description>Le guerrier flutflut</Description>
+        <Flavor>Manger Manger</Flavor>
+        <Cost>3</Cost>
+    </Card>
+</Cards>

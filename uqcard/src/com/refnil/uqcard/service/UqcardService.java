@@ -27,6 +27,8 @@ import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.library.Server;
 import com.refnil.uqcard.library.ai.DummyAi;
+import com.refnil.uqcard.library.message.CardDeckMessage;
+import com.refnil.uqcard.library.message.EmptyDeck;
 
 public class UqcardService extends Service implements IService {
 
@@ -212,7 +214,7 @@ public class UqcardService extends Service implements IService {
 			player = new Player(t.getLooper(), server);
 
 			try {
-				player.connect("ROger");
+				player.connect("ROger",new CardDeckMessage(1, 1, new EmptyDeck()));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

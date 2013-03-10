@@ -10,6 +10,7 @@ import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
+import com.refnil.uqcard.library.message.DeckMessage;
 import com.refnil.uqcard.library.message.EventMessage;
 import com.refnil.uqcard.library.message.RequestServer;
 import com.refnil.uqcard.library.message.UqcardMessage;
@@ -27,8 +28,8 @@ public class Player extends AbstractPlayer {
 		board = new Board();
 	}
 
-	public void connect(String name) throws RemoteException {
-		sendTo(getServer(), new ConnectPlayer(name));
+	public void connect(String name, DeckMessage dm) throws RemoteException {
+		sendTo(getServer(), new ConnectPlayer(name,dm));
 	}
 
 	public void sendEvent(Event e) throws RemoteException {
