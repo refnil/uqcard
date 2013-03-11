@@ -28,16 +28,20 @@ public class Board extends AbstractListenable<Event> {
 	private int playerID;
 	private List<Card> opponentHandCards;
 	private List<Card> playerHandCards;
-	private List<Card> opponentBoardCards;
-	private List<Card> playerBoardCards;
+	private Card[] opponentBoardCards;
+	private Card[] playerBoardCards;
 	private Stack<Card> opponentStackCards;
 	private Stack<Card> playerStackCards;
 	private Stack<Card> opponentGraveyardCards;
 	private Stack<Card> playerGraveyardCards;
+	private Deck playerDeck;
+	private Deck opponentDeck;
 
 	public Board()
 	{
 		this.setTour(1);
+		playerBoardCards = new Card[12];
+		opponentBoardCards = new Card[12];
 	}
 	
 	public int getPhase() {
@@ -88,37 +92,37 @@ public class Board extends AbstractListenable<Event> {
 		this.playerHandCards.remove(card);
 	}
 
-	public List<Card> getOpponentBoardCards() {
+	public Card[]  getOpponentBoardCards() {
 		return opponentBoardCards;
 	}
 
-	public void setOpponentBoardCards(List<Card> opponentBoardCards) {
+	public void setOpponentBoardCards(Card[]  opponentBoardCards) {
 		this.opponentBoardCards = opponentBoardCards;
 	}
 
-	public void addOpponentBoardCard(Card card) {
-		this.opponentBoardCards.add(card);
+	public void addOpponentBoardCard(Card card,int position) {
+		this.opponentBoardCards[position] = card ;
 	}
 
-	public void deleteOpponentBoardCard(Card card) {
+	/*public void deleteOpponentBoardCard(Card card) {
 		this.opponentBoardCards.remove(card);
-	}
+	}*/
 
-	public List<Card> getPlayerBoardCards() {
+	public Card[]  getPlayerBoardCards() {
 		return playerBoardCards;
 	}
 
-	public void setPlayerBoardCards(List<Card> playerBoardCards) {
+	public void setPlayerBoardCards(Card[] playerBoardCards) {
 		this.playerBoardCards = playerBoardCards;
 	}
 
-	public void addPlayerBoardCard(Card card) {
-		this.playerBoardCards.add(card);
+	public void addPlayerBoardCard(Card card,int position) {
+		this.opponentBoardCards[position] = card ;
 	}
 
-	public void deletePlayerBoardCard(Card card) {
+	/*public void deletePlayerBoardCard(Card card) {
 		this.playerBoardCards.remove(card);
-	}
+	}*/
 
 	public Stack<Card> getOpponentStackCards() {
 		return opponentStackCards;
@@ -225,7 +229,7 @@ public class Board extends AbstractListenable<Event> {
 	{
 		Log.i(TAG, "Draw card");
 		DrawCardEvent dce = (DrawCardEvent)event;
-		Card c = CardStoreBidon.getCard(dce.getCard());
+		Card c = CardStoreBidon.getCard(dce.getCard(),CardType.CARD);
 		playerTakeCardInStack();
 		addPlayerHandCard(c);
 		tell(event);
@@ -234,21 +238,22 @@ public class Board extends AbstractListenable<Event> {
 	void PutCardAction(PutCardEvent event)
 	{
 		Log.i(TAG,"Put card");
-		Card c = CardStoreBidon.getCard(event.getCard());
+		Card c = CardStoreBidon.getCard(event.getCard(),CardType.CARD);
 		deletePlayerHandCard(c);
-		addPlayerBoardCard(c);
+		
+		addPlayerBoardCard(c,event.getPosition());
 		tell(event);
 	}
 	
 	void BattleAction(AttackEvent event)
 	{
-		Card c = CardStoreBidon.getCard(event.getOpponent());
-		List<Card> list =  getOpponentBoardCards();
-		for(int i=0;i<list.size();i++)
+		Card c = CardStoreBidon.getCard(event.getOpponent(),CardType.CARD);
+		Card[] list =  getOpponentBoardCards();
+		for(int i=0;i<list.length;i++)
 		{
-			if(list.get(i).getUid() == c.getUid())
+			if(list[i].getUid() == c.getUid())
 			{
-				list.set(i,c);
+				list[i]= c;
 				break;
 			}
 		}
@@ -265,5 +270,62 @@ public class Board extends AbstractListenable<Event> {
 	{
 		Log.i(TAG, "Game ends");
 		tell(event);
+	}
+
+	public Deck getPlayerDeck() {
+		return playerDeck;
+	}
+
+	public void setPlayerDeck(Deck playerDeck) {
+		this.playerDeck = playerDeck;
+	}
+
+	public Deck getOpponentDeck() {
+		return opponentDeck;
+	}
+
+	public void setOpponentDeck(Deck opponentDeck) {
+		this.opponentDeck = opponentDeck;
+	}
+	
+	public Card getCardByUID(int uid)
+	{
+		for(int i = 0; i< playerBoardCards.length; i++)
+		{
+			if(uid == playerBoardCards[i].getUid())
+			{
+				return  playerBoardCards[i];
+			}
+			
+		}
+		
+		for(int i = 0; i< opponentBoardCards.length; i++)
+		{
+			if(uid == opponentBoardCards[i].getUid())
+			{
+				return  opponentBoardCards[i];
+			}
+			
+		}
+		
+		for(int i = 0; i< playerHandCards.size(); i++)
+		{
+			if(uid == playerHandCards.get(i).getUid())
+			{
+				return  playerHandCards.get(i);
+			}
+			
+		}
+		
+		for(int i = 0; i< opponentHandCards.size(); i++)
+		{
+			if(uid == opponentHandCards.get(i).getUid())
+			{
+				return  opponentHandCards.get(i);
+			}
+			
+		}
+		return null;
+	
 	}
 }

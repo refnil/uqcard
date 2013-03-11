@@ -3,6 +3,7 @@ package com.refnil.uqcard;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.CardStore;
+import com.refnil.uqcard.data.CardType;
 import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.event.*;
 import com.refnil.uqcard.view.CardView;
@@ -97,7 +98,7 @@ public class BoardActivity extends AbstractBoard {
 		CardView tab[] = new CardView[size];
 		tab = ((ImageAdapter)gallery.getAdapter()).getPics();
 		
-		Card c = CardStoreBidon.getCard(event.getCard());
+		Card c = CardStoreBidon.getCard(event.getCard(), CardType.CARD);
 		tab[size-2] = new CardView(getApplicationContext(),c);
 		ImageAdapter adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
@@ -110,7 +111,7 @@ public class BoardActivity extends AbstractBoard {
 			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
 		else
 			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
-		Card c = CardStoreBidon.getCard(event.getOpponent());
+		Card c = CardStoreBidon.getCard(event.getOpponent(), CardType.CARD);
 		CardView cv = new CardView(getApplicationContext(),c);
 		int index = gv.indexOfChild(cv);
 		gv.removeViewAt(index);
@@ -120,7 +121,7 @@ public class BoardActivity extends AbstractBoard {
 
 	@Override
 	public void PutCardAction(PutCardEvent event) {
-		Card c = CardStoreBidon.getCard(event.getCard());
+		Card c = CardStoreBidon.getCard(event.getCard(), CardType.CARD);
 		CardView cv = new CardView(getApplicationContext(),c);
 		GridLayout gv;
 		if(event.isOpponent())

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.refnil.uqcard.CardView
+        android:id="@+id/cardPreview"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" >
+    </com.refnil.uqcard.CardView>
+
+    <ScrollView
+        android:id="@+id/cardList"
+        android:layout_width="140dp"
+        android:layout_height="200dp"
+        android:layout_alignTop="@+id/cardPreview"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/cardPreview" >
+
+        <LinearLayout
+            android:id="@+id/cardListLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/cardDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cardPreview"
+        android:layout_below="@+id/cardPreview"
+        android:layout_marginTop="27dp"
+        android:lines="8"
+        android:maxLines="8"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:width="300dp" />
+
+</RelativeLayout>
