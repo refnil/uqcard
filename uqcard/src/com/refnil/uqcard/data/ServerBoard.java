@@ -7,12 +7,11 @@ import com.refnil.uqcard.event.DrawCardEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
-import com.refnil.uqcard.event.SelectedCardEvent;
-
 import android.util.Log;
 
 public class ServerBoard extends Board {
 	
+	private DummyCardStore cardStore = new DummyCardStore();
 	final private static String TAG = "ServerBoard";
 	
 	public ServerBoard()
@@ -49,23 +48,23 @@ public class ServerBoard extends Board {
 		}
 		if (event.type == Event_Type.DRAW_CARD) {
 			DrawCardEvent de = (DrawCardEvent) event;
-			Log.i(TAG, "Drawing card "+de.getCard());
+			Log.i(TAG, "Drawing card "+de.getCardUID());
 			
-			getPlayerHandCards().add(getCardByUID(de.getCard()));
+			getPlayerHandCards().add(getCardByUID(de.getCardUID()));
 			tell(de);
 		}
 		
 		if (event.type == Event_Type.PUT_CARD) {
 			PutCardEvent pe = (PutCardEvent) event;
-			Log.i(TAG, "Putting card "+pe.getCard()+" on play");
-			
-			if(pe.isOpponent())
+			Log.i(TAG, "Putting card "+pe.getCardUID()+" on play");
+			//FIXME
+			if(true)
 			{
 				if(pe.getPosition() !=5 && pe.getPosition() !=11)
 				{
 					if(this.getOpponentBoardCards()[pe.getPosition()] == null)
 					{
-						this.getOpponentBoardCards()[pe.getPosition()] =this.getCardByUID(pe.getCard());
+						this.getOpponentBoardCards()[pe.getPosition()] =this.getCardByUID(pe.getCardUID());
 						tell(pe);
 					}
 					else
@@ -84,7 +83,7 @@ public class ServerBoard extends Board {
 				{
 					if(this.getPlayerBoardCards()[pe.getPosition()] == null)
 					{
-						this.getPlayerBoardCards()[pe.getPosition()] =this.getCardByUID(pe.getCard());
+						this.getPlayerBoardCards()[pe.getPosition()] =this.getCardByUID(pe.getCardUID());
 						tell(pe);
 					}
 					else
