@@ -14,6 +14,7 @@ import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
 import com.refnil.uqcard.library.message.ConnectPlayer;
 import com.refnil.uqcard.library.message.ConnectedPlayer;
+import com.refnil.uqcard.library.message.DeckMessage;
 import com.refnil.uqcard.library.message.DisconnectPlayer;
 import com.refnil.uqcard.library.message.DisconnectedPlayer;
 import com.refnil.uqcard.library.message.EventMessage;
@@ -46,6 +47,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 		DisconnectPlayer dp = um instanceof DisconnectPlayer?(DisconnectPlayer)um:null;
 		RequestServer rs = um instanceof RequestServer?(RequestServer)um:null;
 		Close c = um instanceof Close?(Close)um:null;
+		DeckMessage dm = um instanceof DeckMessage? (DeckMessage)um : null;
 
 		if (cp != null) {
 			if (numberOfPlayer < 2) {
@@ -90,6 +92,10 @@ public class Server extends AbstractServer implements Listener<Event> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else if (dm != null)
+		{
+			dm.getDeck();
 		}
 
 	}

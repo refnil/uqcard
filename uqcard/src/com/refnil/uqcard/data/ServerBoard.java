@@ -1,5 +1,7 @@
 package com.refnil.uqcard.data;
 
+import java.util.ArrayList;
+
 import com.refnil.uqcard.data.test.DeckTest;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginTurnEvent;
@@ -46,13 +48,13 @@ public class ServerBoard extends Board {
 				tell(ae);
 			}
 		}
-		if (event.type == Event_Type.DRAW_CARD) {
+		/*if (event.type == Event_Type.DRAW_CARD) {
 			DrawCardEvent de = (DrawCardEvent) event;
 			Log.i(TAG, "Drawing card "+de.getCardUID());
 			
 			getPlayerHandCards().add(getCardByUID(de.getCardUID()));
 			tell(de);
-		}
+		}*/
 		
 		if (event.type == Event_Type.PUT_CARD) {
 			PutCardEvent pe = (PutCardEvent) event;
@@ -110,5 +112,11 @@ public class ServerBoard extends Board {
 			tell(event);
 		}
 	}
+	
+	void receiveDeck(ArrayList<Integer> idList,int playerNumber)
+	{
+		
+	}
+	
 
 }
