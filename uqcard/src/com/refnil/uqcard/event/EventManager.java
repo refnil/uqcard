@@ -10,6 +10,7 @@ public class EventManager {
 	private BoardActivity board;
 	private int selectedCard;
 	private int selectedCardHand;
+	private int selectedCardHandUID;
 
 	public EventManager(Player p) {
 		this.p = p;
@@ -53,5 +54,13 @@ public class EventManager {
 
 	public void setSelectedCardHand(int selectedCardHand) {
 		this.selectedCardHand = selectedCardHand;
+	}
+
+	public int getSelectedCardHandUID() {
+		return selectedCardHandUID;
+	}
+
+	public void setSelectedCardHandUID(int selectedCardHandUID) {
+		this.selectedCardHandUID = selectedCardHandUID;
 	}
 }

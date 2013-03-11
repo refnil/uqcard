@@ -22,7 +22,6 @@ public class ServerBoard extends Board {
 	
 	@Override
 	public void receiveEvent(Event event) {
-		Log.i(TAG,"TPTP "+ event.type.toString());
 		if (event.type == Event_Type.BEGIN_GAME) {
 			Log.i(TAG, "Game begins");
 			tell(event);
@@ -31,6 +30,7 @@ public class ServerBoard extends Board {
 		if (event.type == Event_Type.BEGIN_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() + " begins");
 			tell(new DrawCardEvent((int)getPlayerDeck().drawCardAt(0).get_Id()));
+
 		}
 		
 		if (event.type == Event_Type.DECLARE_ATTACK) {
@@ -101,7 +101,7 @@ public class ServerBoard extends Board {
 		
 		if (event.type == Event_Type.END_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() + " ends");
-			
+
 			this.setTour(getTour()+1);
 			tell(new BeginTurnEvent());
 		}

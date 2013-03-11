@@ -10,107 +10,108 @@
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_below="@+id/opponentText"
         android:columnCount="6"
         android:rowCount="2" >
 
         <TextView
             android:layout_width="50dp"
-            android:text="1"
+            android:text="@string/pos1"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="2"
+            android:text="@string/pos2"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="3"
+            android:text="@string/pos3"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="4"
+            android:text="@string/pos4"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="5"
+            android:text="@string/pos5"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="Deck"
+            android:text="@string/deck"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
-            android:text="7"
+            android:text="@string/pos7"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="8"
+            android:text="@string/pos8"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="9"
+            android:text="@string/pos9"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="10"
+            android:text="@string/pos10"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
             android:layout_width="50dp"
-            android:text="11"
+            android:text="@string/pos11"
             android:textSize="40sp" 
             android:clickable="true"/>
 
         <TextView
-            android:text="Graveyard"
+            android:text="@string/graveyard"
             android:textSize="15sp" />
-    </GridLayout>
-
-    <TextView
-        android:id="@+id/opponentText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="30dp"
-        android:textIsSelectable="false"
-        android:textSize="15sp" >
-    </TextView>
+    </GridLayout> 
+    
+    
 
     <TextView
         android:id="@+id/playerText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/opponentText"
-        android:height="30dp"
-        android:textIsSelectable="false"
-        android:textSize="15sp" >
-    </TextView>
-
-    <Button
-        android:id="@+id/endTurnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/playerText"
-        android:text="@string/endturn" />
+        android:layout_alignBottom="@+id/endturnbutton"
+        android:layout_alignParentLeft="true"
+        android:textIsSelectable="false"
+        android:layout_toLeftOf="@+id/endturnbutton"/>
 
- 
+    <Button
+        android:id="@+id/endturnbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/gridLayoutBoardOpponent"
+        android:text="@string/startgame" 
+        android:onClick="StartGameButton"/>
+
+    <TextView
+        android:id="@+id/opponentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/playerText"
+        android:layout_alignParentLeft="true"
+        android:textIsSelectable="false"
+        android:layout_alignRight="@+id/playerText"
+        android:layout_alignTop="@+id/endturnbutton"/>
 
     <com.refnil.uqcard.view.SemiClosedSlidingDrawer
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -159,70 +160,70 @@
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="1"
+            android:text="@string/pos1"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="2"
+            android:text="@string/pos2"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="3"
+            android:text="@string/pos3"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="4"
+            android:text="@string/pos4"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="5"
+            android:text="@string/pos5"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
-            android:text="Deck"
+            android:text="@string/deck"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="7"
+            android:text="@string/pos7"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="8"
+            android:text="@string/pos8"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="9"
+            android:text="@string/pos9"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="10"
+            android:text="@string/pos10"
             android:textSize="40sp" />
 
         <TextView
             android:layout_width="50dp"
             android:clickable="true"
-            android:text="11"
+            android:text="@string/pos11"
             android:textSize="40sp" />
 
         <TextView
-            android:text="Graveyard"
+            android:text="@string/graveyard"
             android:textSize="15sp" />
     </GridLayout>
 

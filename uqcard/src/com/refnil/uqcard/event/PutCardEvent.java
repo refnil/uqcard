@@ -1,25 +1,27 @@
 package com.refnil.uqcard.event;
 
+import com.refnil.uqcard.data.Card;
+
 public class PutCardEvent extends Event{
 
 	private static final long serialVersionUID = 50728585326483695L;
-	private int card;
+	private int cardID;
+	private int cardUID;
 	private int position;
-	private boolean opponent;
 
-	public PutCardEvent(int card,int position, boolean opponent) {
+	public PutCardEvent(Card card,int position) {
 		super(Event_Type.PUT_CARD);
-		setCard(card);
+		setCardID(card.get_Id());
+		setCardUID(card.getUid());
 		setPosition(position);
-		setOpponent(opponent);
 	}
 
-	public int getCard() {
-		return card;
+	public int getCardID() {
+		return cardID;
 	}
 
-	public void setCard(int card) {
-		this.card = card;
+	public void setCardID(int card) {
+		this.cardID = card;
 	}
 
 	public int getPosition() {
@@ -30,12 +32,12 @@ public class PutCardEvent extends Event{
 		this.position = position;
 	}
 
-	public boolean isOpponent() {
-		return opponent;
+	public int getCardUID() {
+		return cardUID;
 	}
 
-	public void setOpponent(boolean opponent) {
-		this.opponent = opponent;
+	public void setCardUID(int cardUID) {
+		this.cardUID = cardUID;
 	}
 	
 

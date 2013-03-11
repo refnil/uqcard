@@ -48,7 +48,7 @@ public class CardsDataSource {
 				cardsColumns, MySQLiteHelper.CARDS_ID + " = " + insertId, null,
 				null, null, null);
 		cursor.moveToFirst();
-		myCard.setId(cursor.getLong(MySQLiteHelper.CARDS_NUM_ID));
+		myCard.setId(cursor.getInt(MySQLiteHelper.CARDS_NUM_ID));
 		cursor.close();
 		if (myCard instanceof CreatureCard) {
 			newCard = new ContentValues();
@@ -124,7 +124,7 @@ public class CardsDataSource {
 	}
 
 	private Card cursorToCard(Cursor cursor) {
-		Card aCard = new Card(cursor.getLong(MySQLiteHelper.CARDS_NUM_ID),
+		Card aCard = new Card(cursor.getInt(MySQLiteHelper.CARDS_NUM_ID),
 				cursor.getString(MySQLiteHelper.CARDS_NUM_NAME),
 				cursor.getString(MySQLiteHelper.CARDS_NUM_DESCRIPTION),
 				cursor.getString(MySQLiteHelper.CARDS_NUM_FLAVOR),

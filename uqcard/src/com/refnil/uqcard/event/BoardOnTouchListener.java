@@ -36,7 +36,8 @@ public class BoardOnTouchListener implements OnTouchListener {
 					CardView ca = ((ImageAdapter) gallery.getAdapter())
 							.getCardView(gallery.getSelectedItemPosition(),
 								null, null);
-					getEm().setSelectedCardHand(ca.getCard().getUid());
+					getEm().setSelectedCardHand(ca.getCard().get_Id());
+					getEm().setSelectedCardHandUID(ca.getCard().getUid());
 					slider.animateClose();
 					pointY = 0;
 				}

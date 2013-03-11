@@ -10,7 +10,7 @@ public class Card implements Parcelable {
 	private String description;
 	private String flavor;
 
-	private long id;
+	private int id;
 	private int uid;
 	private byte[] image;
 	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
@@ -22,8 +22,20 @@ public class Card implements Parcelable {
 			return new Card[size];
 		}
 	};
+	
+	Card(int id,int uid, String name, String description, String flavor, int cost,byte[] image) {
 
-	public Card(long id, String name, String description, String flavor, int cost,byte[] image) {
+		this.setId(id);
+		this.setUid(uid);
+		this.setName(name);
+		this.setDescription(description);
+		this.setFlavor(flavor);
+		this.setCost(cost);
+		this.setImage(image);
+	}
+
+
+	Card(int id, String name, String description, String flavor, int cost,byte[] image) {
 
 		this.setId(id);
 		this.setName(name);
@@ -47,7 +59,7 @@ public class Card implements Parcelable {
 
 	public Card(Parcel source) {
 		byte[] temp = null;
-		this.setId(source.readLong());
+		this.setId(source.readInt());
 		this.setName(source.readString());
 		this.setDescription(source.readString());
 		this.setFlavor(source.readString());
@@ -56,11 +68,11 @@ public class Card implements Parcelable {
 		this.setImage(temp);
 	}
 
-	public long get_Id() {
+	public int get_Id() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
