@@ -1,5 +1,7 @@
 package com.refnil.uqcard;
 
+import java.util.List;
+
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.CardStoreBidon;
@@ -97,8 +99,10 @@ public class BoardActivity extends AbstractBoard {
 		CardView tab[] = new CardView[size];
 		tab = ((ImageAdapter)gallery.getAdapter()).getPics();
 		
-		Card c = CardStoreBidon.getCard(event.getCard());
-		tab[size-2] = new CardView(getApplicationContext(),c);
+		Card c = CardStoreBidon.getCard(event.getCardID());
+		c.setUid(event.getCardUID());
+		int index = this.board.getPlayerHandCards().indexOf(c);
+		tab[size-2] = new CardView(getApplicationContext(),this.board.getPlayerHandCards().get(index));
 		ImageAdapter adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
 	}
@@ -106,7 +110,8 @@ public class BoardActivity extends AbstractBoard {
 	@Override
 	public void BattleAction(AttackEvent event) {
 
-		Card c = CardStoreBidon.getCard(event.getOpponent());
+		//Doit s'updater normalement à cause des références
+		/*Card c = CardStoreBidon.getCard(event.getOpponent());
 		CardView cv = new CardView(getApplicationContext(),c);
 		int index;
 		GridLayout gv ;
@@ -126,20 +131,44 @@ public class BoardActivity extends AbstractBoard {
 		cv.setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
 		gv.removeViewAt(index);
 		
-		gv.addView(cv, index);
+		gv.addView(cv, index);*/
 		
 	}
 
 	@Override
-	public void PutCardAction(PutCardEvent event) {
-		Card c = CardStoreBidon.getCard(event.getCard());
-		CardView cv = new CardView(getApplicationContext(),c);
+	public void PutCardAction(PutCardEvent event) 
+	{
+		Gallery gallery = (Gallery)findViewById(R.id.Gallery);
+		ImageAdapter adapter = (ImageAdapter) gallery.getAdapter();
+		CardView cv = null;
+		for(int i=0;i<adapter.getCount();i++)
+		{
+			if(((CardView)adapter.getItem(i)).getCard().getUid() == event.getCardUID())
+			{
+				cv = ((CardView)adapter.getItem(i));
+				final int size = gallery.getAdapter().getCount()-1;
+				CardView tab[] = new CardView[size];
+				for(int j=0;j<adapter.getCount();j++)
+				{
+					if(j>i)
+						tab[j-1] = (CardView)adapter.getItem(j);
+					else if(j != i)
+							tab[j] = (CardView)adapter.getItem(j);
+				}
+				break;
+			}
+		}
 		GridLayout gv;
-		if(event.isOpponent())
+		if(cv == null)
+		{
 			gv = (GridLayout) findViewById(R.id.gridLayoutBoardOpponent);
+			cv = new CardView(getApplicationContext(),CardStoreBidon.getCard(event.getCardID()));
+		}
 		else
 			gv = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
 		gv.addView(cv, event.getPosition());
+		em.setSelectedCardHand(-1);
+		em.setSelectedCardHandUID(-1);
 	}
 	
 	public void StartGameButton(View v)

@@ -6,7 +6,6 @@ public class AttackEvent extends Event{
 	
 	private int opponent;
 	private int player;
-	private boolean yourAttack;
 	
 	AttackEvent(int opp, int pl)
 	{
@@ -25,11 +24,5 @@ public class AttackEvent extends Event{
 	}
 	public void setPlayer(int player) {
 		this.player = player;
-	}
-	public boolean isYourAttack() {
-		return yourAttack;
-	}
-	public void setYourAttack(boolean yourAttack) {
-		this.yourAttack = yourAttack;
 	}
 }

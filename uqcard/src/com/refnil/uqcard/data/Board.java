@@ -223,8 +223,9 @@ public class Board extends AbstractListenable<Event> {
 	{
 		Log.i(TAG, "Draw card");
 		DrawCardEvent dce = (DrawCardEvent)event;
-		Card c = CardStoreBidon.getCard(dce.getCard());
+		Card c = CardStoreBidon.getCard(dce.getCardID());
 		playerTakeCardInStack();
+		c.setUid(event.getCardUID());
 		addPlayerHandCard(c);
 		tell(event);
 	}
@@ -232,24 +233,47 @@ public class Board extends AbstractListenable<Event> {
 	void PutCardAction(PutCardEvent event)
 	{
 		Log.i(TAG,"Put card");
-		Card c = CardStoreBidon.getCard(event.getCard());
-		deletePlayerHandCard(c);
-		addPlayerBoardCard(c);
+		Card c = CardStoreBidon.getCard(event.getCardID());
+		if(this.getPlayerHandCards().contains(c))
+		{
+
+			deletePlayerHandCard(c);
+			c.setUid(event.getCardUID());
+			addPlayerBoardCard(c);
+		}
+		else
+		{
+			deleteOpponentHandCard(c);
+			c.setUid(event.getCardUID());
+			addOpponentBoardCard(c);
+		}
 		tell(event);
 	}
 	
 	void BattleAction(AttackEvent event)
 	{
-		Card c = CardStoreBidon.getCard(event.getOpponent());
 		List<Card> list =  getOpponentBoardCards();
+		int opponent = -1;
 		for(int i=0;i<list.size();i++)
 		{
-			if(list.get(i).getUid() == c.getUid())
+			if(list.get(i).getUid() == event.getOpponent())
 			{
-				list.set(i,c);
+				opponent = i;
 				break;
 			}
 		}
+		list =  getPlayerBoardCards();
+		int player = -1;
+		for(int i=0;i<list.size();i++)
+		{
+			if(list.get(i).getUid() == event.getPlayer())
+			{
+				player = i;
+				break;
+			}
+		}
+		
+		((CreatureCard)this.getOpponentBoardCards().get(opponent)).setHp(((CreatureCard)this.getOpponentBoardCards().get(opponent)).getHp() - (((CreatureCard)this.getOpponentBoardCards().get(opponent)).getAtk()- ((CreatureCard)this.getOpponentBoardCards().get(opponent)).getDef()));
 		tell(event);
 	}
 	

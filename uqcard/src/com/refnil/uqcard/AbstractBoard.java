@@ -79,11 +79,6 @@ public abstract class AbstractBoard extends Activity implements Listener<Event>{
 	
 	public abstract void PutCardAction(PutCardEvent event);
 	
-	final public void SelectedCardAction(SelectedCardEvent event)
-	{
-		em.setSelectedCard(event.getCard().getCard().getUid(),event.isOpponent());
-	}
-	
 	final protected void setBoard(Board board2) {
 		// TODO Auto-generated method stub
 		board = board2;
