@@ -4,7 +4,6 @@ import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.view.CardView;
 
-import android.R;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridLayout;

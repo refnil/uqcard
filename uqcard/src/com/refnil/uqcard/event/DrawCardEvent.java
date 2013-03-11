@@ -1,7 +1,5 @@
 package com.refnil.uqcard.event;
 
-import com.refnil.uqcard.data.Card;
-
 public class DrawCardEvent extends Event{
 
 
@@ -9,9 +7,9 @@ public class DrawCardEvent extends Event{
 	private int cardID;
 	private int cardUID;
 
-	public DrawCardEvent(Card c) {
+	public DrawCardEvent(int i) {
 		super(Event_Type.DRAW_CARD);
-		this.setCardID(c.get_Id());
+		this.setCardID(i);
 	}
 
 	public int getCardID() {
