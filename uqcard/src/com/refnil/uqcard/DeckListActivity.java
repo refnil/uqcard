@@ -20,7 +20,7 @@ public class DeckListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_deck_list);
-		deck = new Deck(DeckTest.createDeck());
+		deck = new Deck(DeckTest.createDeck(),"Test");
 		cardListLayout = (LinearLayout) findViewById(R.id.cardListLayout);
 		cardListLayout.setOrientation(LinearLayout.VERTICAL);
 		for(int i=0;i<40;i++)

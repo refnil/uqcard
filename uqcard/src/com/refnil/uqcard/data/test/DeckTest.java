@@ -10,7 +10,7 @@ public class DeckTest extends Deck{
 
 	public DeckTest()
 	{
-		super(createDeck());
+		super(createDeck(),"Test");
 
 	}
 
