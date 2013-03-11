@@ -1,7 +1,7 @@
 package com.refnil.uqcard.event;
 
 import com.refnil.uqcard.data.Card;
-import com.refnil.uqcard.data.CardStoreBidon;
+import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.view.CardView;
 
 import android.R;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class CardViewPlayerOnClickListener implements OnClickListener {
 
 	EventManager em;
-	
+	DummyCardStore CardStoreBidon = new DummyCardStore();
 
 	public CardViewPlayerOnClickListener(EventManager em) {
 		this.em = em;

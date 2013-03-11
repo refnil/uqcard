@@ -19,7 +19,7 @@ public class XMLCardStore implements CardStore {
 	
 	}
 
-	public Card getCard(int id,CardType type) {
+	public Card getCard(int id) {
 		// TODO Auto-generated method stub
 		return cardMap.get(id);
 	}

@@ -2,13 +2,13 @@ package com.refnil.uqcard.data;
 
 public class DummyCardStore implements CardStore{
 
-	public Card getCard(int id,CardType type) {
+	public Card getCard(int id) {
 		// TODO Auto-generated method stub
-		if(type == CardType.CARD)
+		if(id == 0)
 		{
 			return new Card(id,"Carte","Description","WOOSH",2, new byte[] {});
 		}
-		else if(type == CardType.CREATURE)
+		else if(id == 1)
 		{
 			return new CreatureCard("Carte", "Description","WOOSH", 2, 2, 1, 2);
 		}

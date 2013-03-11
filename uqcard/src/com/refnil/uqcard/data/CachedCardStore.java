@@ -12,11 +12,11 @@ public class CachedCardStore implements CardStore {
 		this.cs = cs;
 	}
 
-	public Card getCard(int id,CardType type) {
+	public Card getCard(int id) {
 		// TODO Auto-generated method stub
 		Card c = cardMap.get(id);
 		if (c == null) {
-			c = cs.getCard(id, type);
+			c = cs.getCard(id);
 			cardMap.append(id, c);
 		}
 		return c;

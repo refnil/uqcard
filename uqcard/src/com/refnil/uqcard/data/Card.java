@@ -35,7 +35,7 @@ public class Card implements Parcelable {
 	}
 
 
-	Card(int id, String name, String description, String flavor, int cost,byte[] image) {
+	public Card(int id, String name, String description, String flavor, int cost,byte[] image) {
 
 		this.setId(id);
 		this.setName(name);
