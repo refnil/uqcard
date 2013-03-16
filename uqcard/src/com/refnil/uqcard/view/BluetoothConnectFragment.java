@@ -1,12 +1,9 @@
-package com.refnil.uqcard;
+package com.refnil.uqcard.view;
 
 import java.util.Set;
-
+import com.refnil.uqcard.R;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -15,23 +12,21 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class BluetoothConnect extends Activity {
-
+public class BluetoothConnectFragment extends Fragment{
 	private BluetoothEntryAdapter dbea;
 	private BluetoothEntryAdapter pbea;
 	final private int REQUEST_ENABLE_BT = 1337;
@@ -79,19 +74,28 @@ public class BluetoothConnect extends Activity {
 			}
 		}
 	};
-//**************************************************************
+	
+	
+	public BluetoothConnectFragment()
+	{
+		
+	}
+	
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_bluetooth_connect);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.activity_bluetooth_connect,
+		        container, false);
+		
 		// Show the Up button in the action bar.
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		BluetoothAdapter mBluetoothAdapter = BluetoothAdapter
 				.getDefaultAdapter();
 
 		IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-		registerReceiver(mReceiver, filter); // Don't forget to
+		getActivity().registerReceiver(mReceiver, filter); // Don't forget to
 												// unregister during
 												// onDestroy
 
@@ -100,19 +104,20 @@ public class BluetoothConnect extends Activity {
 					BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 		} else {
-			setUpList();
+			setUpList(view);
 		}
 
-		bdlh = (TextView) findViewById(R.id.BluetoothDiscoveredListHeader);
-
+		bdlh = (TextView) getActivity().findViewById(R.id.BluetoothDiscoveredListHeader);
+		
+		return view;
 	}
-
-	private void setUpList() {
+	
+	private void setUpList(View view) {
 		final BluetoothAdapter mBluetoothAdapter = BluetoothAdapter
 				.getDefaultAdapter();
-		Context c = getApplicationContext();
+		Context c = getActivity().getApplicationContext();
 
-		Button b = (Button) findViewById(R.id.BluetoothDiscoveriesButton);
+		Button b = (Button) view.findViewById(R.id.BluetoothDiscoveriesButton);
 
 		b.setOnClickListener(new OnClickListener() {
 
@@ -121,9 +126,11 @@ public class BluetoothConnect extends Activity {
 				// Register the BroadcastReceiver
 				Button b = ((Button) v);
 				if (!mBluetoothAdapter.isDiscovering()) {
+					Log.i(TAG, "yep");
 					mBluetoothAdapter.startDiscovery();
 					b.setText("Cancel discovery");
 				} else {
+					Log.i(TAG,"nop");
 					mBluetoothAdapter.cancelDiscovery();
 					b.setText("Start discovery");
 				}
@@ -132,8 +139,8 @@ public class BluetoothConnect extends Activity {
 
 		});
 
-		ListView discoveredView = (ListView) findViewById(R.id.BluetoothDiscoveredList);
-		ListView pairedView = (ListView) findViewById(R.id.BluetoothPairedList);
+		ListView discoveredView = (ListView) view.findViewById(R.id.BluetoothDiscoveredList);
+		ListView pairedView = (ListView) view.findViewById(R.id.BluetoothPairedList);
 
 		OnItemClickListener icl = new OnItemClickListener() {
 
@@ -148,7 +155,7 @@ public class BluetoothConnect extends Activity {
 				final CharSequence address = addressView.getText();
 
 				AlertDialog.Builder adb = new AlertDialog.Builder(
-						BluetoothConnect.this);
+						getActivity());
 
 				AlertDialog ad = adb.setMessage(
 						"Voulez-vous vous connecter à " + name.getText() + "("
@@ -159,12 +166,12 @@ public class BluetoothConnect extends Activity {
 											int id) {
 										// User clicked OK button
 										Intent i = new Intent(
-												getApplicationContext(),
+												getActivity().getApplicationContext(),
 												UqcardService.class);
 										i.putExtra(IService.TYPE,
 												IService.CONNECT_BLUETOOTH);
 										i.putExtra("address", address);
-										startService(i);
+										getActivity().startService(i);
 									}
 								})
 						.setNegativeButton(R.string.cancel,
@@ -180,6 +187,7 @@ public class BluetoothConnect extends Activity {
 
 		};
 
+		
 		discoveredView.setOnItemClickListener(icl);
 		pairedView.setOnItemClickListener(icl);
 
@@ -194,7 +202,7 @@ public class BluetoothConnect extends Activity {
 
 		// If there are paired devices
 		if (pairedDevices.size() > 0) {
-			TextView tv = (TextView) findViewById(R.id.BluetoothPairedListHeader);
+			TextView tv = (TextView) view.findViewById(R.id.BluetoothPairedListHeader);
 			tv.setVisibility(View.VISIBLE);
 
 			// Loop through paired devices
@@ -206,41 +214,10 @@ public class BluetoothConnect extends Activity {
 			}
 		}
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_bluetooth_connect, menu);
-		return true;
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		unregisterReceiver(mReceiver);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-
-	}
-
+	
 	public class BluetoothEntryAdapter extends ArrayAdapter<BluetoothEntry> {
 
-		LayoutInflater li = getLayoutInflater();
+		LayoutInflater li = getActivity().getLayoutInflater();
 
 		public BluetoothEntryAdapter(Context c) {
 			super(c, R.layout.bluetooth_entry);
@@ -289,5 +266,4 @@ public class BluetoothConnect extends Activity {
 		}
 
 	}
-
 }

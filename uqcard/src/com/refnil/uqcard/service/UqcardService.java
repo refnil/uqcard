@@ -128,6 +128,7 @@ public class UqcardService extends Service implements IService {
 					server = blc.getServer();
 					blc.start();
 					lcs.add(blc);
+					//THERE IT IS !!!v
 					Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,11 +1,8 @@
 package com.refnil.uqcard;
 
-import java.util.List;
-
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.CardStore;
-import com.refnil.uqcard.data.CardType;
 import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.event.*;
 import com.refnil.uqcard.view.CardView;
@@ -45,14 +42,14 @@ public class BoardActivity extends AbstractBoard {
 		for(int i=0;i<glo.getChildCount();i++)
 		{
 			glo.getChildAt(i).setOnClickListener(new CardViewOpponentOnClickListener(em));
-			glo.getChildAt(i).setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
+			//glo.getChildAt(i).setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
 		}
 		
 		GridLayout glp = (GridLayout) findViewById(R.id.gridLayoutBoardPlayer);
 		for(int i=0;i<glp.getChildCount();i++)
 		{
 			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
-			glo.getChildAt(i).setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
+			//glo.getChildAt(i).setOnLongClickListener(new CardViewOnLongClickListener(getApplicationContext()));
 		}
 
 		// Hand (For tests.)
@@ -115,6 +112,7 @@ public class BoardActivity extends AbstractBoard {
 	public void BattleAction(AttackEvent event) {
 
 		//Doit s'updater normalement à cause des références
+		
 		/*Card c = CardStoreBidon.getCard(event.getOpponent());
 		CardView cv = new CardView(getApplicationContext(),c);
 		int index;

@@ -2,20 +2,27 @@ package com.refnil.uqcard;
 
 
 
+import com.refnil.uqcard.service.IService;
+import com.refnil.uqcard.service.UqcardService;
+import com.refnil.uqcard.view.BluetoothConnectFragment;
+import com.refnil.uqcard.view.BoardFragment;
 import com.refnil.uqcard.view.CardListFragment;
+import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.DeckListFragment;
+import com.refnil.uqcard.view.FullCardFragment;
 import com.refnil.uqcard.view.GameFragment;
 import com.refnil.uqcard.view.HistoryFragment;
 import com.refnil.uqcard.view.StatsFragment;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
+import android.view.Menu;import android.widget.Toast;
 
 public class TabsActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -62,6 +69,39 @@ public class TabsActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+	}
+	
+	public void startBoardFragment()
+	{
+		Intent i = new Intent(getApplicationContext(),
+				UqcardService.class);
+		i.putExtra(IService.TYPE, IService.START_AI_LAME);
+		startService(i);
+		
+		BoardFragment fragment = new BoardFragment();
+		fragmentTransaction(fragment,R.id.bluetoothconnectlayout);
+	}
+	
+	public void startFullCardFragment(CardView cv)
+	{
+		FullCardFragment fragment = new FullCardFragment();
+		fragment.setCard(cv);		
+		fragmentTransaction(fragment,R.id.boardlayout);
+	}
+	
+	public void startBluetoothFragment(int id)
+	{
+		BluetoothConnectFragment fragment = new BluetoothConnectFragment();
+		fragmentTransaction(fragment,id);
+	}
+	
+	public void fragmentTransaction(Fragment fragment,int id)
+	{
+		android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+	    ft.replace(id, fragment);
+	    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+	    ft.addToBackStack(null);
+	    ft.commit();
 	}
 
 	@Override
