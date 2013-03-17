@@ -3,7 +3,7 @@
     android:id="@+id/boardlayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#C85A17"
+    android:background="@drawable/gradient"
     android:orientation="vertical" >
 
     <GridLayout

@@ -42,6 +42,7 @@ public class BoardFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
+		container.removeAllViews();
 		View view = inflater.inflate(R.layout.activity_board, container,false);
 		view.setOnTouchListener(new BoardOnTouchListener(
 				(SemiClosedSlidingDrawer) view.findViewById(R.id.mySlidingDrawer),

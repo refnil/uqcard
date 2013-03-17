@@ -128,11 +128,11 @@ public class UqcardService extends Service implements IService {
 					server = blc.getServer();
 					blc.start();
 					lcs.add(blc);
-					//THERE IT IS !!!v
-					Intent i = new Intent(UqcardService.this,
+					//Modification cindy
+					/*Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);
+					startActivity(i);*/
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -2,6 +2,7 @@ package com.refnil.uqcard.view;
 
 import java.util.Set;
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import android.app.AlertDialog;
@@ -50,13 +51,12 @@ public class BluetoothConnectFragment extends Fragment{
 
 				boolean present = false;
 				for (int i = 0; i < dbea.getCount(); i++) {
-
-					if (device.getAddress().equals(dbea.getItem(i).getAddress())) {
+					if (device.getAddress().equals(dbea.getItem(i).address)) {
 						present = true;
 					}
 				}
 				for (int i = 0; i < pbea.getCount(); i++) {
-					if (device.getAddress().equals(pbea.getItem(i).getAddress())) {
+					if (device.getAddress().equals(pbea.getItem(i).address)) {
 						present = true;
 					}
 				}
@@ -107,7 +107,7 @@ public class BluetoothConnectFragment extends Fragment{
 			setUpList(view);
 		}
 
-		bdlh = (TextView) getActivity().findViewById(R.id.BluetoothDiscoveredListHeader);
+		bdlh = (TextView) view.findViewById(R.id.BluetoothDiscoveredListHeader);
 		
 		return view;
 	}
@@ -126,11 +126,9 @@ public class BluetoothConnectFragment extends Fragment{
 				// Register the BroadcastReceiver
 				Button b = ((Button) v);
 				if (!mBluetoothAdapter.isDiscovering()) {
-					Log.i(TAG, "yep");
 					mBluetoothAdapter.startDiscovery();
 					b.setText("Cancel discovery");
 				} else {
-					Log.i(TAG,"nop");
 					mBluetoothAdapter.cancelDiscovery();
 					b.setText("Start discovery");
 				}
@@ -172,6 +170,7 @@ public class BluetoothConnectFragment extends Fragment{
 												IService.CONNECT_BLUETOOTH);
 										i.putExtra("address", address);
 										getActivity().startService(i);
+										((TabsActivity) getActivity()).startBoardFragment();
 									}
 								})
 						.setNegativeButton(R.string.cancel,
@@ -215,7 +214,7 @@ public class BluetoothConnectFragment extends Fragment{
 		}
 	}
 	
-	public class BluetoothEntryAdapter extends ArrayAdapter<BluetoothEntry> {
+	private class BluetoothEntryAdapter extends ArrayAdapter<BluetoothEntry> {
 
 		LayoutInflater li = getActivity().getLayoutInflater();
 
@@ -240,14 +239,14 @@ public class BluetoothConnectFragment extends Fragment{
 			BluetoothEntry be = getItem(position);
 
 			name.setText(be.name);
-			address.setText(be.getAddress());
+			address.setText(be.address);
 
 			return row;
 		}
 
 	}
 
-	public class BluetoothEntry {
+	private class BluetoothEntry {
 
 		private String name;
 		private String address;

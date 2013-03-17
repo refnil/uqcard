@@ -44,24 +44,25 @@ public class BluetoothConnect extends Activity {
 		private boolean header = false;
 
 		public void onReceive(Context context, Intent intent) {
+			
 			String action = intent.getAction();
 			// When discovery finds a device
 			if (BluetoothDevice.ACTION_FOUND.equals(action)) {
 				// Get the BluetoothDevice object from the Intent
 				BluetoothDevice device = intent
 						.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
+				
 				// Check if the device is already present
 
 				boolean present = false;
 				for (int i = 0; i < dbea.getCount(); i++) {
 
-					if (device.getAddress().equals(dbea.getItem(i).getAddress())) {
+					if (device.getAddress().equals(dbea.getItem(i).address)) {
 						present = true;
 					}
 				}
 				for (int i = 0; i < pbea.getCount(); i++) {
-					if (device.getAddress().equals(pbea.getItem(i).getAddress())) {
+					if (device.getAddress().equals(pbea.getItem(i).address)) {
 						present = true;
 					}
 				}
@@ -238,7 +239,7 @@ public class BluetoothConnect extends Activity {
 
 	}
 
-	public class BluetoothEntryAdapter extends ArrayAdapter<BluetoothEntry> {
+	private class BluetoothEntryAdapter extends ArrayAdapter<BluetoothEntry> {
 
 		LayoutInflater li = getLayoutInflater();
 
@@ -263,14 +264,14 @@ public class BluetoothConnect extends Activity {
 			BluetoothEntry be = getItem(position);
 
 			name.setText(be.name);
-			address.setText(be.getAddress());
+			address.setText(be.address);
 
 			return row;
 		}
 
 	}
 
-	public class BluetoothEntry {
+	private class BluetoothEntry {
 
 		private String name;
 		private String address;

@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;import android.widget.Toast;
 
 public class TabsActivity extends FragmentActivity implements
@@ -41,6 +42,7 @@ public class TabsActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	private final String TAG = "TABSACTIVITY";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,34 +75,35 @@ public class TabsActivity extends FragmentActivity implements
 	
 	public void startBoardFragment()
 	{
-		Intent i = new Intent(getApplicationContext(),
+		//Lame ai start.
+		/*Intent i = new Intent(getApplicationContext(),
 				UqcardService.class);
 		i.putExtra(IService.TYPE, IService.START_AI_LAME);
-		startService(i);
-		
+		startService(i);*/
 		BoardFragment fragment = new BoardFragment();
-		fragmentTransaction(fragment,R.id.bluetoothconnectlayout);
+		fragmentTransaction(fragment,R.id.bluetoothconnectlayout,false);
 	}
 	
 	public void startFullCardFragment(CardView cv)
 	{
 		FullCardFragment fragment = new FullCardFragment();
 		fragment.setCard(cv);		
-		fragmentTransaction(fragment,R.id.boardlayout);
+		fragmentTransaction(fragment,R.id.boardlayout,true);
 	}
 	
 	public void startBluetoothFragment(int id)
 	{
 		BluetoothConnectFragment fragment = new BluetoothConnectFragment();
-		fragmentTransaction(fragment,id);
+		fragmentTransaction(fragment,id,true);
 	}
 	
-	public void fragmentTransaction(Fragment fragment,int id)
+	public void fragmentTransaction(Fragment fragment,int id,boolean add)
 	{
 		android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 	    ft.replace(id, fragment);
 	    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-	    ft.addToBackStack(null);
+	    if(add)
+	    	ft.addToBackStack(null);
 	    ft.commit();
 	}
 
