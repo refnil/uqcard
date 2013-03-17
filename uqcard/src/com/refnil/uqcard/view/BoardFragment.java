@@ -16,10 +16,24 @@ import com.refnil.uqcard.event.CardViewPlayerOnClickListener;
 import com.refnil.uqcard.event.DrawCardEvent;
 import com.refnil.uqcard.event.EndGameEvent;
 import com.refnil.uqcard.event.EndTurnEvent;
+import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.EventManager;
+import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.library.Listener;
+import com.refnil.uqcard.library.Player;
+import com.refnil.uqcard.service.IService;
+import com.refnil.uqcard.service.UqcardService;
+import com.refnil.uqcard.service.UqcardService.LocalBinder;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +43,7 @@ import android.widget.Gallery;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-public class BoardFragment extends Fragment{
+public class BoardFragment extends Fragment implements Listener<Event>{
 	protected final static String TAG = "BoardActivity";
 	protected EventManager em;
 	protected List<CardView> onBoard;
@@ -41,6 +55,32 @@ public class BoardFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		ServiceConnection mConnection = new ServiceConnection() {
+
+			public void onServiceConnected(ComponentName name, IBinder service) {
+				// TODO Auto-generated method stub
+				Log.i(TAG,"BoardViewActivity est connecter au service.");
+				IService mService = (IService) ((LocalBinder) service).getService();
+				Player p = mService.getPlayer();
+				if(p == null)
+					Log.i(TAG,"p is null");
+				em = new EventManager(p);
+				setBoard(p.getBoard());
+				board.temp = true;
+			}
+
+			public void onServiceDisconnected(ComponentName name) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		
+		Intent intent = new Intent(getActivity(), UqcardService.class);
+		getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+		
+		
 		
 		container.removeAllViews();
 		View view = inflater.inflate(R.layout.activity_board, container,false);
@@ -64,6 +104,27 @@ public class BoardFragment extends Fragment{
 		{
 			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
 		}
+		
+		Button b = (Button)view.findViewById(R.id.endturnbutton);
+		b.setOnClickListener(new OnClickListener(){
+
+			public void onClick(View v) {
+				Button b = (Button) v;
+				b.setText(R.string.endturn);
+				b.setOnClickListener(new OnClickListener()
+				{
+
+					public void onClick(View v) {
+						em.sendToPlayer(new EndTurnEvent());
+						
+					}
+					
+				});
+				em.sendToPlayer(new BeginGameEvent());
+				
+			}
+			
+		});
 
 		// Hand (For tests.)
 		/*
@@ -83,20 +144,46 @@ public class BoardFragment extends Fragment{
 	}
 	
 	
-	public void StartGameButton(View v)
+	final protected void setBoard(Board board2) {
+		// TODO Auto-generated method stub
+		board = board2;
+		board.subscribe(this);
+	}
+	
+	final public void onMessage(final Event e)
 	{
-		Button b = (Button) v;
-		b.setText(R.string.endturn);
-		b.setOnClickListener(new OnClickListener()
-		{
+		this.getActivity().runOnUiThread(new Runnable() {
 
-			public void onClick(View v) {
-				em.sendToPlayer(new EndTurnEvent());
-				
+			public void run() {
+				// TODO Auto-generated method stub
+				handleEvent(e);
 			}
 			
 		});
-		em.sendToPlayer(new BeginGameEvent());
+	}
+	
+	final public void handleEvent(Event e){
+		if(e.type == Event_Type.BEGIN_GAME)
+			BeginGameAction((BeginGameEvent)e);	
+		
+		else if(e.type == Event_Type.END_GAME)
+			EndGameAction((EndGameEvent)e);
+		
+		else if(e.type == Event_Type.BEGIN_TURN)
+			BeginTurnAction((BeginTurnEvent)e);
+		
+		else if(e.type == Event_Type.END_TURN)
+			EndTurnAction((EndTurnEvent)e);
+		
+		else if(e.type == Event_Type.DRAW_CARD)
+			DrawCardAction((DrawCardEvent)e);
+		
+		else if(e.type == Event_Type.DECLARE_ATTACK)
+			BattleAction((AttackEvent)e);
+		
+		else if(e.type == Event_Type.PUT_CARD)
+			PutCardAction((PutCardEvent)e);
+			
 	}
 	
 	
@@ -207,6 +294,11 @@ public class BoardFragment extends Fragment{
 		gv.addView(cv, event.getPosition());
 		em.setSelectedCardHand(-1);
 		em.setSelectedCardHandUID(-1);
+	}
+
+	public void onClose() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
