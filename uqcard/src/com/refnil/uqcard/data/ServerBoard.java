@@ -1,6 +1,10 @@
 package com.refnil.uqcard.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Stack;
 
 import com.refnil.uqcard.data.test.DeckTest;
 import com.refnil.uqcard.event.AttackEvent;
@@ -9,6 +13,8 @@ import com.refnil.uqcard.event.DrawCardEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.SendDeckEvent;
+
 import android.util.Log;
 
 public class ServerBoard extends Board {
@@ -24,14 +30,38 @@ public class ServerBoard extends Board {
 	@Override
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
-			Log.i(TAG, "Game begins");
+			Log.i(TAG, "server Game begins");
 			tell(event);
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() + " begins");
-			tell(new DrawCardEvent((int)getPlayerDeck().drawCardAt(0).get_Id()));
+			tell(new DrawCardEvent(this.getPlayerStackCards().pop().get_Id()));
 
+		}
+		
+		if(event.type == Event_Type.SEND_DECK)
+		{
+			Log.i(TAG, "in server senddeckevent");
+			SendDeckEvent se = (SendDeckEvent)event;
+			
+			Stack<Card> deckStack = new Stack<Card>();
+			long seed = System.nanoTime();
+			Collections.shuffle(se.getDecklist().getCards(), new Random(seed));
+			
+			deckStack.addAll(se.getDecklist().getCards());
+			if(se.getPlayer() == this.getPlayerID())
+			{
+				Log.i(TAG, "Setting host deck");
+				this.setPlayerStackCards(deckStack);
+				tell(event);
+			}
+			else
+			{
+				Log.i(TAG, "Setting host's enemy deck");
+				this.setOpponentStackCards(deckStack);
+				tell(event);
+			}
 		}
 		
 		if (event.type == Event_Type.DECLARE_ATTACK) {
@@ -50,12 +80,12 @@ public class ServerBoard extends Board {
 		}
 		/*if (event.type == Event_Type.DRAW_CARD) {
 			DrawCardEvent de = (DrawCardEvent) event;
-			Log.i(TAG, "Drawing card "+de.getCardUID());
+			Log.i(TAG, "server drawing card "+de.getCardUID());
 			
 			getPlayerHandCards().add(getCardByUID(de.getCardUID()));
 			tell(de);
-		}*/
-		
+		}
+		*/
 		if (event.type == Event_Type.PUT_CARD) {
 			PutCardEvent pe = (PutCardEvent) event;
 			Log.i(TAG, "Putting card "+pe.getCardUID()+" on play");
@@ -105,6 +135,7 @@ public class ServerBoard extends Board {
 
 			this.setTour(getTour()+1);
 			tell(new BeginTurnEvent());
+			tell(new DrawCardEvent(this.getPlayerStackCards().pop().get_Id()));
 		}
 
 		if (event.type == Event_Type.END_GAME) {

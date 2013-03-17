@@ -1,6 +1,8 @@
 package com.refnil.uqcard.data;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import com.refnil.uqcard.event.AttackEvent;
@@ -12,6 +14,7 @@ import com.refnil.uqcard.event.EndTurnEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.SendDeckEvent;
 import com.refnil.uqcard.library.AbstractListenable;
 
 import android.util.Log;
@@ -185,6 +188,10 @@ public class Board extends AbstractListenable<Event> {
 		if (event.type == Event_Type.BEGIN_GAME) {
 			BeginGameAction((BeginGameEvent)event);
 		}
+		else if(event.type == Event_Type.PUT_CARD)
+		{
+			
+		}
 
 		else if (event.type == Event_Type.BEGIN_TURN) {
 			BeginTurnAction((BeginTurnEvent)event);
@@ -216,6 +223,18 @@ public class Board extends AbstractListenable<Event> {
 	{
 		Log.i(TAG, "Game begins");
 		tell(event);
+		tell(new SendDeckEvent(playerID, playerDeck));
+	}
+	
+	void SendDeckAction(SendDeckEvent event)
+	{
+		Log.i(TAG, "getting shuffled deck");
+		Stack<Card> deckStack = new Stack<Card>();
+		long seed = System.nanoTime();
+		Collections.shuffle(event.getDecklist().getCards(), new Random(seed));
+		
+		deckStack.addAll(event.getDecklist().getCards());
+		this.playerStackCards = deckStack;
 	}
 	
 	void BeginTurnAction(BeginTurnEvent event)

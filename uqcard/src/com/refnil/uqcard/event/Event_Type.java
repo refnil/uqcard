@@ -10,5 +10,6 @@ public enum Event_Type
     SELECTED_OPPONENT_CARD,
     DECLARE_ATTACK,
     DRAW_CARD,
-    PUT_CARD
+    PUT_CARD,
+    SEND_DECK
 }
