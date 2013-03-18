@@ -27,8 +27,13 @@ public class Deck {
 		this.deckName = "TEST";
 	}
 
-	public Card drawCardAt(int index)
+	public Card CardAt(int index)
 	{
-		return cards.remove(index);
+		return cards.get(index);
+	}
+	
+	public Card pop()
+	{
+		return cards.remove(0);
 	}
 }

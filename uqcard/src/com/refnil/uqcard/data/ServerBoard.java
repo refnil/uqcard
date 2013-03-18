@@ -21,22 +21,30 @@ public class ServerBoard extends Board {
 	
 	private DummyCardStore cardStore = new DummyCardStore();
 	final private static String TAG = "ServerBoard";
+	private int UIDedDecks;
+	private DeckTest deckBidon;
 	
 	public ServerBoard()
 	{
 		this.setTour(1);
+		UIDedDecks = 0;
+		deckBidon = new DeckTest();
+
 	}
 	
 	@Override
 	public void receiveEvent(Event event) {
 		if (event.type == Event_Type.BEGIN_GAME) {
 			Log.i(TAG, "server Game begins");
+
 			tell(event);
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
 			Log.i(TAG, "Turn " + this.getTour() + " begins");
-			tell(new DrawCardEvent(this.getPlayerStackCards().pop().get_Id()));
+			// DOIT RECEVOIR DECK DU SERVER, SO FAR THIS IS SHIT
+			/*tell(new DrawCardEvent(deckBidon.CardAt(0).get_Id(), deckBidon.CardAt(0).getUid()));
+			deckBidon.pop();*/
 
 		}
 		
@@ -47,6 +55,13 @@ public class ServerBoard extends Board {
 			
 			Stack<Card> deckStack = new Stack<Card>();
 			long seed = System.nanoTime();
+			
+			for(int i = UIDedDecks *40;i<(UIDedDecks *40)+40;i++)
+			{
+				se.getDecklist().getCards().get(i).setUid(i);
+			}
+			UIDedDecks++;
+			
 			Collections.shuffle(se.getDecklist().getCards(), new Random(seed));
 			
 			deckStack.addAll(se.getDecklist().getCards());
@@ -134,8 +149,12 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "Turn " + this.getTour() + " ends");
 
 			this.setTour(getTour()+1);
+			Log.i(TAG, "sending begin turn event");
 			tell(new BeginTurnEvent());
-			tell(new DrawCardEvent(this.getPlayerStackCards().pop().get_Id()));
+			// DOIT RECEVOIR DECK DU SERVER, SO FAR THIS IS SHIT
+			Log.i(TAG, "sending draw event");
+			tell(new DrawCardEvent(deckBidon.CardAt(0).get_Id(), deckBidon.CardAt(0).getUid()));
+			deckBidon.pop();
 		}
 
 		if (event.type == Event_Type.END_GAME) {
@@ -144,6 +163,7 @@ public class ServerBoard extends Board {
 		}
 	}
 	
+
 	void receiveDeck(ArrayList<Integer> idList,int playerNumber)
 	{
 		

@@ -7,9 +7,10 @@ public class DrawCardEvent extends Event{
 	private int cardID;
 	private int cardUID;
 
-	public DrawCardEvent(int i) {
+	public DrawCardEvent(int id,int uid) {
 		super(Event_Type.DRAW_CARD);
-		this.setCardID(i);
+		this.setCardID(id);
+		this.setCardUID(uid);
 	}
 
 	public int getCardID() {

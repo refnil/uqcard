@@ -26,7 +26,7 @@ public class DeckListActivity extends Activity {
 		for(int i=0;i<40;i++)
 		{
 			TextView t = new TextView(this);
-			t.setText(String.valueOf(deck.drawCardAt(0).get_Id()));
+			t.setText(String.valueOf(deck.CardAt(0).get_Id()));
 			t.setClickable(true);
 			t.setOnClickListener(new OnClickListener(){
 

@@ -24,7 +24,7 @@ public class Board extends AbstractListenable<Event> {
 	public boolean temp;
 	private final static String TAG = "Board";
 	
-	private CardStore CardStoreBidon = new DummyCardStore();
+	private DummyCardStore cardStoreBidon = new DummyCardStore();
 
 	private int phase;
 	private int tour;
@@ -88,7 +88,9 @@ public class Board extends AbstractListenable<Event> {
 	}
 
 	public void addPlayerHandCard(Card card) {
+		Log.i(TAG, "begin add");
 		this.playerHandCards.add(card);
+		Log.i(TAG, "end add");
 	}
 
 	public void deletePlayerHandCard(Card card) {
@@ -221,9 +223,11 @@ public class Board extends AbstractListenable<Event> {
 	
 	void BeginGameAction(BeginGameEvent event)
 	{
+		Log.i(TAG, "Sending deck");
+		tell(new SendDeckEvent(playerID, playerDeck));
 		Log.i(TAG, "Game begins");
 		tell(event);
-		tell(new SendDeckEvent(playerID, playerDeck));
+		
 	}
 	
 	void SendDeckAction(SendDeckEvent event)
@@ -247,19 +251,22 @@ public class Board extends AbstractListenable<Event> {
 	void DrawCardAction(DrawCardEvent event)
 	{
 		Log.i(TAG, "Draw card");
-		DrawCardEvent dce = (DrawCardEvent)event;
-
-		Card c = CardStoreBidon.getCard(dce.getCardID());
-		playerTakeCardInStack();
+		
+		Card c = cardStoreBidon.getCard(event.getCardID());
+		
+		//playerTakeCardInStack();
 		c.setUid(event.getCardUID());
+		Log.i(TAG, "card id: "+c.get_Id()+" card UID: " + c.getUid());
+		Log.i(TAG, "addPlayerHandCard");
 		addPlayerHandCard(c);
+		Log.i(TAG, "tell(event);");
 		tell(event);
 	}
 	
 	void PutCardAction(PutCardEvent event)
 	{
 		Log.i(TAG,"Put card");
-		Card c = CardStoreBidon.getCard(event.getCardID());
+		Card c = cardStoreBidon.getCard(event.getCardID());
 		if(this.getPlayerHandCards().contains(c))
 		{
 
