@@ -170,7 +170,7 @@ public class BluetoothConnectFragment extends Fragment{
 												IService.CONNECT_BLUETOOTH);
 										i.putExtra("address", address);
 										getActivity().startService(i);
-										((TabsActivity) getActivity()).startBoardFragment();
+										//((TabsActivity) getActivity()).startBoardFragment();
 									}
 								})
 						.setNegativeButton(R.string.cancel,
