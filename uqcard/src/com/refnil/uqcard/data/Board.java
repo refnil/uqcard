@@ -267,10 +267,7 @@ public class Board extends AbstractListenable<Event> {
 		
 		//playerTakeCardInStack();
 		c.setUid(event.getCardUID());
-		Log.i(TAG, "card id: "+c.get_Id()+" card UID: " + c.getUid());
-		Log.i(TAG, "addPlayerHandCard");
 		addPlayerHandCard(c);
-		Log.i(TAG, "tell(event);");
 		tell(event);
 	}
 	

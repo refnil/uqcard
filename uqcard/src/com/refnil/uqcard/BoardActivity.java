@@ -117,8 +117,17 @@ public class BoardActivity extends AbstractBoard {
 		Card c = CardStoreBidon.getCard(event.getCardID());
 		c.setUid(event.getCardUID());
 		//L'index retourner est de -1. Il ne doit pas trouver l'objet dans la liste. Ca doit etre parce que c'est par référence.
-		int index = this.board.getPlayerHandCards().indexOf(c);
-		Log.i(TAG, String.valueOf(index));
+		int index = -1;
+		for(int i =0;i<this.board.getPlayerHandCards().size(); i++)
+		{
+			if(this.board.getPlayerHandCards().get(i).getUid() == event.getCardUID())
+			{
+				index =i;
+			}
+		}
+		
+		
+		Log.i(TAG, "index is:" + String.valueOf(index) + " Hand has "+String.valueOf(this.board.getPlayerHandCards().size())+" elements");
 		tab[size-1] = new CardView(getApplicationContext(),this.board.getPlayerHandCards().get(index));
 		ImageAdapter adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
