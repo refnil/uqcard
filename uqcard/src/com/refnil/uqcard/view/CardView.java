@@ -8,6 +8,7 @@ import android.content.Context;
 //import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.view.Display;
@@ -127,7 +128,9 @@ public class CardView extends RelativeLayout {
 		iv.setLayoutParams(new Gallery.LayoutParams(150, 120));
 		iv.setBackgroundResource(imageBackground);
 		iv.setImageBitmap(viewCapture);
-
+		//Cindy : Temporaire pour test
+		iv.setBackgroundColor(Color.CYAN);
+		//end
 		return iv;
 	}
 

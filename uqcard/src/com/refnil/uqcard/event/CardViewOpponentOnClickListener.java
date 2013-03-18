@@ -12,7 +12,7 @@ public class CardViewOpponentOnClickListener implements OnClickListener {
 		this.em = em;
 	}
 	public void onClick(View v) {
-		if(v instanceof CardView)
+		if(v instanceof CardView && em != null)
 			em.setSelectedCard(((CardView)v).getCard().getUid(), true);
 	}
 

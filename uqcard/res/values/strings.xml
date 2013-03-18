@@ -3,7 +3,6 @@
 
     <string name="app_name">uqcard</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="title_section3">Section 3</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Section 1</string>
@@ -53,7 +52,7 @@
     <string name="general_ability_2_description">target creature gets -1 attack</string>
     <string name="general_ability_3_description">deal x damage to target creature or player, exile x cards</string>
     <string name="title_activity_start">StartActivity</string>
-    <string name="title_activity_tabs">TabsActivity</string>
+    <string name="title_activity_tabs">UQCARD</string>
     <string name="deckList">Decks</string>
     <string name="game">Game</string>
     <string name="cardList">Cards</string>

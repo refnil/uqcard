@@ -2,20 +2,28 @@ package com.refnil.uqcard;
 
 
 
+import com.refnil.uqcard.service.IService;
+import com.refnil.uqcard.service.UqcardService;
+import com.refnil.uqcard.view.BluetoothConnectFragment;
+import com.refnil.uqcard.view.BoardFragment;
 import com.refnil.uqcard.view.CardListFragment;
+import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.DeckListFragment;
+import com.refnil.uqcard.view.FullCardFragment;
 import com.refnil.uqcard.view.GameFragment;
 import com.refnil.uqcard.view.HistoryFragment;
 import com.refnil.uqcard.view.StatsFragment;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
+import android.util.Log;
+import android.view.Menu;import android.widget.Toast;
 
 public class TabsActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -34,6 +42,7 @@ public class TabsActivity extends FragmentActivity implements
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	private final String TAG = "TABSACTIVITY";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,40 @@ public class TabsActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+	}
+	
+	public void startBoardFragment()
+	{
+		//Lame ai start.
+		/*Intent i = new Intent(getApplicationContext(),
+				UqcardService.class);
+		i.putExtra(IService.TYPE, IService.START_AI_LAME);
+		startService(i);*/
+		BoardFragment fragment = new BoardFragment();
+		fragmentTransaction(fragment,R.id.bluetoothconnectlayout,false);
+	}
+	
+	public void startFullCardFragment(CardView cv)
+	{
+		FullCardFragment fragment = new FullCardFragment();
+		fragment.setCard(cv);		
+		fragmentTransaction(fragment,R.id.boardlayout,true);
+	}
+	
+	public void startBluetoothFragment(int id)
+	{
+		BluetoothConnectFragment fragment = new BluetoothConnectFragment();
+		fragmentTransaction(fragment,id,true);
+	}
+	
+	public void fragmentTransaction(Fragment fragment,int id,boolean add)
+	{
+		android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+	    ft.replace(id, fragment);
+	    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+	    if(add)
+	    	ft.addToBackStack(null);
+	    ft.commit();
 	}
 
 	@Override

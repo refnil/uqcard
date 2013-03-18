@@ -19,19 +19,22 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-		if(v instanceof CardView)
-			em.setSelectedCard(((CardView)v).getCard().getUid(), false);
-		else
+		if(em != null)
 		{
-			GridLayout gl = (GridLayout)v.getParent();
-			for(int i=0;i<gl.getChildCount();i++)
+			if(v instanceof CardView)
+				em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+			else
 			{
-				if((TextView)gl.getChildAt(i) == (TextView)v)
+				GridLayout gl = (GridLayout)v.getParent();
+				for(int i=0;i<gl.getChildCount();i++)
 				{
-					Card c = CardStoreBidon.getCard(em.getSelectedCardHand());
-					c.setUid(em.getSelectedCardHandUID());
-					em.sendToPlayer(new PutCardEvent(c,i));
-					break;
+					if((TextView)gl.getChildAt(i) == (TextView)v)
+					{
+						Card c = CardStoreBidon.getCard(em.getSelectedCardHand());
+						c.setUid(em.getSelectedCardHandUID());
+						em.sendToPlayer(new PutCardEvent(c,i));
+						break;
+					}
 				}
 			}
 		}
