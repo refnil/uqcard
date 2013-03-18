@@ -70,7 +70,7 @@ public class GameFragment extends Fragment {
 				mService.createServer();
 				Log.v(TAG,"Try to listen");
 				mService.listenBluetooth();
-				
+				Toast.makeText(getActivity(), TAG, Toast.LENGTH_SHORT).show();
 			}
 
 		});

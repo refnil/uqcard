@@ -121,6 +121,8 @@ public class UqcardService extends Service implements IService {
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
+					
+					//Toast.makeText(getBaseContext(),"chatton" ,Toast.LENGTH_SHORT).show();
 					BluetoothSocket bs = bd
 							.createRfcommSocketToServiceRecord(uuid);
 					bs.connect();
@@ -129,7 +131,7 @@ public class UqcardService extends Service implements IService {
 					server = blc.getServer();
 					blc.start();
 					lcs.add(blc);
-					//Modification cindy
+					
 					Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
