@@ -111,7 +111,7 @@ public class BoardActivity extends AbstractBoard {
 	@Override
 	public void BattleAction(AttackEvent event) {
 
-		//Doit s'updater normalement à cause des références
+		//Doit s'updater normalement à cause des références donc pas nécessaire
 		
 		/*Card c = CardStoreBidon.getCard(event.getOpponent());
 		CardView cv = new CardView(getApplicationContext(),c);
