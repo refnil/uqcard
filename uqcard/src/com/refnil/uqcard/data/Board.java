@@ -1,6 +1,7 @@
 package com.refnil.uqcard.data;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
@@ -45,6 +46,12 @@ public class Board extends AbstractListenable<Event> {
 		this.setTour(1);
 		playerBoardCards = new Card[12];
 		opponentBoardCards = new Card[12];
+		playerHandCards = new LinkedList<Card>();
+		opponentHandCards = new LinkedList<Card>();
+		opponentStackCards = new Stack<Card>();
+		playerStackCards = new Stack<Card>();
+		opponentGraveyardCards = new Stack<Card>();
+		playerGraveyardCards = new Stack<Card>();
 	}
 	
 	public int getPhase() {
@@ -89,6 +96,10 @@ public class Board extends AbstractListenable<Event> {
 
 	public void addPlayerHandCard(Card card) {
 		Log.i(TAG, "begin add");
+		if(card == null)
+			Log.i(TAG, "card is null");
+		if(playerHandCards == null)
+			Log.i(TAG,"playerhandcards is null");
 		this.playerHandCards.add(card);
 		Log.i(TAG, "end add");
 	}

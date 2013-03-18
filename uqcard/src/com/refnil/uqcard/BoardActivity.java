@@ -13,6 +13,7 @@ import com.refnil.uqcard.view.ImageAdapter;
 import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 import android.os.Bundle;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -99,14 +100,26 @@ public class BoardActivity extends AbstractBoard {
 	@Override
 	public void DrawCardAction(DrawCardEvent event) {
 		Gallery gallery = (Gallery) findViewById(R.id.Gallery);
-		final int size = gallery.getAdapter().getCount()+1;
-		CardView tab[] = new CardView[size];
-		tab = ((ImageAdapter)gallery.getAdapter()).getPics();
+		final int size;
+		CardView tab[];
+		if(gallery.getAdapter() == null)
+		{
+			size=1;
+			tab= new CardView[size];
+		}
+		else
+		{
+			size = gallery.getAdapter().getCount()+1;
+			tab = new CardView[size];
+			tab = ((ImageAdapter)gallery.getAdapter()).getPics();
+		}
 		
 		Card c = CardStoreBidon.getCard(event.getCardID());
 		c.setUid(event.getCardUID());
+		//L'index retourner est de -1. Il ne doit pas trouver l'objet dans la liste. Ca doit etre parce que c'est par référence.
 		int index = this.board.getPlayerHandCards().indexOf(c);
-		tab[size-2] = new CardView(getApplicationContext(),this.board.getPlayerHandCards().get(index));
+		Log.i(TAG, String.valueOf(index));
+		tab[size-1] = new CardView(getApplicationContext(),this.board.getPlayerHandCards().get(index));
 		ImageAdapter adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
 	}
