@@ -111,7 +111,11 @@ public class BoardActivity extends AbstractBoard {
 		{
 			size = gallery.getAdapter().getCount()+1;
 			tab = new CardView[size];
-			tab = ((ImageAdapter)gallery.getAdapter()).getPics();
+			
+			for(int i =0; i<((ImageAdapter)gallery.getAdapter()).getPics().length;i++)
+			{
+				tab[i] = ((ImageAdapter)gallery.getAdapter()).getPics()[i];
+			}
 		}
 		
 		Card c = CardStoreBidon.getCard(event.getCardID());
@@ -128,6 +132,7 @@ public class BoardActivity extends AbstractBoard {
 		
 		
 		Log.i(TAG, "index is:" + String.valueOf(index) + " Hand has "+String.valueOf(this.board.getPlayerHandCards().size())+" elements");
+		Log.i(TAG, "size: "+String.valueOf(size)+ " tabLength: "+String.valueOf(tab.length));
 		tab[size-1] = new CardView(getApplicationContext(),this.board.getPlayerHandCards().get(index));
 		ImageAdapter adapter = new ImageAdapter(this,tab);
 		gallery.setAdapter(adapter);
