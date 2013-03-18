@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
@@ -128,6 +129,7 @@ public class UqcardService extends Service implements IService {
 					server = blc.getServer();
 					blc.start();
 					lcs.add(blc);
+					//Modification cindy
 					Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

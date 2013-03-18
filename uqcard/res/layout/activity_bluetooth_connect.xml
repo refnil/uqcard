@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:baselineAligned="true"
     android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:id="@+id/bluetoothconnectlayout"
     tools:context=".BluetoothConnect" >
 
     <TextView

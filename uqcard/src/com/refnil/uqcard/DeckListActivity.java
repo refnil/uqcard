@@ -4,9 +4,7 @@ import com.refnil.uqcard.data.Deck;
 import com.refnil.uqcard.data.test.DeckTest;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
