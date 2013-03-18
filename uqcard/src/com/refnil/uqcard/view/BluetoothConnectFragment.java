@@ -169,10 +169,6 @@ public class BluetoothConnectFragment extends Fragment{
 											int id) {
 										// User clicked OK button
 										
-										Thread t = new Thread(new Runnable() {
-
-											public void run() {
-												// TODO Auto-generated method stub
 												Intent i = new Intent(
 														getActivity().getApplicationContext(),
 														UqcardService.class);
@@ -180,23 +176,7 @@ public class BluetoothConnectFragment extends Fragment{
 														IService.CONNECT_BLUETOOTH);
 												i.putExtra("address", address);
 												getActivity().startService(i);
-											}
-
-										});
-										
-										t.start();
-										t.
-										
-										while(!UqcardService.isConnected)
-										{
-											Log.i(TAG, String.valueOf(UqcardService.isConnected));
-											try {
-												Thread.sleep(1000);
-											} catch (InterruptedException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											}
-										}
+									
 										//((TabsActivity) getActivity()).startBoardFragment();
 									}
 								})

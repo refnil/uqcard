@@ -103,6 +103,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/gridLayoutBoardOpponent"
         android:layout_centerVertical="true"
+        android:onClick="StartGameButton"
         android:text="@string/startgame" />
 
     <TextView

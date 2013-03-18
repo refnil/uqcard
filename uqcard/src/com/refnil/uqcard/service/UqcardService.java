@@ -39,13 +39,11 @@ public class UqcardService extends Service implements IService {
 	private AbstractServer server = null;
 	private Player player = null;
 	private Set<LinkConnection> lcs = new HashSet<LinkConnection>();
-	public static boolean isConnected;
 
 	@Override
 	public void onCreate() {
 		Log.i(TAG, "onCreate");
 		uuid = UUID.fromString(getResources().getString(R.string.UUID));
-		isConnected = false;
 	}
 
 	@Override
@@ -132,12 +130,10 @@ public class UqcardService extends Service implements IService {
 					blc.start();
 					lcs.add(blc);
 					//Modification cindy
-					/*Intent i = new Intent(UqcardService.this,
+					Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);*/
-					isConnected = true;
-					Log.i(TAG, String.valueOf(isConnected));
+					startActivity(i);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
