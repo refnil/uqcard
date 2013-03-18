@@ -1,6 +1,9 @@
 package com.refnil.uqcard.view;
 
+import java.io.IOException;
 import java.util.Set;
+
+import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.service.IService;
@@ -8,12 +11,14 @@ import com.refnil.uqcard.service.UqcardService;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -163,13 +168,35 @@ public class BluetoothConnectFragment extends Fragment{
 									public void onClick(DialogInterface dialog,
 											int id) {
 										// User clicked OK button
-										Intent i = new Intent(
-												getActivity().getApplicationContext(),
-												UqcardService.class);
-										i.putExtra(IService.TYPE,
-												IService.CONNECT_BLUETOOTH);
-										i.putExtra("address", address);
-										getActivity().startService(i);
+										
+										Thread t = new Thread(new Runnable() {
+
+											public void run() {
+												// TODO Auto-generated method stub
+												Intent i = new Intent(
+														getActivity().getApplicationContext(),
+														UqcardService.class);
+												i.putExtra(IService.TYPE,
+														IService.CONNECT_BLUETOOTH);
+												i.putExtra("address", address);
+												getActivity().startService(i);
+											}
+
+										});
+										
+										t.start();
+										t.
+										
+										while(!UqcardService.isConnected)
+										{
+											Log.i(TAG, String.valueOf(UqcardService.isConnected));
+											try {
+												Thread.sleep(1000);
+											} catch (InterruptedException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
 										//((TabsActivity) getActivity()).startBoardFragment();
 									}
 								})

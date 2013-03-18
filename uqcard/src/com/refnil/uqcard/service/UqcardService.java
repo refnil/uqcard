@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
@@ -38,11 +39,13 @@ public class UqcardService extends Service implements IService {
 	private AbstractServer server = null;
 	private Player player = null;
 	private Set<LinkConnection> lcs = new HashSet<LinkConnection>();
+	public static boolean isConnected;
 
 	@Override
 	public void onCreate() {
 		Log.i(TAG, "onCreate");
 		uuid = UUID.fromString(getResources().getString(R.string.UUID));
+		isConnected = false;
 	}
 
 	@Override
@@ -127,13 +130,14 @@ public class UqcardService extends Service implements IService {
 							bs, server);
 					server = blc.getServer();
 					blc.start();
-					Log.i(TAG, "connect 130");
 					lcs.add(blc);
 					//Modification cindy
-					Intent i = new Intent(UqcardService.this,
+					/*Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);
+					startActivity(i);*/
+					isConnected = true;
+					Log.i(TAG, String.valueOf(isConnected));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

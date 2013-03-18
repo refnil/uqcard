@@ -73,7 +73,7 @@ public class TabsActivity extends FragmentActivity implements
 		}
 	}
 	
-	public void startBoardFragment()
+	public static void startBoardFragment()
 	{
 		//Lame ai start.
 		/*Intent i = new Intent(getApplicationContext(),
@@ -81,7 +81,7 @@ public class TabsActivity extends FragmentActivity implements
 		i.putExtra(IService.TYPE, IService.START_AI_LAME);
 		startService(i);*/
 		BoardFragment fragment = new BoardFragment();
-		fragmentTransaction(fragment,R.id.bluetoothconnectlayout,false);
+		this.fragmentTransaction(fragment,R.id.bluetoothconnectlayout,false);
 	}
 	
 	public void startFullCardFragment(CardView cv)

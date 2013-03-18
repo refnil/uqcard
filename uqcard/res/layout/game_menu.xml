@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="50dp"
         android:text="@string/connect"
         android:textSize="20sp" />
@@ -20,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewConnect"
         android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="44dp"
         android:text="@string/host"
         android:textSize="20sp" />
