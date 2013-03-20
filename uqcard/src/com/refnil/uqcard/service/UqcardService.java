@@ -15,6 +15,8 @@ import android.content.res.Resources.NotFoundException;
 import android.os.Binder;
 import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class UqcardService extends Service implements IService {
 	private AbstractServer server = null;
 	private Player player = null;
 	private Set<LinkConnection> lcs = new HashSet<LinkConnection>();
+	private Messenger messengerActivity;
 
 	@Override
 	public void onCreate() {
@@ -52,6 +55,7 @@ public class UqcardService extends Service implements IService {
 		Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 
 		int type = intent.getIntExtra(IService.TYPE, IService.NOTHING);
+		messengerActivity = (Messenger) intent.getExtras().get("MESSENGER");
 
 		switch (type) {
 		case CONNECT_BLUETOOTH:
@@ -130,10 +134,18 @@ public class UqcardService extends Service implements IService {
 					blc.start();
 					lcs.add(blc);
 					//Modification cindy
-					Intent i = new Intent(UqcardService.this,
+					/*Intent i = new Intent(UqcardService.this,
 							BoardActivity.class);
 					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);
+					startActivity(i);*/
+					try {
+						Message msg = Message.obtain();
+					      msg.obj = "true";
+						messengerActivity.send(msg);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

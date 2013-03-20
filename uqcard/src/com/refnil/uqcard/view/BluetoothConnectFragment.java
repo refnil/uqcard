@@ -18,6 +18,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -31,13 +34,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class BluetoothConnectFragment extends Fragment{
 	private BluetoothEntryAdapter dbea;
 	private BluetoothEntryAdapter pbea;
 	final private int REQUEST_ENABLE_BT = 1337;
 	private final static String TAG = "BluetoothConnect";
-
 	private TextView bdlh;
 
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -79,6 +82,23 @@ public class BluetoothConnectFragment extends Fragment{
 			}
 		}
 	};
+	
+	private Handler handler = new Handler() {
+	    public void handleMessage(Message message) {
+	      Object connected = message.obj;
+	      if (connected.toString() == "true") {
+	        Toast.makeText(getActivity(),
+	            "Connected " + connected.toString(), Toast.LENGTH_LONG)
+	            .show();
+	        ((TabsActivity)getActivity()).startBoardFragment();
+	      } else {
+	        Toast.makeText(getActivity(), "Connection failed.",
+	            Toast.LENGTH_LONG).show();
+	      }
+
+	    };
+	  };
+
 	
 	
 	public BluetoothConnectFragment()
@@ -169,14 +189,25 @@ public class BluetoothConnectFragment extends Fragment{
 											int id) {
 										// User clicked OK button
 										
+												/*Intent i = new Intent(
+														getActivity().getApplicationContext(),
+														UqcardService.class);
+												i.putExtra(IService.TYPE,
+														IService.CONNECT_BLUETOOTH);
+												i.putExtra("address", address);
+												getActivity().startService(i);*/
+									
+										//Zone X
+										Messenger messenger = new Messenger(handler);
 												Intent i = new Intent(
 														getActivity().getApplicationContext(),
 														UqcardService.class);
 												i.putExtra(IService.TYPE,
 														IService.CONNECT_BLUETOOTH);
 												i.putExtra("address", address);
-												getActivity().startService(i);
-									
+												i.putExtra("MESSENGER",messenger);
+												getActivity().startService(i);	
+										//End
 										//((TabsActivity) getActivity()).startBoardFragment();
 									}
 								})
