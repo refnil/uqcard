@@ -5,6 +5,7 @@ import com.refnil.uqcard.R;
 import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.data.Board;
 import com.refnil.uqcard.data.Card;
+import com.refnil.uqcard.data.CardStore;
 import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginGameEvent;
@@ -19,6 +20,7 @@ import com.refnil.uqcard.event.EndTurnEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.EventManager;
 import com.refnil.uqcard.event.Event_Type;
+import com.refnil.uqcard.event.GalleryOnItemClickListener;
 import com.refnil.uqcard.event.PutCardEvent;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
@@ -48,6 +50,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	protected EventManager em;
 	protected List<CardView> onBoard;
 	protected Board board;
+	private CardStore CardStoreBidon = new DummyCardStore();
 	
 	public BoardFragment() {
 	}
@@ -125,6 +128,10 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			}
 			
 		});
+		
+		Gallery g = (Gallery) view.findViewById(R.id.Gallery);
+		g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity()));
+		
 		return view;
 	}
 	
@@ -198,17 +205,41 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	
 	public void DrawCardAction(DrawCardEvent event) {
 		Gallery gallery = (Gallery) getActivity().findViewById(R.id.Gallery);
-		final int size = gallery.getAdapter().getCount()+1;
-		CardView tab[] = new CardView[size];
-		tab = ((ImageAdapter)gallery.getAdapter()).getPics();
-		
-		DummyCardStore store = new DummyCardStore();
-		
-		Card c = store.getCard(event.getCardID());
+		final int size;
+		CardView tab[];
+		if(gallery.getAdapter() == null)
+		{
+			size=1;
+			tab= new CardView[size];
+		}
+		else
+		{
+			size = gallery.getAdapter().getCount()+1;
+			tab = new CardView[size];
+
+			for(int i =0; i<((ImageAdapter)gallery.getAdapter()).getPics().length;i++)
+			{
+				tab[i] = ((ImageAdapter)gallery.getAdapter()).getPics()[i];
+			}
+		}
+
+		Card c = CardStoreBidon.getCard(event.getCardID());
 		c.setUid(event.getCardUID());
-		int index = this.board.getPlayerHandCards().indexOf(c);
-		tab[size-2] = new CardView(getActivity().getApplicationContext(),this.board.getPlayerHandCards().get(index));
-		ImageAdapter adapter = new ImageAdapter(getActivity().getApplicationContext(),tab);
+		//L'index retourner est de -1. Il ne doit pas trouver l'objet dans la liste. Ca doit etre parce que c'est par référence.
+		int index = -1;
+		for(int i =0;i<this.board.getPlayerHandCards().size(); i++)
+		{
+			if(this.board.getPlayerHandCards().get(i).getUid() == event.getCardUID())
+			{
+				index =i;
+			}
+		}
+
+
+		Log.i(TAG, "index is:" + String.valueOf(index) + " Hand has "+String.valueOf(this.board.getPlayerHandCards().size())+" elements");
+		Log.i(TAG, "size: "+String.valueOf(size)+ " tabLength: "+String.valueOf(tab.length));
+		tab[size-1] = new CardView(getActivity().getApplicationContext(),this.board.getPlayerHandCards().get(index));
+		ImageAdapter adapter = new ImageAdapter(getActivity(),tab);
 		gallery.setAdapter(adapter);
 	}
 
