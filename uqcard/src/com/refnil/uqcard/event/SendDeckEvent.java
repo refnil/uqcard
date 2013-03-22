@@ -8,8 +8,10 @@ import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.Deck;
 
 public class SendDeckEvent extends Event{
+	
 	private int player;
 	private Deck decklist;
+	
 	public SendDeckEvent(int player,Deck decklist) {
 		super(Event_Type.SEND_DECK);
 		this.setPlayer(player);

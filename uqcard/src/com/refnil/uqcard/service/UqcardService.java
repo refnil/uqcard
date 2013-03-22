@@ -124,6 +124,8 @@ public class UqcardService extends Service implements IService {
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
+					
+					//Toast.makeText(getBaseContext(),"chatton" ,Toast.LENGTH_SHORT).show();
 					BluetoothSocket bs = bd
 							.createRfcommSocketToServiceRecord(uuid);
 					bs.connect();

@@ -154,7 +154,12 @@ public class ServerBoard extends Board {
 			// DOIT RECEVOIR DECK DU SERVER, SO FAR THIS IS SHIT
 			Log.i(TAG, "sending draw event");
 			tell(new DrawCardEvent(deckBidon.CardAt(0).get_Id(), deckBidon.CardAt(0).getUid()));
-			deckBidon.pop();
+			
+			// not good code, to burn.
+			if(deckBidon.getCards().size() > 1)
+			{
+				deckBidon.pop();
+			}
 		}
 
 		if (event.type == Event_Type.END_GAME) {

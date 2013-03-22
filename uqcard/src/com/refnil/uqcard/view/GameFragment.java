@@ -28,7 +28,7 @@ public class GameFragment extends Fragment {
 	private String TAG = "GameFragment";
 	IService mService;
 	ServiceConnection mConnection;
-	private Messenger messenger = new Messenger(new Handler());
+	
 	private Handler handler = new Handler() {
 	    public void handleMessage(Message message) {
 	      Object connected = message.obj;
