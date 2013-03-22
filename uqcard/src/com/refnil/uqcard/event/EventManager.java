@@ -1,13 +1,12 @@
 package com.refnil.uqcard.event;
 
 import android.os.RemoteException;
-import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.library.Player;
 
 public class EventManager {
 
 	private Player p;
-	private BoardActivity board;
+	//private BoardActivity board;
 	private int selectedCard;
 	private int selectedCardHand;
 	private int selectedCardHandUID;
@@ -25,13 +24,13 @@ public class EventManager {
 		}
 	}
 
-	public BoardActivity getBoard() {
+	/*public BoardActivity getBoard() {
 		return board;
 	}
 
 	public void setBoard(BoardActivity board) {
 		this.board = board;
-	}
+	}*/
 
 	public int getSelectedCard() {
 		return selectedCard;

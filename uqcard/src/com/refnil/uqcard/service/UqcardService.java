@@ -22,9 +22,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.refnil.uqcard.BluetoothLinkConnection;
-import com.refnil.uqcard.BoardActivity;
 import com.refnil.uqcard.R;
-import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
@@ -79,8 +77,9 @@ public class UqcardService extends Service implements IService {
 	}
 
 	@Override
-	public IBinder onBind(Intent arg0) {
-		// TODO Auto-generated method stub
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub¸
+		messengerActivity = (Messenger) intent.getExtras().get("MESSENGER");
 		return mBinder;
 	}
 
@@ -133,11 +132,6 @@ public class UqcardService extends Service implements IService {
 					server = blc.getServer();
 					blc.start();
 					lcs.add(blc);
-					//Modification cindy
-					/*Intent i = new Intent(UqcardService.this,
-							BoardActivity.class);
-					i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(i);*/
 					try {
 						Message msg = Message.obtain();
 					      msg.obj = "true";
@@ -192,10 +186,14 @@ public class UqcardService extends Service implements IService {
 							lcs.add(blc);
 							Log.i(TAG, "Connection received");
 							if (nb == 1) {
-								Intent i = new Intent(UqcardService.this,
-										BoardActivity.class);
-								i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-								startActivity(i);
+								try {
+									Message msg = Message.obtain();
+								      msg.obj = "true";
+									messengerActivity.send(msg);
+								} catch (RemoteException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						} catch (NotFoundException e) {
 							// TODO Auto-generated catch block

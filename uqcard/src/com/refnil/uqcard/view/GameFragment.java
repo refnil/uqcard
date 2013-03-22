@@ -10,14 +10,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class GameFragment extends Fragment {
@@ -25,7 +28,21 @@ public class GameFragment extends Fragment {
 	private String TAG = "GameFragment";
 	IService mService;
 	ServiceConnection mConnection;
-	
+	private Messenger messenger = new Messenger(new Handler());
+	private Handler handler = new Handler() {
+	    public void handleMessage(Message message) {
+	      Object connected = message.obj;
+	      if (connected.toString() == "true") {
+	        Log.i(TAG,
+	            "Connected " + connected.toString());
+	        ((TabsActivity)getActivity()).startBoardFragment(true);
+	      } else {
+	    	  Log.i(TAG,"Connected failed");
+	      }
+
+	    };
+	  };
+	  
 	public GameFragment() {
 	}
 
@@ -38,8 +55,8 @@ public class GameFragment extends Fragment {
 		
 		getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
-		final TextView h = (TextView) view.findViewById(R.id.textViewHost);
-		final TextView c = (TextView) view.findViewById(R.id.textViewConnect);
+		final Button h = (Button) view.findViewById(R.id.textViewHost);
+		final Button c = (Button) view.findViewById(R.id.textViewConnect);
 
 		mConnection = new ServiceConnection() {
 
@@ -50,6 +67,7 @@ public class GameFragment extends Fragment {
 				// Because we have bound to an explicit
 				// service that is running in our own process, we can
 				// cast its IBinder to a concrete class and directly access it.
+				
 				mService = (IService) ((LocalBinder) service).getService();
 				h.setClickable(true);
 				c.setClickable(true);
@@ -70,7 +88,6 @@ public class GameFragment extends Fragment {
 				mService.createServer();
 				Log.v(TAG,"Try to listen");
 				mService.listenBluetooth();
-				
 			}
 
 		});
@@ -87,10 +104,10 @@ public class GameFragment extends Fragment {
 		c.setClickable(false);
 
 		Intent intent = new Intent(getActivity(), UqcardService.class);
+		Messenger messenger = new Messenger(handler);
+		intent.putExtra("MESSENGER", messenger);
 		getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
 		
 		return view;
 	}
-	
-	
 }

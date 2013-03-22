@@ -125,21 +125,6 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			}
 			
 		});
-
-		// Hand (For tests.)
-		/*
-		Gallery gallery = (Gallery) findViewById(R.id.Gallery);
-		CardView tab[]  = {new CardView(getApplicationContext(), "nom", "desc", "flav", 2)};
-		adapter = new ImageAdapter(this,tab);
-		gallery.setAdapter(adapter);
-		gallery.setOnItemClickListener(new GalleryOnItemClickListener(
-				getApplicationContext(), gallery));
-
-		SemiClosedSlidingDrawer slider = (SemiClosedSlidingDrawer) findViewById(R.id.mySlidingDrawer);
-		slider.setOnDrawerOpenListener(new SliderOnDrawerOpenListener(
-				(Gallery) findViewById(R.id.Gallery)));
-		slider.setOnDrawerCloseListener(new SliderOnDrawerCloseListener(
-				(Gallery) findViewById(R.id.Gallery)));*/
 		return view;
 	}
 	

@@ -4,26 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
+    <Button
         android:id="@+id/textViewConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="156dp"
         android:text="@string/connect"
         android:textSize="20sp" />
 
-    <TextView
+    <Button
         android:id="@+id/textViewHost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewConnect"
         android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="37dp"
         android:text="@string/host"
         android:textSize="20sp" />
 

@@ -1,6 +1,6 @@
 package com.refnil.uqcard.event;
 
-import com.refnil.uqcard.FullCardActivity;
+import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.ImageAdapter;
@@ -17,18 +17,18 @@ public class GalleryOnItemClickListener implements OnItemClickListener {
 
 	Context context;
 	Gallery gallery;
+	TabsActivity activity;
 
-	public GalleryOnItemClickListener(Context c, Gallery g) {
-		context = c;
-		gallery = g;
+	public GalleryOnItemClickListener(TabsActivity a) {
+		activity = a;
 	}
 
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		Intent i = new Intent(context, FullCardActivity.class);
-		CardView cv = (CardView) ((ImageAdapter)gallery.getAdapter()).getItem(gallery.getSelectedItemPosition());
-		Card card = cv.getCard();
-		i.putExtra("Card", card);
-		((Activity) context).startActivity(i);
+	public void onItemClick(AdapterView<?> arg0, View v, int arg2, long arg3) {
+		if(v instanceof CardView)
+		{
+			CardView iv = (CardView) v;
+			((TabsActivity) activity).startFullCardFragment(iv);
+		}
 	}
 
 }

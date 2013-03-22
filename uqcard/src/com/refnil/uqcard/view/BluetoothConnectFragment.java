@@ -1,9 +1,6 @@
 package com.refnil.uqcard.view;
 
-import java.io.IOException;
 import java.util.Set;
-
-import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.R;
 import com.refnil.uqcard.TabsActivity;
 import com.refnil.uqcard.service.IService;
@@ -11,7 +8,6 @@ import com.refnil.uqcard.service.UqcardService;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +17,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,7 +85,7 @@ public class BluetoothConnectFragment extends Fragment{
 	        Toast.makeText(getActivity(),
 	            "Connected " + connected.toString(), Toast.LENGTH_LONG)
 	            .show();
-	        ((TabsActivity)getActivity()).startBoardFragment();
+	        ((TabsActivity)getActivity()).startBoardFragment(false);
 	      } else {
 	        Toast.makeText(getActivity(), "Connection failed.",
 	            Toast.LENGTH_LONG).show();
@@ -187,17 +182,6 @@ public class BluetoothConnectFragment extends Fragment{
 								new DialogInterface.OnClickListener() {
 									public void onClick(DialogInterface dialog,
 											int id) {
-										// User clicked OK button
-										
-												/*Intent i = new Intent(
-														getActivity().getApplicationContext(),
-														UqcardService.class);
-												i.putExtra(IService.TYPE,
-														IService.CONNECT_BLUETOOTH);
-												i.putExtra("address", address);
-												getActivity().startService(i);*/
-									
-										//Zone X
 										Messenger messenger = new Messenger(handler);
 												Intent i = new Intent(
 														getActivity().getApplicationContext(),
@@ -207,8 +191,6 @@ public class BluetoothConnectFragment extends Fragment{
 												i.putExtra("address", address);
 												i.putExtra("MESSENGER",messenger);
 												getActivity().startService(i);	
-										//End
-										//((TabsActivity) getActivity()).startBoardFragment();
 									}
 								})
 						.setNegativeButton(R.string.cancel,
