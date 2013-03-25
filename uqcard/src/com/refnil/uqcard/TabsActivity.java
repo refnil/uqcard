@@ -19,7 +19,9 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 public class TabsActivity extends FragmentActivity implements
 		ActionBar.TabListener {
@@ -76,6 +78,7 @@ public class TabsActivity extends FragmentActivity implements
 		i.putExtra(IService.TYPE, IService.START_AI_LAME);
 		startService(i);*/
 		BoardFragment fragment = new BoardFragment();
+		Toast.makeText(getApplicationContext(), String.valueOf(fragment.getId()), Toast.LENGTH_SHORT).show();
 		if(host)
 			fragmentTransaction(fragment,R.id.gameMenuLayout,false);
 		else

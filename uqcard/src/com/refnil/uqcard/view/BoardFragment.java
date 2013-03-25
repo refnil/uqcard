@@ -44,6 +44,7 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BoardFragment extends Fragment implements Listener<Event>{
 	protected final static String TAG = "BoardActivity";
@@ -56,85 +57,97 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
-		ServiceConnection mConnection = new ServiceConnection() {
-
-			public void onServiceConnected(ComponentName name, IBinder service) {
-				// TODO Auto-generated method stub
-				Log.i(TAG,"BoardViewActivity est connecter au service.");
-				IService mService = (IService) ((LocalBinder) service).getService();
-				Player p = mService.getPlayer();
-				if(p == null)
-					Log.i(TAG,"p is null");
-				em = new EventManager(p);
-				setBoard(p.getBoard());
-				board.temp = true;
-			}
-
-			public void onServiceDisconnected(ComponentName name) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		};
-		
-		Intent intent = new Intent(getActivity(), UqcardService.class);
-		getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-		
-		
-		
-		container.removeAllViews();
-		View view = inflater.inflate(R.layout.activity_board, container,false);
-		view.setOnTouchListener(new BoardOnTouchListener(
-				(SemiClosedSlidingDrawer) view.findViewById(R.id.mySlidingDrawer),
-				(Gallery) view.findViewById(R.id.Gallery),em));
-
-		TextView tv = (TextView) view.findViewById(R.id.opponentText);
-		tv.setText("My opponent");
-		tv = (TextView) view.findViewById(R.id.playerText);
-		tv.setText("Me");
-
-		GridLayout glo = (GridLayout) view.findViewById(R.id.gridLayoutBoardOpponent);
-		for(int i=0;i<glo.getChildCount();i++)
-		{
-			glo.getChildAt(i).setOnClickListener(new CardViewOpponentOnClickListener(em));
-		}
-		
-		GridLayout glp = (GridLayout) view.findViewById(R.id.gridLayoutBoardPlayer);
-		for(int i=0;i<glp.getChildCount();i++)
-		{
-			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
-		}
-		
-		Button b = (Button)view.findViewById(R.id.endturnbutton);
-		b.setOnClickListener(new OnClickListener(){
-
-			public void onClick(View v) {
-				Button b = (Button) v;
-				b.setText(R.string.endturn);
-				b.setOnClickListener(new OnClickListener()
-				{
-
-					public void onClick(View v) {
-						em.sendToPlayer(new EndTurnEvent());
-						
-					}
-					
-				});
-				em.sendToPlayer(new BeginGameEvent());
-				
-			}
-			
-		});
-		
-		Gallery g = (Gallery) view.findViewById(R.id.Gallery);
-		g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity()));
-		
-		return view;
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		this.setRetainInstance(true);
+		Toast.makeText(getActivity(), String.valueOf(getRetainInstance()), Toast.LENGTH_SHORT).show();
 	}
 	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		super.onCreateView(inflater, container, savedInstanceState);
+		View view = null;
+		
+		if(savedInstanceState == null)
+		{
+			ServiceConnection mConnection = new ServiceConnection() {
+
+				public void onServiceConnected(ComponentName name, IBinder service) {
+					// TODO Auto-generated method stub
+					Log.i(TAG,"BoardViewActivity est connecter au service.");
+					IService mService = (IService) ((LocalBinder) service).getService();
+					Player p = mService.getPlayer();
+					em = new EventManager(p);
+					setBoard(p.getBoard());
+					board.temp = true;
+				}
+
+				public void onServiceDisconnected(ComponentName name) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			};
+			
+			Intent intent = new Intent(getActivity(), UqcardService.class);
+			getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+			
+			
+			container.removeAllViews();
+			view = inflater.inflate(R.layout.activity_board, container,false);
+			view.setOnTouchListener(new BoardOnTouchListener(
+					(SemiClosedSlidingDrawer) view.findViewById(R.id.mySlidingDrawer),
+					(Gallery) view.findViewById(R.id.Gallery),em));
+
+			TextView tv = (TextView) view.findViewById(R.id.opponentText);
+			tv.setText("My opponent");
+			tv = (TextView) view.findViewById(R.id.playerText);
+			tv.setText("Me");
+
+			GridLayout glo = (GridLayout) view.findViewById(R.id.gridLayoutBoardOpponent);
+			for(int i=0;i<glo.getChildCount();i++)
+			{
+				glo.getChildAt(i).setOnClickListener(new CardViewOpponentOnClickListener(em));
+			}
+			
+			GridLayout glp = (GridLayout) view.findViewById(R.id.gridLayoutBoardPlayer);
+			for(int i=0;i<glp.getChildCount();i++)
+			{
+				glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
+			}
+			
+			Button b = (Button)view.findViewById(R.id.endturnbutton);
+			b.setOnClickListener(new OnClickListener(){
+
+				public void onClick(View v) {
+					Button b = (Button) v;
+					b.setText(R.string.endturn);
+					b.setOnClickListener(new OnClickListener()
+					{
+
+						public void onClick(View v) {
+							em.sendToPlayer(new EndTurnEvent());
+							
+						}
+						
+					});
+					em.sendToPlayer(new BeginGameEvent());
+					
+				}
+				
+			});
+			
+			Gallery g = (Gallery) view.findViewById(R.id.Gallery);
+			g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity()));
+			
+			
+		}
+		else
+			Toast.makeText(getActivity(), "Bundle not null", Toast.LENGTH_SHORT).show();
+		return view;
+	}
 	
 	final protected void setBoard(Board board2) {
 		// TODO Auto-generated method stub

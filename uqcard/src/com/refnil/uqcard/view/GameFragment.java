@@ -86,6 +86,7 @@ public class GameFragment extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				mService.createServer();
+				Toast.makeText(getActivity(), "En attente d'une connection...", Toast.LENGTH_LONG).show();
 				Log.v(TAG,"Try to listen");
 				mService.listenBluetooth();
 			}
