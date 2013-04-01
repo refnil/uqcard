@@ -4,6 +4,7 @@ import com.refnil.uqcard.view.CardView;
 import com.refnil.uqcard.view.ImageAdapter;
 import com.refnil.uqcard.view.SemiClosedSlidingDrawer;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -33,9 +34,11 @@ public class BoardOnTouchListener implements OnTouchListener {
 		case MotionEvent.ACTION_UP:
 			if (eventY < pointY) {
 				if (slider.isOpened()) {
-					CardView ca = ((ImageAdapter) gallery.getAdapter())
-							.getCardView(gallery.getSelectedItemPosition(),
-								null, null);
+					CardView ca = ((ImageAdapter) gallery.getAdapter()).getCardView(gallery.getSelectedItemPosition(),null, null);
+					if(ca ==  null)
+						Log.i("ontouch", "cardview null");
+					else
+						Log.i("ontouch","cardview not null");
 					getEm().setSelectedCardHand(ca.getCard().get_Id());
 					getEm().setSelectedCardHandUID(ca.getCard().getUid());
 					slider.animateClose();

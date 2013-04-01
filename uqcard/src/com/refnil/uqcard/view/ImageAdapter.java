@@ -34,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
 		return pics.length;
 	}
 
-	public Object getItem(int pos) {
+	public CardView getItem(int pos) {
 		return pics[pos];
 	}
 

@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class FullCardFragment extends Fragment{
-	private CardView card = null;
+	private CardView cardDisplayed = null;
+	
 	
 	public FullCardFragment()
 	{
@@ -23,21 +24,23 @@ public class FullCardFragment extends Fragment{
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.activity_full_card,
 		        container, false);
-		if(this.getCard()!= null)
+		if(getCardView() != null)
 		{
 			ImageView iv = (ImageView)view.findViewById(R.id.ImageFullScreen);
-			Bitmap bm = card.loadBitmapFromView(card);
+			Bitmap bm = getCardView().loadBitmapFromView(getCardView());
 			iv.setImageBitmap(bm);
 			return view;
 		}
 		return view;
 	}
-
-	public CardView getCard() {
-		return card;
+	
+	public void setCardView(CardView c)
+	{
+		this.cardDisplayed = c;
 	}
-
-	public void setCard(CardView card) {
-		this.card = card;
+	
+	public CardView getCardView()
+	{
+		return this.cardDisplayed;
 	}
 }

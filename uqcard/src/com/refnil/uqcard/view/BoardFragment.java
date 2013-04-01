@@ -138,10 +138,8 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				}
 				
 			});
-			
 			Gallery g = (Gallery) view.findViewById(R.id.Gallery);
 			g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity()));
-			
 			
 		}
 		else
@@ -238,7 +236,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 
 		Card c = CardStoreBidon.getCard(event.getCardID());
 		c.setUid(event.getCardUID());
-		//L'index retourner est de -1. Il ne doit pas trouver l'objet dans la liste. Ca doit etre parce que c'est par référence.
+		
 		int index = -1;
 		for(int i =0;i<this.board.getPlayerHandCards().size(); i++)
 		{
@@ -248,9 +246,6 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			}
 		}
 
-
-		Log.i(TAG, "index is:" + String.valueOf(index) + " Hand has "+String.valueOf(this.board.getPlayerHandCards().size())+" elements");
-		Log.i(TAG, "size: "+String.valueOf(size)+ " tabLength: "+String.valueOf(tab.length));
 		tab[size-1] = new CardView(getActivity().getApplicationContext(),this.board.getPlayerHandCards().get(index));
 		ImageAdapter adapter = new ImageAdapter(getActivity(),tab);
 		gallery.setAdapter(adapter);

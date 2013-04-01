@@ -13,6 +13,9 @@ import com.refnil.uqcard.view.HistoryFragment;
 import com.refnil.uqcard.view.StatsFragment;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -45,6 +48,14 @@ public class TabsActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tabs);
+		if(isTablet(this))
+		{
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		}
+		else
+		{
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -70,6 +81,12 @@ public class TabsActivity extends FragmentActivity implements
 		}
 	}
 	
+	public boolean isTablet(Context context) {
+	    boolean xlarge = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == 4);
+	    boolean large = ((context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE);
+	    return (xlarge || large);
+	}
+	
 	public void startBoardFragment(boolean host)
 	{
 		//Lame ai start.
@@ -88,7 +105,7 @@ public class TabsActivity extends FragmentActivity implements
 	public void startFullCardFragment(CardView cv)
 	{
 		FullCardFragment fragment = new FullCardFragment();
-		fragment.setCard(cv);		
+		fragment.setCardView(cv);	
 		fragmentTransaction(fragment,R.id.boardlayout,true);
 	}
 	
