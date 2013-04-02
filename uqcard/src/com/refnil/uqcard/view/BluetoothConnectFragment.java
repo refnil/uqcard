@@ -83,7 +83,7 @@ public class BluetoothConnectFragment extends Fragment{
 	      Object connected = message.obj;
 	      if (connected.toString() == "true") {
 	        Toast.makeText(getActivity(),
-	            "Connected " + connected.toString(), Toast.LENGTH_LONG)
+	            "Connected", Toast.LENGTH_LONG)
 	            .show();
 	        ((TabsActivity)getActivity()).startBoardFragment(false);
 	      } else {

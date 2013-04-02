@@ -34,11 +34,7 @@ public class BoardOnTouchListener implements OnTouchListener {
 		case MotionEvent.ACTION_UP:
 			if (eventY < pointY) {
 				if (slider.isOpened()) {
-					CardView ca = ((ImageAdapter) gallery.getAdapter()).getCardView(gallery.getSelectedItemPosition(),null, null);
-					if(ca ==  null)
-						Log.i("ontouch", "cardview null");
-					else
-						Log.i("ontouch","cardview not null");
+					CardView ca = ((ImageAdapter) gallery.getAdapter()).getItem(gallery.getSelectedItemPosition());
 					getEm().setSelectedCardHand(ca.getCard().get_Id());
 					getEm().setSelectedCardHandUID(ca.getCard().getUid());
 					slider.animateClose();

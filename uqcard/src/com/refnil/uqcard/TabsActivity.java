@@ -95,7 +95,6 @@ public class TabsActivity extends FragmentActivity implements
 		i.putExtra(IService.TYPE, IService.START_AI_LAME);
 		startService(i);*/
 		BoardFragment fragment = new BoardFragment();
-		Toast.makeText(getApplicationContext(), String.valueOf(fragment.getId()), Toast.LENGTH_SHORT).show();
 		if(host)
 			fragmentTransaction(fragment,R.id.gameMenuLayout,false);
 		else
