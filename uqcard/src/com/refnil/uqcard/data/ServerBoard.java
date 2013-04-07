@@ -105,14 +105,26 @@ public class ServerBoard extends Board {
 			PutCardEvent pe = (PutCardEvent) event;
 			Log.i(TAG, "Putting card "+pe.getCardUID()+" on play");
 			//FIXME
+
 			if(true)
 			{
 				if(pe.getPosition() !=5 && pe.getPosition() !=11)
 				{
 					if(this.getOpponentBoardCards()[pe.getPosition()] == null)
 					{
-						this.getOpponentBoardCards()[pe.getPosition()] =this.getCardByUID(pe.getCardUID());
-						tell(pe);
+						Log.i(TAG, "in 1st if");
+						for(int i=0; i<this.getPlayerHandCards().size(); i++)
+						{
+							Log.i(TAG, "in for");
+							if(this.getPlayerHandCards().get(i).getUid() == pe.getCardUID())
+							{
+								Log.i(TAG, "in 2nd if");
+								this.getOpponentBoardCards()[pe.getPosition()] =this.getPlayerHandCards().get(i);
+								this.getPlayerHandCards().remove(i);
+								tell(pe);
+							}
+						}
+						
 					}
 					else
 					{
@@ -151,8 +163,9 @@ public class ServerBoard extends Board {
 			this.setTour(getTour()+1);
 			Log.i(TAG, "sending begin turn event");
 			tell(new BeginTurnEvent());
-			// DOIT RECEVOIR DECK DU SERVER, SO FAR THIS IS SHIT
+			
 			Log.i(TAG, "sending draw event");
+			this.getPlayerHandCards().add(deckBidon.CardAt(0));
 			tell(new DrawCardEvent(deckBidon.CardAt(0).get_Id(), deckBidon.CardAt(0).getUid()));
 			
 			// not good code, to burn.

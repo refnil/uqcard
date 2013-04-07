@@ -282,6 +282,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 
 	public void PutCardAction(PutCardEvent event) 
 	{
+		Log.i(TAG,"PUT CARD ACTION");
 		Gallery gallery = (Gallery)getActivity().findViewById(R.id.Gallery);
 		ImageAdapter adapter = (ImageAdapter) gallery.getAdapter();
 		CardView cv = null;

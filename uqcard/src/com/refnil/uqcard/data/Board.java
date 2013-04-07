@@ -203,7 +203,7 @@ public class Board extends AbstractListenable<Event> {
 		}
 		else if(event.type == Event_Type.PUT_CARD)
 		{
-			
+			PutCardAction((PutCardEvent)event);
 		}
 
 		else if (event.type == Event_Type.BEGIN_TURN) {
@@ -220,11 +220,6 @@ public class Board extends AbstractListenable<Event> {
 		
 		else if(event.type == Event_Type.DRAW_CARD){
 			DrawCardAction((DrawCardEvent)event);
-		}
-		
-		else if(event.type == Event_Type.PUT_CARD)
-		{
-			PutCardAction((PutCardEvent)event);
 		}
 
 		else if (event instanceof AttackEvent) {
