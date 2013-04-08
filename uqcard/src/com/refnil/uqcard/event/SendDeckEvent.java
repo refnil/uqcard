@@ -9,6 +9,10 @@ import com.refnil.uqcard.data.Deck;
 
 public class SendDeckEvent extends Event {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6289681923780792987L;
 	private int player;
 	private Deck decklist;
 

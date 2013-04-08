@@ -8,7 +8,6 @@ import com.refnil.uqcard.library.Player;
 public class EventManager {
 
 	private Player p;
-	//private BoardActivity board;
 	private int selectedCard;
 	private int selectedCardHand;
 	private int selectedCardHandUID;

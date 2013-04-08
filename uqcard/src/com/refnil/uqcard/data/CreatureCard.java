@@ -3,6 +3,10 @@ package com.refnil.uqcard.data;
 
 public class CreatureCard extends Card {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5650896118503012325L;
 	private int atk,def,hp;
 
 	CreatureCard(String name, String description, String flavor, int cost,int atk, int def, int hp) {

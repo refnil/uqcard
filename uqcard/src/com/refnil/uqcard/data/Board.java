@@ -23,7 +23,6 @@ import android.util.Log;
 
 public class Board extends AbstractListenable<Event> {
 
-	public boolean temp;
 	private final static String TAG = "Board";
 	
 	private DummyCardStore cardStoreBidon = new DummyCardStore();
@@ -268,7 +267,7 @@ public class Board extends AbstractListenable<Event> {
 	
 	void DrawCardAction(DrawCardEvent event)
 	{
-		if(event.getCardUID() % 40 == playerID-1)
+		if(event.getCardUID() / 40 == playerID)
 		{
 			Card c = cardStoreBidon.getCard(event.getCardID());
 			

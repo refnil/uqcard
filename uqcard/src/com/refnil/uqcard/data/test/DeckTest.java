@@ -9,6 +9,10 @@ import com.refnil.uqcard.data.Deck;
 import com.refnil.uqcard.data.DummyCardStore;
 
 public class DeckTest extends Deck{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2114504418021401695L;
 	public static DummyCardStore cardStore = new DummyCardStore();
 
 	public DeckTest()

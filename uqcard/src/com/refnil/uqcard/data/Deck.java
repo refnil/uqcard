@@ -1,10 +1,15 @@
 package com.refnil.uqcard.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.refnil.uqcard.data.test.DeckTest;
 
-public class Deck {
+public class Deck implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7497696027546651007L;
 	private	ArrayList<Card> cards;
 	private String deckName;
 

@@ -1,10 +1,16 @@
 package com.refnil.uqcard.data;
 
+import java.io.Serializable;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Card implements Parcelable {
+public class Card implements Parcelable, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1365074821008760918L;
 	private int cost;
 	private String name;
 	private String description;

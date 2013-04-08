@@ -53,9 +53,11 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "ASDASDWFFAS DSAFWAFDASD SAD " + String.valueOf(se.getPlayer()));
 			Stack<Card> deckStack = new Stack<Card>();
 			long seed = System.nanoTime();
+			int cpt=0;
 
 			for (int i = UIDedDecks * 40; i < (UIDedDecks * 40) + 40; i++) {
-				se.getDecklist().getCards().get(i).setUid(i);
+				se.getDecklist().getCards().get(cpt).setUid(i);
+				cpt++;
 			}
 			UIDedDecks++;
 
@@ -63,7 +65,7 @@ public class ServerBoard extends Board {
 
 			deckStack.addAll(se.getDecklist().getCards());
 			
-			if (se.getPlayer() == 0) {
+			if (se.getPlayer() == 1) {
 				Log.i(TAG, "Setting host deck");
 				this.setPlayerStackCards(deckStack);
 				tell(event);
@@ -107,15 +109,33 @@ public class ServerBoard extends Board {
 			{
 				if(pe.getPosition() !=5 && pe.getPosition() !=11)
 				{
-					if(this.getOpponentBoardCards()[pe.getPosition()] == null)
+					Log.i(TAG, "l.112");
+					List<Card> stack;
+					Card[] tab;
+					if(((PutCardEvent)event).getCardUID() / 40 ==1)
 					{
-						for(int i=0; i<this.getPlayerHandCards().size(); i++)
+						stack = this.getPlayerHandCards();
+						tab = this.getPlayerBoardCards();
+					}
+					else
+					{
+						stack = this.getOpponentHandCards();
+						tab = this.getOpponentBoardCards();
+					}
+					
+					if(tab[pe.getPosition()] == null)
+					{
+						Log.i(TAG, "l.128");
+						for(int i=0; i<stack.size(); i++)
 						{
-							if(this.getPlayerHandCards().get(i).getUid() == pe.getCardUID())
+							Log.i(TAG, "l.131");
+							if(stack.get(i).getUid() == pe.getCardUID())
 							{
-								this.getOpponentBoardCards()[pe.getPosition()] =this.getPlayerHandCards().get(i);
-								this.getPlayerHandCards().remove(i);
+								tab[pe.getPosition()] =stack.get(i);
+								stack.remove(i);
+								Log.i(TAG, "l.136");
 								tell(pe);
+								break;
 							}
 						}
 						
@@ -130,25 +150,7 @@ public class ServerBoard extends Board {
 					Log.i(TAG, "Cant put card on deck or graveyard ");
 				}
 			}
-			else
-			{
-				if(pe.getPosition() !=5 && pe.getPosition() !=11)
-				{
-					if(this.getPlayerBoardCards()[pe.getPosition()] == null)
-					{
-						this.getPlayerBoardCards()[pe.getPosition()] =this.getCardByUID(pe.getCardUID());
-						tell(pe);
-					}
-					else
-					{
-						Log.i(TAG, "Already a card in position "+pe.getPosition());
-					}
-				}
-				else
-				{
-					Log.i(TAG, "Cant put card on deck or graveyard ");
-				}
-			}
+			
 		}
 		
 		if (event.type == Event_Type.END_TURN) {
