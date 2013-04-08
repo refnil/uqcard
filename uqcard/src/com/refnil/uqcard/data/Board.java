@@ -236,6 +236,12 @@ public class Board extends AbstractListenable<Event> {
 	
 	void BeginGameAction(BeginGameEvent event)
 	{
+
+		Log.i(TAG, "Sending deck");
+		for(int i=0;i<playerDeck.getCards().size();i++)
+		{
+			this.playerStackCards.add(playerDeck.CardAt(i));
+		}
 		Log.i(TAG, "Game begins");
 		for(int i =0; i<40; i++)
 		{
@@ -276,6 +282,23 @@ public class Board extends AbstractListenable<Event> {
 			c.setUid(event.getCardUID());
 			addPlayerHandCard(c);
 			tell(event);
+		}
+		Log.i(TAG, "Draw card");
+		
+		
+		for(int i=0;i<this.getPlayerStackCards().size();i++)
+		{
+			Log.i(TAG, String.valueOf(this.getPlayerStackCards().get(i).getUid()) + " != " + String.valueOf(event.getCardUID()));
+			if(this.getPlayerStackCards().get(i).getUid() == event.getCardUID())
+			{
+				Card c = cardStoreBidon.getCard(event.getCardUID());
+				
+				//playerTakeCardInStack();
+				c.setUid(event.getCardUID());
+				addPlayerHandCard(c);
+				tell(event);
+				break;
+			}
 		}
 	}
 	
