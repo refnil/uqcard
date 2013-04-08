@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+import com.refnil.uqcard.data.test.DeckTest;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginGameEvent;
 import com.refnil.uqcard.event.BeginTurnEvent;
@@ -52,6 +53,8 @@ public class Board extends AbstractListenable<Event> {
 		playerStackCards = new Stack<Card>();
 		opponentGraveyardCards = new Stack<Card>();
 		playerGraveyardCards = new Stack<Card>();
+		playerDeck = new DeckTest();
+		opponentDeck = new DeckTest();
 	}
 	
 	public int getPhase() {
@@ -221,6 +224,10 @@ public class Board extends AbstractListenable<Event> {
 		else if(event.type == Event_Type.DRAW_CARD){
 			DrawCardAction((DrawCardEvent)event);
 		}
+		else if(event.type == Event_Type.SEND_DECK)
+		{
+			SendDeckAction((SendDeckEvent) event);
+		}
 
 		else if (event instanceof AttackEvent) {
 			BattleAction((AttackEvent)event);
@@ -229,22 +236,27 @@ public class Board extends AbstractListenable<Event> {
 	
 	void BeginGameAction(BeginGameEvent event)
 	{
-		Log.i(TAG, "Sending deck");
-		tell(new SendDeckEvent(playerID, playerDeck));
 		Log.i(TAG, "Game begins");
+		for(int i =0; i<40; i++)
+		{
+			this.getOpponentStackCards().add(cardStoreBidon.getCard(0));
+			this.getPlayerStackCards().add(cardStoreBidon.getCard(0));
+		}
 		tell(event);
-		
 	}
 	
 	void SendDeckAction(SendDeckEvent event)
 	{
 		Log.i(TAG, "getting shuffled deck");
-		Stack<Card> deckStack = new Stack<Card>();
-		long seed = System.nanoTime();
-		Collections.shuffle(event.getDecklist().getCards(), new Random(seed));
+		this.setPlayerDeck(event.getDecklist());
+		playerStackCards = new Stack<Card>();
 		
-		deckStack.addAll(event.getDecklist().getCards());
-		this.playerStackCards = deckStack;
+		for(int i =0; i < this.getPlayerDeck().getCards().size(); i++)
+		{
+			playerStackCards.add(this.getPlayerDeck().CardAt(i));
+		}
+		this.setPlayerStackCards(playerStackCards);
+		
 	}
 	
 	void BeginTurnAction(BeginTurnEvent event)
@@ -256,14 +268,15 @@ public class Board extends AbstractListenable<Event> {
 	
 	void DrawCardAction(DrawCardEvent event)
 	{
-		Log.i(TAG, "Draw card");
-		
-		Card c = cardStoreBidon.getCard(event.getCardID());
-		
-		//playerTakeCardInStack();
-		c.setUid(event.getCardUID());
-		addPlayerHandCard(c);
-		tell(event);
+		if(event.getCardUID() % 40 == playerID-1)
+		{
+			Card c = cardStoreBidon.getCard(event.getCardID());
+			
+			//playerTakeCardInStack();
+			c.setUid(event.getCardUID());
+			addPlayerHandCard(c);
+			tell(event);
+		}
 	}
 	
 	void PutCardAction(PutCardEvent event)

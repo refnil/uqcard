@@ -38,46 +38,43 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "server Game begins");
 
 			tell(event);
+
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
-			Log.i(TAG, "Turn " + this.getTour() + " begins");
 			// DOIT RECEVOIR DECK DU SERVER, SO FAR THIS IS SHIT
 			/*tell(new DrawCardEvent(deckBidon.CardAt(0).get_Id(), deckBidon.CardAt(0).getUid()));
 			deckBidon.pop();*/
 
 		}
 		
-		if(event.type == Event_Type.SEND_DECK)
-		{
-			Log.i(TAG, "in server senddeckevent");
-			SendDeckEvent se = (SendDeckEvent)event;
-			
+		if (event.type == Event_Type.SEND_DECK) {
+			SendDeckEvent se = (SendDeckEvent) event;
+			Log.i(TAG, "ASDASDWFFAS DSAFWAFDASD SAD " + String.valueOf(se.getPlayer()));
 			Stack<Card> deckStack = new Stack<Card>();
 			long seed = System.nanoTime();
-			
-			for(int i = UIDedDecks *40;i<(UIDedDecks *40)+40;i++)
-			{
+
+			for (int i = UIDedDecks * 40; i < (UIDedDecks * 40) + 40; i++) {
 				se.getDecklist().getCards().get(i).setUid(i);
 			}
 			UIDedDecks++;
-			
+
 			Collections.shuffle(se.getDecklist().getCards(), new Random(seed));
-			
+
 			deckStack.addAll(se.getDecklist().getCards());
-			if(se.getPlayer() == this.getPlayerID())
-			{
+			
+			if (se.getPlayer() == 0) {
 				Log.i(TAG, "Setting host deck");
 				this.setPlayerStackCards(deckStack);
 				tell(event);
-			}
-			else
-			{
+			} else {
 				Log.i(TAG, "Setting host's enemy deck");
 				this.setOpponentStackCards(deckStack);
 				tell(event);
 			}
 		}
+		
+		
 		
 		if (event.type == Event_Type.DECLARE_ATTACK) {
 			
@@ -112,13 +109,10 @@ public class ServerBoard extends Board {
 				{
 					if(this.getOpponentBoardCards()[pe.getPosition()] == null)
 					{
-						Log.i(TAG, "in 1st if");
 						for(int i=0; i<this.getPlayerHandCards().size(); i++)
 						{
-							Log.i(TAG, "in for");
 							if(this.getPlayerHandCards().get(i).getUid() == pe.getCardUID())
 							{
-								Log.i(TAG, "in 2nd if");
 								this.getOpponentBoardCards()[pe.getPosition()] =this.getPlayerHandCards().get(i);
 								this.getPlayerHandCards().remove(i);
 								tell(pe);
@@ -161,12 +155,21 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "Turn " + this.getTour() + " ends");
 
 			this.setTour(getTour()+1);
-			Log.i(TAG, "sending begin turn event");
 			tell(new BeginTurnEvent());
 			
-			Log.i(TAG, "sending draw event");
-			this.getPlayerHandCards().add(deckBidon.CardAt(0));
-			tell(new DrawCardEvent(deckBidon.CardAt(0).get_Id(), deckBidon.CardAt(0).getUid()));
+			if(getTour() %2 ==1)
+			{
+				this.getPlayerHandCards().add(this.getPlayerStackCards().get(0));
+				tell(new DrawCardEvent(this.getPlayerStackCards().get(0).get_Id(), getPlayerStackCards().get(0).getUid()));
+				this.getPlayerStackCards().pop();
+			}
+			else
+			{
+				this.getOpponentHandCards().add(this.getOpponentStackCards().get(0));
+				tell(new DrawCardEvent(this.getOpponentStackCards().get(0).get_Id(), getOpponentStackCards().get(0).getUid()));
+				this.getOpponentStackCards().pop();
+			}
+			
 			
 			// not good code, to burn.
 			if(deckBidon.getCards().size() > 1)

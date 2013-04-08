@@ -22,6 +22,7 @@ import com.refnil.uqcard.event.EventManager;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.GalleryOnItemClickListener;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.SendDeckEvent;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
 import com.refnil.uqcard.service.IService;
@@ -44,6 +45,7 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BoardFragment extends Fragment implements Listener<Event>{
 	protected final static String TAG = "BoardActivity";
@@ -83,10 +85,14 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			public void onServiceConnected(ComponentName name, IBinder service) {
 				// TODO Auto-generated method stub
 				Log.i(TAG,"BoardViewActivity est connecter au service.");
+				
 				IService mService = (IService) ((LocalBinder) service).getService();
 				Player p = mService.getPlayer();
 				em = new EventManager(p);
 				setBoard(p.getBoard());
+				Toast.makeText(getActivity(), "le toast important", Toast.LENGTH_LONG).show();
+				em.sendToPlayer(new SendDeckEvent(board.getPlayerID(),board.getPlayerDeck()));
+				Toast.makeText(getActivity(), "le toast important2", Toast.LENGTH_LONG).show();
 				setTouchlistener();
 				board.temp = true;
 				
@@ -205,7 +211,18 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	
 	public void BeginGameAction(BeginGameEvent event) {
 		// TODO Auto-generated method stub
-		
+		Log.i(TAG, "in da event");
+		Button b = (Button) getActivity().findViewById(R.id.endturnbutton);
+		b.setText(R.string.endturn);
+		b.setOnClickListener(new OnClickListener()
+		{
+
+			public void onClick(View v) {
+				em.sendToPlayer(new EndTurnEvent());
+				Toast.makeText(getActivity(), "end turn button ", Toast.LENGTH_LONG).show();
+			}
+			
+		});
 	}
 
 	
