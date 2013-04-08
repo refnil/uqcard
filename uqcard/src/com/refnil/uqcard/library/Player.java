@@ -33,6 +33,7 @@ public class Player extends AbstractPlayer {
 	}
 
 	public void sendEvent(Event e) throws RemoteException {
+		Log.i("Player", "player send to " + String.valueOf(board.getPlayerID()));
 		sendTo(getServer(), new RequestServer(board.getPlayerID(),e));
 	}
 
@@ -49,12 +50,10 @@ public class Player extends AbstractPlayer {
 				: null;
 		Close c = um instanceof Close ? (Close) um : null;
 
-		Log.i(TAG, um.toString());
 
 		if (em != null) { // EventMessage
 			board.receiveEvent(em.event);
 		} else if (ya != null) { // YouAre
-			Log.i(TAG, String.valueOf(ya.id));
 			board.setPlayerID(ya.id);
 		} else if (cp != null) { // ConnectedPlayer
 
