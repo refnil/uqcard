@@ -90,12 +90,16 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				Player p = mService.getPlayer();
 				em = new EventManager(p);
 				setBoard(p.getBoard());
-				Toast.makeText(getActivity(), "le toast important", Toast.LENGTH_LONG).show();
 				em.sendToPlayer(new SendDeckEvent(board.getPlayerID(),board.getPlayerDeck()));
-				Toast.makeText(getActivity(), "le toast important2", Toast.LENGTH_LONG).show();
 				setTouchlistener();
 				board.temp = true;
 				
+				//If he isn't the host, he can't click.
+				if(board.getPlayerID()!=1)
+				{
+					Button b = (Button)getActivity().findViewById(R.id.endturnbutton);
+					b.setVisibility(View.INVISIBLE);
+				}
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -212,17 +216,17 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	public void BeginGameAction(BeginGameEvent event) {
 		// TODO Auto-generated method stub
 		Log.i(TAG, "in da event");
-		Button b = (Button) getActivity().findViewById(R.id.endturnbutton);
+		final Button b = (Button) getActivity().findViewById(R.id.endturnbutton);
 		b.setText(R.string.endturn);
 		b.setOnClickListener(new OnClickListener()
 		{
 
 			public void onClick(View v) {
 				em.sendToPlayer(new EndTurnEvent());
-				Toast.makeText(getActivity(), "end turn button ", Toast.LENGTH_LONG).show();
 			}
 			
 		});
+		b.setVisibility(View.VISIBLE);
 	}
 
 	
