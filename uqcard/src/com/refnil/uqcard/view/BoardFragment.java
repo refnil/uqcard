@@ -32,6 +32,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BoardFragment extends Fragment implements Listener<Event>{
@@ -291,6 +293,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		{
 			if(((CardView)adapter.getItem(i)).getCard().getUid() == event.getCardUID())
 			{
+				Log.i(TAG,"card found");
 				cv = ((CardView)adapter.getItem(i));
 				final int size = gallery.getAdapter().getCount()-1;
 				CardView tab[] = new CardView[size];
@@ -316,8 +319,10 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			gv = (GridLayout) getActivity().findViewById(R.id.gridLayoutBoardPlayer);
 			cv.setOnClickListener(new CardViewPlayerOnClickListener(em));
 		}
-		cv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
-		gv.addView(cv, event.getPosition());
+		ImageView iv = cv.getCardImageView(getActivity(), 50, 88);
+		iv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
+		gv.removeViewAt(event.getPosition());
+		gv.addView(iv, event.getPosition());
 		em.setSelectedCardHand(-1);
 		em.setSelectedCardHandUID(-1);
 	}

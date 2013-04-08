@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,21 +117,19 @@ public class CardView extends RelativeLayout {
 	}
 
 	public ImageView getCardImageView(Context c, int width, int height) {
-
+		
+		Log.i("cardview", String.valueOf(width) + "/" + String.valueOf(height));
 		layoutCard.setLayoutParams(new LayoutParams(width, height));
 
-		View v = this.getCardView(c, 150, 120);
+		View v = this.getCardView(c, 100, 120);
 
 		Bitmap viewCapture = loadBitmapFromView(v);
 		ImageView iv = new ImageView(c);
 
 		iv.setScaleType(ImageView.ScaleType.FIT_XY);
-		iv.setLayoutParams(new Gallery.LayoutParams(150, 120));
+		iv.setLayoutParams(new Gallery.LayoutParams(100, 120));
 		iv.setBackgroundResource(imageBackground);
 		iv.setImageBitmap(viewCapture);
-		//Cindy : Temporaire pour test
-		iv.setBackgroundColor(Color.CYAN);
-		//end
 		return iv;
 	}
 
