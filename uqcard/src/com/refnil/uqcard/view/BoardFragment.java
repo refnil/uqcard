@@ -91,6 +91,8 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				em = new EventManager(p);
 				setBoard(p.getBoard());
 				setTouchlistener();
+				Gallery g = (Gallery) getActivity().findViewById(R.id.Gallery);
+				g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity(),em));
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -143,8 +145,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				}
 				
 			});
-			Gallery g = (Gallery) view.findViewById(R.id.Gallery);
-			g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity()));
+
 			
 		return view;
 	}
