@@ -44,6 +44,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -330,8 +331,10 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			gv = (GridLayout) getActivity().findViewById(R.id.gridLayoutBoardPlayer);
 			cv.setOnClickListener(new CardViewPlayerOnClickListener(em));
 		}
-		cv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
-		gv.addView(cv, event.getPosition());
+		ImageView iv = cv.getCardImageView(getActivity(), 50, 88);
+		iv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
+		gv.removeViewAt(event.getPosition());
+		gv.addView(iv, event.getPosition());
 		em.setSelectedCardHand(-1);
 		em.setSelectedCardHandUID(-1);
 	}
