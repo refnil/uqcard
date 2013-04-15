@@ -128,7 +128,7 @@ public class ServerBoard extends Board {
 						Log.i(TAG, "l.128");
 						for(int i=0; i<stack.size(); i++)
 						{
-							Log.i(TAG, "l.131");
+							Log.i(TAG, "l.131 "+String.valueOf(stack.size()));
 							if(stack.get(i).getUid() == pe.getCardUID())
 							{
 								tab[pe.getPosition()] =stack.get(i);
