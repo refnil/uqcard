@@ -267,7 +267,8 @@ public class Board extends AbstractListenable<Event> {
 	
 	void DrawCardAction(DrawCardEvent event)
 	{
-		if(event.getCardUID() / 40 == playerID)
+		Log.i(TAG, "uid / 40 " + String.valueOf(event.getCardUID() / 40) + " PID "+String.valueOf(playerID));
+		if(event.getCardUID() / 40 == playerID-1)
 		{
 			Card c = cardStoreBidon.getCard(event.getCardID());
 			

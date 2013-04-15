@@ -90,7 +90,6 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				Player p = mService.getPlayer();
 				em = new EventManager(p);
 				setBoard(p.getBoard());
-				em.sendToPlayer(new SendDeckEvent(board.getPlayerID(),board.getPlayerDeck()));
 				setTouchlistener();
 			}
 
@@ -206,6 +205,9 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 
 	
 	public void BeginGameAction(BeginGameEvent event) {
+		
+		em.sendToPlayer(new SendDeckEvent(board.getPlayerID(),board.getPlayerDeck()));
+		
 		Log.i(TAG, "in da event");
 		Button b = (Button) getActivity().findViewById(R.id.endturnbutton);
 		b.setText(R.string.endturn);

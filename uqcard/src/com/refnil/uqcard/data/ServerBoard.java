@@ -167,6 +167,7 @@ public class ServerBoard extends Board {
 			}
 			else
 			{
+				Log.i(TAG, "uid  " + getOpponentStackCards().get(0).getUid());
 				this.getOpponentHandCards().add(this.getOpponentStackCards().get(0));
 				tell(new DrawCardEvent(this.getOpponentStackCards().get(0).get_Id(), getOpponentStackCards().get(0).getUid()));
 				this.getOpponentStackCards().pop();
