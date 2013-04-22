@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,10 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 	public void onClick(View v) {
 		if(em != null)
 		{
-			if(v instanceof CardView)
-				em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+			if(v instanceof ImageView )
+			{
+				//em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+			}
 			else
 			{
 				Log.i("click", "l.29");

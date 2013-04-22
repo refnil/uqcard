@@ -50,7 +50,6 @@ public class ServerBoard extends Board {
 		
 		if (event.type == Event_Type.SEND_DECK) {
 			SendDeckEvent se = (SendDeckEvent) event;
-			Log.i(TAG, "ASDASDWFFAS DSAFWAFDASD SAD " + String.valueOf(se.getPlayer()));
 			Stack<Card> deckStack = new Stack<Card>();
 			long seed = System.nanoTime();
 			int cpt=0;
@@ -116,11 +115,13 @@ public class ServerBoard extends Board {
 					{
 						stack = this.getPlayerHandCards();
 						tab = this.getPlayerBoardCards();
+						Log.i(TAG, "l.131 player ");
 					}
 					else
 					{
 						stack = this.getOpponentHandCards();
 						tab = this.getOpponentBoardCards();
+						Log.i(TAG, "l.131 opp ");
 					}
 					
 					if(tab[pe.getPosition()] == null)
@@ -128,7 +129,9 @@ public class ServerBoard extends Board {
 						Log.i(TAG, "l.128");
 						for(int i=0; i<stack.size(); i++)
 						{
-							Log.i(TAG, "l.131 "+String.valueOf(stack.size()));
+							Log.i(TAG, "l.131 stack "+String.valueOf(stack.get(i).getUid()));
+							
+							
 							if(stack.get(i).getUid() == pe.getCardUID())
 							{
 								tab[pe.getPosition()] =stack.get(i);
