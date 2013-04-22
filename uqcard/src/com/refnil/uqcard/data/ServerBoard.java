@@ -23,6 +23,7 @@ public class ServerBoard extends Board {
 	final private static String TAG = "ServerBoard";
 	private int UIDedDecks;
 	private DeckTest deckBidon;
+	private int playerID,opponentID;
 	
 	public ServerBoard()
 	{
@@ -67,10 +68,12 @@ public class ServerBoard extends Board {
 			if (se.getPlayer() == 1) {
 				Log.i(TAG, "Setting host deck");
 				this.setPlayerStackCards(deckStack);
+				playerID = 1;
 				tell(event);
 			} else {
 				Log.i(TAG, "Setting host's enemy deck");
 				this.setOpponentStackCards(deckStack);
+				opponentID = se.getPlayer();
 				tell(event);
 			}
 		}
@@ -111,7 +114,7 @@ public class ServerBoard extends Board {
 					Log.i(TAG, "l.112");
 					List<Card> stack;
 					Card[] tab;
-					if(((PutCardEvent)event).getCardUID() / 40 ==1)
+					if(((PutCardEvent)event).getCardUID() / 40 +1 == playerID)
 					{
 						stack = this.getPlayerHandCards();
 						tab = this.getPlayerBoardCards();
@@ -162,7 +165,7 @@ public class ServerBoard extends Board {
 			this.setTour(getTour()+1);
 			tell(new BeginTurnEvent());
 			
-			if(getTour() %2 ==1)
+			if(getTour() %2 ==playerID)
 			{
 				this.getPlayerHandCards().add(this.getPlayerStackCards().get(0));
 				tell(new DrawCardEvent(this.getPlayerStackCards().get(0).get_Id(), getPlayerStackCards().get(0).getUid()));

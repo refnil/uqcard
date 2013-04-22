@@ -24,9 +24,11 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 	public void onClick(View v) {
 		if(em != null)
 		{
+			Log.i("click", String.valueOf(v.getClass()));
 			if(v instanceof ImageView )
 			{
-				//em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+				Log.i("click", "chose playerCard");
+				em.setSelectedCard(((CardView)v).getCard().getUid(), false);
 			}
 			else
 			{
@@ -34,13 +36,19 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 				GridLayout gl = (GridLayout)v.getParent();
 				for(int i=0;i<gl.getChildCount();i++)
 				{
-					if((TextView)gl.getChildAt(i) == (TextView)v)
+					if(gl.getChildAt(i) instanceof TextView)
 					{
-						Log.i("click", "l.35");
-						Card c = CardStoreBidon.getCard(em.getSelectedCardHand());
-						c.setUid(em.getSelectedCardHandUID());
-						em.sendToPlayer(new PutCardEvent(c,i));
-						break;
+						if((TextView)gl.getChildAt(i) == (TextView)v)
+						{
+							Log.i("click", "l.35");
+							Card c = CardStoreBidon.getCard(em.getSelectedCardHand());
+							if(c != null)
+							{
+								c.setUid(em.getSelectedCardHandUID());
+								em.sendToPlayer(new PutCardEvent(c,i));
+								break;
+							}
+						}
 					}
 				}
 			}

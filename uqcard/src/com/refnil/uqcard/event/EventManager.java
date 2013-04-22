@@ -39,14 +39,18 @@ public class EventManager {
 	}
 
 	public void setSelectedCard(int selectedCard,boolean opponent) {
-		
+		Log.i("click", "in selectedEvent");
 		if(this.getSelectedCard() != -1 && opponent)
 		{
+			Log.i("click", "pew pew");
 			this.sendToPlayer(new AttackEvent(this.getSelectedCard(),selectedCard));	
 			this.selectedCard = -1;
 		}
 		else
+		{
+			Log.i("click", "no pew pew");
 			this.selectedCard = selectedCard;
+		}
 	}
 
 	public int getSelectedCardHand() {
