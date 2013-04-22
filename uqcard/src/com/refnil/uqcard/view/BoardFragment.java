@@ -307,48 +307,49 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		ImageAdapter adapter = (ImageAdapter) gallery.getAdapter();
 		CardView cv = null;
 		DummyCardStore store = new DummyCardStore();
-		for(int i=0;i<adapter.getCount();i++)
+		if(event.getCardUID() / 40 + 1 == em.getPlayer().getBoard().getPlayerID())
 		{
-			if(((CardView)adapter.getItem(i)).getCard().getUid() == event.getCardUID())
+			for(int i=0;i<adapter.getCount();i++)
 			{
-				Log.i(TAG,"1st if");
-				cv = ((CardView)adapter.getItem(i));
-				final int size = gallery.getAdapter().getCount()-1;
-				CardView tab[] = new CardView[size];
-				for(int j=0;j<adapter.getCount();j++)
+				if(((CardView)adapter.getItem(i)).getCard().getUid() == event.getCardUID())
 				{
-					if(j>i)
+					cv = ((CardView)adapter.getItem(i));
+					final int size = gallery.getAdapter().getCount()-1;
+					CardView tab[] = new CardView[size];
+					for(int j=0;j<adapter.getCount();j++)
 					{
-						Log.i(TAG,"2nd if");
-						tab[j-1] = (CardView)adapter.getItem(j);
+						if(j>i)
+						{
+							tab[j-1] = (CardView)adapter.getItem(j);
+						}
+						else if(j != i)
+						{
+							tab[j] = (CardView)adapter.getItem(j);
+						}
 					}
-					else if(j != i)
-					{
-						Log.i(TAG,"else if");
-						tab[j] = (CardView)adapter.getItem(j);
-					}
+					ImageAdapter adp = new ImageAdapter(getActivity(),tab);
+					gallery.setAdapter(adp);
+					break;
 				}
-				ImageAdapter adp = new ImageAdapter(getActivity(),tab);
-				gallery.setAdapter(adp);
-				break;
 			}
 		}
 		GridLayout gv;
-		ImageView iv = cv.getCardImageView(getActivity(), 50, 88);
+		ImageView iv ;
 		
 		if(cv == null)
 		{
 			gv = (GridLayout) getActivity().findViewById(R.id.gridLayoutBoardOpponent);
 			cv = new CardView(getActivity().getApplicationContext(),store.getCard(event.getCardID()));
-			cv.setOnClickListener(new CardViewOpponentOnClickListener(em));
+			iv = cv.getCardImageView(getActivity(), 50, 88);
+			iv.setOnClickListener(new CardViewOpponentOnClickListener(em));
 		}
 		else
 		{
 			gv = (GridLayout) getActivity().findViewById(R.id.gridLayoutBoardPlayer);
-			cv.setOnClickListener(new CardViewPlayerOnClickListener(em));
+			iv = cv.getCardImageView(getActivity(), 50, 88);
+			iv.setOnClickListener(new CardViewPlayerOnClickListener(em));
 		}
 
-		iv.setOnClickListener(new CardViewPlayerOnClickListener(em));
 		iv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
 		gv.removeViewAt(event.getPosition());
 		gv.addView(iv, event.getPosition());

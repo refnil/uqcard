@@ -3,6 +3,7 @@ package com.refnil.uqcard.event;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.library.Player;
 
 public class EventManager {
@@ -16,9 +17,13 @@ public class EventManager {
 		this.p = p;
 	}
 	
+	public Player getPlayer()
+	{
+		return p;
+	}
+	
 	public void sendToPlayer(Event event) {
 		try {
-			Log.i("eventmanager", "send to player ");
 			p.sendEvent(event);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -39,17 +44,21 @@ public class EventManager {
 	}
 
 	public void setSelectedCard(int selectedCard,boolean opponent) {
-		Log.i("click", "in selectedEvent");
+		
 		if(this.getSelectedCard() != -1 && opponent)
 		{
+			Card[] cards = this.p.getBoard().getOpponentBoardCards();
+			int carduid = cards[selectedCard].getUid();
+			
 			Log.i("click", "pew pew");
-			this.sendToPlayer(new AttackEvent(this.getSelectedCard(),selectedCard));	
+			this.sendToPlayer(new AttackEvent(this.getSelectedCard(),carduid));	
 			this.selectedCard = -1;
 		}
 		else
 		{
-			Log.i("click", "no pew pew");
-			this.selectedCard = selectedCard;
+			Card[] cards = this.p.getBoard().getPlayerBoardCards();
+			int carduid = cards[selectedCard].getUid();
+			this.selectedCard = carduid;
 		}
 	}
 

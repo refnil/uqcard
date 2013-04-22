@@ -51,7 +51,7 @@ public class ServerBoard extends Board {
 		
 		if (event.type == Event_Type.SEND_DECK) {
 			SendDeckEvent se = (SendDeckEvent) event;
-			Stack<Card> deckStack = new Stack<Card>();
+			Stack<CreatureCard> deckStack = new Stack<CreatureCard>();
 			long seed = System.nanoTime();
 			int cpt=0;
 
@@ -112,8 +112,8 @@ public class ServerBoard extends Board {
 				if(pe.getPosition() !=5 && pe.getPosition() !=11)
 				{
 					Log.i(TAG, "l.112");
-					List<Card> stack;
-					Card[] tab;
+					List<CreatureCard> stack;
+					CreatureCard[] tab;
 					if(((PutCardEvent)event).getCardUID() / 40 +1 == playerID)
 					{
 						stack = this.getPlayerHandCards();

@@ -77,8 +77,6 @@ public class HostChoice extends Activity {
 
 		c.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "BluetoothConnect",
-						Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getApplicationContext(), BluetoothConnect.class);
 				startActivity(i);
 			}

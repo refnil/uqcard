@@ -81,16 +81,8 @@ public class BluetoothConnectFragment extends Fragment{
 	private Handler handler = new Handler() {
 	    public void handleMessage(Message message) {
 	      Object connected = message.obj;
-	      if (connected.toString() == "true") {
-	        Toast.makeText(getActivity(),
-	            "Connected", Toast.LENGTH_LONG)
-	            .show();
+	      if (connected.toString() == "true")
 	        ((TabsActivity)getActivity()).startBoardFragment(false);
-	      } else {
-	        Toast.makeText(getActivity(), "Connection failed.",
-	            Toast.LENGTH_LONG).show();
-	      }
-
 	    };
 	  };
 
