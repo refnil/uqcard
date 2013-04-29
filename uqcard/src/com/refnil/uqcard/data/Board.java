@@ -288,12 +288,41 @@ public class Board extends AbstractListenable<Event> {
 			deletePlayerHandCard(c);
 			c.setUid(event.getCardUID());
 			addPlayerBoardCard(c,event.getPosition());
+			int player = -1;
+			
+			for(int i=0;i<playerBoardCards.length;i++)
+			{
+				if(playerBoardCards[i] != null)
+				{
+					Log.i("board", "uid playerr : " + String.valueOf(playerBoardCards[i].getUid()));
+					if(playerBoardCards[i].getUid() == event.getCardUID())
+					{
+						player = i;
+						break;
+					}
+				}
+			}
+			
 		}
 		else
 		{
 			deleteOpponentHandCard(c);
 			c.setUid(event.getCardUID());
 			addOpponentBoardCard(c,event.getPosition());
+			int pasfin = -1;
+			
+			for(int i=0;i<opponentBoardCards.length;i++)
+			{
+				if(opponentBoardCards[i] != null)
+				{
+					Log.i("board", "uid pasfin : " + String.valueOf(opponentBoardCards[i].getUid()));
+					if(opponentBoardCards[i].getUid() == event.getCardUID())
+					{
+						pasfin = i;
+						break;
+					}
+				}
+			}
 		}
 		tell(event);
 	}
@@ -306,11 +335,14 @@ public class Board extends AbstractListenable<Event> {
 		for(int i=0;i<list.length;i++)
 		{
 			if(list[i] != null)
+			{
+				Log.i("board", "uid opponent : " + String.valueOf(list[i].getUid()));
 				if(list[i].getUid() == event.getOpponent())
 				{
 					opponent = i;
 					break;
 				}
+			}
 		}
 		list =  getPlayerBoardCards();
 		int player = -1;
@@ -318,11 +350,14 @@ public class Board extends AbstractListenable<Event> {
 		for(int i=0;i<list.length;i++)
 		{
 			if(list[i] != null)
+			{
+				Log.i("board", "uid playerr : " + String.valueOf(list[i].getUid()));
 				if(list[i].getUid() == event.getPlayer())
 				{
 					player = i;
 					break;
 				}
+			}
 		}
 		Log.i(TAG, "opponent " + String.valueOf(opponent) + " :: player " + String.valueOf(player));
 		((CreatureCard)this.getOpponentBoardCards()[opponent]).setHp(((CreatureCard)this.getOpponentBoardCards()[opponent]).getHp() - (((CreatureCard)this.getOpponentBoardCards()[opponent]).getAtk()- ((CreatureCard)this.getOpponentBoardCards()[opponent]).getDef()));
