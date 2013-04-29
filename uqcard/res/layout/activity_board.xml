@@ -127,8 +127,8 @@
         custom:content="@+id/contentGallery"
         custom:handle="@+id/handleButton"
         custom:orientation="vertical"
-        custom:semiClosedContentSize="55dp"
-        custom:topOffset="350dp" >
+        custom:semiClosedContentSize="10dp"
+        custom:topOffset="310dp" >
 
         <Button
             android:id="@id/handleButton"
@@ -146,7 +146,7 @@
             <Gallery
                 android:id="@+id/Gallery"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_gravity="top" />
         </LinearLayout>
     </com.refnil.uqcard.view.SemiClosedSlidingDrawer>

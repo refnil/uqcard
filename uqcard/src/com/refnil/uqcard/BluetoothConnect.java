@@ -34,7 +34,7 @@ public class BluetoothConnect extends Activity {
 
 	private BluetoothEntryAdapter dbea;
 	private BluetoothEntryAdapter pbea;
-	final private int REQUEST_ENABLE_BT = 1337;
+	final private int REQUEST_ENABLE_BT = 1337 ;
 	private final static String TAG = "BluetoothConnect";
 
 	private TextView bdlh;
