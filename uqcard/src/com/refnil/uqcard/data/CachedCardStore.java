@@ -20,7 +20,7 @@ public class CachedCardStore implements CardStore {
 		String temp;
 
 		while ((temp = br.readLine()) != null)
-			total += temp;
+			total += temp + "\n";
 
 		store = new CachedCardStore(total);
 

@@ -36,7 +36,7 @@ public class Deck implements Serializable {
 		
 		ArrayList<Card> cards = new ArrayList<Card>(40);
 		for (int i = 0; i < 40; i++) {
-			cards.add(cs.getCard(0));
+			cards.add(cs.getCard(i%2));
 		}
 		return new Deck(cards, "TEST");
 	}
