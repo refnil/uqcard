@@ -42,7 +42,7 @@
         android:layout_alignParentBottom="true"
         android:lines="8"
         android:maxLines="8"
-        android:text="Medium Text"
+        android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:width="300dp" />
 
