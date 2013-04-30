@@ -3,14 +3,12 @@ package com.refnil.uqcard.data;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.refnil.uqcard.data.test.DeckTest;
-
-public class Deck implements Serializable{
+public class Deck implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7497696027546651007L;
-	private	ArrayList<Card> cards;
+	private ArrayList<Card> cards;
 	private String deckName;
 
 	public ArrayList<Card> getCards() {
@@ -21,24 +19,25 @@ public class Deck implements Serializable{
 		this.cards = cards;
 	}
 
-	public Deck(ArrayList<Card> cards,String deckName) {
+	public Deck(ArrayList<Card> cards, String deckName) {
 		this.cards = cards;
 		this.deckName = deckName;
 	}
-	
-	public Deck()
-	{
-		this.cards = DeckTest.createDeck();
-		this.deckName = "TEST";
-	}
 
-	public Card CardAt(int index)
-	{
+	public Card CardAt(int index) {
 		return cards.get(index);
 	}
-	
-	public Card pop()
-	{
+
+	public Card pop() {
 		return cards.remove(0);
+	}
+
+	public static Deck createDeck(CardStore cs){
+		
+		ArrayList<Card> cards = new ArrayList<Card>(40);
+		for (int i = 0; i < 40; i++) {
+			cards.add(cs.getCard(0));
+		}
+		return new Deck(cards, "TEST");
 	}
 }

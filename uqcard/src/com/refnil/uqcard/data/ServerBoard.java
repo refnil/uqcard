@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-import com.refnil.uqcard.data.test.DeckTest;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginTurnEvent;
 import com.refnil.uqcard.event.DrawCardEvent;
@@ -19,17 +18,16 @@ import android.util.Log;
 
 public class ServerBoard extends Board {
 	
-	private DummyCardStore cardStore = new DummyCardStore();
 	final private static String TAG = "ServerBoard";
 	private int UIDedDecks;
-	private DeckTest deckBidon;
+	private Deck deckBidon;
 	private int playerID,opponentID;
 	
 	public ServerBoard()
 	{
 		this.setTour(1);
 		UIDedDecks = 0;
-		deckBidon = new DeckTest();
+		//deckBidon = new DeckTest();
 
 	}
 	

@@ -1,8 +1,12 @@
 package com.refnil.uqcard.view;
 
+import java.io.IOException;
+
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.data.CachedCardStore;
 import com.refnil.uqcard.data.Deck;
-import com.refnil.uqcard.data.test.DeckTest;
+
+import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,7 +18,7 @@ import android.widget.TextView;
 
 public class DeckListFragment extends Fragment {
 	
-	
+	CachedCardStore ccs;
 
 	public DeckListFragment() {
 	}
@@ -27,7 +31,19 @@ public class DeckListFragment extends Fragment {
 		LinearLayout cardListLayout;
 		View view = inflater.inflate( R.layout.activity_deck_list,
 		        container, false);
-		deck = new Deck(DeckTest.createDeck(),"Test");
+		
+		try {
+			ccs = CachedCardStore.initAndGet(getResources().openRawResource(R.raw.card));
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		deck = Deck.createDeck(ccs);
+		
 		cardListLayout = (LinearLayout) view.findViewById(R.id.cardListLayout);
 		cardListLayout.setOrientation(LinearLayout.VERTICAL);
 		for(int i=0;i<40;i++)

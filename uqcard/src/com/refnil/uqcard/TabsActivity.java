@@ -12,6 +12,7 @@ import com.refnil.uqcard.view.GameFragment;
 import com.refnil.uqcard.view.HistoryFragment;
 import com.refnil.uqcard.view.StatsFragment;
 import android.app.ActionBar;
+import android.app.Application;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -79,6 +80,8 @@ public class TabsActivity extends FragmentActivity implements
 					.setText(mSectionsPagerAdapter.getPageTitle(i))
 					.setTabListener(this));
 		}
+		
+		
 	}
 	
 	public boolean isTablet(Context context) {

@@ -1,5 +1,7 @@
 package com.refnil.uqcard.event;
 
+import com.refnil.uqcard.data.CachedCardStore;
+import com.refnil.uqcard.data.CachedCardStore.CachedStoreNotInitialised;
 import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.view.CardView;
@@ -14,11 +16,17 @@ import android.widget.Toast;
 
 public class CardViewPlayerOnClickListener implements OnClickListener {
 
-	EventManager em;
-	DummyCardStore CardStoreBidon = new DummyCardStore();
+	private EventManager em;
+	private CachedCardStore CardStoreBidon;
 
 	public CardViewPlayerOnClickListener(EventManager em) {
 		this.em = em;
+		try {
+			CardStoreBidon = CachedCardStore.getStore();
+		} catch (CachedStoreNotInitialised e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void onClick(View v) {
