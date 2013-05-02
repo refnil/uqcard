@@ -359,6 +359,10 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		gv.addView(iv, position);
 		em.setSelectedCardHand(-1);
 		em.setSelectedCardHandUID(-1);
+		
+		SemiClosedSlidingDrawer scsd = (SemiClosedSlidingDrawer) getActivity().findViewById(R.id.mySlidingDrawer);
+		scsd.open();
+		scsd.close();
 	}
 
 	public void onClose() {
