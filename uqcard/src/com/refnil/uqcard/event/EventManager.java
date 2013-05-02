@@ -51,7 +51,7 @@ public class EventManager {
 			int carduid = cards[selectedCard].getUid();
 			
 			Log.i("click", "pew pew");
-			this.sendToPlayer(new AttackEvent(this.getSelectedCard(),carduid));	
+			this.sendToPlayer(new AttackEvent(carduid,this.getSelectedCard()));	
 			this.selectedCard = -1;
 		}
 		else

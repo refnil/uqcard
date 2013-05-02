@@ -259,7 +259,6 @@ public class Board extends AbstractListenable<Event> {
 	
 	void DrawCardAction(DrawCardEvent event)
 	{
-		Log.i(TAG, "uid / 40 " + String.valueOf(event.getCardUID() / 40) + " PID "+String.valueOf(playerID));
 		if(event.getCardUID() / 40 == playerID-1)
 		{
 			CreatureCard c = cardStoreBidon.getCard(event.getCardID());
@@ -300,32 +299,60 @@ public class Board extends AbstractListenable<Event> {
 	
 	void BattleAction(AttackEvent event)
 	{
-		//Ça plante ici les deux sont à -1
 		CreatureCard[] list =  getOpponentBoardCards();
-		int opponent = -1;
+		int opponent = -1,player = -1;
 		for(int i=0;i<list.length;i++)
 		{
 			if(list[i] != null)
-				if(list[i].getUid() == event.getOpponent())
-				{
-					opponent = i;
-					break;
-				}
-		}
-		list =  getPlayerBoardCards();
-		int player = -1;
-		
-		for(int i=0;i<list.length;i++)
-		{
-			if(list[i] != null)
+			{
 				if(list[i].getUid() == event.getPlayer())
 				{
 					player = i;
 					break;
 				}
+				else if(list[i].getUid() == event.getOpponent())
+				{
+					opponent = i;
+					break;
+				}
+			}
+		}
+		list =  getPlayerBoardCards();
+		
+		for(int i=0;i<list.length;i++)
+		{
+			if(list[i] != null)
+			{
+				if(list[i].getUid() == event.getPlayer())
+				{
+					player = i;
+					break;
+				}
+				else if(list[i].getUid() == event.getOpponent())
+				{
+					opponent = i;
+					break;
+				}
+			}
 		}
 		Log.i(TAG, "opponent " + String.valueOf(opponent) + " :: player " + String.valueOf(player));
-		((CreatureCard)this.getOpponentBoardCards()[opponent]).setHp(((CreatureCard)this.getOpponentBoardCards()[opponent]).getHp() - (((CreatureCard)this.getOpponentBoardCards()[opponent]).getAtk()- ((CreatureCard)this.getOpponentBoardCards()[opponent]).getDef()));
+		Log.i(TAG, "event player " + String.valueOf(event.getPlayer()/40) + " :: playerID " + String.valueOf(playerID-1));
+		if(event.getPlayer()/40 == playerID-1)
+		{
+			int hp = ((CreatureCard)this.getOpponentBoardCards()[opponent]).getHp();
+			int attack = ((CreatureCard)this.getPlayerBoardCards()[player]).getAtk();
+			attack -= ((CreatureCard)this.getOpponentBoardCards()[opponent]).getDef();
+			Log.i("Board", "My attack : " + String.valueOf(hp) + " - " + String.valueOf(attack));
+			((CreatureCard)this.getOpponentBoardCards()[opponent]).setHp(hp-attack);
+		}
+		else
+		{
+			int hp = this.getPlayerBoardCards()[player].getHp();
+			int attack = ((CreatureCard)this.getOpponentBoardCards()[opponent]).getAtk();
+			attack -= ((CreatureCard)this.getPlayerBoardCards()[player]).getDef();
+			Log.i("Board", "His attack : " + String.valueOf(hp) + " - " + String.valueOf(attack));
+			((CreatureCard)this.getPlayerBoardCards()[player]).setHp(hp - attack);
+		}	
 		tell(event);
 	}
 	
