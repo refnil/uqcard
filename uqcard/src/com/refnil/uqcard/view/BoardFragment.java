@@ -335,13 +335,17 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		}
 		GridLayout gv;
 		ImageView iv ;
-		
+		int position = event.getPosition();
 		if(cv == null)
 		{
 			gv = (GridLayout) getActivity().findViewById(R.id.gridLayoutBoardOpponent);
 			cv = new CardView(getActivity().getApplicationContext(),store.getCard(event.getCardID()));
 			iv = cv.getCardImageView(getActivity(), 50, 88);
 			iv.setOnClickListener(new CardViewOpponentOnClickListener(em));
+			if(position<=4)
+				position+=6;
+			else
+				position-=6;
 		}
 		else
 		{
@@ -349,10 +353,10 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			iv = cv.getCardImageView(getActivity(), 50, 88);
 			iv.setOnClickListener(new CardViewPlayerOnClickListener(em));
 		}
-
+		
 		iv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
-		gv.removeViewAt(event.getPosition());
-		gv.addView(iv, event.getPosition());
+		gv.removeViewAt(position);
+		gv.addView(iv, position);
 		em.setSelectedCardHand(-1);
 		em.setSelectedCardHandUID(-1);
 	}
