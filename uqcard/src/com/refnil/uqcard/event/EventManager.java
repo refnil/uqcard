@@ -3,6 +3,7 @@ package com.refnil.uqcard.event;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.refnil.uqcard.data.Board;
 import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.library.Player;
 
@@ -47,8 +48,26 @@ public class EventManager {
 		
 		if(this.getSelectedCard() != -1 && opponent)
 		{
-			Card[] cards = this.p.getBoard().getOpponentBoardCards();
-			int carduid = cards[selectedCard].getUid();
+			Log.i("click", "car");
+			Log.i("click", "position "+String.valueOf(selectedCard));
+			
+			Board b = this.p.getBoard();
+			Card[] cards = b.getOpponentBoardCards();
+			
+			Log.i("click", "cards size "+String.valueOf(cards.length));
+			
+			//adjusting reversed opponent grid
+			if(selectedCard >=6)
+			{
+				selectedCard = selectedCard -6;
+			}
+			else
+			{
+				selectedCard = selectedCard +6;
+			}
+			
+			Card sCard =  cards[selectedCard];
+			int carduid = sCard.getUid();
 			
 			Log.i("click", "pew pew");
 			this.sendToPlayer(new AttackEvent(carduid,this.getSelectedCard()));	

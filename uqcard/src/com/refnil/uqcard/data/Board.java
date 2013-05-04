@@ -284,14 +284,14 @@ public class Board extends AbstractListenable<Event> {
 		
 		if(found)
 		{
-			deletePlayerHandCard(c);
 			c.setUid(event.getCardUID());
+			deletePlayerHandCard(c);
 			addPlayerBoardCard(c,event.getPosition());
 		}
 		else
 		{
-			deleteOpponentHandCard(c);
 			c.setUid(event.getCardUID());
+			deleteOpponentHandCard(c);
 			addOpponentBoardCard(c,event.getPosition());
 		}
 		tell(event);
