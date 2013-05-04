@@ -347,11 +347,11 @@ public class Board extends AbstractListenable<Event> {
 		}
 		else
 		{
-			int hp = this.getPlayerBoardCards()[player].getHp();
-			int attack = ((CreatureCard)this.getOpponentBoardCards()[opponent]).getAtk();
-			attack -= ((CreatureCard)this.getPlayerBoardCards()[player]).getDef();
+			int hp = ((CreatureCard)this.getPlayerBoardCards()[opponent]).getHp();
+			int attack = ((CreatureCard)this.getOpponentBoardCards()[player]).getAtk();
+			attack -= ((CreatureCard)this.getPlayerBoardCards()[opponent]).getDef();
 			Log.i("Board", "His attack : " + String.valueOf(hp) + " - " + String.valueOf(attack));
-			((CreatureCard)this.getPlayerBoardCards()[player]).setHp(hp - attack);
+			((CreatureCard)this.getPlayerBoardCards()[opponent]).setHp(hp - attack);
 		}	
 		tell(event);
 	}

@@ -87,6 +87,8 @@ public class ServerBoard extends Board {
 
 			CreatureCard good = (CreatureCard) getCardByUID(ae.getPlayer());
 			CreatureCard evil = (CreatureCard) getCardByUID(ae.getOpponent());
+			int atkgood = good.getAtk();
+			int evildef = evil.getDef();
 			int damage = good.getAtk()-evil.getDef();
 			if(damage>0)
 			{
