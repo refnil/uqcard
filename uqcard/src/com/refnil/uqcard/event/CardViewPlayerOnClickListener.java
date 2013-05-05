@@ -13,26 +13,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CardViewPlayerOnClickListener implements OnClickListener {
-
+	
 	EventManager em;
 	DummyCardStore CardStoreBidon = new DummyCardStore();
 
 	public CardViewPlayerOnClickListener(EventManager em) {
 		this.em = em;
 	}
-
+	
 	public void onClick(View v) {
 		if(em != null)
 		{
-			Log.i("click", String.valueOf(v.getClass()));
 			if(v instanceof ImageView )
 			{
-				Log.i("click", "chose playerCard");
-				em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+				GridLayout gl = (GridLayout) v.getParent();
+				int position = gl.indexOfChild(v);
+				em.setSelectedCard(position, false);
 			}
 			else
 			{
-				Log.i("click", "l.29");
 				GridLayout gl = (GridLayout)v.getParent();
 				for(int i=0;i<gl.getChildCount();i++)
 				{
@@ -40,7 +39,6 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 					{
 						if((TextView)gl.getChildAt(i) == (TextView)v)
 						{
-							Log.i("click", "l.35");
 							Card c = CardStoreBidon.getCard(em.getSelectedCardHand());
 							if(c != null)
 							{

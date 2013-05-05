@@ -10,18 +10,18 @@ public class Deck implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7497696027546651007L;
-	private	ArrayList<Card> cards;
+	private	ArrayList<CreatureCard> cards;
 	private String deckName;
 
-	public ArrayList<Card> getCards() {
+	public ArrayList<CreatureCard> getCards() {
 		return cards;
 	}
 
-	public void setCards(ArrayList<Card> cards) {
+	public void setCards(ArrayList<CreatureCard> cards) {
 		this.cards = cards;
 	}
 
-	public Deck(ArrayList<Card> cards,String deckName) {
+	public Deck(ArrayList<CreatureCard> cards,String deckName) {
 		this.cards = cards;
 		this.deckName = deckName;
 	}

@@ -13,6 +13,7 @@ import com.refnil.uqcard.event.DrawCardEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.RemoveEvent;
 import com.refnil.uqcard.event.SendDeckEvent;
 
 import android.util.Log;
@@ -51,7 +52,7 @@ public class ServerBoard extends Board {
 		
 		if (event.type == Event_Type.SEND_DECK) {
 			SendDeckEvent se = (SendDeckEvent) event;
-			Stack<Card> deckStack = new Stack<Card>();
+			Stack<CreatureCard> deckStack = new Stack<CreatureCard>();
 			long seed = System.nanoTime();
 			int cpt=0;
 
@@ -87,11 +88,30 @@ public class ServerBoard extends Board {
 
 			CreatureCard good = (CreatureCard) getCardByUID(ae.getPlayer());
 			CreatureCard evil = (CreatureCard) getCardByUID(ae.getOpponent());
+			int atkgood = good.getAtk();
+			int evildef = evil.getDef();
 			int damage = good.getAtk()-evil.getDef();
 			if(damage>0)
 			{
 				evil.setHp(evil.getHp()-damage);
 				tell(ae);
+				if(evil.getHp()<=0)
+				{
+					int playerid = (ae.getOpponent() / 40)+1;
+					int position;
+					if(playerid==1)
+					{
+						position = this.getCardPositionOnBoard(ae.getOpponent(), true);
+						this.getPlayerBoardCards()[position]=null;
+					}
+					else
+					{
+						position = this.getCardPositionOnBoard(ae.getOpponent(), false);
+						this.getOpponentBoardCards()[position]=null;
+					}
+					Log.i(TAG, "DEAD");
+					tell(new RemoveEvent(evil.getUid(),position));
+				}
 			}
 		}
 		/*if (event.type == Event_Type.DRAW_CARD) {
@@ -112,8 +132,8 @@ public class ServerBoard extends Board {
 				if(pe.getPosition() !=5 && pe.getPosition() !=11)
 				{
 					Log.i(TAG, "l.112");
-					List<Card> stack;
-					Card[] tab;
+					List<CreatureCard> stack;
+					CreatureCard[] tab;
 					if(((PutCardEvent)event).getCardUID() / 40 +1 == playerID)
 					{
 						stack = this.getPlayerHandCards();
