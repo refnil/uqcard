@@ -22,6 +22,7 @@ import com.refnil.uqcard.event.EventManager;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.GalleryOnItemClickListener;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.RemoveEvent;
 import com.refnil.uqcard.event.SendDeckEvent;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
@@ -29,10 +30,12 @@ import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
 
+import android.R.color;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -191,10 +194,45 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		
 		else if(e.type == Event_Type.PUT_CARD)
 			PutCardAction((PutCardEvent)e);
-			
+		else if(e.type == Event_Type.REMOVE_CARD)
+			RemoveAction((RemoveEvent)e);
 	}
 	
 	
+	private void RemoveAction(RemoveEvent e) {
+		Log.i(TAG, "DEAD");
+		int playerid = (e.getuid() / 40)+1;
+		GridLayout gl;
+		int position;
+		TextView tv = new TextView(getActivity().getApplicationContext());
+		tv.setTextSize(2, 40);
+		tv.setTextColor(Color.BLACK);
+		
+		if(playerid == this.board.getPlayerID())
+		{
+			gl = (GridLayout)getActivity().findViewById(R.id.gridLayoutBoardPlayer);
+			position = e.getPosition();
+			tv.setText(String.valueOf(position+1));
+		}
+		else
+		{
+			gl = (GridLayout)getActivity().findViewById(R.id.gridLayoutBoardOpponent);
+			position = e.getPosition();
+			tv.setText(String.valueOf(position+1));
+			
+			if(position<=4)
+				position+=6;
+			else
+				position-=6;
+		}
+		Log.i(TAG, "position " + String.valueOf(position));
+		gl.removeViewAt(position);
+		
+		
+		
+		gl.addView(tv, position);
+	}
+
 	public void BeginTurnAction(BeginTurnEvent event) {
 		// TODO Auto-generated method stub
 		
@@ -275,6 +313,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	
 	public void BattleAction(AttackEvent event) {
 
+		
 		//Doit s'updater normalement à cause des références
 		/*Card c = CardStoreBidon.getCard(event.getOpponent());
 		CardView cv = new CardView(getApplicationContext(),c);

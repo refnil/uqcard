@@ -13,6 +13,7 @@ import com.refnil.uqcard.event.DrawCardEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.RemoveEvent;
 import com.refnil.uqcard.event.SendDeckEvent;
 
 import android.util.Log;
@@ -94,6 +95,23 @@ public class ServerBoard extends Board {
 			{
 				evil.setHp(evil.getHp()-damage);
 				tell(ae);
+				if(evil.getHp()<=0)
+				{
+					int playerid = (ae.getOpponent() / 40)+1;
+					int position;
+					if(playerid==1)
+					{
+						position = this.getCardPositionOnBoard(ae.getOpponent(), true);
+						this.getPlayerBoardCards()[position]=null;
+					}
+					else
+					{
+						position = this.getCardPositionOnBoard(ae.getOpponent(), false);
+						this.getOpponentBoardCards()[position]=null;
+					}
+					Log.i(TAG, "DEAD");
+					tell(new RemoveEvent(evil.getUid(),position));
+				}
 			}
 		}
 		/*if (event.type == Event_Type.DRAW_CARD) {

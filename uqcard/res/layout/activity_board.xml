@@ -19,70 +19,82 @@
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos7"
-            android:textSize="40sp" />
+            android:textSize="40sp" 
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos8"
-            android:textSize="40sp" />
+            android:textSize="40sp" 
+            android:textColor="#000" />
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos9"
-            android:textSize="40sp" />
+            android:textSize="40sp" 
+            android:textColor="#000" />
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos10"
-            android:textSize="40sp" />
+            android:textSize="40sp" 
+            android:textColor="#000" />
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos11"
-            android:textSize="40sp" />
+            android:textSize="40sp" 
+            android:textColor="#000" />
 
         <TextView
             android:text="@string/graveyard"
-            android:textSize="20sp" />
+            android:textSize="20sp" 
+            android:textColor="#000" />
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/pos1"
             android:textSize="40sp" 
-            android:clickable="true"/>
+            android:clickable="true" 
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/pos2"
             android:textSize="40sp" 
-            android:clickable="true"/>
+            android:clickable="true" 
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/pos3"
             android:textSize="40sp" 
-            android:clickable="true"/>
+            android:clickable="true" 
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/pos4"
             android:textSize="40sp" 
-            android:clickable="true"/>
+            android:clickable="true" 
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/pos5"
             android:textSize="40sp" 
-            android:clickable="true"/>
+            android:clickable="true" 
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/deck"
-            android:textSize="20sp" />
+            android:textSize="20sp" 
+            android:textColor="#000" />
 
     </GridLayout> 
     
@@ -94,7 +106,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/endturnbutton"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"  
+            android:textColor="#000"/>
 
     <Button
         android:id="@+id/endturnbutton"
@@ -115,7 +128,8 @@
         android:layout_alignRight="@+id/playerText"
         android:layout_alignTop="@+id/endturnbutton"
         android:layout_centerVertical="true"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"  
+            android:textColor="#000"/>
 
     <com.refnil.uqcard.view.SemiClosedSlidingDrawer
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -166,70 +180,82 @@
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos1"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos2"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos3"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos4"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos5"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:text="@string/deck"
-            android:textSize="20sp" />
+            android:textSize="20sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos7"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos8"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos9"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos10"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:layout_width="55dp"
             android:clickable="true"
             android:text="@string/pos11"
-            android:textSize="40sp" />
+            android:textSize="40sp"  
+            android:textColor="#000"/>
 
         <TextView
             android:text="@string/graveyard"
-            android:textSize="20sp" />
+            android:textSize="20sp"  
+            android:textColor="#000"/>
     </GridLayout>
 
 </RelativeLayout>
