@@ -153,8 +153,6 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 						
 					});
 					em.sendToPlayer(new BeginGameEvent());
-					if(board.getPlayerID()==1)
-						em.sendToPlayer(new EndTurnEvent());
 				}
 				
 			});
@@ -281,6 +279,11 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 			}
 			
 		});
+
+		if(board.getPlayerID()==2)
+			em.sendToPlayer(new EndTurnEvent());
+		else
+			b.setVisibility(View.INVISIBLE);
 	}
 
 	
