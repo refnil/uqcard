@@ -56,6 +56,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	protected EventManager em;
 	protected List<CardView> onBoard;
 	protected Board board;
+	private boolean myendturn;
 	private CardStore CardStoreBidon = new DummyCardStore();
 	
 	public BoardFragment() {
@@ -97,6 +98,10 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				setTouchlistener();
 				Gallery g = (Gallery) getActivity().findViewById(R.id.Gallery);
 				g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity(),em));
+				if(board.getPlayerID()==1)
+					myendturn=true;
+				else
+					myendturn=false;
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -138,7 +143,8 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 					b.setOnClickListener(new OnClickListener()
 					{
 
-						public void onClick(View v) {
+						public void onClick(View view) {
+							myendturn = true;
 							em.sendToPlayer(new EndTurnEvent());
 							
 						}
@@ -233,14 +239,23 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	}
 
 	public void BeginTurnAction(BeginTurnEvent event) {
-		// TODO Auto-generated method stub
-		
+
+		Button b = (Button)getActivity().findViewById(R.id.endturnbutton);
+		if(myendturn)
+		{
+			myendturn = false;
+			b.setVisibility(View.INVISIBLE);
+		}
+		else
+		{
+			myendturn = true;
+			b.setVisibility(View.VISIBLE);
+		}
 	}
 
 	
 	public void EndTurnAction(EndTurnEvent event) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	

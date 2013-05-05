@@ -84,34 +84,40 @@ public class ServerBoard extends Board {
 		if (event.type == Event_Type.DECLARE_ATTACK) {
 			
 			AttackEvent ae = (AttackEvent)event;
-			Log.i(TAG, ae.getPlayer()+" attacks "+ae.getOpponent());
-
-			CreatureCard good = (CreatureCard) getCardByUID(ae.getPlayer());
-			CreatureCard evil = (CreatureCard) getCardByUID(ae.getOpponent());
-			int atkgood = good.getAtk();
-			int evildef = evil.getDef();
-			int damage = good.getAtk()-evil.getDef();
-			if(damage>0)
+			int playerid = ae.getPlayer() / 40;
+			if(this.getTour() %2 != playerid)
 			{
-				evil.setHp(evil.getHp()-damage);
-				tell(ae);
-				if(evil.getHp()<=0)
+				Log.i(TAG, ae.getPlayer()+" attacks "+ae.getOpponent());
+	
+				CreatureCard good = (CreatureCard) getCardByUID(ae.getPlayer());
+				CreatureCard evil = (CreatureCard) getCardByUID(ae.getOpponent());
+				int atkgood = good.getAtk();
+				int evildef = evil.getDef();
+				int damage = good.getAtk()-evil.getDef();
+				if(damage>0)
 				{
-					int playerid = (ae.getOpponent() / 40)+1;
-					int position;
-					if(playerid==1)
+					evil.setHp(evil.getHp()-damage);
+					tell(ae);
+					if(evil.getHp()<=0)
 					{
-						position = this.getCardPositionOnBoard(ae.getOpponent(), true);
-						this.getPlayerBoardCards()[position]=null;
+						playerid = (ae.getOpponent() / 40)+1;
+						int position;
+						if(playerid==1)
+						{
+							position = this.getCardPositionOnBoard(ae.getOpponent(), true);
+							this.getPlayerBoardCards()[position]=null;
+						}
+						else
+						{
+							position = this.getCardPositionOnBoard(ae.getOpponent(), false);
+							this.getOpponentBoardCards()[position]=null;
+						}
+						Log.i(TAG, "DEAD");
+						tell(new RemoveEvent(evil.getUid(),position));
 					}
-					else
-					{
-						position = this.getCardPositionOnBoard(ae.getOpponent(), false);
-						this.getOpponentBoardCards()[position]=null;
-					}
-					Log.i(TAG, "DEAD");
-					tell(new RemoveEvent(evil.getUid(),position));
 				}
+				else
+					Log.i(TAG, "You can't attack. Wait your turn.");
 			}
 		}
 		/*if (event.type == Event_Type.DRAW_CARD) {
@@ -126,8 +132,8 @@ public class ServerBoard extends Board {
 			PutCardEvent pe = (PutCardEvent) event;
 			Log.i(TAG, "Putting card "+pe.getCardUID()+" on play");
 			//FIXME
-
-			if(true)
+			int playerid = (pe.getCardUID()/40);
+			if(this.getTour() % 2 != playerid)
 			{
 				if(pe.getPosition() !=5 && pe.getPosition() !=11)
 				{
@@ -176,6 +182,8 @@ public class ServerBoard extends Board {
 					Log.i(TAG, "Cant put card on deck or graveyard ");
 				}
 			}
+			else
+				Log.i(TAG, "It's not your turn. You can't put a card.");
 			
 		}
 		
