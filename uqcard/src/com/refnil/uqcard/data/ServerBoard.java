@@ -38,6 +38,14 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "server Game begins");
 
 			tell(event);
+			
+			/*CreatureCard playa = (CreatureCard) cardStore.getCard(2);
+			playa.setUid(0);
+			tell(new PutCardEvent(playa, 0));
+			
+			CreatureCard enemy = (CreatureCard) cardStore.getCard(2);
+			enemy.setUid(40);
+			tell(new PutCardEvent(enemy, 0));*/
 
 		}
 

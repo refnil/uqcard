@@ -12,6 +12,10 @@ public class DummyCardStore implements CardStore{
 		{
 			return new CreatureCard("Carte", "Description","WOOSH", 2, 2, 1, 2);
 		}
+		else if(id == 2)
+		{
+			return new CreatureCard("General", "Description general","haha", 2, 2, 0, 20);
+		}
 		return null;
 	}
 }
