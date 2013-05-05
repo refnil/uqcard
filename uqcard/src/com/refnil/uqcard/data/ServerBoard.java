@@ -40,7 +40,6 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "server Game begins");
 
 			tell(event);
-
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {

@@ -77,7 +77,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		GridLayout glp = (GridLayout) this.getView().findViewById(R.id.gridLayoutBoardPlayer);
 		for(int i=0;i<glp.getChildCount();i++)
 		{
-			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em));
+			glp.getChildAt(i).setOnClickListener(new CardViewPlayerOnClickListener(em,this.getActivity().getApplicationContext()));
 		}
 	}
 	
@@ -101,7 +101,9 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				if(board.getPlayerID()==1)
 					myendturn=true;
 				else
+				{
 					myendturn=false;
+				}
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -151,7 +153,8 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 						
 					});
 					em.sendToPlayer(new BeginGameEvent());
-					
+					if(board.getPlayerID()==1)
+						em.sendToPlayer(new EndTurnEvent());
 				}
 				
 			});
@@ -404,7 +407,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		{
 			gv = (GridLayout) getActivity().findViewById(R.id.gridLayoutBoardPlayer);
 			iv = cv.getCardImageView(getActivity(), 50, 88);
-			iv.setOnClickListener(new CardViewPlayerOnClickListener(em));
+			iv.setOnClickListener(new CardViewPlayerOnClickListener(em,this.getActivity().getApplicationContext()));
 		}
 		
 		iv.setOnLongClickListener(new CardViewOnLongClickListener((TabsActivity) this.getActivity()));
