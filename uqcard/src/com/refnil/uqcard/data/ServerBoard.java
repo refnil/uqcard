@@ -76,7 +76,9 @@ public class ServerBoard extends Board {
 				
 				CreatureCard playa = cardStore.getCard(1);
 				playa.setUid(0);
-				int wtf = playa.getDef();
+				
+				this.getPlayerBoardCards()[0] = playa;
+				
 				tell(new DrawCardEvent(1, 0));
 				tell(new PutCardEvent(playa,0));
 			} else {
@@ -87,6 +89,9 @@ public class ServerBoard extends Board {
 				
 				CreatureCard enemy = cardStore.getCard(1);
 				enemy.setUid(40);
+				
+				this.getOpponentBoardCards()[0] = enemy;
+				
 				tell(new DrawCardEvent(1, 40));
 				tell(new PutCardEvent(enemy,0));
 			}
