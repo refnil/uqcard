@@ -29,6 +29,8 @@ public class EventManager {
 	
 	public void sendToPlayer(Event event) {
 		try {
+			if(event instanceof EndTurnEvent)
+				this.clearAttacks();
 			p.sendEvent(event);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
