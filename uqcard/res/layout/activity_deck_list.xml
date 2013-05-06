@@ -13,7 +13,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/android3d" >
-
     </com.refnil.uqcard.view.CardView>
 
     <ScrollView
@@ -29,21 +28,78 @@
         <LinearLayout
             android:id="@+id/cardListLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
+            android:layout_height="wrap_content" >
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/cardName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cardPreview"
+        android:layout_below="@+id/cardPreview"
+        android:lines="1"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/cardDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cardPreview"
-        android:layout_alignParentBottom="true"
-        android:lines="8"
-        android:maxLines="8"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:width="300dp" />
+        android:layout_alignLeft="@+id/cardName"
+        android:layout_below="@+id/cardName"
+        android:lines="1"
+        android:maxLines="4"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/cardAtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cardDesc"
+        android:layout_below="@+id/cardDesc"
+        android:lines="1"
+        android:maxLines="4"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/cardDef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cardAtt"
+        android:layout_below="@+id/cardAtt"
+        android:lines="1"
+        android:maxLines="4"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/cardVie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cardDef"
+        android:layout_below="@+id/cardDef"
+        android:lines="1"
+        android:maxLines="4"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/addCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cardVie"
+        android:layout_below="@+id/cardVie" 
+        android:text="Ajouter une carte"/>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCard"
+        android:layout_below="@+id/addCard" 
+        android:text="Save"/>
 
 </RelativeLayout>

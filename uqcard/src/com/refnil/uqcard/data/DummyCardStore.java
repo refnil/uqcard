@@ -1,6 +1,7 @@
 package com.refnil.uqcard.data;
 
 public class DummyCardStore implements CardStore{
+	
 
 	public CreatureCard getCard(int id) {
 		// TODO Auto-generated method stub
