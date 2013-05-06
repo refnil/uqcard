@@ -40,6 +40,8 @@ public class ServerBoard extends Board {
 			Log.i(TAG, "server Game begins");
 
 			tell(event);
+			
+
 		}
 
 		if (event.type == Event_Type.BEGIN_TURN) {
@@ -55,7 +57,7 @@ public class ServerBoard extends Board {
 			long seed = System.nanoTime();
 			int cpt=0;
 
-			for (int i = UIDedDecks * 40; i < (UIDedDecks * 40) + 40; i++) {
+			for (int i = UIDedDecks * 40 +1; i < (UIDedDecks * 40) + 40; i++) {
 				se.getDecklist().getCards().get(cpt).setUid(i);
 				cpt++;
 			}
@@ -70,12 +72,26 @@ public class ServerBoard extends Board {
 				this.setPlayerStackCards(deckStack);
 				playerID = 1;
 				tell(event);
+				
+				CreatureCard playa = cardStore.getCard(1);
+				playa.setUid(0);
+				tell(new DrawCardEvent(1, 0));
+				tell(new PutCardEvent(playa,0));
 			} else {
 				Log.i(TAG, "Setting host's enemy deck");
 				this.setOpponentStackCards(deckStack);
 				opponentID = se.getPlayer();
 				tell(event);
+				
+				CreatureCard enemy = cardStore.getCard(1);
+				enemy.setUid(40);
+				tell(new DrawCardEvent(1, 40));
+				tell(new PutCardEvent(enemy,0));
 			}
+			
+			
+			
+			
 		}
 		
 		
