@@ -54,11 +54,11 @@ public class CardsDataSource {
 			newCard = new ContentValues();
 			newCard.put(MySQLiteHelper.CREATURECARDS_IDCARD, myCard.get_Id());
 			newCard.put(MySQLiteHelper.CREATURECARDS_ATTACK,
-					((CreatureCard) myCard).getAttack());
+					((CreatureCard) myCard).getAtk());
 			newCard.put(MySQLiteHelper.CREATURECARDS_DEFENSE,
-					((CreatureCard) myCard).getDefense());
+					((CreatureCard) myCard).getDef());
 			newCard.put(MySQLiteHelper.CREATURECARDS_HEALTH,
-					((CreatureCard) myCard).getHealth());
+					((CreatureCard) myCard).getHp());
 			insertId = database.insert(MySQLiteHelper.TABLE_CREATURECARDS,
 					null, newCard);
 		}
@@ -89,11 +89,11 @@ public class CardsDataSource {
 		if (newCard instanceof CreatureCard) {
 			values.clear();
 			values.put(MySQLiteHelper.CREATURECARDS_ATTACK,
-					((CreatureCard) newCard).getAttack());
+					((CreatureCard) newCard).getAtk());
 			values.put(MySQLiteHelper.CREATURECARDS_DEFENSE,
-					((CreatureCard) newCard).getDefense());
+					((CreatureCard) newCard).getDef());
 			values.put(MySQLiteHelper.CREATURECARDS_HEALTH,
-					((CreatureCard) newCard).getHealth());
+					((CreatureCard) newCard).getHp());
 			database.update(MySQLiteHelper.TABLE_CREATURECARDS, values,
 					MySQLiteHelper.CREATURECARDS_IDCARD + " = " + id, null);
 		}

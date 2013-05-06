@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-import com.refnil.uqcard.data.test.DeckTest;
+import com.refnil.uqcard.data.CachedCardStore.CachedStoreNotInitialised;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginGameEvent;
 import com.refnil.uqcard.event.BeginTurnEvent;
@@ -27,8 +27,8 @@ public class Board extends AbstractListenable<Event> {
 
 	private final static String TAG = "Board";
 	
-	private DummyCardStore cardStoreBidon = new DummyCardStore();
-
+	public CachedCardStore cardStoreBidon;
+	
 	private int phase;
 	private int tour;
 	private int playerID;
@@ -45,7 +45,18 @@ public class Board extends AbstractListenable<Event> {
 
 	public Board()
 	{
+		try {
+			cardStoreBidon = CachedCardStore.getStore();
+		} catch (CachedStoreNotInitialised e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.setTour(1);
+
+		playerDeck = Deck.createDeck(cardStoreBidon);
+		opponentDeck = Deck.createDeck(cardStoreBidon);
+
 		playerBoardCards = new CreatureCard[12];
 		opponentBoardCards = new CreatureCard[12];
 		playerHandCards = new LinkedList<CreatureCard>();
@@ -54,8 +65,7 @@ public class Board extends AbstractListenable<Event> {
 		playerStackCards = new Stack<CreatureCard>();
 		opponentGraveyardCards = new Stack<CreatureCard>();
 		playerGraveyardCards = new Stack<CreatureCard>();
-		playerDeck = new DeckTest();
-		opponentDeck = new DeckTest();
+
 	}
 	
 	public int getPhase() {
@@ -272,7 +282,7 @@ public class Board extends AbstractListenable<Event> {
 		this.setTour(this.getTour() + 1);
 		Log.i(TAG, "Turn " + this.getTour() + " begins");
 		tell(event);
-	}
+	} 
 	
 	void DrawCardAction(DrawCardEvent event)
 	{

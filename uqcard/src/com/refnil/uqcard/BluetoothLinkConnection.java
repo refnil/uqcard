@@ -63,7 +63,7 @@ public class BluetoothLinkConnection extends LinkConnection {
 		                // Read from the InputStream
 		                m = (UqcardMessage)is.readObject();
 		                // Send the obtained bytes to the UI activity
-		                receive(m);
+		                 receive(m);
 		            } catch (IOException e) {
 		            	e.printStackTrace();
 		            	break;

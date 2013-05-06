@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
-import com.refnil.uqcard.data.test.DeckTest;
+import com.refnil.uqcard.data.CachedCardStore.CachedStoreNotInitialised;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginTurnEvent;
 import com.refnil.uqcard.event.DrawCardEvent;
@@ -21,17 +21,19 @@ import android.util.Log;
 
 public class ServerBoard extends Board {
 	
-	private DummyCardStore cardStore = new DummyCardStore();
+	private CachedCardStore cardStore;
 	final private static String TAG = "ServerBoard";
 	private int UIDedDecks;
-	private DeckTest deckBidon;
+	private Deck deckBidon;
 	private int playerID,opponentID;
 	
-	public ServerBoard()
+	public ServerBoard() throws CachedStoreNotInitialised
 	{
 		this.setTour(1);
 		UIDedDecks = 0;
-		deckBidon = new DeckTest();
+		//deckBidon = new DeckTest();
+		
+		cardStore = CachedCardStore.getStore();
 
 	}
 	
@@ -67,6 +69,7 @@ public class ServerBoard extends Board {
 			Collections.shuffle(se.getDecklist().getCards(), new Random(seed));
 
 			deckStack.addAll(se.getDecklist().getCards());
+			
 			
 			if (se.getPlayer() == 1) {
 				Log.i(TAG, "Setting host deck");

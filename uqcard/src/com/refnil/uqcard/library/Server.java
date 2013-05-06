@@ -1,6 +1,7 @@
 package com.refnil.uqcard.library;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -9,6 +10,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.refnil.uqcard.data.CachedCardStore.CachedStoreNotInitialised;
 import com.refnil.uqcard.data.ServerBoard;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.library.message.Close;
@@ -26,14 +28,17 @@ public class Server extends AbstractServer implements Listener<Event> {
 	
 	private final static String TAG = "Server";
 
-	private ServerBoard board = new ServerBoard();
+	private ServerBoard board;
 
 	private List<TempPlayer> players = new ArrayList<TempPlayer>();
 	private int numberOfPlayer = 0;
+	
+	private List<UqcardMessage> messages = new LinkedList<UqcardMessage>();
 
-	public Server(Looper looper) {
+	public Server(Looper looper) throws CachedStoreNotInitialised {
 		super(looper);
 		// TODO Auto-generated constructor stub
+		board = new ServerBoard();
 		board.subscribe(this);
 	}
 
@@ -42,6 +47,8 @@ public class Server extends AbstractServer implements Listener<Event> {
 		// TODO Auto-generated method stub
 		
 		Log.i(TAG, "Server received:" + um);
+		
+		messages.add(um);
 		
 		ConnectPlayer cp = um instanceof ConnectPlayer?(ConnectPlayer)um:null;
 		DisconnectPlayer dp = um instanceof DisconnectPlayer?(DisconnectPlayer)um:null;
@@ -125,7 +132,7 @@ public class Server extends AbstractServer implements Listener<Event> {
 	}
 
 	private class TempPlayer {
-		private final int id;
+		final private int id;
 		final public Messenger m;
 		final public String name;
 

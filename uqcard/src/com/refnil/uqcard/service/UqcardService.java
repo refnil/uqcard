@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.refnil.uqcard.BluetoothLinkConnection;
 import com.refnil.uqcard.R;
+import com.refnil.uqcard.data.CachedCardStore;
+import com.refnil.uqcard.data.CachedCardStore.CachedStoreNotInitialised;
 import com.refnil.uqcard.library.AbstractServer;
 import com.refnil.uqcard.library.LinkConnection;
 import com.refnil.uqcard.library.Player;
@@ -101,7 +103,26 @@ public class UqcardService extends Service implements IService {
 
 			HandlerThread t = new HandlerThread("Server");
 			t.start();
-			server = new Server(t.getLooper());
+			try {
+				server = new Server(t.getLooper());
+			} catch (CachedStoreNotInitialised e) {
+				// TODO Auto-generated catch block
+				try {
+					CachedCardStore.initStore(getResources().openRawResource(
+							R.raw.card));
+					server = new Server(t.getLooper());
+				} catch (NotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (CachedStoreNotInitialised e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
 
 		}
 	}
@@ -124,8 +145,9 @@ public class UqcardService extends Service implements IService {
 			public void run() {
 				// TODO Auto-generated method stub
 				try {
-					
-					//Toast.makeText(getBaseContext(),"chatton" ,Toast.LENGTH_SHORT).show();
+
+					// Toast.makeText(getBaseContext(),"chatton"
+					// ,Toast.LENGTH_SHORT).show();
 					BluetoothSocket bs = bd
 							.createRfcommSocketToServiceRecord(uuid);
 					bs.connect();
@@ -136,7 +158,7 @@ public class UqcardService extends Service implements IService {
 					lcs.add(blc);
 					try {
 						Message msg = Message.obtain();
-					      msg.obj = "true";
+						msg.obj = "true";
 						messengerActivity.send(msg);
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
@@ -190,7 +212,7 @@ public class UqcardService extends Service implements IService {
 							if (nb == 1) {
 								try {
 									Message msg = Message.obtain();
-								      msg.obj = "true";
+									msg.obj = "true";
 									messengerActivity.send(msg);
 								} catch (RemoteException e) {
 									// TODO Auto-generated catch block
@@ -228,7 +250,8 @@ public class UqcardService extends Service implements IService {
 			player = new Player(t.getLooper(), server);
 
 			try {
-				player.connect("ROger",new CardDeckMessage(1, 1, new EmptyDeck()));
+				player.connect("ROger", new CardDeckMessage(1, 1,
+						new EmptyDeck()));
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
