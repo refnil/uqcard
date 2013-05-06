@@ -57,14 +57,6 @@ public class EventManager {
 		this.attacks.add(this.selectedCard);
 	}
 
-	/*public BoardActivity getBoard() {
-		return board;
-	}
-
-	public void setBoard(BoardActivity board) {
-		this.board = board;
-	}*/
-
 	public int getSelectedCard() {
 		return selectedCard;
 	}
