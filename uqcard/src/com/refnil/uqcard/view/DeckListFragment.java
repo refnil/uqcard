@@ -49,6 +49,14 @@ public class DeckListFragment extends Fragment {
 		
 		addButton = (Button) view.findViewById(R.id.addCard);
 		saveButton =  (Button) view.findViewById(R.id.save);
+		
+		saveButton.setOnClickListener(new OnClickListener() {
+			
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		try {
 			ccs = CachedCardStore.initAndGet(getResources().openRawResource(
