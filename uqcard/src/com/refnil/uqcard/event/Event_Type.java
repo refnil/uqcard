@@ -11,5 +11,6 @@ public enum Event_Type
     DECLARE_ATTACK,
     DRAW_CARD,
     PUT_CARD,
-    SEND_DECK
+    SEND_DECK,
+    REMOVE_CARD
 }

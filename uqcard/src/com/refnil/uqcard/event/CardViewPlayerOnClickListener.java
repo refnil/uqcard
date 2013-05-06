@@ -6,6 +6,7 @@ import com.refnil.uqcard.data.Card;
 import com.refnil.uqcard.data.DummyCardStore;
 import com.refnil.uqcard.view.CardView;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,29 +19,35 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 
 	private EventManager em;
 	private CachedCardStore CardStoreBidon;
+	Context c;
 
-	public CardViewPlayerOnClickListener(EventManager em) {
+	public CardViewPlayerOnClickListener(EventManager em,Context c) {
 		this.em = em;
+
 		try {
 			CardStoreBidon = CachedCardStore.getStore();
 		} catch (CachedStoreNotInitialised e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
 
+		this.c = c;
+
+	}
+	
 	public void onClick(View v) {
 		if(em != null)
 		{
-			Log.i("click", String.valueOf(v.getClass()));
 			if(v instanceof ImageView )
 			{
-				Log.i("click", "chose playerCard");
-				em.setSelectedCard(((CardView)v).getCard().getUid(), false);
+				GridLayout gl = (GridLayout) v.getParent();
+				int position = gl.indexOfChild(v);
+				boolean can = em.setSelectedCard(position, false);
+				if(!can)
+					Toast.makeText(c, "Cette carte a déjà attaqué.", Toast.LENGTH_SHORT).show();
 			}
 			else
 			{
-				Log.i("click", "l.29");
 				GridLayout gl = (GridLayout)v.getParent();
 				for(int i=0;i<gl.getChildCount();i++)
 				{
@@ -48,7 +55,6 @@ public class CardViewPlayerOnClickListener implements OnClickListener {
 					{
 						if((TextView)gl.getChildAt(i) == (TextView)v)
 						{
-							Log.i("click", "l.35");
 							Card c = CardStoreBidon.getCard(em.getSelectedCardHand());
 							if(c != null)
 							{

@@ -16,6 +16,7 @@ import com.refnil.uqcard.event.EndTurnEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.RemoveEvent;
 import com.refnil.uqcard.event.SendDeckEvent;
 import com.refnil.uqcard.library.AbstractListenable;
 
@@ -30,14 +31,14 @@ public class Board extends AbstractListenable<Event> {
 	private int phase;
 	private int tour;
 	private int playerID;
-	private List<Card> opponentHandCards;
-	private List<Card> playerHandCards;
-	private Card[] opponentBoardCards;
-	private Card[] playerBoardCards;
-	private Stack<Card> opponentStackCards;
-	private Stack<Card> playerStackCards;
-	private Stack<Card> opponentGraveyardCards;
-	private Stack<Card> playerGraveyardCards;
+	private List<CreatureCard> opponentHandCards;
+	private List<CreatureCard> playerHandCards;
+	private CreatureCard[] opponentBoardCards;
+	private CreatureCard[] playerBoardCards;
+	private Stack<CreatureCard> opponentStackCards;
+	private Stack<CreatureCard> playerStackCards;
+	private Stack<CreatureCard> opponentGraveyardCards;
+	private Stack<CreatureCard> playerGraveyardCards;
 	private Deck playerDeck;
 	private Deck opponentDeck;
 
@@ -51,16 +52,19 @@ public class Board extends AbstractListenable<Event> {
 		}
 		
 		this.setTour(1);
-		playerBoardCards = new Card[12];
-		opponentBoardCards = new Card[12];
-		playerHandCards = new LinkedList<Card>();
-		opponentHandCards = new LinkedList<Card>();
-		opponentStackCards = new Stack<Card>();
-		playerStackCards = new Stack<Card>();
-		opponentGraveyardCards = new Stack<Card>();
-		playerGraveyardCards = new Stack<Card>();
+
 		playerDeck = Deck.createDeck(cardStoreBidon);
 		opponentDeck = Deck.createDeck(cardStoreBidon);
+
+		playerBoardCards = new CreatureCard[12];
+		opponentBoardCards = new CreatureCard[12];
+		playerHandCards = new LinkedList<CreatureCard>();
+		opponentHandCards = new LinkedList<CreatureCard>();
+		opponentStackCards = new Stack<CreatureCard>();
+		playerStackCards = new Stack<CreatureCard>();
+		opponentGraveyardCards = new Stack<CreatureCard>();
+		playerGraveyardCards = new Stack<CreatureCard>();
+
 	}
 	
 	public int getPhase() {
@@ -79,53 +83,47 @@ public class Board extends AbstractListenable<Event> {
 		this.tour = tour;
 	}
 
-	public List<Card> getOpponentHandCards() {
+	public List<CreatureCard> getOpponentHandCards() {
 		return opponentHandCards;
 	}
 
-	public void setOpponentHandCards(List<Card> opponentCards) {
+	public void setOpponentHandCards(List<CreatureCard> opponentCards) {
 		this.opponentHandCards = opponentCards;
 	}
 
-	public void addOpponentHandCard(Card card) {
+	public void addOpponentHandCard(CreatureCard card) {
 		this.opponentHandCards.add(card);
 	}
 
-	public void deleteOpponentHandCard(Card card) {
+	public void deleteOpponentHandCard(CreatureCard card) {
 		this.opponentHandCards.remove(card);
 	}
 
-	public List<Card> getPlayerHandCards() {
+	public List<CreatureCard> getPlayerHandCards() {
 		return playerHandCards;
 	}
 
-	public void setPlayerHandCards(List<Card> playerCards) {
+	public void setPlayerHandCards(List<CreatureCard> playerCards) {
 		this.playerHandCards = playerCards;
 	}
 
-	public void addPlayerHandCard(Card card) {
-		Log.i(TAG, "begin add");
-		if(card == null)
-			Log.i(TAG, "card is null");
-		if(playerHandCards == null)
-			Log.i(TAG,"playerhandcards is null");
+	public void addPlayerHandCard(CreatureCard card) {
 		this.playerHandCards.add(card);
-		Log.i(TAG, "end add");
 	}
 
-	public void deletePlayerHandCard(Card card) {
+	public void deletePlayerHandCard(CreatureCard card) {
 		this.playerHandCards.remove(card);
 	}
 
-	public Card[]  getOpponentBoardCards() {
+	public CreatureCard[]  getOpponentBoardCards() {
 		return opponentBoardCards;
 	}
 
-	public void setOpponentBoardCards(Card[]  opponentBoardCards) {
+	public void setOpponentBoardCards(CreatureCard[]  opponentBoardCards) {
 		this.opponentBoardCards = opponentBoardCards;
 	}
 
-	public void addOpponentBoardCard(Card card,int position) {
+	public void addOpponentBoardCard(CreatureCard card,int position) {
 		this.opponentBoardCards[position] = card ;
 	}
 
@@ -133,27 +131,27 @@ public class Board extends AbstractListenable<Event> {
 		this.opponentBoardCards.remove(card);
 	}*/
 
-	public Card[]  getPlayerBoardCards() {
+	public CreatureCard[]  getPlayerBoardCards() {
 		return playerBoardCards;
 	}
 
-	public void setPlayerBoardCards(Card[] playerBoardCards) {
+	public void setPlayerBoardCards(CreatureCard[] playerBoardCards) {
 		this.playerBoardCards = playerBoardCards;
 	}
 
-	public void addPlayerBoardCard(Card card,int position) {
-		this.opponentBoardCards[position] = card ;
+	public void addPlayerBoardCard(CreatureCard card,int position) {
+		this.playerBoardCards[position] = card ;
 	}
 
 	/*public void deletePlayerBoardCard(Card card) {
 		this.playerBoardCards.remove(card);
 	}*/
 
-	public Stack<Card> getOpponentStackCards() {
+	public Stack<CreatureCard> getOpponentStackCards() {
 		return opponentStackCards;
 	}
 
-	public void setOpponentStackCards(Stack<Card> opponentStackCards) {
+	public void setOpponentStackCards(Stack<CreatureCard> opponentStackCards) {
 		this.opponentStackCards = opponentStackCards;
 	}
 
@@ -161,11 +159,11 @@ public class Board extends AbstractListenable<Event> {
 		return this.opponentStackCards.pop();
 	}
 
-	public Stack<Card> getPlayerStackCards() {
+	public Stack<CreatureCard> getPlayerStackCards() {
 		return playerStackCards;
 	}
 
-	public void setPlayerStackCards(Stack<Card> playerStackCards) {
+	public void setPlayerStackCards(Stack<CreatureCard> playerStackCards) {
 		this.playerStackCards = playerStackCards;
 	}
 
@@ -173,27 +171,27 @@ public class Board extends AbstractListenable<Event> {
 		return this.playerStackCards.pop();
 	}
 
-	public Stack<Card> getOpponentGraveyardCards() {
+	public Stack<CreatureCard> getOpponentGraveyardCards() {
 		return opponentGraveyardCards;
 	}
 
-	public void setOpponentGraveyardCards(Stack<Card> opponentGraveyardCards) {
+	public void setOpponentGraveyardCards(Stack<CreatureCard> opponentGraveyardCards) {
 		this.opponentGraveyardCards = opponentGraveyardCards;
 	}
 
-	public void opponentAddCardInGraveyard(Card c) {
+	public void opponentAddCardInGraveyard(CreatureCard c) {
 		this.opponentGraveyardCards.push(c);
 	}
 
-	public Stack<Card> getPlayerGraveyardCards() {
+	public Stack<CreatureCard> getPlayerGraveyardCards() {
 		return playerGraveyardCards;
 	}
 
-	public void setPlayerGraveyardCards(Stack<Card> playerGraveyardCards) {
+	public void setPlayerGraveyardCards(Stack<CreatureCard> playerGraveyardCards) {
 		this.playerGraveyardCards = playerGraveyardCards;
 	}
 
-	public void playerAddCardInGraveyard(Card c) {
+	public void playerAddCardInGraveyard(CreatureCard c) {
 		this.playerGraveyardCards.push(c);
 	}
 
@@ -238,28 +236,41 @@ public class Board extends AbstractListenable<Event> {
 		else if (event instanceof AttackEvent) {
 			BattleAction((AttackEvent)event);
 		}
+		else if(event instanceof RemoveEvent){
+			RemoveAction((RemoveEvent)event);
+		}
+	}
+	
+	void RemoveAction(RemoveEvent event)
+	{
+		Log.i(TAG, "DEAD");
+		int playerid = (event.getuid() / 40) + 1;
+		
+		if(playerid==this.playerID)
+			this.getPlayerBoardCards()[this.getCardPositionOnBoard(event.getuid(), true)] = null;
+		else
+			this.getOpponentBoardCards()[this.getCardPositionOnBoard(event.getuid(), false)] = null;
+		tell(event);
 	}
 	
 	void BeginGameAction(BeginGameEvent event)
 	{
-		Log.i(TAG, "Game begins");
 		for(int i =0; i<40; i++)
 		{
-			this.getOpponentStackCards().add(cardStoreBidon.getCard(0));
-			this.getPlayerStackCards().add(cardStoreBidon.getCard(0));
+			this.getOpponentStackCards().add((CreatureCard)cardStoreBidon.getCard(1));
+			this.getPlayerStackCards().add((CreatureCard)cardStoreBidon.getCard(1));
 		}
 		tell(event);
 	}
 	
 	void SendDeckAction(SendDeckEvent event)
 	{
-		Log.i(TAG, "getting shuffled deck");
 		this.setPlayerDeck(event.getDecklist());
-		playerStackCards = new Stack<Card>();
+		playerStackCards = new Stack<CreatureCard>();
 		
 		for(int i =0; i < this.getPlayerDeck().getCards().size(); i++)
 		{
-			playerStackCards.add(this.getPlayerDeck().CardAt(i));
+			playerStackCards.add((CreatureCard)this.getPlayerDeck().CardAt(i));
 		}
 		this.setPlayerStackCards(playerStackCards);
 		
@@ -274,10 +285,9 @@ public class Board extends AbstractListenable<Event> {
 	
 	void DrawCardAction(DrawCardEvent event)
 	{
-		Log.i(TAG, "uid / 40 " + String.valueOf(event.getCardUID() / 40) + " PID "+String.valueOf(playerID));
 		if(event.getCardUID() / 40 == playerID-1)
 		{
-			Card c = cardStoreBidon.getCard(event.getCardID());
+			CreatureCard c = cardStoreBidon.getCard(event.getCardID());
 			
 			//playerTakeCardInStack();
 			c.setUid(event.getCardUID());
@@ -288,19 +298,26 @@ public class Board extends AbstractListenable<Event> {
 	
 	void PutCardAction(PutCardEvent event)
 	{
-		Log.i(TAG,"Put card");
-		Card c = cardStoreBidon.getCard(event.getCardID());
-		if(this.getPlayerHandCards().contains(c))
+		CreatureCard c = (CreatureCard)cardStoreBidon.getCard(event.getCardID());
+		boolean found = false;
+		for(int i=0;i<this.getPlayerHandCards().size();i++)
 		{
-
-			deletePlayerHandCard(c);
+			found = this.getPlayerHandCards().get(i).getUid() == event.getCardUID();
+			if(found)
+				break;
+		}
+		
+		
+		if(found)
+		{
 			c.setUid(event.getCardUID());
+			deletePlayerHandCard(c);
 			addPlayerBoardCard(c,event.getPosition());
 		}
 		else
 		{
-			deleteOpponentHandCard(c);
 			c.setUid(event.getCardUID());
+			deleteOpponentHandCard(c);
 			addOpponentBoardCard(c,event.getPosition());
 		}
 		tell(event);
@@ -308,29 +325,58 @@ public class Board extends AbstractListenable<Event> {
 	
 	void BattleAction(AttackEvent event)
 	{
-
-		Card[] list =  getOpponentBoardCards();
-		int opponent = -1;
+		CreatureCard[] list =  getOpponentBoardCards();
+		int opponent = -1,player = -1;
 		for(int i=0;i<list.length;i++)
 		{
-			if(list[i].getUid() == event.getOpponent())
+			if(list[i] != null)
 			{
-				opponent = i;
-				break;
+				if(list[i].getUid() == event.getPlayer())
+				{
+					player = i;
+					break;
+				}
+				else if(list[i].getUid() == event.getOpponent())
+				{
+					opponent = i;
+					break;
+				}
 			}
 		}
 		list =  getPlayerBoardCards();
-		int player = -1;
+		
 		for(int i=0;i<list.length;i++)
 		{
-			if(list[i].getUid() == event.getPlayer())
+			if(list[i] != null)
 			{
-				player = i;
-				break;
+				if(list[i].getUid() == event.getPlayer())
+				{
+					player = i;
+					break;
+				}
+				else if(list[i].getUid() == event.getOpponent())
+				{
+					opponent = i;
+					break;
+				}
 			}
 		}
 		
-		((CreatureCard)this.getOpponentBoardCards()[opponent]).setHp(((CreatureCard)this.getOpponentBoardCards()[opponent]).getHp() - (((CreatureCard)this.getOpponentBoardCards()[opponent]).getAtk()- ((CreatureCard)this.getOpponentBoardCards()[opponent]).getDef()));
+		if(event.getPlayer()/40 == playerID-1)
+		{
+			int hp = ((CreatureCard)this.getOpponentBoardCards()[opponent]).getHp();
+			int attack = ((CreatureCard)this.getPlayerBoardCards()[player]).getAtk();
+			attack -= ((CreatureCard)this.getOpponentBoardCards()[opponent]).getDef();
+			((CreatureCard)this.getOpponentBoardCards()[opponent]).setHp(hp-attack);
+		}
+		else
+		{
+			int hp = ((CreatureCard)this.getPlayerBoardCards()[opponent]).getHp();
+			int attack = ((CreatureCard)this.getOpponentBoardCards()[player]).getAtk();
+			attack -= ((CreatureCard)this.getPlayerBoardCards()[opponent]).getDef();
+			((CreatureCard)this.getPlayerBoardCards()[opponent]).setHp(hp - attack);
+			
+		}	
 		tell(event);
 	}
 	
@@ -342,7 +388,6 @@ public class Board extends AbstractListenable<Event> {
 	
 	void EndGameAction(EndGameEvent event)
 	{
-		Log.i(TAG, "Game ends");
 		tell(event);
 	}
 
@@ -366,15 +411,17 @@ public class Board extends AbstractListenable<Event> {
 	{
 		for(int i = 0; i< playerBoardCards.length; i++)
 		{
-			if(uid == playerBoardCards[i].getUid())
-			{
-				return  playerBoardCards[i];
-			}
+			if(playerBoardCards[i] != null)
+				if(uid == playerBoardCards[i].getUid())
+				{
+					return  playerBoardCards[i];
+				}
 			
 		}
 		
 		for(int i = 0; i< opponentBoardCards.length; i++)
 		{
+			if(opponentBoardCards[i] != null)
 			if(uid == opponentBoardCards[i].getUid())
 			{
 				return  opponentBoardCards[i];
@@ -384,6 +431,7 @@ public class Board extends AbstractListenable<Event> {
 		
 		for(int i = 0; i< playerHandCards.size(); i++)
 		{
+			if(playerHandCards.get(i) != null)
 			if(uid == playerHandCards.get(i).getUid())
 			{
 				return  playerHandCards.get(i);
@@ -393,6 +441,7 @@ public class Board extends AbstractListenable<Event> {
 		
 		for(int i = 0; i< opponentHandCards.size(); i++)
 		{
+			if(opponentHandCards.get(i) != null)
 			if(uid == opponentHandCards.get(i).getUid())
 			{
 				return  opponentHandCards.get(i);
@@ -401,5 +450,30 @@ public class Board extends AbstractListenable<Event> {
 		}
 		return null;
 	
+	}
+	
+	public int getCardPositionOnBoard(int uid,boolean isPlayer)
+	{
+		int position = -1;
+		CreatureCard tab[];
+		
+		if(isPlayer)
+			tab= this.getPlayerBoardCards();
+		else
+			tab = this.getOpponentBoardCards();
+		
+		for(int i=0;i<tab.length;i++)
+		{
+			if(tab[i]!=null)
+			{
+				if(tab[i].getUid() == uid)
+				{
+					position = i;
+					break;
+				}
+			}
+		}
+		Log.i(TAG, "position trouvé : " + position);
+		return position;
 	}
 }

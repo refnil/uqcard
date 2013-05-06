@@ -17,19 +17,23 @@ public class Deck implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7497696027546651007L;
+
 	public static final String DEFAUT_SAVE_PATH = "Deck.save";
-	private ArrayList<Card> cards;
+
+	private	ArrayList<CreatureCard> cards;
+
 	private String deckName;
 
-	public ArrayList<Card> getCards() {
+	public ArrayList<CreatureCard> getCards() {
 		return cards;
 	}
 
-	public void setCards(ArrayList<Card> cards) {
+	public void setCards(ArrayList<CreatureCard> cards) {
 		this.cards = cards;
 	}
 
-	public Deck(ArrayList<Card> cards, String deckName) {
+	public Deck(ArrayList<CreatureCard> cards,String deckName) {
+
 		this.cards = cards;
 		this.deckName = deckName;
 	}
@@ -54,7 +58,7 @@ public class Deck implements Serializable {
 
 	public static Deck createSpecificDeck(CardStore cs,
 			Iterable<Integer> listCard, String name) {
-		ArrayList<Card> cards = new ArrayList<Card>(40);
+		ArrayList<CreatureCard> cards = new ArrayList<CreatureCard>(40);
 		for (Integer i : listCard) {
 			cards.add(cs.getCard(i));
 		}

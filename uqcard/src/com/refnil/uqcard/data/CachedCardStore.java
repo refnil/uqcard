@@ -9,7 +9,7 @@ import android.util.SparseArray;
 
 public class CachedCardStore implements CardStore {
 
-	private SparseArray<Card> cardMap = new SparseArray<Card>();
+	private SparseArray<CreatureCard> cardMap = new SparseArray<CreatureCard>();
 
 	private static CachedCardStore store;
 
@@ -57,7 +57,7 @@ public class CachedCardStore implements CardStore {
 		}
 	}
 
-	public Card getCard(int id) {
+	public CreatureCard getCard(int id) {
 		// TODO Auto-generated method stub
 		return cardMap.get(id);
 	}

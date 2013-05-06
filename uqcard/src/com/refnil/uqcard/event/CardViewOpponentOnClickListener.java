@@ -5,6 +5,8 @@ import com.refnil.uqcard.view.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.GridLayout;
+import android.widget.ImageView;
 
 public class CardViewOpponentOnClickListener implements OnClickListener {
 
@@ -14,10 +16,12 @@ public class CardViewOpponentOnClickListener implements OnClickListener {
 		this.em = em;
 	}
 	public void onClick(View v) {
-		if(v instanceof CardView && em != null)
+		if(v instanceof ImageView && em != null)
 		{
 			Log.i("click", "chose EnemyCard");
-			em.setSelectedCard(((CardView)v).getCard().getUid(), true);
+			GridLayout gl = (GridLayout) v.getParent();
+			int position = gl.indexOfChild(v);
+			em.setSelectedCard(position, true);
 		}
 	}
 

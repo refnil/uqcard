@@ -25,6 +25,7 @@ import com.refnil.uqcard.event.EventManager;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.GalleryOnItemClickListener;
 import com.refnil.uqcard.event.PutCardEvent;
+import com.refnil.uqcard.event.RemoveEvent;
 import com.refnil.uqcard.event.SendDeckEvent;
 import com.refnil.uqcard.library.Listener;
 import com.refnil.uqcard.library.Player;
@@ -32,11 +33,16 @@ import com.refnil.uqcard.service.IService;
 import com.refnil.uqcard.service.UqcardService;
 import com.refnil.uqcard.service.UqcardService.LocalBinder;
 
+import android.R.color;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+
 import android.content.res.Resources.NotFoundException;
+
+import android.graphics.Color;
+
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -57,7 +63,10 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 	protected EventManager em;
 	protected List<CardView> onBoard;
 	protected Board board;
+
 	private CardStore CardStoreBidon;
+
+	private boolean myendturn;
 
 	public BoardFragment() {
 	}
@@ -81,7 +90,9 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 				R.id.gridLayoutBoardPlayer);
 		for (int i = 0; i < glp.getChildCount(); i++) {
 			glp.getChildAt(i).setOnClickListener(
-					new CardViewPlayerOnClickListener(em));
+					new CardViewPlayerOnClickListener(em, this.getActivity()
+							.getApplicationContext()));
+
 		}
 	}
 
@@ -90,7 +101,8 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 		super.onCreate(savedInstanceState);
 
 		try {
-			CardStoreBidon = CachedCardStore.initAndGet(getResources().openRawResource(R.raw.card));
+			CardStoreBidon = CachedCardStore.initAndGet(getResources()
+					.openRawResource(R.raw.card));
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,8 +124,15 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 				setBoard(p.getBoard());
 				setTouchlistener();
 				Gallery g = (Gallery) getActivity().findViewById(R.id.Gallery);
+
 				g.setOnItemClickListener(new GalleryOnItemClickListener(
 						(TabsActivity) getActivity(), em));
+				if (board.getPlayerID() == 1)
+					myendturn = true;
+				else {
+					myendturn = false;
+				}
+
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -143,21 +162,22 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 		tv.setText("Me");
 
 		Button b = (Button) view.findViewById(R.id.endturnbutton);
-		b.setOnClickListener(new OnClickListener() {
+		b.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View v) {
 				Button b = (Button) v;
 				b.setText(R.string.endturn);
-				b.setOnClickListener(new OnClickListener() {
+				b.setOnClickListener(new OnClickListener()
+				{
 
-					public void onClick(View v) {
+					public void onClick(View view) {
+						myendturn = true;
 						em.sendToPlayer(new EndTurnEvent());
 
 					}
 
 				});
 				em.sendToPlayer(new BeginGameEvent());
-
 			}
 
 		});
@@ -203,11 +223,52 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 
 		else if (e.type == Event_Type.PUT_CARD)
 			PutCardAction((PutCardEvent) e);
+		else if (e.type == Event_Type.REMOVE_CARD)
+			RemoveAction((RemoveEvent) e);
 
 	}
 
+	private void RemoveAction(RemoveEvent e) {
+		Log.i(TAG, "DEAD");
+		int playerid = (e.getuid() / 40) + 1;
+		GridLayout gl;
+		int position;
+		TextView tv = new TextView(getActivity().getApplicationContext());
+		tv.setTextSize(2, 40);
+		tv.setTextColor(Color.BLACK);
+
+		if (playerid == this.board.getPlayerID()) {
+			gl = (GridLayout) getActivity().findViewById(
+					R.id.gridLayoutBoardPlayer);
+			position = e.getPosition();
+			tv.setText(String.valueOf(position + 1));
+		} else {
+			gl = (GridLayout) getActivity().findViewById(
+					R.id.gridLayoutBoardOpponent);
+			position = e.getPosition();
+			tv.setText(String.valueOf(position + 1));
+
+			if (position <= 4)
+				position += 6;
+			else
+				position -= 6;
+		}
+		Log.i(TAG, "position " + String.valueOf(position));
+		gl.removeViewAt(position);
+
+		gl.addView(tv, position);
+	}
+
 	public void BeginTurnAction(BeginTurnEvent event) {
-		// TODO Auto-generated method stub
+
+		Button b = (Button) getActivity().findViewById(R.id.endturnbutton);
+		if (myendturn) {
+			myendturn = false;
+			b.setVisibility(View.INVISIBLE);
+		} else {
+			myendturn = true;
+			b.setVisibility(View.VISIBLE);
+		}
 
 	}
 
@@ -234,6 +295,11 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 			}
 
 		});
+
+		if (board.getPlayerID() == 2)
+			em.sendToPlayer(new EndTurnEvent());
+		else
+			b.setVisibility(View.INVISIBLE);
 	}
 
 	public void EndGameAction(EndGameEvent event) {
@@ -302,49 +368,66 @@ public class BoardFragment extends Fragment implements Listener<Event> {
 		ImageAdapter adapter = (ImageAdapter) gallery.getAdapter();
 		CardView cv = null;
 
-		for (int i = 0; i < adapter.getCount(); i++) {
-			if (((CardView) adapter.getItem(i)).getCard().getUid() == event
-					.getCardUID()) {
-				Log.i(TAG, "1st if");
-				cv = ((CardView) adapter.getItem(i));
-				final int size = gallery.getAdapter().getCount() - 1;
-				CardView tab[] = new CardView[size];
-				for (int j = 0; j < adapter.getCount(); j++) {
-					if (j > i) {
-						Log.i(TAG, "2nd if");
-						tab[j - 1] = (CardView) adapter.getItem(j);
-					} else if (j != i) {
-						Log.i(TAG, "else if");
-						tab[j] = (CardView) adapter.getItem(j);
+		DummyCardStore store = new DummyCardStore();
+		if (event.getCardUID() / 40 + 1 == em.getPlayer().getBoard()
+				.getPlayerID()) {
+			for (int i = 0; i < adapter.getCount(); i++) {
+				if (((CardView) adapter.getItem(i)).getCard().getUid() == event
+						.getCardUID()) {
+					cv = ((CardView) adapter.getItem(i));
+					final int size = gallery.getAdapter().getCount() - 1;
+					CardView tab[] = new CardView[size];
+					for (int j = 0; j < adapter.getCount(); j++) {
+						if (j > i) {
+							tab[j - 1] = (CardView) adapter.getItem(j);
+						} else if (j != i) {
+							tab[j] = (CardView) adapter.getItem(j);
+						}
 					}
+					ImageAdapter adp = new ImageAdapter(getActivity(), tab);
+					gallery.setAdapter(adp);
+					break;
+
 				}
-				ImageAdapter adp = new ImageAdapter(getActivity(), tab);
-				gallery.setAdapter(adp);
-				break;
+
 			}
 		}
 		GridLayout gv;
-		ImageView iv = cv.getCardImageView(getActivity(), 50, 88);
 
+		ImageView iv;
+		int position = event.getPosition();
 		if (cv == null) {
 			gv = (GridLayout) getActivity().findViewById(
 					R.id.gridLayoutBoardOpponent);
 			cv = new CardView(getActivity().getApplicationContext(),
-					CardStoreBidon.getCard(event.getCardID()));
-			cv.setOnClickListener(new CardViewOpponentOnClickListener(em));
+					store.getCard(event.getCardID()));
+			iv = cv.getCardImageView(getActivity(), 50, 88);
+			iv.setOnClickListener(new CardViewOpponentOnClickListener(em));
+			if (position <= 4)
+				position += 6;
+			else
+				position -= 6;
 		} else {
 			gv = (GridLayout) getActivity().findViewById(
 					R.id.gridLayoutBoardPlayer);
-			cv.setOnClickListener(new CardViewPlayerOnClickListener(em));
+			iv = cv.getCardImageView(getActivity(), 50, 88);
+			iv.setOnClickListener(new CardViewPlayerOnClickListener(em, this
+					.getActivity().getApplicationContext()));
+
 		}
 
-		iv.setOnClickListener(new CardViewPlayerOnClickListener(em));
 		iv.setOnLongClickListener(new CardViewOnLongClickListener(
 				(TabsActivity) this.getActivity()));
-		gv.removeViewAt(event.getPosition());
-		gv.addView(iv, event.getPosition());
+		gv.removeViewAt(position);
+		gv.addView(iv, position);
+
 		em.setSelectedCardHand(-1);
 		em.setSelectedCardHandUID(-1);
+
+		SemiClosedSlidingDrawer scsd = (SemiClosedSlidingDrawer) getActivity()
+				.findViewById(R.id.mySlidingDrawer);
+		scsd.open();
+		scsd.close();
 	}
 
 	public void onClose() {
