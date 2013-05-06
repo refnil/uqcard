@@ -379,6 +379,7 @@ public class Board extends AbstractListenable<Event> {
 	
 	void EndGameAction(EndGameEvent event)
 	{
+		Log.i(TAG, "THE END!");
 		tell(event);
 	}
 

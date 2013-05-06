@@ -290,6 +290,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	
 	public void EndGameAction(EndGameEvent event) {
 		// TODO Auto-generated method stub
+		Log.i(TAG, "THE END!");
 		Toast.makeText(getActivity(), "PARTIE TERMINÉE", Toast.LENGTH_LONG).show();
 	}
 

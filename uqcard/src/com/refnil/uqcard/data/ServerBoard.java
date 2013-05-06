@@ -79,7 +79,7 @@ public class ServerBoard extends Board {
 				
 				this.getPlayerBoardCards()[0] = playa;
 				
-				tell(new DrawCardEvent(1, 0));
+				tell(new DrawCardEvent(0, 0));
 				tell(new PutCardEvent(playa,0));
 			} else {
 				Log.i(TAG, "Setting host's enemy deck");
@@ -92,7 +92,7 @@ public class ServerBoard extends Board {
 				
 				this.getOpponentBoardCards()[0] = enemy;
 				
-				tell(new DrawCardEvent(1, 40));
+				tell(new DrawCardEvent(0, 40));
 				tell(new PutCardEvent(enemy,0));
 			}
 			
@@ -137,9 +137,10 @@ public class ServerBoard extends Board {
 
 						Log.i(TAG, "DEAD");
 						tell(new RemoveEvent(evil.getUid(),position));
-						
-						if(evil.get_Id() == 1)
+						Log.i(TAG, "DEAD id "+String.valueOf(evil.get_Id()));
+						if(evil.get_Id() == 0)
 						{
+							Log.i(TAG, "GENERAL DEAD");
 							tell(new EndGameEvent());
 						}
 					}
@@ -192,8 +193,8 @@ public class ServerBoard extends Board {
 							if(stack.get(i).getUid() == pe.getCardUID())
 							{
 								tab[pe.getPosition()] =stack.get(i);
+								tab[pe.getPosition()].setId(1);
 								stack.remove(i);
-								Log.i(TAG, "l.136");
 								tell(pe);
 								break;
 							}
