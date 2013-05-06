@@ -21,6 +21,7 @@ import com.refnil.uqcard.event.SendDeckEvent;
 import com.refnil.uqcard.library.AbstractListenable;
 
 import android.util.Log;
+import android.widget.Toast;
 
 public class Board extends AbstractListenable<Event> {
 
@@ -404,6 +405,7 @@ public class Board extends AbstractListenable<Event> {
 			if(playerBoardCards[i] != null)
 				if(uid == playerBoardCards[i].getUid())
 				{
+					Log.i(TAG, "found player card");
 					return  playerBoardCards[i];
 				}
 			
@@ -414,6 +416,7 @@ public class Board extends AbstractListenable<Event> {
 			if(opponentBoardCards[i] != null)
 			if(uid == opponentBoardCards[i].getUid())
 			{
+				Log.i(TAG, "found enemu card");
 				return  opponentBoardCards[i];
 			}
 			

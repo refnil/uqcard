@@ -10,6 +10,7 @@ import com.refnil.uqcard.data.test.DeckTest;
 import com.refnil.uqcard.event.AttackEvent;
 import com.refnil.uqcard.event.BeginTurnEvent;
 import com.refnil.uqcard.event.DrawCardEvent;
+import com.refnil.uqcard.event.EndGameEvent;
 import com.refnil.uqcard.event.Event;
 import com.refnil.uqcard.event.Event_Type;
 import com.refnil.uqcard.event.PutCardEvent;
@@ -75,6 +76,7 @@ public class ServerBoard extends Board {
 				
 				CreatureCard playa = cardStore.getCard(1);
 				playa.setUid(0);
+				int wtf = playa.getDef();
 				tell(new DrawCardEvent(1, 0));
 				tell(new PutCardEvent(playa,0));
 			} else {
@@ -127,8 +129,14 @@ public class ServerBoard extends Board {
 							position = this.getCardPositionOnBoard(ae.getOpponent(), false);
 							this.getOpponentBoardCards()[position]=null;
 						}
+
 						Log.i(TAG, "DEAD");
 						tell(new RemoveEvent(evil.getUid(),position));
+						
+						if(evil.get_Id() == 1)
+						{
+							tell(new EndGameEvent());
+						}
 					}
 				}
 				else

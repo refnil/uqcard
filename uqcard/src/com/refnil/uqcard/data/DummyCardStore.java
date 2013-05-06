@@ -10,7 +10,7 @@ public class DummyCardStore implements CardStore{
 		}
 		else if(id == 1)
 		{
-			return  new CreatureCard("Carte", "Description","WOOSH", 2, 2, 0, 20);
+			return  new CreatureCard("Carte", "Description","WOOSH", 2, 2, 0, 1);
 		}
 		return null;
 	}

@@ -50,6 +50,7 @@ import android.widget.Gallery;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BoardFragment extends Fragment implements Listener<Event>{
 	protected final static String TAG = "BoardActivity";
@@ -289,7 +290,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 	
 	public void EndGameAction(EndGameEvent event) {
 		// TODO Auto-generated method stub
-		
+		Toast.makeText(getActivity(), "PARTIE TERMINÉE", Toast.LENGTH_LONG).show();
 	}
 
 	
