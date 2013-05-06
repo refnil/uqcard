@@ -99,12 +99,6 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 				setTouchlistener();
 				Gallery g = (Gallery) getActivity().findViewById(R.id.Gallery);
 				g.setOnItemClickListener(new GalleryOnItemClickListener((TabsActivity) getActivity(),em));
-				if(board.getPlayerID()==1)
-					myendturn=true;
-				else
-				{
-					myendturn=false;
-				}
 			}
 
 			public void onServiceDisconnected(ComponentName name) {
@@ -246,12 +240,12 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		if(myendturn)
 		{
 			myendturn = false;
-			//b.setVisibility(View.INVISIBLE);
+			b.setVisibility(View.INVISIBLE);
 		}
 		else
 		{
 			myendturn = true;
-			//b.setVisibility(View.VISIBLE);
+			b.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -269,7 +263,7 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		Log.i(TAG, "board id "+String.valueOf(board.getPlayerID()));
 		em.sendToPlayer(new SendDeckEvent(board.getPlayerID(),board.getPlayerDeck()));
 		
-		Log.i(TAG, "in da event");
+		
 		Button b = (Button) getActivity().findViewById(R.id.endturnbutton);
 		b.setText(R.string.endturn);
 		b.setOnClickListener(new OnClickListener()
@@ -282,9 +276,15 @@ public class BoardFragment extends Fragment implements Listener<Event>{
 		});
 
 		if(board.getPlayerID()==2)
+		{
+			myendturn = false;
 			em.sendToPlayer(new EndTurnEvent());
-		//else
-			//b.setVisibility(View.INVISIBLE);
+		}
+		else
+		{
+			myendturn = true;
+			b.setVisibility(View.INVISIBLE);
+		}
 	}
 
 	
